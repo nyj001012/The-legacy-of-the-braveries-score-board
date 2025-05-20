@@ -7,41 +7,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheLagacyOfTheBraveriesScoreBoard.content;
 
 namespace TheLagacyOfTheBraveriesScoreBoard
 {
     public partial class MainForm : Form
     {
+        // 더블 버퍼링 적용
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
         public MainForm()
         {
             InitializeComponent();
             this.Size = new Size(1920, 1080);
-            this.btnOrganise.Size = new Size(392, 104);
+        }
+
+        private void ShowControl(UserControl control)
+        {
+            this.Controls.Clear();
+            control.Dock = DockStyle.Fill;
+            this.Controls.Add(control);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            ShowMainControl();
         }
 
-        private void btnOrganise_Click(object sender, EventArgs e)
+        private void ShowMainControl()
         {
+            var mainControl = new MainControl();
+            mainControl.OrganiseButtonClicked += (s, e) =>
+            {
+               ShowControl(new OrganisationControl());
+            };
 
-        }
-
-        private void btnDataArchive_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnGuide_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/nyj001012/The-lagacy-of-the-braveries-score-board");
-        }
-
-        private void btnSecretCode_Click(object sender, EventArgs e)
-        {
-
+            ShowControl(mainControl);
         }
     }
 }

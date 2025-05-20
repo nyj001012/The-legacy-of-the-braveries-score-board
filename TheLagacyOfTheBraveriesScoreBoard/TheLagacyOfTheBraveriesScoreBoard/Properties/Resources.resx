@@ -142,4 +142,14 @@
     <value>..\Resources\시크릿 코드 버튼 이미지.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
     <comment>시크릿 코드 버튼 이미지</comment>
   </data>
+  <data name="ImgInGameBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\인게임 배경 이미지.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <comment>인게임 배경 이미지</comment>
+  </data>
+  <data name="BtnSelectCharacter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\용사 이야기 리소스\resource\캐릭터 선택 버튼.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BtnJoin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\용사 이야기 리소스\resource\참전 버튼.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
