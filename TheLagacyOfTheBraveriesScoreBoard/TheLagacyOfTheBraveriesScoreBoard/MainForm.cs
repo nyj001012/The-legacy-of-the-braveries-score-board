@@ -16,9 +16,30 @@ namespace TheLagacyOfTheBraveriesScoreBoard
         {
             InitializeComponent();
             this.Size = new Size(1920, 1080);
+            this.btnOrganise.Size = new Size(392, 104);
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOrganise_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDataArchive_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGuide_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
         {
 
         }

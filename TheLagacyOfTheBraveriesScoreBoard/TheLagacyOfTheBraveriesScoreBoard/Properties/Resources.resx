@@ -118,6 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BtnDataArchive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\기록 보관소 버튼.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <comment>기록 보관소 버튼 이미지</comment>
+  </data>
+  <data name="BtnOrganise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\용사 이야기 리소스\resource\부대 편성 버튼.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <comment>부대 편성 버튼 이미지</comment>
+  </data>
   <data name="ImgBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\배경 이미지.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
     <comment>기본 배경 이미지</comment>
@@ -125,5 +133,13 @@
   <data name="ImgBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\배너 타이틀.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
     <comment>배너 타이틀</comment>
+  </data>
+  <data name="BtnGuide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\훈련 교본 버튼 이미지.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <comment>훈련 교본 버튼 이미지</comment>
+  </data>
+  <data name="BtnSecretCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\시크릿 코드 버튼 이미지.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <comment>시크릿 코드 버튼 이미지</comment>
   </data>
 </root>
