@@ -28,7 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.ImgBanner;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(665, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(590, 590);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -36,14 +49,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.ImgBackground;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "MainForm";
             this.Text = "용사 이야기 점수판";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
