@@ -37,10 +37,12 @@
             this.gradientLabel1 = new TheLagacyOfTheBraveriesScoreBoard.controls.GradientLabel();
             this.gradientLabel3 = new TheLagacyOfTheBraveriesScoreBoard.controls.GradientLabel();
             this.btnSelect4P = new System.Windows.Forms.PictureBox();
+            this.btnJoin = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnSelect1P)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSelect2P)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSelect3P)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSelect4P)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnJoin)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSelect1P
@@ -148,12 +150,23 @@
             this.btnSelect4P.TabIndex = 9;
             this.btnSelect4P.TabStop = false;
             // 
+            // btnJoin
+            // 
+            this.btnJoin.BackColor = System.Drawing.Color.Transparent;
+            this.btnJoin.Image = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.BtnJoin;
+            this.btnJoin.Location = new System.Drawing.Point(843, 943);
+            this.btnJoin.Name = "btnJoin";
+            this.btnJoin.Size = new System.Drawing.Size(235, 104);
+            this.btnJoin.TabIndex = 11;
+            this.btnJoin.TabStop = false;
+            // 
             // OrganisationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.ImgInGameBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.btnJoin);
             this.Controls.Add(this.gradientLabel3);
             this.Controls.Add(this.btnSelect4P);
             this.Controls.Add(this.gradientLabel7);
@@ -170,6 +183,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSelect2P)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSelect3P)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSelect4P)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnJoin)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,5 +199,6 @@
         private System.Windows.Forms.PictureBox btnSelect3P;
         private controls.GradientLabel gradientLabel3;
         private System.Windows.Forms.PictureBox btnSelect4P;
+        private System.Windows.Forms.PictureBox btnJoin;
     }
 }
