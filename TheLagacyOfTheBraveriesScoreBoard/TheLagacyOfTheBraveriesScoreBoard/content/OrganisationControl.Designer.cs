@@ -28,7 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.gradientLabel1 = new TheLagacyOfTheBraveriesScoreBoard.controls.GradientLabel();
             this.SuspendLayout();
+            // 
+            // gradientLabel1
+            // 
+            this.gradientLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.gradientLabel1.Font = new System.Drawing.Font("Danjo-bold", 50.24999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gradientLabel1.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(89)))), ((int)(((byte)(50)))));
+            this.gradientLabel1.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(162)))), ((int)(((byte)(97)))));
+            this.gradientLabel1.Location = new System.Drawing.Point(0, 0);
+            this.gradientLabel1.Margin = new System.Windows.Forms.Padding(0);
+            this.gradientLabel1.Name = "gradientLabel1";
+            this.gradientLabel1.Size = new System.Drawing.Size(1920, 170);
+            this.gradientLabel1.TabIndex = 0;
+            this.gradientLabel1.Text = "어떤 형제와 전장에 나서겠는가?";
             // 
             // OrganisationControl
             // 
@@ -36,6 +50,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.ImgBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.gradientLabel1);
             this.Name = "OrganisationControl";
             this.Size = new System.Drawing.Size(1920, 1080);
             this.Load += new System.EventHandler(this.OrganisationControl_Load);
@@ -44,5 +59,7 @@
         }
 
         #endregion
+
+        private controls.GradientLabel gradientLabel1;
     }
 }
