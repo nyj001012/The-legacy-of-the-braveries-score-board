@@ -117,13 +117,14 @@
             // gradientLabel1
             // 
             this.gradientLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.gradientLabel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.gradientLabel1.Font = new System.Drawing.Font("Danjo-bold", 38.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gradientLabel1.GradientEnd = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(89)))), ((int)(((byte)(50)))));
             this.gradientLabel1.GradientStart = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(162)))), ((int)(((byte)(97)))));
             this.gradientLabel1.Location = new System.Drawing.Point(0, 0);
             this.gradientLabel1.Margin = new System.Windows.Forms.Padding(0);
             this.gradientLabel1.Name = "gradientLabel1";
-            this.gradientLabel1.Size = new System.Drawing.Size(1920, 170);
+            this.gradientLabel1.Size = new System.Drawing.Size(1920, 231);
             this.gradientLabel1.TabIndex = 0;
             this.gradientLabel1.Text = "어떤 형제와 전장에 나서겠는가?";
             // 
@@ -154,7 +155,7 @@
             // 
             this.btnJoin.BackColor = System.Drawing.Color.Transparent;
             this.btnJoin.Image = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.BtnJoin;
-            this.btnJoin.Location = new System.Drawing.Point(843, 943);
+            this.btnJoin.Location = new System.Drawing.Point(843, 910);
             this.btnJoin.Name = "btnJoin";
             this.btnJoin.Size = new System.Drawing.Size(235, 104);
             this.btnJoin.TabIndex = 11;

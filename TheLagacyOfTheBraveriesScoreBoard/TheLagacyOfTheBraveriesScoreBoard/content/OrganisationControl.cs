@@ -15,6 +15,7 @@ namespace TheLagacyOfTheBraveriesScoreBoard.content
         public OrganisationControl()
         {
             InitializeComponent();
+            this.Size = new Size(1920, 1080);
         }
 
         private void OrganisationControl_Load(object sender, EventArgs e)

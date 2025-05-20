@@ -116,7 +116,7 @@
             this.Controls.Add(this.pictureBox1);
             this.MaximumSize = new System.Drawing.Size(1920, 1080);
             this.Name = "MainControl";
-            this.Size = new System.Drawing.Size(1904, 1041);
+            this.Size = new System.Drawing.Size(1920, 1080);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOrganise)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDataArchive)).EndInit();

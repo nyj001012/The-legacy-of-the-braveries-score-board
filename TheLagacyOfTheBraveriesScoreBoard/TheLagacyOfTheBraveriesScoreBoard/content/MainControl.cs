@@ -18,6 +18,7 @@ namespace TheLagacyOfTheBraveriesScoreBoard
         public MainControl()
         {
             InitializeComponent();
+            this.Size = new Size(1920, 1080);
         }
 
         private void btnOrganise_Click(object sender, EventArgs e)

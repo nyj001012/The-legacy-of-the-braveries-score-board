@@ -37,6 +37,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.MaximumSize = new System.Drawing.Size(1920, 1080);
+            this.MinimumSize = new System.Drawing.Size(1920, 1080);
             this.Name = "MainForm";
             this.Text = "용사 이야기 점수판";
             this.Load += new System.EventHandler(this.Form1_Load);
