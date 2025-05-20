@@ -32,12 +32,12 @@
             this.btnOrganise = new System.Windows.Forms.PictureBox();
             this.btnDataArchive = new System.Windows.Forms.PictureBox();
             this.btnGuide = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnSecretCode = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOrganise)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDataArchive)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuide)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSecretCode)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -90,18 +90,18 @@
             this.btnGuide.TabStop = false;
             this.btnGuide.Click += new System.EventHandler(this.btnGuide_Click);
             // 
-            // pictureBox2
+            // btnSecretCode
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.BtnSecretCode;
-            this.pictureBox2.Location = new System.Drawing.Point(987, 792);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(392, 104);
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.btnSecretCode.BackColor = System.Drawing.Color.Transparent;
+            this.btnSecretCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSecretCode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSecretCode.Image = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.BtnSecretCode;
+            this.btnSecretCode.Location = new System.Drawing.Point(987, 792);
+            this.btnSecretCode.Name = "btnSecretCode";
+            this.btnSecretCode.Size = new System.Drawing.Size(392, 104);
+            this.btnSecretCode.TabIndex = 6;
+            this.btnSecretCode.TabStop = false;
+            this.btnSecretCode.Click += new System.EventHandler(this.btnSecretCode_Click);
             // 
             // MainForm
             // 
@@ -110,7 +110,7 @@
             this.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.ImgBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.btnSecretCode);
             this.Controls.Add(this.btnGuide);
             this.Controls.Add(this.btnDataArchive);
             this.Controls.Add(this.btnOrganise);
@@ -123,7 +123,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnOrganise)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDataArchive)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGuide)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSecretCode)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -134,7 +134,7 @@
         private System.Windows.Forms.PictureBox btnOrganise;
         private System.Windows.Forms.PictureBox btnDataArchive;
         private System.Windows.Forms.PictureBox btnGuide;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox btnSecretCode;
     }
 }
 

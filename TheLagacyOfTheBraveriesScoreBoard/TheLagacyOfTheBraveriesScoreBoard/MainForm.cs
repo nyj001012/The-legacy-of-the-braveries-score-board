@@ -36,10 +36,10 @@ namespace TheLagacyOfTheBraveriesScoreBoard
 
         private void btnGuide_Click(object sender, EventArgs e)
         {
-
+            System.Diagnostics.Process.Start("https://github.com/nyj001012/The-lagacy-of-the-braveries-score-board");
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void btnSecretCode_Click(object sender, EventArgs e)
         {
 
         }
