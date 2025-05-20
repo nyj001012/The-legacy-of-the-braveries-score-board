@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,19 @@ namespace TheLagacyOfTheBraveriesScoreBoard.modals
         public SelectPlayerForm()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.ControlBox = false;
-            this.MinimizeBox = false;
-            this.MaximizeBox = false;
-            this.ShowInTaskbar = false;
-            this.TopMost = true;
-            this.Deactivate += (s, e) => this.Close();
+        }
+
+        private void SelectPlayerForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SelectPlayerForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }

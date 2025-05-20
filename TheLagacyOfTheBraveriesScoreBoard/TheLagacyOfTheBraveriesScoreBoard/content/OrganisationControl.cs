@@ -32,10 +32,11 @@ namespace TheLagacyOfTheBraveriesScoreBoard.content
             string playerNumber = selectedButton.Tag.ToString();
             var selectPlayerModal = new SelectPlayerForm();
 
-            selectPlayerModal.Show();
-
-            var selectedData = selectPlayerModal.SelectedPlayerId;
-            ApplyToSlot(playerNumber, selectedData);
+            if (selectPlayerModal.ShowDialog(this) == DialogResult.OK)
+            {
+                int selectedData = selectPlayerModal.SelectedPlayerId;
+                ApplyToSlot(playerNumber, selectedData);
+            }
         }
 
         private void ApplyToSlot(string playerNumber, int selectedData)
