@@ -6,14 +6,16 @@ namespace TheLagacyOfTheBraveriesScoreBoard.controls
 {
     public class GradientLabel : Control
     {
-        public Color GradientStart { get; set; } = Color.Blue;
-        public Color GradientEnd { get; set; } = Color.Red;
+        public Color GradientStart { get; set; } = ColorTranslator.FromHtml("#D1A261");
+        public Color GradientEnd { get; set; } = ColorTranslator.FromHtml("#6B5932");
 
         public GradientLabel()
         {
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint |
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor |
+                          ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.UserPaint |
                           ControlStyles.OptimizedDoubleBuffer, true);
+            this.BackColor = Color.Transparent;
             this.UpdateStyles();
         }
 
@@ -25,7 +27,7 @@ namespace TheLagacyOfTheBraveriesScoreBoard.controls
                 this.ClientRectangle,
                 GradientStart,
                 GradientEnd,
-                LinearGradientMode.Horizontal))
+                LinearGradientMode.Vertical))
             {
                 StringFormat format = new StringFormat
                 {
