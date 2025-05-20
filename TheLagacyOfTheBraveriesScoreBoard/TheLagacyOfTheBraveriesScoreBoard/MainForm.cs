@@ -15,6 +15,7 @@ namespace TheLagacyOfTheBraveriesScoreBoard
         public MainForm()
         {
             InitializeComponent();
+            this.Size = new Size(1920, 1080);
         }
 
         private void Form1_Load(object sender, EventArgs e)
