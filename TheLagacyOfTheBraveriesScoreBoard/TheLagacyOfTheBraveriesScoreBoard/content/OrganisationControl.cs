@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheLagacyOfTheBraveriesScoreBoard.modals;
 
 namespace TheLagacyOfTheBraveriesScoreBoard.content
 {
@@ -26,13 +27,20 @@ namespace TheLagacyOfTheBraveriesScoreBoard.content
         private void BtnSelectPlayer_Click(object sender, EventArgs e)
         {
             PictureBox selectedButton = sender as PictureBox;
-            if (selectedButton != null)
-            {
-                string playerNumber = selectedButton.Tag.ToString();
+            if (selectedButton == null) { return; }
 
-                // TODO => 캐릭터 선택 모달 창(Form) 띄우기
-                Console.WriteLine($"Player {playerNumber} selected.");
-            }
+            string playerNumber = selectedButton.Tag.ToString();
+            var selectPlayerModal = new SelectPlayerForm();
+
+            selectPlayerModal.Show();
+
+            var selectedData = selectPlayerModal.SelectedPlayerId;
+            ApplyToSlot(playerNumber, selectedData);
+        }
+
+        private void ApplyToSlot(string playerNumber, int selectedData)
+        {
+            // TODO => 슬롯에 선택된 데이터를 적용하는 로직을 구현합니다.
         }
     }
 }
