@@ -37,7 +37,7 @@
             this.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.ImgBackground;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "용사 이야기 점수판";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
