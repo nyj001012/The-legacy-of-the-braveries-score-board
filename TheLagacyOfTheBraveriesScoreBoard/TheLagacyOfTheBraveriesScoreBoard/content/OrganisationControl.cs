@@ -22,5 +22,17 @@ namespace TheLagacyOfTheBraveriesScoreBoard.content
         {
 
         }
+
+        private void BtnSelectPlayer_Click(object sender, EventArgs e)
+        {
+            PictureBox selectedButton = sender as PictureBox;
+            if (selectedButton != null)
+            {
+                string playerNumber = selectedButton.Tag.ToString();
+
+                // TODO => 캐릭터 선택 모달 창(Form) 띄우기
+                Console.WriteLine($"Player {playerNumber} selected.");
+            }
+        }
     }
 }

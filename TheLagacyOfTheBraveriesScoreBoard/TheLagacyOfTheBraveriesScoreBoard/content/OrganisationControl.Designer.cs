@@ -50,33 +50,42 @@
             this.btnSelect1P.BackColor = System.Drawing.Color.Transparent;
             this.btnSelect1P.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.BtnSelectCharacter;
             this.btnSelect1P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSelect1P.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelect1P.Location = new System.Drawing.Point(108, 330);
             this.btnSelect1P.Name = "btnSelect1P";
             this.btnSelect1P.Size = new System.Drawing.Size(345, 535);
             this.btnSelect1P.TabIndex = 1;
             this.btnSelect1P.TabStop = false;
+            this.btnSelect1P.Tag = "1";
+            this.btnSelect1P.Click += new System.EventHandler(this.BtnSelectPlayer_Click);
             // 
             // btnSelect2P
             // 
             this.btnSelect2P.BackColor = System.Drawing.Color.Transparent;
             this.btnSelect2P.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.BtnSelectCharacter;
             this.btnSelect2P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSelect2P.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelect2P.Location = new System.Drawing.Point(561, 330);
             this.btnSelect2P.Name = "btnSelect2P";
             this.btnSelect2P.Size = new System.Drawing.Size(345, 535);
             this.btnSelect2P.TabIndex = 4;
             this.btnSelect2P.TabStop = false;
+            this.btnSelect2P.Tag = "2";
+            this.btnSelect2P.Click += new System.EventHandler(this.BtnSelectPlayer_Click);
             // 
             // btnSelect3P
             // 
             this.btnSelect3P.BackColor = System.Drawing.Color.Transparent;
             this.btnSelect3P.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.BtnSelectCharacter;
             this.btnSelect3P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSelect3P.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelect3P.Location = new System.Drawing.Point(1014, 330);
             this.btnSelect3P.Name = "btnSelect3P";
             this.btnSelect3P.Size = new System.Drawing.Size(345, 535);
             this.btnSelect3P.TabIndex = 7;
             this.btnSelect3P.TabStop = false;
+            this.btnSelect3P.Tag = "3";
+            this.btnSelect3P.Click += new System.EventHandler(this.BtnSelectPlayer_Click);
             // 
             // gradientLabel7
             // 
@@ -145,21 +154,26 @@
             this.btnSelect4P.BackColor = System.Drawing.Color.Transparent;
             this.btnSelect4P.BackgroundImage = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.BtnSelectCharacter;
             this.btnSelect4P.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSelect4P.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelect4P.Location = new System.Drawing.Point(1467, 330);
             this.btnSelect4P.Name = "btnSelect4P";
             this.btnSelect4P.Size = new System.Drawing.Size(345, 535);
             this.btnSelect4P.TabIndex = 9;
             this.btnSelect4P.TabStop = false;
+            this.btnSelect4P.Tag = "4";
+            this.btnSelect4P.Click += new System.EventHandler(this.BtnSelectPlayer_Click);
             // 
             // btnJoin
             // 
             this.btnJoin.BackColor = System.Drawing.Color.Transparent;
+            this.btnJoin.Enabled = false;
             this.btnJoin.Image = global::TheLagacyOfTheBraveriesScoreBoard.Properties.Resources.BtnJoin;
             this.btnJoin.Location = new System.Drawing.Point(843, 910);
             this.btnJoin.Name = "btnJoin";
             this.btnJoin.Size = new System.Drawing.Size(235, 104);
             this.btnJoin.TabIndex = 11;
             this.btnJoin.TabStop = false;
+            this.btnJoin.Visible = false;
             // 
             // OrganisationControl
             // 
