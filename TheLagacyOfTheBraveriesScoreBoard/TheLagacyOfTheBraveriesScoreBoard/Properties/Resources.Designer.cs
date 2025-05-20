@@ -103,6 +103,16 @@ namespace TheLagacyOfTheBraveriesScoreBoard.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap BtnSelectCharacter {
+            get {
+                object obj = ResourceManager.GetObject("BtnSelectCharacter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap ImgBackground {
             get {
                 object obj = ResourceManager.GetObject("ImgBackground", resourceCulture);
@@ -116,6 +126,16 @@ namespace TheLagacyOfTheBraveriesScoreBoard.Properties {
         internal static System.Drawing.Bitmap ImgBanner {
             get {
                 object obj = ResourceManager.GetObject("ImgBanner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ImgInGameBackground {
+            get {
+                object obj = ResourceManager.GetObject("ImgInGameBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
