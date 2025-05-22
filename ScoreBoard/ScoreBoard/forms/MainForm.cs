@@ -30,6 +30,11 @@ namespace ScoreBoard.forms
             this.Size = new Size(1920, 1080);
         }
 
+        /*
+         * ShowControl(UserControl control)
+         * - control: 표시할 UserControl 객체
+         * - 기능: 현재 폼에 UserControl을 표시하는 메서드
+         */
         private void ShowControl(UserControl control)
         {
             this.Controls.Clear();
@@ -37,12 +42,16 @@ namespace ScoreBoard.forms
             this.Controls.Add(control);
         }
 
+        /*
+         * ShowMainControl()
+         * - 기능: 메인 컨트롤을 표시하는 메서드
+         */
         private void ShowMainControl()
         {
             var mainControl = new MainControl();
             mainControl.OrganiseButtonClicked += (s, e) =>
             {
-                ShowControl(new OrganisationControl());
+                ShowControl(new OrganisationControl()); // 부대 편성 컨트롤 표시
             };
 
             ShowControl(mainControl);

@@ -24,6 +24,10 @@ namespace ScoreBoard.content
 
         }
 
+        /*
+         * BtnSelectPlayer_Click(object sender, EventArgs e)
+         * 플레이어 선택 버튼 클릭 시 플레이어 선택 모달을 표시하는 메서드
+         */
         private void BtnSelectPlayer_Click(object sender, EventArgs e)
         {
             if (sender is not PictureBox selectedButton || selectedButton.Tag is null)
@@ -31,7 +35,12 @@ namespace ScoreBoard.content
                 return;
             }
 
-            string playerNumber = selectedButton.Tag.ToString();
+            string? playerNumber = selectedButton.Tag.ToString();
+            if (playerNumber is null)
+            {
+                return;
+            }
+
             var selectPlayerModal = new SelectPlayerForm();
 
             if (selectPlayerModal.ShowDialog(this) == DialogResult.OK)
