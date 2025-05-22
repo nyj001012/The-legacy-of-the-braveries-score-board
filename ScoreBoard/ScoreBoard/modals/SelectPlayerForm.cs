@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Text.Json;
+﻿using ScoreBoard.controls;
 using ScoreBoard.utils;
-using ScoreBoard.controls;
+using System.Diagnostics;
 
 namespace ScoreBoard.modals
 {
@@ -18,20 +8,26 @@ namespace ScoreBoard.modals
     {
         private string corpsJsonPath;
         private Dictionary<string, string> corpsMap;
-
+        private int labelHeight = 0;
+        private int verticalSpace = 20;
         public int SelectedPlayerId { get; private set; }
 
         public SelectPlayerForm()
         {
             InitializeComponent();
+
+            // Key Preview
+            this.KeyPreview = true;
+
+            // 군단 JSON 파일 읽고 리스트에 표시
             corpsJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "corps.json");
             corpsMap = JsonReader.ReadJsonStringValue(corpsJsonPath);
             ShowCorps();
+            ScrollBarManager.SetScrollBar(corpsListContainer, corpsList, corpsScrollBar);
         }
 
         private void ShowCorps()
         {
-            corpsList.SuspendLayout();
             foreach (var unit in corpsMap)
             {
                 var label = new TransparentTextLabel
@@ -42,8 +38,9 @@ namespace ScoreBoard.modals
                     Cursor = Cursors.Hand,
                     Font = new Font("나눔고딕코딩", 25, FontStyle.Bold),
                     ForeColor = Color.FromArgb(100, 245, 245, 245),
-                    Margin = new Padding(0, 20, 0, 20),
+                    Margin = new Padding(0, verticalSpace, 0, verticalSpace),
                 };
+
                 label.MouseEnter += (s, e) =>
                 {
                     label.ForeColor = Color.FromArgb(255, 245, 245, 245);
@@ -52,8 +49,10 @@ namespace ScoreBoard.modals
                 };
                 label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
                 corpsList.Controls.Add(label);
+                labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
-            corpsList.ResumeLayout();
+            corpsList.Height = labelHeight;
+            Debug.WriteLine($"corpsList Height: {corpsList.Height}");
         }
 
         private void SelectPlayerForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -64,14 +63,23 @@ namespace ScoreBoard.modals
             }
         }
 
-        private void corpsList_Scroll(object sender, ScrollEventArgs e)
+        private void corpsList_MouseEnter(object sender, EventArgs e)
         {
-
+            corpsList.Focus();
         }
 
-        private void corpsList_Paint(object sender, PaintEventArgs e)
+        private void corpsList_MouseWheel(object sender, MouseEventArgs e)
         {
+            if (!corpsScrollBar.Enabled) return;
 
+            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * corpsScrollBar.SmallStep;
+            int newScrollValue = corpsScrollBar.Value + delta;
+
+            // 스크롤 범위 안에서만 동작하도록 조정
+            newScrollValue = Math.Max(corpsScrollBar.Minimum, Math.Min(corpsScrollBar.Maximum, newScrollValue));
+
+            corpsScrollBar.Value = newScrollValue;
+            corpsList.Top = -newScrollValue;
         }
     }
 }
