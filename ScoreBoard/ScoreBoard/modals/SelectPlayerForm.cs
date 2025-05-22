@@ -26,10 +26,10 @@ namespace ScoreBoard.modals
             InitializeComponent();
             corpsJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "corps.json");
             corpsMap = JsonReader.ReadJsonStringValue(corpsJsonPath);
-            ShowUnits();
+            ShowCorps();
         }
 
-        private void ShowUnits()
+        private void ShowCorps()
         {
             foreach (var unit in corpsMap)
             {
