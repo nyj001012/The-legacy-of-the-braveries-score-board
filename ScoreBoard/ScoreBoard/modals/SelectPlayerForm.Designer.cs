@@ -12,8 +12,10 @@
             unitList.BackColor = Color.Transparent;
             unitList.BackgroundImage = Properties.Resources.ImgMajorListBackground;
             unitList.BackgroundImageLayout = ImageLayout.Stretch;
+            unitList.FlowDirection = FlowDirection.TopDown;
             unitList.Location = new Point(65, 70);
             unitList.Name = "unitList";
+            unitList.Padding = new Padding(5, 10, 5, 10);
             unitList.Size = new Size(194, 720);
             unitList.TabIndex = 2;
             // 
