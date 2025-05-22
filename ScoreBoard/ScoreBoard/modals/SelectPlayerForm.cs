@@ -9,14 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json;
+using ScoreBoard.utils;
 
 namespace ScoreBoard.modals
 {
     public partial class SelectPlayerForm : Form
     {
-        public class LegionList
-        {
-        }
+        private string unitsJsonPath;
+        private Dictionary<string, string> unitsMap;
 
         private void LoadLegionsFromJson()
         {
@@ -28,6 +28,8 @@ namespace ScoreBoard.modals
         public SelectPlayerForm()
         {
             InitializeComponent();
+            unitsJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "units.json");
+            unitsMap = JsonReader.ReadJsonStringValue(unitsJsonPath);
         }
 
         private void SelectPlayerForm_Load(object sender, EventArgs e)
