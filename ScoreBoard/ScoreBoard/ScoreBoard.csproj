@@ -12,4 +12,10 @@
     <Folder Include="Resources\character\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\meta_data\units.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

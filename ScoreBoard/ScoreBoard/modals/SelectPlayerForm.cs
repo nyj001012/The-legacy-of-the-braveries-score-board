@@ -18,11 +18,6 @@ namespace ScoreBoard.modals
         private string unitsJsonPath;
         private Dictionary<string, string> unitsMap;
 
-        private void LoadLegionsFromJson()
-        {
-
-        }
-
         public int SelectedPlayerId { get; private set; }
 
         public SelectPlayerForm()
@@ -30,11 +25,24 @@ namespace ScoreBoard.modals
             InitializeComponent();
             unitsJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "units.json");
             unitsMap = JsonReader.ReadJsonStringValue(unitsJsonPath);
+            ShowUnits();
         }
 
-        private void SelectPlayerForm_Load(object sender, EventArgs e)
+        private void ShowUnits()
         {
-
+            foreach (var unit in unitsMap)
+            {
+                var label = new Label
+                {
+                    Text = unit.Value,
+                    Tag = unit.Key,
+                    AutoSize = true,
+                    Location = new Point(10, 10 + 30 * unitsMap.Keys.ToList().IndexOf(unit.Key)),
+                    Cursor = Cursors.Hand,
+                    Font = new Font("나눔고딕코딩", 12)
+                };
+                unitList.Controls.Add(label);
+            }
         }
 
         private void SelectPlayerForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -43,11 +51,6 @@ namespace ScoreBoard.modals
             {
                 this.Close();
             }
-        }
-
-        private void SelectPlayerForm_Load_1(object sender, EventArgs e)
-        {
-
         }
     }
 }
