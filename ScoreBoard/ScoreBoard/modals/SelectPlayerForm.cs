@@ -31,6 +31,7 @@ namespace ScoreBoard.modals
 
         private void ShowCorps()
         {
+            corpsList.SuspendLayout();
             foreach (var unit in corpsMap)
             {
                 var label = new TransparentTextLabel
@@ -40,7 +41,6 @@ namespace ScoreBoard.modals
                     AutoSize = true,
                     Cursor = Cursors.Hand,
                     Font = new Font("나눔고딕코딩", 25, FontStyle.Bold),
-                    BackColor = Color.Transparent,
                     ForeColor = Color.FromArgb(100, 245, 245, 245),
                     Margin = new Padding(0, 20, 0, 20),
                 };
@@ -51,8 +51,9 @@ namespace ScoreBoard.modals
                     // TODO => ShowCorpsMember(corpsId);
                 };
                 label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
-                unitList.Controls.Add(label);
+                corpsList.Controls.Add(label);
             }
+            corpsList.ResumeLayout();
         }
 
         private void SelectPlayerForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -61,6 +62,16 @@ namespace ScoreBoard.modals
             {
                 this.Close();
             }
+        }
+
+        private void corpsList_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void corpsList_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
