@@ -1,5 +1,6 @@
 ﻿using ScoreBoard.controls;
 using ScoreBoard.utils;
+using System.Data;
 using System.Diagnostics;
 
 namespace ScoreBoard.modals
@@ -26,7 +27,7 @@ namespace ScoreBoard.modals
         {
             // 군단 JSON 파일 읽고 리스트에 표시
             string corpsJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "corps.json");
-            Dictionary<string, string> corpsMap = JsonReader.ReadJsonStringValue(corpsJsonPath);
+            Dictionary<string, string> corpsMap = DataReader.ReadCorpsData(corpsJsonPath);
             
             foreach (var unit in corpsMap)
             {
@@ -61,7 +62,22 @@ namespace ScoreBoard.modals
 
         private void ShowCorpsMembers(string corpsId)
         {
-            // TODO => 군단원 JSON 파일 읽고 리스트에 표시
+            Dictionary<string, string> membersMap = DataReader.ReadCorpsMembersData(corpsId);
+            foreach (var member in membersMap)
+            {
+                var label = CreateListItem(member.Value);
+
+                label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
+                label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
+                label.Click += (s, e) => ShowMemberStat(member.Key);
+                corpsList.Controls.Add(label);
+                labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
+            }
+        }
+
+        private void ShowMemberStat(string memberId)
+        {
+            // TODO => 선택된 병사 Id 저장 및 병사 정보 표시
         }
 
         /*
