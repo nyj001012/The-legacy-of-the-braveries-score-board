@@ -8,7 +8,7 @@ using ScoreBoard.utils;
 namespace ScoreBoardUnitTest.utils
 {
     [TestClass]
-    public class JsonReaderTests
+    public class DataReader
     {
         [TestMethod]
         public void TestReadCorpsData_ValidFile_ReturnsDictionary()
@@ -25,7 +25,7 @@ namespace ScoreBoardUnitTest.utils
                 { "006", "군사학교" },
                 { "007", "군사학교(고급)" }
             };
-            Dictionary<string, string> actualMap = JsonReader.ReadCorpsData(jsonPath);
+            Dictionary<string, string> actualMap = ScoreBoard.utils.DataReader.ReadCorpsData(jsonPath);
             CollectionAssert.AreEquivalent(expectedMap, actualMap); // 딕셔너리 레퍼런스 비교가 아닌 값 비교
         }
 
@@ -33,7 +33,7 @@ namespace ScoreBoardUnitTest.utils
         public void TestReadCorpsData_InvalidFile_ReturnsEmptyDictionary()
         {
             string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "invalid.json");
-            Dictionary<string, string> actualMap = JsonReader.ReadCorpsData(jsonPath);
+            Dictionary<string, string> actualMap = ScoreBoard.utils.DataReader.ReadCorpsData(jsonPath);
             Assert.AreEqual(0, actualMap.Count);
         }
     }
