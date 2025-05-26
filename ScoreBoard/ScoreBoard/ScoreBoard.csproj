@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="data\character\1_03_SkyHaneulSoraTen.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Resources\character\" />
   </ItemGroup>
 
