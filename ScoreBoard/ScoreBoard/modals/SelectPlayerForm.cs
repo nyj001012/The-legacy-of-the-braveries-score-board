@@ -28,7 +28,7 @@ namespace ScoreBoard.modals
             // 군단 JSON 파일 읽고 리스트에 표시
             string corpsJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "corps.json");
             Dictionary<string, string> corpsMap = DataReader.ReadCorpsData(corpsJsonPath);
-            
+
             foreach (var unit in corpsMap)
             {
                 var label = CreateListItem(unit.Value);
@@ -60,9 +60,19 @@ namespace ScoreBoard.modals
             };
         }
 
+        /*
+         * ShowCorpsMembers(string corpsId)
+         * - corpsId: 군단 ID
+         * - 해당 군단의 병사 리스트를 표시하는 메서드
+         */
         private void ShowCorpsMembers(string corpsId)
         {
             Dictionary<string, string> membersMap = DataReader.ReadCorpsMembersData(corpsId);
+            if (membersMap.Count == 0)
+            {
+                return;
+            }
+            membersList.Controls.Clear(); // 이전 병사 리스트 초기화
             foreach (var member in membersMap)
             {
                 var label = CreateListItem(member.Value);
@@ -70,11 +80,17 @@ namespace ScoreBoard.modals
                 label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
                 label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
                 label.Click += (s, e) => ShowMemberStat(member.Key);
-                corpsList.Controls.Add(label);
+                membersList.Controls.Add(label);
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
+            ScrollBarManager.SetScrollBar(MembersListContainer, membersList, membersScrollBar); // 병사 리스트 스크롤바 설정
         }
 
+        /*
+         * ShowMemberStat(string memberId)
+         * - memberId: 병사 ID
+         * - 해당 병사의 정보를 표시하는 메서드
+         */
         private void ShowMemberStat(string memberId)
         {
             // TODO => 선택된 병사 Id 저장 및 병사 정보 표시
