@@ -16,7 +16,6 @@ namespace ScoreBoard.modals
             InitializeComponent();
             this.KeyPreview = true; // 폼에서 키 입력을 우선하여 받을 수 있도록 설정
             ShowCorps(); // 군단 리스트 표시
-            ScrollBarManager.SetScrollBar(corpsListContainer, corpsList, corpsScrollBar); // 스크롤바 설정
         }
 
         /*
@@ -29,6 +28,11 @@ namespace ScoreBoard.modals
             string corpsJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "corps.json");
             Dictionary<string, string> corpsMap = DataReader.ReadCorpsData(corpsJsonPath);
 
+            if (corpsMap.Count == 0)
+            {
+                MessageBox.Show("군단 정보가 없습니다.");
+                return;
+            }
             foreach (var unit in corpsMap)
             {
                 var label = CreateListItem(unit.Value);
@@ -40,6 +44,7 @@ namespace ScoreBoard.modals
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
             corpsList.Height = labelHeight;
+            ScrollBarManager.SetScrollBar(corpsListContainer, corpsList, corpsScrollBar); // 스크롤바 설정
         }
 
         /*
@@ -70,6 +75,7 @@ namespace ScoreBoard.modals
             Dictionary<string, string> membersMap = DataReader.ReadCorpsMembersData(corpsId);
             if (membersMap.Count == 0)
             {
+                MessageBox.Show("해당 군단의 병사 정보가 없습니다.");
                 return;
             }
             membersList.Controls.Clear(); // 이전 병사 리스트 초기화

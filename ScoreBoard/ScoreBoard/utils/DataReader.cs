@@ -31,7 +31,7 @@ namespace ScoreBoard.utils
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error reading JSON file: {ex.Message}");
+                MessageBox.Show(jsonPath + " 파일을 읽는 중 오류 발생: " + ex.Message);
             }
             return map;
         }
@@ -48,18 +48,15 @@ namespace ScoreBoard.utils
             {
                 string[] files = GetCharacterFilesByCorpsId(corpsId);
 
-                if (files.Length == 0)
+                if (files.Length > 0)
                 {
-                    MessageBox.Show("해당 군단의 병사 정보가 없습니다.");
-                    return membersMap;
-                }
-
-                foreach (var file in files)
-                {
-                    var entry = ExtractIdAndName(file);
-                    if (entry != null)
+                    foreach (var file in files)
                     {
-                        membersMap[entry.Value.id] = entry.Value.name;
+                        var entry = ExtractIdAndName(file);
+                        if (entry != null)
+                        {
+                            membersMap[entry.Value.id] = entry.Value.name;
+                        }
                     }
                 }
             }
