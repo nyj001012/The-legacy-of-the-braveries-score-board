@@ -8,8 +8,8 @@
             corpsScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             corpsListContainer = new Panel();
             MembersListContainer = new Panel();
-            membersScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             membersList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            membersScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             corpsListContainer.SuspendLayout();
             MembersListContainer.SuspendLayout();
             SuspendLayout();
@@ -84,12 +84,20 @@
             // 
             MembersListContainer.BackColor = Color.Transparent;
             MembersListContainer.BackgroundImageLayout = ImageLayout.Stretch;
-            MembersListContainer.Controls.Add(membersList);
             MembersListContainer.Controls.Add(membersScrollBar);
-            MembersListContainer.Location = new Point(285, 68);
+            MembersListContainer.Location = new Point(301, 68);
             MembersListContainer.Name = "MembersListContainer";
             MembersListContainer.Size = new Size(194, 720);
             MembersListContainer.TabIndex = 6;
+            // 
+            // membersList
+            // 
+            membersList.BackColor = Color.Transparent;
+            membersList.FlowDirection = FlowDirection.TopDown;
+            membersList.Location = new Point(301, 68);
+            membersList.Name = "membersList";
+            membersList.Size = new Size(194, 714);
+            membersList.TabIndex = 0;
             // 
             // membersScrollBar
             // 
@@ -135,14 +143,6 @@
             membersScrollBar.Value = 0;
             membersScrollBar.Visible = false;
             // 
-            // membersList
-            // 
-            membersList.FlowDirection = FlowDirection.TopDown;
-            membersList.Location = new Point(0, 0);
-            membersList.Name = "membersList";
-            membersList.Size = new Size(194, 714);
-            membersList.TabIndex = 0;
-            // 
             // SelectPlayerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -152,6 +152,7 @@
             BackgroundImage = Properties.Resources.ImgModalBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1452, 860);
+            Controls.Add(membersList);
             Controls.Add(MembersListContainer);
             Controls.Add(corpsListContainer);
             DoubleBuffered = true;
