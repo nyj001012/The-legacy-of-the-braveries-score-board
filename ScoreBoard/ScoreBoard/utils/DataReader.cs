@@ -93,12 +93,14 @@ namespace ScoreBoard.utils
             try
             {
                 string json = File.ReadAllText(filePath);
-                var data = JsonSerializer.Deserialize<JsonObject>(json);
+                JsonNode? node = JsonNode.Parse(json);
 
-                if (data != null && data.ContainsKey("id") && data.ContainsKey("name"))
+                if (node is JsonObject obj &&
+                    obj.TryGetPropertyValue("id", out var idNode) &&
+                    obj.TryGetPropertyValue("name", out var nameNode))
                 {
-                    string? id = data["id"]?.ToString();
-                    string? name = data["name"]?.ToString();
+                    string? id = idNode?.ToString();
+                    string? name = nameNode?.ToString();
 
                     if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(name))
                     {

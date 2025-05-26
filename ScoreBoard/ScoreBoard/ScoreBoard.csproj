@@ -9,10 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="data\character\1_03_SkyHaneulSoraTen.json" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="data\" />
     <Folder Include="Resources\character\" />
   </ItemGroup>
 
@@ -37,6 +34,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\meta_data\character\201_01_Ruda.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\meta_data\character\201_03_SkyHaneulSoraTen.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\meta_data\character\203_02_Rudeus.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\meta_data\character\204_01_Valerian.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\meta_data\corps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
