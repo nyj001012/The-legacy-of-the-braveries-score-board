@@ -61,7 +61,7 @@
   "actives": [
     {
       "name": "매콤한 주먹",
-      "level": 3,
+      "level": 0,
       "cooldown": 3,
       "description": [
         "적을 기절시킵니다."
