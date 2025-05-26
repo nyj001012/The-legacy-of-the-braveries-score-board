@@ -36,5 +36,18 @@ namespace ScoreBoardUnitTest.utils
             Dictionary<string, string> actualMap = ScoreBoard.utils.DataReader.ReadCorpsData(jsonPath);
             Assert.AreEqual(0, actualMap.Count);
         }
+
+        [TestMethod]
+        public void TestReadCorpsMembersData_ValidCorpsId_ReturnsDictionary()
+        {
+            string corpsId = "201"; // 1군단
+            Dictionary<string, string> expectedMembers = new Dictionary<string, string>
+            {
+                { "201_01_Ruda", "루다" },
+                { "201_03_SkyHaneulSoraTen", "스카이하늘소라텐" }
+            };
+            Dictionary<string, string> actualMembers = ScoreBoard.utils.DataReader.ReadCorpsMembersData(corpsId);
+            CollectionAssert.AreEquivalent(expectedMembers, actualMembers); // 딕셔너리 레퍼런스 비교가 아닌 값 비교
+        }
     }
 }

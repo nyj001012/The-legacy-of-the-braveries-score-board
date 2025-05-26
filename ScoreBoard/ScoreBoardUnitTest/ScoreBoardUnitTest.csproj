@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\meta_data\corps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\units.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
