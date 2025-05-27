@@ -69,14 +69,15 @@ namespace ScoreBoard.data.character
                 {
                     Name = Validator.ValidateNull(p.Name, nameof(p.Name)),
                     RequiredLevel = p.RequiredLevel,
-                    Description = Validator.ValidateNull(p.Description, nameof(p.Description)),
-                    Execute = p.Name switch
-                    {
-                        "전투의 열정" => () => Console.WriteLine("공격력 증가"),
-                        "전투의 의지" => () => Console.WriteLine("방어력 증가"),
-                        "전투의 집중" => () => Console.WriteLine("명중률 증가"),
-                        _ => null
-                    }
+                    Description = Validator.ValidateNull(p.Description, nameof(p.Description))
+                };
+
+                skill.Execute = p.Name switch
+                {
+                    "다재다능" => () => skill.isActivated = true,
+                    "집행자" => () => skill.isActivated = true,
+                    "완벽주의" => () => ActivatePerfectionism(),
+                    _ => null
                 };
                 return skill;
             }).ToList() ?? [];
@@ -102,6 +103,11 @@ namespace ScoreBoard.data.character
                 };
                 return skill;
             }).ToList() ?? [];
+        }
+
+        private void ActivatePerfectionism()
+        {
+            // TODO => 장착 유물의 개수를 세서 공격 속도 증가
         }
     }
 }
