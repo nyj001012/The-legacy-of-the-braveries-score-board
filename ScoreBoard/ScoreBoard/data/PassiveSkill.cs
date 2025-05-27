@@ -11,7 +11,7 @@ namespace ScoreBoard.data
     {
         public bool isActivated { get; set; } = false; // 지속 시간 (예: 2턴 동안 효과 지속). 0인 경우 영구 효과를 의미합니다.
 
-        public PassiveSkill() : base("", 0, [])
+        public PassiveSkill() : base()
         {
         }
 

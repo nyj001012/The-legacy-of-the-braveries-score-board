@@ -13,7 +13,7 @@ namespace ScoreBoard.data
         public bool isOnCooldown { get; set; } = false; // 기술이 현재 재사용 대기 중인지 여부
         public ushort CurrentCooldown { get; set; } = 0; // 현재 남은 재사용 대기 시간 (예: 2턴 남음)
 
-        public ActiveSkill() : base("", 0, [])
+        public ActiveSkill() : base()
         {
         }
 
