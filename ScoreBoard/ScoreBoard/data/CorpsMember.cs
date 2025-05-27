@@ -15,5 +15,6 @@ namespace ScoreBoard.data
         public Stat Stat { get; set; } = stat; // 멤버의 능력치 정보
         public List<PassiveSkill> Passives { get; set; } = []; // 멤버의 패시브 스킬 정보
         public List<ActiveSkill> Actives { get; set; } = []; // 멤버의 능력치 정보
+        public List<Artifact> ArtifactSlot { get; set; } = []; // 멤버의 유물 슬롯 정보 (예: 무기, 방어구 등)
     }
 }
