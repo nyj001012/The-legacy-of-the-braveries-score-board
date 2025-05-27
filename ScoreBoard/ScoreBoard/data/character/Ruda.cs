@@ -11,15 +11,11 @@ namespace ScoreBoard.data.character
 {
     internal class Ruda : CorpsMember
     {
-        public Ruda(string id) : base("", "", "", Array.Empty<string>(), new Stat(0, 0, 0, new()))
+        public Ruda(string id) : base()
         {
             Validator.ValidateNull(id, nameof(id));
 
-            var data = DataReader.ReadMemberData(id);
-            if (data == null)
-            {
-                throw new ArgumentException($"데이터 불러오기 오류: {id}");
-            }
+            var data = DataReader.ReadMemberData(id) ?? throw new ArgumentException($"데이터 불러오기 오류: {id}");
 
             // 필드 초기화
             InitialiseBasicInfo(data);
@@ -43,21 +39,24 @@ namespace ScoreBoard.data.character
         private void InitialiseStat(Stat statData)
         {
             Validator.ValidateNull(statData, nameof(statData));
+            Validator.ValidateNull(statData.CombatStats, nameof(statData.CombatStats));
 
-            Stat = new Stat(
-                hp: statData.Hp,
-                movement: statData.Movement,
-                wisdom: statData.Wisdom,
-                combatStats: statData.CombatStats?.ToDictionary(
+            Stat = new Stat
+            {
+                Hp = statData.Hp,
+                Movement = statData.Movement,
+                Wisdom = statData.Wisdom, // nullable 또는 기본값 처리
+                CombatStats = statData.CombatStats.ToDictionary(
                     kv => kv.Key,
-                    kv => new CombatStat(
-                        kv.Value.Type,
-                        kv.Value.Range,
-                        kv.Value.AttackCount,
-                        kv.Value.Value
-                    )
-                ) ?? []
-            );
+                    kv => new CombatStat
+                    {
+                        Type = kv.Value.Type,
+                        Range = kv.Value.Range,
+                        AttackCount = kv.Value.AttackCount,
+                        Value = kv.Value.Value
+                    }
+                ) ?? new Dictionary<string, CombatStat>()
+            };
         }
 
         private void InitialisePasssiveSkills(CorpsMember data)
@@ -106,9 +105,15 @@ namespace ScoreBoard.data.character
             }).ToList() ?? [];
         }
 
+        /*
+         * ActivatePerfectionism()
+         * 완벽주의 패시브 스킬을 활성화하는 메서드
+         * - 장착한 유물의 개수만큼 attackCount 증가
+         */
         private void ActivatePerfectionism()
         {
-            // TODO => 장착 유물의 개수를 세서 공격 속도 증가
+            this.Stat.CombatStats["melee"].AttackCount += (ushort)this.ArtifactSlot.Count;
+            this.Stat.CombatStats["ranged"].AttackCount += (ushort)this.ArtifactSlot.Count;
         }
     }
 }
