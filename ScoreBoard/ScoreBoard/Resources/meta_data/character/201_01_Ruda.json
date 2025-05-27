@@ -8,10 +8,10 @@
     "용사가 환생이라도 한 걸까요?",
     "물론 그건 중요치 않습니다."
   ],
-  "stats": {
+  "stat": {
     "hp": 750,
     "movement": 3,
-    "combatStats": {
+    "combatstat": {
       "melee": {
         "type": "atk",
         "range": 1,
