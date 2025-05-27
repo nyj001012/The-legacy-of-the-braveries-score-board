@@ -65,8 +65,11 @@ namespace ScoreBoard.data.character
             Validator.ValidateNull(data.Passives, nameof(data.Passives));
             Passives = data.Passives?.Select(p =>
             {
-                var skill = new PassiveSkill(p.Name, p.RequiredLevel, p.Description, p.Duration)
+                var skill = new PassiveSkill()
                 {
+                    Name = Validator.ValidateNull(p.Name, nameof(p.Name)),
+                    RequiredLevel = p.RequiredLevel,
+                    Description = Validator.ValidateNull(p.Description, nameof(p.Description)),
                     Execute = p.Name switch
                     {
                         "전투의 열정" => () => Console.WriteLine("공격력 증가"),
@@ -84,8 +87,11 @@ namespace ScoreBoard.data.character
             Validator.ValidateNull(data.Actives, nameof(data.Actives));
             Actives = data.Actives?.Select(a =>
             {
-                var skill = new ActiveSkill(a.Name, a.RequiredLevel, a.Description, a.Cooldown)
+                var skill = new ActiveSkill()
                 {
+                    Name = Validator.ValidateNull(a.Name, nameof(a.Name)),
+                    RequiredLevel = a.RequiredLevel,
+                    Description = Validator.ValidateNull(a.Description, nameof(a.Description)),
                     Execute = a.Name switch
                     {
                         "폭발 탄환" => () => Console.WriteLine("폭발 피해를 줍니다."),
