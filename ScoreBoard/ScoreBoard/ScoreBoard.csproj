@@ -9,11 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="data\" />
-    <Folder Include="Resources\character\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ReaLTaiizor" Version="3.8.1.2" />
   </ItemGroup>
 
@@ -49,6 +44,10 @@
     <None Update="Resources\meta_data\corps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="data\character\" />
   </ItemGroup>
 
 </Project>

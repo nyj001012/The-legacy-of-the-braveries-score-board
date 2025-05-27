@@ -22,35 +22,35 @@
   "passives": [
     {
       "name": "임페리얼 베리어",
-      "level": 0,
+      "requiredLevel": 0,
       "description": [
         "채력이 1로 1회 생존합니다."
       ]
     },
     {
       "name": "커스텀 튜닝",
-      "level": 1,
+      "requiredLevel": 1,
       "description": [
         "공격력 20 증가"
       ]
     },
     {
       "name": "목청이 터질 정도로! wahhhhhhh!",
-      "level": 2,
+      "requiredLevel": 2,
       "description": [
         "본인을 제외한 모든 아군 원거리는 공격력 + 100 부여"
       ]
     },
     {
       "name": "전투의 함성!",
-      "level": 2,
+      "requiredLevel": 2,
       "description": [
         "본인과 아군의 공속이 1 증가합니다."
       ]
     },
     {
       "name": "진⭐급",
-      "level": 3,
+      "requiredLevel": 3,
       "description": [
         "체력 1000",
         "공격 횟수 8, 공격력 200으로 증가",
@@ -62,7 +62,7 @@
   "actives": [
     {
       "name": "매콤한 주먹",
-      "level": 0,
+      "requiredLevel": 0,
       "cooldown": 3,
       "description": [
         "적을 기절시킵니다."

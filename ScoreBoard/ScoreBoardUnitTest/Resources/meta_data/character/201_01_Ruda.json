@@ -29,7 +29,7 @@
   "passives": [
     {
       "name": "다재다능",
-      "level": 0,
+      "requiredLevel": 0,
       "description": [
         "근거리와 원거리 무기 둘 다 사용 가능",
         "무기 사용 후, 다른 무기로 추가 행동 가능",
@@ -38,14 +38,14 @@
     },
     {
       "name": "집행자",
-      "level": 1,
+      "requiredLevel": 1,
       "description": [
         "상대의 모든 디버프에 '치유차단' 추가"
       ]
     },
     {
       "name": "완벽주의",
-      "level": 2,
+      "requiredLevel": 2,
       "description": [
         "원거리 스킬 치명타 발생",
         "근거리 돌진거리 +1",
@@ -56,7 +56,7 @@
   "actives": [
     {
       "name": "폭발 탄환",
-      "level": 0,
+      "requiredLevel": 0,
       "cooldown": 3,
       "description": [
         "사격 전투 시 대상 주변 1칸 범위에 폭발 피해"
@@ -64,7 +64,7 @@
     },
     {
       "name": "결정타",
-      "level": 0,
+      "requiredLevel": 0,
       "cooldown": 3,
       "description": [
         "2칸 돌진 후 근접 전투 개시"
@@ -72,7 +72,7 @@
     },
     {
       "name": "신성한 결투",
-      "level": 3,
+      "requiredLevel": 3,
       "cooldown": 0,
       "description": [
         "공속 수치만큼 연속 공격 (실패 없음)",

@@ -29,14 +29,14 @@
   "passives": [
     {
       "name": "마검",
-      "level": 0,
+      "requiredLevel": 0,
       "description": [
         "흑마법 카드를 사용합니다."
       ]
     },
     {
       "name": "오늘 흑마법 배웠어요 ^^",
-      "level": 1,
+      "requiredLevel": 1,
       "description": [
         "이동거리 +1",
         "공격력 +100, 주문력 +200"
@@ -44,7 +44,7 @@
     },
     {
       "name": "흑마법에 익숙해지다",
-      "level": 2,
+      "requiredLevel": 2,
       "description": [
         "체력 +200",
         "지혜 +1",
@@ -53,7 +53,7 @@
     },
     {
       "name": "검은 불길",
-      "level": 3,
+      "requiredLevel": 3,
       "description": [
         "모든 공격과 마법에 '흑화염'이 추가 피해를 입힙니다.",
         "흑화염 대미지는 주문력과 같습니다."
@@ -63,7 +63,7 @@
   "actives": [
     {
       "name": "검!풍!",
-      "level": 0,
+      "requiredLevel": 0,
       "cooldown": 0,
       "description": [
         "흑마법을 3개 사용할 때마다 충전 됩니다.",

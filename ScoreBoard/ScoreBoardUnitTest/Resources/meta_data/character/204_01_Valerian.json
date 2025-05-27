@@ -24,7 +24,7 @@
   "passives": [
     {
       "name": "죽음의 천사",
-      "level": 0,
+      "requiredLevel": 0,
       "description": [
         "전투 방식을 정합니다.",
         "기본 전투: 적에게 4의 거리를 돌진하여 공격합니다.",
@@ -33,7 +33,7 @@
     },
     {
       "name": "백수지만 능력자!!",
-      "level": 0,
+      "requiredLevel": 0,
       "description": [
         "모든 플레이어가 각자 행동을 마칠 때 가까운 적을 공격합니다.",
         "공격은 원거리 공격으로 고정되고 두 번 피래를 줍니다.",
@@ -42,7 +42,7 @@
     },
     {
       "name": "백수가 되었지만 훈련을 게을리하지않아ㅜㅠㅠㅠㅠ으어헝",
-      "level": 1,
+      "requiredLevel": 1,
       "description": [
         "공격력 +100",
         "공속 +1",
@@ -51,7 +51,7 @@
     },
     {
       "name": "백수가 되어도 굳건한 정신력 엉어유ㅠㅡㅠㅠㅠ",
-      "level": 2,
+      "requiredLevel": 2,
       "description": [
         "주문력 +200",
         "공격속도 +1"
@@ -61,7 +61,7 @@
   "actives": [
     {
       "name": "만능이란 이런 것",
-      "level": 3,
+      "requiredLevel": 3,
       "cooldown": 3,
       "description": [
         "이번 턴에 아군의 행동 하나를 발레리안이 복사하여 사용합니다.",
