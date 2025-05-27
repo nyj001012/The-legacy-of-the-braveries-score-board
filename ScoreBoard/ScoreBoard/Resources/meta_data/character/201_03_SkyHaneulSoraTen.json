@@ -1,22 +1,24 @@
 ﻿{
-  "actives": [
-    {
-      "name": "매콤한 주먹",
-      "level": 0,
-      "cooldown": 3,
-      "description": [
-        "적을 기절시킵니다."
-      ]
-    }
-  ],
+  "id": "201_03_SkyHaneulSoraTen",
+  "name": "스카이하늘소라텐",
   "corpsId": "201",
   "description": [
     "1군단 2중대 전투소대 소속된 김스카이는",
     "그의 할아버지가 대성전의 최전방을 책임진 푸른 군단의 장군이었고 할아버지를 본받아 자연스럽게 군인이 되었지만 재능은 그렇지 못했습니다.",
     "하지만 그의 노력과 근성은 그가 군인이 되어 활약하는 걸 그 누구도 막지 못했습니다."
   ],
-  "id": "201_03_SkyHaneulSoraTen",
-  "name": "스카이하늘소라텐",
+  "stats": {
+    "hp": 300,
+    "movement": 4,
+    "combatStats": {
+      "ranged": {
+        "type": "atk",
+        "range": 3,
+        "attackCount": 6,
+        "value": 70
+      }
+    }
+  },
   "passives": [
     {
       "name": "임페리얼 베리어",
@@ -57,16 +59,14 @@
       ]
     }
   ],
-  "stats": {
-    "hp": 300,
-    "movement": 4,
-    "combatStats": {
-      "ranged": {
-        "type": "atk",
-        "range": 3,
-        "attackCount": 6,
-        "value": 70
-      }
+  "actives": [
+    {
+      "name": "매콤한 주먹",
+      "level": 0,
+      "cooldown": 3,
+      "description": [
+        "적을 기절시킵니다."
+      ]
     }
-  }
+  ]
 }
