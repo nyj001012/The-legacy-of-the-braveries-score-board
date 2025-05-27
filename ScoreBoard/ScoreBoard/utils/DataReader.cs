@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScoreBoard.data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -73,7 +74,7 @@ namespace ScoreBoard.utils
          * - corpsId: 군단 ID
          * - return: 해당 군단의 병사 JSON 파일 경로 배열
          */
-        private static string[] GetCharacterFilesByCorpsId(string corpsId)
+        public static string[] GetCharacterFilesByCorpsId(string corpsId)
         {
             string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "character");
             string pattern = $"{corpsId}_*.json";
@@ -85,7 +86,7 @@ namespace ScoreBoard.utils
          * - filePath: JSON 파일 경로
          * - return: JSON 파일에서 id와 name을 추출하여 (id, name) 형태로 반환
          */
-        private static (string id, string name)? ExtractIdAndName(string filePath)
+        public static (string id, string name)? ExtractIdAndName(string filePath)
         {
             try
             {
@@ -113,6 +114,25 @@ namespace ScoreBoard.utils
             }
 
             return null;
+        }
+
+        /*
+         * JsonReader.ReadMemberData(id)
+         * - id: 병사 ID
+         * - return: 해당 병사의 JSON 데이터를 반환
+         */
+        internal static CorpsMember? ReadMemberData (string id)
+        {
+            string jsonPath = @$"Resources/meta_data/character/{id}.json";
+            if (!File.Exists(jsonPath))
+            {
+                return null;
+            }
+            string json = File.ReadAllText(jsonPath);
+            return JsonSerializer.Deserialize<CorpsMember>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true, // 대소문자 구분 없이 속성 이름을 매칭
+            });
         }
     }
 }
