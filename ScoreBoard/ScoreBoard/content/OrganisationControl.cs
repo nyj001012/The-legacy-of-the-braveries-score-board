@@ -45,12 +45,12 @@ namespace ScoreBoard.content
 
             if (selectPlayerModal.ShowDialog(this) == DialogResult.OK)
             {
-                int selectedData = selectPlayerModal.SelectedPlayerId;
+                string selectedData = selectPlayerModal.SelectedPlayerId;
                 ApplyToSlot(playerNumber, selectedData);
             }
         }
 
-        private void ApplyToSlot(string playerNumber, int selectedData)
+        private void ApplyToSlot(string playerNumber, string selectedData)
         {
             // TODO => 슬롯에 선택된 데이터를 적용하는 로직을 구현합니다.
         }

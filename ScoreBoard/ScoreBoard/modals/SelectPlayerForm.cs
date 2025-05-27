@@ -9,7 +9,7 @@ namespace ScoreBoard.modals
     {
         private int labelHeight = 0;
         private int verticalSpace = 20;
-        public int SelectedPlayerId { get; private set; }
+        public string? SelectedPlayerId { get; private set; }
 
         public SelectPlayerForm()
         {
@@ -99,7 +99,9 @@ namespace ScoreBoard.modals
          */
         private void ShowMemberStat(string memberId)
         {
-            // TODO => 선택된 병사 Id 저장 및 병사 정보 표시
+            SelectedPlayerId = memberId;
+            // TODO => 해당 멤버 Id의 Player 객체를 가져오기
+            // TODO => Player 객체를 이용하여 병사 정보를 표시하기
         }
 
         /*
