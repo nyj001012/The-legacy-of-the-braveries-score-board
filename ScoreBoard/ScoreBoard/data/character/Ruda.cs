@@ -97,9 +97,9 @@ namespace ScoreBoard.data.character
 
                 skill.Execute = a.Name switch
                 {
-                    "폭발 탄환" => () => Console.WriteLine("폭발 피해를 줍니다."),
-                    "결정타" => () => Console.WriteLine("2칸 돌진 후 공격"),
-                    "신성한 결투" => () => Console.WriteLine("공속만큼 타격합니다."),
+                    "폭발 탄환" => () => skill.isOnCooldown = true,
+                    "결정타" => () => skill.isOnCooldown = true,
+                    "신성한 결투" => () => skill.isOnCooldown = true,
                     _ => null
                 };
                 return skill;
