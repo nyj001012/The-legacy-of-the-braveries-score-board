@@ -11,15 +11,17 @@ namespace ScoreBoard.modals
 {
     public partial class SelectPlayerForm : Form
     {
-        private int labelHeight = 0;
-        private int verticalSpace = 20;
-        public string? SelectedPlayerId { get; private set; }
+        private int labelHeight = 0; // 레이블의 총 높이. 동적 레이블 높이를 계산하기 위해 사용
+        private readonly int verticalSpace = 20; // 레이블 간의 수직 여백. 동적으로 레이블을 생성할 때 사용
+        internal CorpsMember? SelectedMember = null; // 선택된 병사 객체. 폼이 닫힐 때 반환됨
+        private readonly Dictionary<string, CorpsMember> _selectedCharacters = []; // 선택된 병사들을 저장하는 딕셔너리
 
-        public SelectPlayerForm()
+        internal SelectPlayerForm(Dictionary<string, CorpsMember> selectedCharacters)
         {
             InitializeComponent();
             this.KeyPreview = true; // 폼에서 키 입력을 우선하여 받을 수 있도록 설정
             ShowCorps(); // 군단 리스트 표시
+            this._selectedCharacters = selectedCharacters; // 선택된 병사들을 저장하는 딕셔너리 초기화
         }
 
         /*
@@ -102,10 +104,13 @@ namespace ScoreBoard.modals
          */
         private void ShowMemberStat(string memberId)
         {
-            SelectedPlayerId = memberId;
             CorpsMember member = GetMember(memberId);
+            SelectedMember = member;
             ShowMemberImage(memberId);
             ShowMemberStatText(member);
+            // 이미 선택된 병사 객체가 selectedCharacters에 있으면 결정 버튼 비활성화
+            btnDecision.Enabled = !_selectedCharacters.Values.Any(m => m.Id == member.Id);
+            btnDecision.Visible = btnDecision.Enabled; // 버튼 표시 여부 설정
         }
 
         /*
@@ -130,8 +135,81 @@ namespace ScoreBoard.modals
          */
         private string BuildStatText(CorpsMember member)
         {
-            var sb = new StringBuilder()
-                .AppendLine($"이름: {member.Name}")
+            var sb = new StringBuilder();
+            BuildBasicInfoText(member, sb); // 기본 정보 설정
+            sb.AppendLine(" ");
+            BuildDescriptionText(member, sb); // 설명 정보 설정
+            sb.AppendLine(" ");
+            BuildSkillText(member.Passives, member.Actives, sb, 0, "기본"); // 기본 스킬 정보 설정
+            BuildSkillText(member.Passives, member.Actives, sb, 1, "1강"); // 1레벨 스킬 정보 설정
+            BuildSkillText(member.Passives, member.Actives, sb, 2, "2강"); // 2레벨 스킬 정보 설정
+            BuildSkillText(member.Passives, member.Actives, sb, 3, "궁극 강화"); // 3레벨 스킬 정보 설정                
+
+            return sb.ToString();
+        }
+
+        /*
+         * BuildSkillText(IEnumerable<Skill> passives, IEnumerable<Skill> actives, StringBuilder sb, ushort requiredLevel, string text)
+         * 스킬 정보를 문자열로 설정하는 메서드
+         * - passives: 패시브 스킬 목록
+         * - actives: 액티브 스킬 목록
+         * - sb: 문자열 빌더
+         * - requiredLevel: 요구 레벨
+         * - text: 스킬 레벨에 대한 설명 텍스트 (예: "기본", "1강", "2강", "궁극 강화" 등)
+         */
+        private void BuildSkillText(IEnumerable<Skill> passives, IEnumerable<Skill> actives, StringBuilder sb, ushort requiredLevel, string text)
+        {
+            var validSkills = passives.Concat(actives).Where(s => s.RequiredLevel == requiredLevel).ToList();
+            if (validSkills.Count == 0) return; // 해당 레벨의 스킬이 없으면 반환
+
+            sb.AppendLine(text + new string('⭐', requiredLevel));
+            foreach (var skill in validSkills)
+            {
+                if (skill is ActiveSkill activeSkill)
+                {
+                    sb.AppendLine($"[액티브] {activeSkill.Name} (쿨타임: {activeSkill.Cooldown})");
+                }
+                else if (skill is PassiveSkill passiveSkill)
+                {
+                    sb.AppendLine($"[패시브] {passiveSkill.Name}");
+                }
+                foreach (var line in skill.Description)
+                {
+                    sb.AppendLine($"· {line}");
+                }
+            }
+            foreach (var skill in actives.Where(s => s.RequiredLevel == 1))
+            {
+                sb.AppendLine($"[액티브] {skill.Name}");
+                foreach (var line in skill.Description)
+                {
+                    sb.AppendLine($"· {line}");
+                }
+            }
+            sb.AppendLine(" ");
+        }
+
+        /*
+         * BuildSkillText(CorpsMember member, StringBuilder sb)
+         * - member: 병사 객체
+         * - sb: 문자열 빌더
+         * 해당 병사의 배경 설명을 문자열로 설정하는 메서드
+         */
+        private void BuildDescriptionText(CorpsMember member, StringBuilder sb)
+        {
+            foreach (var line in member.Description)
+                sb.AppendLine(line);
+        }
+
+        /*
+         * BuildDescriptionText(CorpsMember member, StringBuilder sb)
+         * - member: 병사 객체
+         * - sb: 문자열 빌더
+         * 이름, 체력, 이동 거리 등의 기본 정보를 문자열로 설정하는 메서드
+         */
+        private void BuildBasicInfoText(CorpsMember member, StringBuilder sb)
+        {
+            sb.AppendLine($"이름: {member.Name}")
                 .AppendLine($"체력: {member.Stat.MaxHp}");
 
             var types = new[] { "melee", "ranged" };
@@ -151,10 +229,6 @@ namespace ScoreBoard.modals
             sb.AppendLine($"이동 거리: {member.Stat.Movement}");
             if (member.Stat.Wisdom != null) sb.AppendLine($"지혜: {member.Stat.Wisdom}");
             if (member.Stat.SpellPower != null) sb.AppendLine($"주문력: {member.Stat.SpellPower}");
-            sb.AppendLine(" ");
-            foreach (var line in member.Description)
-                sb.AppendLine(line);
-            return sb.ToString();
         }
 
         /*
@@ -219,6 +293,7 @@ namespace ScoreBoard.modals
         {
             if (e.KeyChar == (char)Keys.Escape)
             {
+                SelectedMember = null; // 선택된 병사 객체 초기화
                 this.Close();
             }
         }
@@ -273,6 +348,12 @@ namespace ScoreBoard.modals
             newScrollValue = Math.Max(statScrollBar.Minimum, Math.Min(statScrollBar.Maximum, newScrollValue));
             statScrollBar.Value = newScrollValue;
             statList.Top = -newScrollValue;
+        }
+
+        private void btnDecision_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK; // 선택된 병사 객체가 있을 경우 OK 반환
+            this.Close(); // 폼 닫기
         }
     }
 }

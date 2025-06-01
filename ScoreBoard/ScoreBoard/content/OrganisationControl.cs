@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScoreBoard.data;
 using ScoreBoard.modals;
 
 namespace ScoreBoard.content
 {
     public partial class OrganisationControl : UserControl
     {
+        Dictionary<string, CorpsMember> selectedCharacters = [];
+
         public OrganisationControl()
         {
             InitializeComponent();
@@ -41,16 +44,22 @@ namespace ScoreBoard.content
                 return;
             }
 
-            var selectPlayerModal = new SelectPlayerForm();
+            var selectPlayerModal = new SelectPlayerForm(selectedCharacters);
 
             if (selectPlayerModal.ShowDialog(this) == DialogResult.OK)
             {
-                string selectedData = selectPlayerModal.SelectedPlayerId;
-                ApplyToSlot(playerNumber, selectedData);
+                CorpsMember? selectedMember = selectPlayerModal.SelectedMember;
+                if (selectedMember is not null)
+                {
+                    // 선택된 멤버를 리스트에 추가합니다.
+                    selectedCharacters[playerNumber] = selectedMember;
+                    // 선택된 멤버의 정보를 UI에 표시합니다.
+                    ApplyToSlot(playerNumber, selectedMember);
+                }
             }
         }
 
-        private void ApplyToSlot(string playerNumber, string selectedData)
+        private void ApplyToSlot(string playerNumber, CorpsMember selectedData)
         {
             // TODO => 슬롯에 선택된 데이터를 적용하는 로직을 구현합니다.
         }

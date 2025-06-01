@@ -15,11 +15,13 @@
             statList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             statScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             btnDecision = new PictureBox();
+            panel1 = new Panel();
             corpsListContainer.SuspendLayout();
             MembersListContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)characterImage).BeginInit();
             statContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnDecision).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // corpsList
@@ -229,11 +231,22 @@
             btnDecision.BackColor = Color.Transparent;
             btnDecision.BackgroundImage = Properties.Resources.BtnDecisionInMonitor;
             btnDecision.BackgroundImageLayout = ImageLayout.Stretch;
-            btnDecision.Location = new Point(1064, 705);
+            btnDecision.Cursor = Cursors.Hand;
+            btnDecision.Location = new Point(117, 640);
             btnDecision.Name = "btnDecision";
             btnDecision.Size = new Size(177, 60);
             btnDecision.TabIndex = 9;
             btnDecision.TabStop = false;
+            btnDecision.Click += btnDecision_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Transparent;
+            panel1.Controls.Add(btnDecision);
+            panel1.Location = new Point(945, 63);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(411, 719);
+            panel1.TabIndex = 10;
             // 
             // SelectPlayerForm
             // 
@@ -244,12 +257,12 @@
             BackgroundImage = Properties.Resources.ImgModalBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1452, 860);
-            Controls.Add(btnDecision);
             Controls.Add(statContainer);
             Controls.Add(characterImage);
             Controls.Add(membersList);
             Controls.Add(MembersListContainer);
             Controls.Add(corpsListContainer);
+            Controls.Add(panel1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
@@ -268,6 +281,7 @@
             ((System.ComponentModel.ISupportInitialize)characterImage).EndInit();
             statContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)btnDecision).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
         private ReaLTaiizor.Controls.CyberScrollBar corpsScrollBar;
@@ -281,5 +295,6 @@
         private controls.CustomFlowLayoutPanel statList;
         private ReaLTaiizor.Controls.CyberScrollBar statScrollBar;
         private PictureBox btnDecision;
+        private Panel panel1;
     }
 }
