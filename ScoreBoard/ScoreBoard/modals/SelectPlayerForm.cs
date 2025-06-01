@@ -5,6 +5,7 @@ using ScoreBoard.Properties;
 using ScoreBoard.utils;
 using System.Data;
 using System.Diagnostics;
+using System.Text;
 
 namespace ScoreBoard.modals
 {
@@ -46,7 +47,6 @@ namespace ScoreBoard.modals
                 corpsList.Controls.Add(label);
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
-            corpsList.Height = labelHeight;
             ScrollBarManager.SetScrollBar(corpsListContainer, corpsList, corpsScrollBar); // 스크롤바 설정
         }
 
@@ -104,9 +104,78 @@ namespace ScoreBoard.modals
         {
             SelectedPlayerId = memberId;
             CorpsMember member = GetMember(memberId);
-            // TODO => Player 객체를 이용하여 병사 정보를 표시하기
             ShowMemberImage(memberId);
+            ShowMemberStatText(member);
         }
+
+        /*
+         * ShowMemberStatText(CorpsMember member)
+         * - member: 병사 객체
+         * - 해당 병사의 정보를 레이블로 표시하는 메서드
+         */
+        private void ShowMemberStatText(CorpsMember member)
+        {
+            statList.Controls.Clear();
+            var label = CreateStatLabel(BuildStatText(member));
+            statList.Controls.Add(label);
+
+            // 최소 높이 보장: 스크롤바 조건 무력화 방지
+            int contentHeight = label.Bottom;
+            int minHeight = statContainer.ClientSize.Height + 1; // +1로 스크롤 조건 유도
+            statList.Height = Math.Max(contentHeight, minHeight);
+
+            ScrollBarManager.SetScrollBar(statContainer, statList, statScrollBar);
+            statScrollBar.Value = statScrollBar.Minimum;
+            statList.Top = 0;
+        }
+
+        /*
+         * BuildStatText(CorpsMember m)
+         * - m: 병사 객체
+         * - 해당 병사의 정보를 문자열로 반환하는 메서드
+         */
+        private string BuildStatText(CorpsMember member)
+        {
+            var sb = new StringBuilder()
+                .AppendLine($"이름: {member.Name}")
+                .AppendLine($"체력: {member.Stat.MaxHp}");
+
+            var types = new[] { "melee", "ranged" };
+            var ranges = new List<string>();
+            var values = new List<string>();
+
+            foreach (var type in types)
+                if (member.Stat.CombatStats.TryGetValue(type, out var s))
+                {
+                    var label = type == "melee" ? "근거리" : "원거리";
+                    ranges.Add($"{label} {s.Range}");
+                    values.Add($"{label} {s.Value} {{{s.AttackCount}}}");
+                }
+
+            if (ranges.Count > 0) sb.AppendLine("사거리:\n· " + string.Join("\n· ", ranges));
+            if (values.Count > 0) sb.AppendLine("공격력:\n· " + string.Join("\n· ", values));
+            sb.AppendLine($"이동 거리: {member.Stat.Movement}");
+            if (member.Stat.Wisdom != null) sb.AppendLine($"지혜: {member.Stat.Wisdom}");
+            if (member.Stat.SpellPower != null) sb.AppendLine($"주문력: {member.Stat.SpellPower}");
+            foreach (var line in member.Description)
+                sb.AppendLine(line);
+
+            return sb.ToString();
+        }
+
+        /*
+         * CreateStatLabel(string text)
+         * - text: 레이블에 표시할 텍스트
+         * - return: 반투명한 레이블 객체
+         */
+        private TransparentTextLabel CreateStatLabel(string text) => new()
+        {
+            Text = text,
+            AutoSize = true,
+            Font = new Font("나눔고딕코딩", 22),
+            ForeColor = Color.FromArgb(255, 245, 245, 245),
+        };
+
 
         /*
          * ShowMemberImage(string memberId)
@@ -186,6 +255,30 @@ namespace ScoreBoard.modals
 
             corpsScrollBar.Value = newScrollValue;
             corpsList.Top = -newScrollValue;
+        }
+
+        /*
+         * statList_MouseEnter(object sender, EventArgs e)
+         * 마우스가 statList에 들어오면 포커스를 statList로 이동시키는 메서드
+         * 스크롤링 우선권을 위함
+         */
+        private void statList_MouseEnter(object sender, EventArgs e)
+        {
+            statList.Focus();
+        }
+
+        private void statList_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (!statScrollBar.Enabled) return;
+
+            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * statScrollBar.SmallStep;
+            int newScrollValue = statScrollBar.Value + delta;
+
+            // 스크롤 범위 안에서만 동작하도록 조정
+
+            newScrollValue = Math.Max(statScrollBar.Minimum, Math.Min(statScrollBar.Maximum, newScrollValue));
+            statScrollBar.Value = newScrollValue;
+            statList.Top = -newScrollValue;
         }
     }
 }

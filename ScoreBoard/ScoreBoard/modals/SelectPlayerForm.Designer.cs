@@ -11,9 +11,13 @@
             membersScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             membersList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             characterImage = new PictureBox();
+            statContainer = new Panel();
+            statList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            statScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             corpsListContainer.SuspendLayout();
             MembersListContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)characterImage).BeginInit();
+            statContainer.SuspendLayout();
             SuspendLayout();
             // 
             // corpsList
@@ -155,6 +159,69 @@
             characterImage.TabIndex = 7;
             characterImage.TabStop = false;
             // 
+            // statContainer
+            // 
+            statContainer.BackColor = Color.Transparent;
+            statContainer.Controls.Add(statList);
+            statContainer.Controls.Add(statScrollBar);
+            statContainer.Location = new Point(945, 88);
+            statContainer.Name = "statContainer";
+            statContainer.Size = new Size(411, 597);
+            statContainer.TabIndex = 8;
+            // 
+            // statList
+            // 
+            statList.FlowDirection = FlowDirection.TopDown;
+            statList.Location = new Point(3, 3);
+            statList.Name = "statList";
+            statList.Size = new Size(405, 591);
+            statList.TabIndex = 0;
+            statList.MouseEnter += statList_MouseEnter;
+            statList.MouseWheel += statList_MouseWheel;
+            // 
+            // statScrollBar
+            // 
+            statScrollBar.Alpha = 50;
+            statScrollBar.BackColor = Color.Transparent;
+            statScrollBar.Background = true;
+            statScrollBar.Background_WidthPen = 3F;
+            statScrollBar.BackgroundPen = true;
+            statScrollBar.ColorBackground = Color.Transparent;
+            statScrollBar.ColorBackground_1 = Color.Transparent;
+            statScrollBar.ColorBackground_2 = Color.Transparent;
+            statScrollBar.ColorBackground_Pen = Color.Transparent;
+            statScrollBar.ColorBackground_Value_1 = Color.Transparent;
+            statScrollBar.ColorBackground_Value_2 = Color.Transparent;
+            statScrollBar.ColorLighting = Color.Transparent;
+            statScrollBar.ColorPen_1 = Color.Transparent;
+            statScrollBar.ColorPen_2 = Color.Transparent;
+            statScrollBar.ColorScrollBar = Color.Transparent;
+            statScrollBar.ColorScrollBar_Transparency = 255;
+            statScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            statScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
+            statScrollBar.Lighting = false;
+            statScrollBar.LinearGradient_Background = false;
+            statScrollBar.LinearGradient_Value = false;
+            statScrollBar.LinearGradientPen = false;
+            statScrollBar.Location = new Point(382, 3);
+            statScrollBar.Maximum = 100;
+            statScrollBar.Minimum = 0;
+            statScrollBar.Name = "statScrollBar";
+            statScrollBar.OrientationValue = Orientation.Vertical;
+            statScrollBar.PenWidth = 10;
+            statScrollBar.RGB = false;
+            statScrollBar.Rounding = true;
+            statScrollBar.RoundingInt = 7;
+            statScrollBar.Size = new Size(26, 591);
+            statScrollBar.SmallStep = 10;
+            statScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            statScrollBar.TabIndex = 1;
+            statScrollBar.Tag = "Cyber";
+            statScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            statScrollBar.ThumbSize = 60;
+            statScrollBar.Timer_RGB = 300;
+            statScrollBar.Value = 0;
+            // 
             // SelectPlayerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -164,6 +231,7 @@
             BackgroundImage = Properties.Resources.ImgModalBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1452, 860);
+            Controls.Add(statContainer);
             Controls.Add(characterImage);
             Controls.Add(membersList);
             Controls.Add(MembersListContainer);
@@ -184,6 +252,7 @@
             corpsListContainer.ResumeLayout(false);
             MembersListContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)characterImage).EndInit();
+            statContainer.ResumeLayout(false);
             ResumeLayout(false);
         }
         private ReaLTaiizor.Controls.CyberScrollBar corpsScrollBar;
@@ -193,5 +262,8 @@
         private controls.CustomFlowLayoutPanel membersList;
         private ReaLTaiizor.Controls.CyberScrollBar membersScrollBar;
         private PictureBox characterImage;
+        private Panel statContainer;
+        private controls.CustomFlowLayoutPanel statList;
+        private ReaLTaiizor.Controls.CyberScrollBar statScrollBar;
     }
 }
