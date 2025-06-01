@@ -116,6 +116,8 @@ namespace ScoreBoard.modals
                     return new Ruda(memberId);
                 case CharacterIds.SkyHaneulSoraTen:
                     return new SkyHaneulSoraTen(memberId);
+                case CharacterIds.Valerian:
+                    return new Valerian(memberId);
                 default:
                     throw new ArgumentException($"잘못된 데이터입니다. memberId: {memberId}");
             }
