@@ -116,6 +116,8 @@ namespace ScoreBoard.modals
                     return new Ruda(memberId);
                 case CharacterIds.SkyHaneulSoraTen:
                     return new SkyHaneulSoraTen(memberId);
+                case CharacterIds.Rudeus:
+                    return new Rudeus(memberId);
                 case CharacterIds.Valerian:
                     return new Valerian(memberId);
                 default:
