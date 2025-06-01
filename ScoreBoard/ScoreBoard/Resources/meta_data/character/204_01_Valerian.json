@@ -12,7 +12,7 @@
   "stat": {
     "hp": 600,
     "movement": 2,
-    "combatStats": {
+    "combatStat": {
       "melee": {
         "type": "sp",
         "range": 1,

@@ -10,7 +10,7 @@
   "stat": {
     "hp": 300,
     "movement": 4,
-    "combatStats": {
+    "combatStat": {
       "ranged": {
         "type": "atk",
         "range": 3,

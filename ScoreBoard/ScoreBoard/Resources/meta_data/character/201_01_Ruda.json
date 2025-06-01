@@ -11,7 +11,7 @@
   "stat": {
     "hp": 750,
     "movement": 3,
-    "combatstat": {
+    "combatStat": {
       "melee": {
         "type": "atk",
         "range": 1,
