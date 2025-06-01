@@ -6,16 +6,16 @@
         {
             corpsList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             corpsScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
-            corpsListContainer = new Panel();
-            MembersListContainer = new Panel();
+            corpsListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
+            MembersListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             membersScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             membersList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             characterImage = new PictureBox();
-            statContainer = new Panel();
+            statContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             statList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             statScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             btnDecision = new PictureBox();
-            panel1 = new Panel();
+            panel1 = new ScoreBoard.controls.DoubleBufferedPanel();
             corpsListContainer.SuspendLayout();
             MembersListContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)characterImage).BeginInit();
@@ -237,6 +237,7 @@
             btnDecision.Size = new Size(177, 60);
             btnDecision.TabIndex = 9;
             btnDecision.TabStop = false;
+            btnDecision.Visible = false;
             btnDecision.Click += btnDecision_Click;
             // 
             // panel1
@@ -275,6 +276,7 @@
             Text = "SelectPlayer";
             TopMost = true;
             TransparencyKey = Color.FromArgb(64, 64, 64);
+            Load += SelectPlayerForm_Load;
             KeyPress += SelectPlayerForm_KeyPress;
             corpsListContainer.ResumeLayout(false);
             MembersListContainer.ResumeLayout(false);
@@ -286,15 +288,15 @@
         }
         private ReaLTaiizor.Controls.CyberScrollBar corpsScrollBar;
         private controls.CustomFlowLayoutPanel corpsList;
-        private Panel corpsListContainer;
-        private Panel MembersListContainer;
+        private ScoreBoard.controls.DoubleBufferedPanel corpsListContainer;
+        private ScoreBoard.controls.DoubleBufferedPanel MembersListContainer;
         private controls.CustomFlowLayoutPanel membersList;
         private ReaLTaiizor.Controls.CyberScrollBar membersScrollBar;
         private PictureBox characterImage;
-        private Panel statContainer;
+        private ScoreBoard.controls.DoubleBufferedPanel statContainer;
         private controls.CustomFlowLayoutPanel statList;
         private ReaLTaiizor.Controls.CyberScrollBar statScrollBar;
         private PictureBox btnDecision;
-        private Panel panel1;
+        private ScoreBoard.controls.DoubleBufferedPanel panel1;
     }
 }

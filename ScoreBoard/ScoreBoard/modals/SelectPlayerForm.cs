@@ -18,10 +18,15 @@ namespace ScoreBoard.modals
 
         internal SelectPlayerForm(Dictionary<string, CorpsMember> selectedCharacters)
         {
+            this.DoubleBuffered = true; // 폼의 더블 버퍼링 활성화
             InitializeComponent();
             this.KeyPreview = true; // 폼에서 키 입력을 우선하여 받을 수 있도록 설정
-            ShowCorps(); // 군단 리스트 표시
             this._selectedCharacters = selectedCharacters; // 선택된 병사들을 저장하는 딕셔너리 초기화
+        }
+
+        private void SelectPlayerForm_Load(object sender, EventArgs e)
+        {
+            ShowCorps(); // 군단 리스트 표시
         }
 
         /*
@@ -30,6 +35,7 @@ namespace ScoreBoard.modals
          */
         private void ShowCorps()
         {
+            this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
             // 군단 JSON 파일 읽고 리스트에 표시
             string corpsJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "corps.json");
             Dictionary<string, string> corpsMap = DataReader.ReadCorpsData(corpsJsonPath);
@@ -50,6 +56,7 @@ namespace ScoreBoard.modals
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
             ScrollBarManager.SetScrollBar(corpsListContainer, corpsList, corpsScrollBar); // 스크롤바 설정
+            this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
         }
 
         /*
@@ -77,6 +84,7 @@ namespace ScoreBoard.modals
          */
         private void ShowCorpsMembers(string corpsId)
         {
+            this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
             Dictionary<string, string> membersMap = DataReader.ReadCorpsMembersData(corpsId);
             if (membersMap.Count == 0)
             {
@@ -95,6 +103,7 @@ namespace ScoreBoard.modals
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
             ScrollBarManager.SetScrollBar(MembersListContainer, membersList, membersScrollBar); // 병사 리스트 스크롤바 설정
+            this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
         }
 
         /*
@@ -104,6 +113,7 @@ namespace ScoreBoard.modals
          */
         private void ShowMemberStat(string memberId)
         {
+            this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
             CorpsMember member = GetMember(memberId);
             SelectedMember = member;
             ShowMemberImage(memberId);
@@ -111,6 +121,7 @@ namespace ScoreBoard.modals
             // 이미 선택된 병사 객체가 selectedCharacters에 있으면 결정 버튼 비활성화
             btnDecision.Enabled = !_selectedCharacters.Values.Any(m => m.Id == member.Id);
             btnDecision.Visible = btnDecision.Enabled; // 버튼 표시 여부 설정
+            this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
         }
 
         /*
