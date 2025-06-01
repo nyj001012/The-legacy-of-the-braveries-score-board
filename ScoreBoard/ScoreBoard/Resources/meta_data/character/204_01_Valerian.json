@@ -19,9 +19,9 @@
         "attackCount": 4,
         "isCountFixed": false,
         "value": 200
-      },
-      "spellPower": 300
-    }
+      }
+    },
+    "spellPower": 300
   },
   "passives": [
     {
