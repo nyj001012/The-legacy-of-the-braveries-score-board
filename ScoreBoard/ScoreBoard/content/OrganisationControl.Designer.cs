@@ -38,6 +38,10 @@
             gradientLabel3 = new ScoreBoard.controls.GradientLabel();
             btnSelect4P = new PictureBox();
             btnJoin = new PictureBox();
+            lbl1P = new ScoreBoard.controls.GradientLabel();
+            lbl2P = new ScoreBoard.controls.GradientLabel();
+            lbl3P = new ScoreBoard.controls.GradientLabel();
+            lbl4P = new ScoreBoard.controls.GradientLabel();
             ((System.ComponentModel.ISupportInitialize)btnSelect1P).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnSelect2P).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnSelect3P).BeginInit();
@@ -185,12 +189,60 @@
             btnJoin.Visible = false;
             btnJoin.Click += btnJoin_Click;
             // 
+            // lbl1P
+            // 
+            lbl1P.BackColor = Color.Transparent;
+            lbl1P.Font = new Font("Danjo-bold", 26.25F);
+            lbl1P.GradientEnd = Color.FromArgb(107, 89, 50);
+            lbl1P.GradientStart = Color.FromArgb(209, 162, 97);
+            lbl1P.Location = new Point(108, 852);
+            lbl1P.Name = "lbl1P";
+            lbl1P.Size = new Size(345, 50);
+            lbl1P.TabIndex = 12;
+            // 
+            // lbl2P
+            // 
+            lbl2P.BackColor = Color.Transparent;
+            lbl2P.Font = new Font("Danjo-bold", 26.25F);
+            lbl2P.GradientEnd = Color.FromArgb(107, 89, 50);
+            lbl2P.GradientStart = Color.FromArgb(209, 162, 97);
+            lbl2P.Location = new Point(561, 852);
+            lbl2P.Name = "lbl2P";
+            lbl2P.Size = new Size(345, 50);
+            lbl2P.TabIndex = 13;
+            // 
+            // lbl3P
+            // 
+            lbl3P.BackColor = Color.Transparent;
+            lbl3P.Font = new Font("Danjo-bold", 26.25F);
+            lbl3P.GradientEnd = Color.FromArgb(107, 89, 50);
+            lbl3P.GradientStart = Color.FromArgb(209, 162, 97);
+            lbl3P.Location = new Point(1014, 852);
+            lbl3P.Name = "lbl3P";
+            lbl3P.Size = new Size(345, 50);
+            lbl3P.TabIndex = 14;
+            // 
+            // lbl4P
+            // 
+            lbl4P.BackColor = Color.Transparent;
+            lbl4P.Font = new Font("Danjo-bold", 26.25F);
+            lbl4P.GradientEnd = Color.FromArgb(107, 89, 50);
+            lbl4P.GradientStart = Color.FromArgb(209, 162, 97);
+            lbl4P.Location = new Point(1467, 852);
+            lbl4P.Name = "lbl4P";
+            lbl4P.Size = new Size(345, 50);
+            lbl4P.TabIndex = 15;
+            // 
             // OrganisationControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.ImgInGameBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
+            Controls.Add(lbl4P);
+            Controls.Add(lbl3P);
+            Controls.Add(lbl2P);
+            Controls.Add(lbl1P);
             Controls.Add(btnJoin);
             Controls.Add(gradientLabel3);
             Controls.Add(btnSelect4P);
@@ -205,7 +257,6 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "OrganisationControl";
             Size = new Size(1920, 1080);
-            Load += OrganisationControl_Load;
             ((System.ComponentModel.ISupportInitialize)btnSelect1P).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnSelect2P).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnSelect3P).EndInit();
@@ -227,5 +278,9 @@
         private controls.GradientLabel gradientLabel3;
         private System.Windows.Forms.PictureBox btnSelect4P;
         private PictureBox btnJoin;
+        private controls.GradientLabel lbl1P;
+        private controls.GradientLabel lbl2P;
+        private controls.GradientLabel lbl3P;
+        private controls.GradientLabel lbl4P;
     }
 }

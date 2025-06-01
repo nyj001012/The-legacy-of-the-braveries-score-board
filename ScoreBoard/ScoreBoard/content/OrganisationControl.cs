@@ -22,11 +22,6 @@ namespace ScoreBoard.content
             this.Size = new Size(1920, 1080);
         }
 
-        private void OrganisationControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
         /*
          * BtnSelectPlayer_Click(object sender, EventArgs e)
          * 플레이어 선택 버튼 클릭 시 플레이어 선택 모달을 표시하는 메서드
@@ -59,6 +54,12 @@ namespace ScoreBoard.content
             }
         }
 
+        /*
+         * ApplyToSlot(string playerNumber, CorpsMember selectedData)
+         * 선택된 멤버의 정보를 해당 플레이어 슬롯에 적용하는 메서드
+         * - playerNumber: 플레이어 번호 (예: "1", "2", "3", "4")
+         * - selectedData: 선택된 CorpsMember 객체
+         */
         private void ApplyToSlot(string playerNumber, CorpsMember selectedData)
         {
             string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "image", "character", selectedData.Id + ".png");
@@ -71,15 +72,23 @@ namespace ScoreBoard.content
             {
                 case "1":
                     btnSelect1P.BackgroundImage = Image.FromFile(imagePath);
+                    lbl1P.Text = selectedData.Name;
+                    lbl1P.Invalidate();
                     break;
                 case "2":
                     btnSelect2P.BackgroundImage = Image.FromFile(imagePath);
+                    lbl2P.Text = selectedData.Name;
+                    lbl2P.Invalidate();
                     break;
                 case "3":
                     btnSelect3P.BackgroundImage = Image.FromFile(imagePath);
+                    lbl3P.Text = selectedData.Name;
+                    lbl3P.Invalidate();
                     break;
                 case "4":
                     btnSelect4P.BackgroundImage = Image.FromFile(imagePath);
+                    lbl4P.Text = selectedData.Name;
+                    lbl4P.Invalidate();
                     break;
                 default:
                     break;
