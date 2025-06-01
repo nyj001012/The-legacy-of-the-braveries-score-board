@@ -117,6 +117,7 @@ namespace ScoreBoard.modals
         {
             statList.Controls.Clear();
             var label = CreateStatLabel(BuildStatText(member));
+            label.SetLineSpacing(1.4f);
             statList.Controls.Add(label);
             statList.Height = Math.Max(statList.Height, label.Height);
             ScrollBarManager.SetScrollBar(statContainer, statList, statScrollBar);
@@ -150,9 +151,9 @@ namespace ScoreBoard.modals
             sb.AppendLine($"이동 거리: {member.Stat.Movement}");
             if (member.Stat.Wisdom != null) sb.AppendLine($"지혜: {member.Stat.Wisdom}");
             if (member.Stat.SpellPower != null) sb.AppendLine($"주문력: {member.Stat.SpellPower}");
+            sb.AppendLine(" ");
             foreach (var line in member.Description)
                 sb.AppendLine(line);
-
             return sb.ToString();
         }
 
