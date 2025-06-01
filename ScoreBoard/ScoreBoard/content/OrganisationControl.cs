@@ -61,7 +61,44 @@ namespace ScoreBoard.content
 
         private void ApplyToSlot(string playerNumber, CorpsMember selectedData)
         {
-            // TODO => 슬롯에 선택된 데이터를 적용하는 로직을 구현합니다.
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "image", "character", selectedData.Id + ".png");
+            if (!File.Exists(imagePath))
+            {
+                MessageBox.Show($"이미지 파일이 존재하지 않습니다: {imagePath}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            switch (playerNumber)
+            {
+                case "1":
+                    btnSelect1P.BackgroundImage = Image.FromFile(imagePath);
+                    break;
+                case "2":
+                    btnSelect2P.BackgroundImage = Image.FromFile(imagePath);
+                    break;
+                case "3":
+                    btnSelect3P.BackgroundImage = Image.FromFile(imagePath);
+                    break;
+                case "4":
+                    btnSelect4P.BackgroundImage = Image.FromFile(imagePath);
+                    break;
+                default:
+                    break;
+            }
+            if (selectedCharacters.Count == 4)
+            {
+                btnJoin.Visible = true;
+                btnJoin.Enabled = true;
+            }
+            else
+            {
+                btnJoin.Visible = false;
+                btnJoin.Enabled = false;
+            }
+        }
+
+        private void btnJoin_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

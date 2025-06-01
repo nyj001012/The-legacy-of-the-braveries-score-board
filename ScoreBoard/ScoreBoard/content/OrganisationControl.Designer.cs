@@ -175,6 +175,7 @@
             // 
             btnJoin.BackColor = Color.Transparent;
             btnJoin.BackgroundImage = Properties.Resources.BtnJoin;
+            btnJoin.Cursor = Cursors.Hand;
             btnJoin.Enabled = false;
             btnJoin.Location = new Point(842, 913);
             btnJoin.Name = "btnJoin";
@@ -182,6 +183,7 @@
             btnJoin.TabIndex = 11;
             btnJoin.TabStop = false;
             btnJoin.Visible = false;
+            btnJoin.Click += btnJoin_Click;
             // 
             // OrganisationControl
             // 
