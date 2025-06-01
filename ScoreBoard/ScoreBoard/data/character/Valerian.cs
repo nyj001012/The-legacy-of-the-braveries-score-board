@@ -78,6 +78,17 @@ namespace ScoreBoard.data.character
             }).ToList() ?? [];
         }
 
+        /*
+         * 백수가 되었지만 훈련을 게을리하지않아ㅜㅠㅠㅠㅠ으어헝
+         * 공격력 +100, 공격 횟수 +1, 최대 유물 슬롯 +1
+         */
+        private void TrainHard()
+        {
+            this.Stat.CombatStats["melee"].Value += 100;
+            this.Stat.CombatStats["melee"].AttackCount += 1;
+            this.MaxArtifactSlot += 1;
+        }
+
         private void InitialiseActiveSkills(CorpsMember data)
         {
             Validator.ValidateNull(data.Actives, nameof(data.Actives));
