@@ -1,4 +1,6 @@
 ﻿using ScoreBoard.controls;
+using ScoreBoard.data;
+using ScoreBoard.data.character;
 using ScoreBoard.utils;
 using System.Data;
 using System.Diagnostics;
@@ -100,8 +102,23 @@ namespace ScoreBoard.modals
         private void ShowMemberStat(string memberId)
         {
             SelectedPlayerId = memberId;
+            CorpsMember member = GetMember(memberId);
+            Debug.WriteLine(member.Stat.CombatStats["melee"]); // 디버그용 출력
             // TODO => 해당 멤버 Id의 Player 객체를 가져오기
             // TODO => Player 객체를 이용하여 병사 정보를 표시하기
+        }
+
+        private CorpsMember GetMember(string memberId)
+        {
+            switch (memberId)
+            {
+                case CharacterIds.Ruda:
+                    return new Ruda(memberId);
+                case CharacterIds.SkyHaneulSoraTen:
+                    return new SkyHaneulSoraTen(memberId);
+                default:
+                    throw new ArgumentException($"잘못된 데이터입니다. memberId: {memberId}");
+            }
         }
 
         /*

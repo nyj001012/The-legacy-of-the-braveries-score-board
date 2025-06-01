@@ -8,10 +8,12 @@
             corpsScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             corpsListContainer = new Panel();
             MembersListContainer = new Panel();
-            membersList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             membersScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            membersList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            charecterImage = new PictureBox();
             corpsListContainer.SuspendLayout();
             MembersListContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)charecterImage).BeginInit();
             SuspendLayout();
             // 
             // corpsList
@@ -90,15 +92,6 @@
             MembersListContainer.Size = new Size(194, 720);
             MembersListContainer.TabIndex = 6;
             // 
-            // membersList
-            // 
-            membersList.BackColor = Color.Transparent;
-            membersList.FlowDirection = FlowDirection.TopDown;
-            membersList.Location = new Point(301, 68);
-            membersList.Name = "membersList";
-            membersList.Size = new Size(194, 714);
-            membersList.TabIndex = 0;
-            // 
             // membersScrollBar
             // 
             membersScrollBar.Alpha = 50;
@@ -143,6 +136,24 @@
             membersScrollBar.Value = 0;
             membersScrollBar.Visible = false;
             // 
+            // membersList
+            // 
+            membersList.BackColor = Color.Transparent;
+            membersList.FlowDirection = FlowDirection.TopDown;
+            membersList.Location = new Point(301, 68);
+            membersList.Name = "membersList";
+            membersList.Size = new Size(194, 714);
+            membersList.TabIndex = 0;
+            // 
+            // charecterImage
+            // 
+            charecterImage.BackColor = Color.Transparent;
+            charecterImage.Location = new Point(501, 68);
+            charecterImage.Name = "charecterImage";
+            charecterImage.Size = new Size(425, 720);
+            charecterImage.TabIndex = 7;
+            charecterImage.TabStop = false;
+            // 
             // SelectPlayerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -152,6 +163,7 @@
             BackgroundImage = Properties.Resources.ImgModalBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1452, 860);
+            Controls.Add(charecterImage);
             Controls.Add(membersList);
             Controls.Add(MembersListContainer);
             Controls.Add(corpsListContainer);
@@ -170,6 +182,7 @@
             KeyPress += SelectPlayerForm_KeyPress;
             corpsListContainer.ResumeLayout(false);
             MembersListContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)charecterImage).EndInit();
             ResumeLayout(false);
         }
         private ReaLTaiizor.Controls.CyberScrollBar corpsScrollBar;
@@ -178,5 +191,6 @@
         private Panel MembersListContainer;
         private controls.CustomFlowLayoutPanel membersList;
         private ReaLTaiizor.Controls.CyberScrollBar membersScrollBar;
+        private PictureBox charecterImage;
     }
 }
