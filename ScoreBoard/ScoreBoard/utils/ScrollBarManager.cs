@@ -25,6 +25,7 @@ namespace ScoreBoard.utils
             }
             else
             {
+                scrollBar.Enabled = true;
                 scrollBar.Minimum = 0;
                 // Maximum = (컨텐츠 높이) - (컨테이너 높이)
                 scrollBar.Maximum = Math.Max(0, contentHeight - container.Height);
