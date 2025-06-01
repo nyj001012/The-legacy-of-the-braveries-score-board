@@ -89,6 +89,16 @@ namespace ScoreBoard.data.character
             this.MaxArtifactSlot += 1;
         }
 
+        /*
+         * 백수가 되어도 굳건한 정신력 엉어유ㅠㅡㅠㅠㅠ
+         * 주문력 +200, 공속 +1
+         */
+        private void FortifyMind()
+        {
+            this.Stat.SpellPower = (ushort?)((this.Stat.SpellPower ?? 0) + 200);
+            this.Stat.CombatStats["melee"].AttackCount += 1;
+        }
+
         private void InitialiseActiveSkills(CorpsMember data)
         {
             Validator.ValidateNull(data.Actives, nameof(data.Actives));
