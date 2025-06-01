@@ -92,7 +92,9 @@ namespace ScoreBoard.data.character
                 {
                     Name = Validator.ValidateNull(a.Name, nameof(a.Name)),
                     RequiredLevel = a.RequiredLevel,
-                    Description = Validator.ValidateNull(a.Description, nameof(a.Description))
+                    Description = Validator.ValidateNull(a.Description, nameof(a.Description)),
+                    Cooldown = a.Cooldown,
+                    isOnCooldown = false,
                 };
 
                 skill.Execute = a.Name switch
