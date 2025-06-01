@@ -1,6 +1,7 @@
 ﻿using ScoreBoard.controls;
 using ScoreBoard.data;
 using ScoreBoard.data.character;
+using ScoreBoard.Properties;
 using ScoreBoard.utils;
 using System.Data;
 using System.Diagnostics;
@@ -103,11 +104,33 @@ namespace ScoreBoard.modals
         {
             SelectedPlayerId = memberId;
             CorpsMember member = GetMember(memberId);
-            Debug.WriteLine(member.Stat.CombatStats["ranged"]); // 디버그용 출력
-            // TODO => 해당 멤버 Id의 Player 객체를 가져오기
             // TODO => Player 객체를 이용하여 병사 정보를 표시하기
+            ShowMemberImage(memberId);
         }
 
+        /*
+         * ShowMemberImage(string memberId)
+         * - memberId: 병사 ID
+         * - 병사의 이미지를 표시하는 메서드
+         */
+        private void ShowMemberImage(string memberId)
+        {
+            // 병사 이미지 표시
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "image", "character", $"{memberId}.png");
+            if (!File.Exists(imagePath))
+            {
+                MessageBox.Show($"병사 이미지가 없습니다: {imagePath}");
+                return;
+            }
+            characterImage.Image = Image.FromFile(imagePath);
+            characterImage.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
+
+        /*
+         * GetMember(string memberId)
+         * - memberId: 병사 ID
+         * - 해당 병사의 객체를 반환하는 메서드
+         */
         private CorpsMember GetMember(string memberId)
         {
             switch (memberId)

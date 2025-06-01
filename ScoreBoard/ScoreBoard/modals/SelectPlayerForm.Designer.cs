@@ -10,10 +10,10 @@
             MembersListContainer = new Panel();
             membersScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             membersList = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            charecterImage = new PictureBox();
+            characterImage = new PictureBox();
             corpsListContainer.SuspendLayout();
             MembersListContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)charecterImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)characterImage).BeginInit();
             SuspendLayout();
             // 
             // corpsList
@@ -145,14 +145,15 @@
             membersList.Size = new Size(194, 714);
             membersList.TabIndex = 0;
             // 
-            // charecterImage
+            // characterImage
             // 
-            charecterImage.BackColor = Color.Transparent;
-            charecterImage.Location = new Point(501, 68);
-            charecterImage.Name = "charecterImage";
-            charecterImage.Size = new Size(425, 720);
-            charecterImage.TabIndex = 7;
-            charecterImage.TabStop = false;
+            characterImage.BackColor = Color.Transparent;
+            characterImage.BackgroundImageLayout = ImageLayout.Stretch;
+            characterImage.Location = new Point(528, 125);
+            characterImage.Name = "characterImage";
+            characterImage.Size = new Size(382, 620);
+            characterImage.TabIndex = 7;
+            characterImage.TabStop = false;
             // 
             // SelectPlayerForm
             // 
@@ -163,7 +164,7 @@
             BackgroundImage = Properties.Resources.ImgModalBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1452, 860);
-            Controls.Add(charecterImage);
+            Controls.Add(characterImage);
             Controls.Add(membersList);
             Controls.Add(MembersListContainer);
             Controls.Add(corpsListContainer);
@@ -182,7 +183,7 @@
             KeyPress += SelectPlayerForm_KeyPress;
             corpsListContainer.ResumeLayout(false);
             MembersListContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)charecterImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)characterImage).EndInit();
             ResumeLayout(false);
         }
         private ReaLTaiizor.Controls.CyberScrollBar corpsScrollBar;
@@ -191,6 +192,6 @@
         private Panel MembersListContainer;
         private controls.CustomFlowLayoutPanel membersList;
         private ReaLTaiizor.Controls.CyberScrollBar membersScrollBar;
-        private PictureBox charecterImage;
+        private PictureBox characterImage;
     }
 }
