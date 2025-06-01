@@ -103,7 +103,7 @@ namespace ScoreBoard.modals
         {
             SelectedPlayerId = memberId;
             CorpsMember member = GetMember(memberId);
-            Debug.WriteLine(member.Stat.CombatStats["melee"]); // 디버그용 출력
+            Debug.WriteLine(member.Stat.CombatStats["ranged"]); // 디버그용 출력
             // TODO => 해당 멤버 Id의 Player 객체를 가져오기
             // TODO => Player 객체를 이용하여 병사 정보를 표시하기
         }
