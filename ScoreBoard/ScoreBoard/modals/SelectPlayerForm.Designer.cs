@@ -14,10 +14,12 @@
             statContainer = new Panel();
             statList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             statScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            btnDecision = new PictureBox();
             corpsListContainer.SuspendLayout();
             MembersListContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)characterImage).BeginInit();
             statContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btnDecision).BeginInit();
             SuspendLayout();
             // 
             // corpsList
@@ -222,6 +224,17 @@
             statScrollBar.Timer_RGB = 300;
             statScrollBar.Value = 0;
             // 
+            // btnDecision
+            // 
+            btnDecision.BackColor = Color.Transparent;
+            btnDecision.BackgroundImage = Properties.Resources.BtnDecisionInMonitor;
+            btnDecision.BackgroundImageLayout = ImageLayout.Stretch;
+            btnDecision.Location = new Point(1064, 705);
+            btnDecision.Name = "btnDecision";
+            btnDecision.Size = new Size(177, 60);
+            btnDecision.TabIndex = 9;
+            btnDecision.TabStop = false;
+            // 
             // SelectPlayerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -231,6 +244,7 @@
             BackgroundImage = Properties.Resources.ImgModalBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1452, 860);
+            Controls.Add(btnDecision);
             Controls.Add(statContainer);
             Controls.Add(characterImage);
             Controls.Add(membersList);
@@ -253,6 +267,7 @@
             MembersListContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)characterImage).EndInit();
             statContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btnDecision).EndInit();
             ResumeLayout(false);
         }
         private ReaLTaiizor.Controls.CyberScrollBar corpsScrollBar;
@@ -265,5 +280,6 @@
         private Panel statContainer;
         private controls.CustomFlowLayoutPanel statList;
         private ReaLTaiizor.Controls.CyberScrollBar statScrollBar;
+        private PictureBox btnDecision;
     }
 }
