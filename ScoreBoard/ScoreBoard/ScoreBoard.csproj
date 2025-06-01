@@ -29,6 +29,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\image\character\201_01_Ruda.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\image\character\201_03_SkyHaneulSoraTen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\image\character\203_02_Rudeus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\image\character\204_01_Valerian.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\meta_data\character\201_01_Ruda.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
