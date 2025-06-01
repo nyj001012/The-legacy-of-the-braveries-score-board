@@ -18,12 +18,13 @@
     "movement": 2,
     "combatStat": {
       "melee": {
-        "type": "sp",
+        "type": "atk",
         "range": 1,
         "attackCount": 3,
         "value": 100
       }
     },
+    "spellPower": 300,
     "wisdom": 3
   },
   "passives": [

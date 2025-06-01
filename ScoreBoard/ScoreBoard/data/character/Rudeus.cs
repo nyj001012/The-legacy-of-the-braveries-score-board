@@ -80,6 +80,28 @@ namespace ScoreBoard.data.character
             }).ToList() ?? [];
         }
 
+        /*
+         * 오늘 흑마법 배웠어요 ^^
+         * 이동거리 +1, 근접 공격력 +100, 주문력 +200
+         */
+        private void BeLearnerOfBlackMagic()
+        {
+            this.Stat.Movement += 1; // 이동 속도 증가
+            this.Stat.CombatStats["melee"].Value += 100; // 근접 공격력 증가
+            this.Stat.SpellPower = (ushort?)((this.Stat.SpellPower ?? 0) + 200); // 주문력 증가
+        }
+
+        /*
+         * 흑마법에 익숙해지다
+         * 체력 +200, 지혜 +1, 마법 사거리 및 스킬 범위 +1은 직접 계산
+         */
+        private void BeSkillfulWithBlackMagic()
+        {
+            this.Stat.MaxHp += 200; // 최대 체력 증가
+            this.Stat.Hp += 200; // 현재 체력 증가
+            this.Stat.Wisdom = (ushort?)((this.Stat.Wisdom ?? 0) + 1); // 지혜 증가
+        }
+
         private void InitialiseActiveSkills(CorpsMember data)
         {
             Validator.ValidateNull(data.Actives, nameof(data.Actives));
