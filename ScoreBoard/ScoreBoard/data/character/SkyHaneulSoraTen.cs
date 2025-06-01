@@ -80,7 +80,7 @@ namespace ScoreBoard.data.character
 
                 skill.Execute = p.Name switch
                 {
-                    "임페리얼 베리어" => () => skill.isActivated = true, // 일회성 효과
+                    "임페리얼 베리어" => () => skill.isActivated = false, // 일회성 효과
                     "커스텀 튜닝" => () => Tune(),
                     "목청이 터질 정도로! wahhhhhhh!" => () => Roar(),
                     "전투의 함성!" => () => ShoutWarCry(),
@@ -134,6 +134,10 @@ namespace ScoreBoard.data.character
         private void GetPromoted()
         {
             this.Stat.Hp += 700;
+            this.Stat.MaxHp += 700; // 최대 체력 1000으로 증가
+            this.Stat.CombatStats["ranged"].AttackCount += 2; // 공격 횟수 8로 증가 (기본: 6)
+            this.Stat.CombatStats["ranged"].Value += 130; // 공격력 200으로 증가 (기본: 70)
+            this.Stat.Movement -= 1; // 이동 거리 3으로 감소 (기본: 4)
         }
 
         private void InitialiseActiveSkills(CorpsMember data)
@@ -145,7 +149,9 @@ namespace ScoreBoard.data.character
                 {
                     Name = Validator.ValidateNull(a.Name, nameof(a.Name)),
                     RequiredLevel = a.RequiredLevel,
-                    Description = Validator.ValidateNull(a.Description, nameof(a.Description))
+                    Description = Validator.ValidateNull(a.Description, nameof(a.Description)),
+                    Cooldown = a.Cooldown,
+                    isOnCooldown = false
                 };
 
                 skill.Execute = a.Name switch
