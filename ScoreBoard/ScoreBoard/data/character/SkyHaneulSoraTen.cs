@@ -9,6 +9,19 @@ namespace ScoreBoard.data.character
 {
     internal class SkyHaneulSoraTen : CorpsMember
     {
+        private List<CorpsMember> _allies = [];
+
+        public List<CorpsMember> GetAllies()
+        {
+            return _allies;
+        }
+
+        public void SetAllies(List<CorpsMember> members)
+        {
+            Validator.ValidateNull(members, nameof(members));
+            _allies = members;
+        }
+
         public SkyHaneulSoraTen(string id) : base()
         {
             Validator.ValidateNull(id, nameof(id));
@@ -37,6 +50,7 @@ namespace ScoreBoard.data.character
             Stat = new Stat
             {
                 Hp = statData.Hp,
+                MaxHp = statData.Hp, // 시작 시, 현재 체력은 최대 체력
                 Movement = statData.Movement,
                 Wisdom = statData.Wisdom, // nullable 또는 기본값 처리
                 CombatStats = statData.CombatStats.ToDictionary(
@@ -66,8 +80,8 @@ namespace ScoreBoard.data.character
 
                 skill.Execute = p.Name switch
                 {
-                    "임페리얼 베리어" => () => skill.isActivated = true,
-                    "커스텀 튜닝" => () => skill.isActivated = true,
+                    "임페리얼 베리어" => () => skill.isActivated = true, // 일회성 효과
+                    "커스텀 튜닝" => () => Tune(),
                     "목청이 터질 정도로! wahhhhhhh!" => () => Roar(),
                     "전투의 함성!" => () => ShoutWarCry(),
                     "진⭐급" => () => GetPromoted(),
@@ -77,16 +91,49 @@ namespace ScoreBoard.data.character
             }).ToList() ?? [];
         }
 
+        /*
+         * 커스텀 튜닝
+         * 물리 공격력 +20
+         */
+        private void Tune()
+        {
+            this.Stat.CombatStats["melee"].Value += 20; // 공격력 증가
+        }
+
+        /*
+         * 목청이 터질 정도로! wahhhhhhh!
+         * 본인을 제외한 모든 아군 원거리 공격력 +100
+         */
         private void Roar()
         {
+            foreach (var ally in _allies)
+            {
+                if (ally.Id == this.Id) continue; // 본인은 제외
+                if (ally.Stat.CombatStats["ranged"] != null)
+                {
+                    ally.Stat.CombatStats["ranged"].Value += 100; // 아군 원거리 공격력 증가
+                }
+            }
         }
 
         private void ShoutWarCry()
         {
+            foreach (var ally in _allies)
+            {
+                if (ally.Stat.CombatStats["melee"] != null)
+                {
+                    ally.Stat.CombatStats["melee"].AttackCount++; // 근접 공속 1 증가
+                }
+                if (ally.Stat.CombatStats["ranged"] != null)
+                {
+                    ally.Stat.CombatStats["ranged"].AttackCount++; // 원거리 공속 1 증가
+                }
+            }
         }
 
         private void GetPromoted()
         {
+            this.Stat.Hp += 700;
         }
 
         private void InitialiseActiveSkills(CorpsMember data)
