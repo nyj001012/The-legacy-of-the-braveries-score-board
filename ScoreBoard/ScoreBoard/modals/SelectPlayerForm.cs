@@ -118,15 +118,8 @@ namespace ScoreBoard.modals
             statList.Controls.Clear();
             var label = CreateStatLabel(BuildStatText(member));
             statList.Controls.Add(label);
-
-            // 최소 높이 보장: 스크롤바 조건 무력화 방지
-            int contentHeight = label.Bottom;
-            int minHeight = statContainer.ClientSize.Height + 1; // +1로 스크롤 조건 유도
-            statList.Height = Math.Max(contentHeight, minHeight);
-
+            statList.Height = Math.Max(statList.Height, label.Height);
             ScrollBarManager.SetScrollBar(statContainer, statList, statScrollBar);
-            statScrollBar.Value = statScrollBar.Minimum;
-            statList.Top = 0;
         }
 
         /*
