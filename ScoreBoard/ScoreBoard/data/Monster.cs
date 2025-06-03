@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScoreBoard.data.monster
+namespace ScoreBoard.data
 {
     internal class Monster
     {
@@ -23,12 +23,12 @@ namespace ScoreBoard.data.monster
 
             var data = DataReader.ReadMonsterData(id) ?? throw new ArgumentException($"데이터 불러오기 오류: {id}");
 
-            this.Id = data.Id;
-            this.Type = data.Type;
-            this.Name = data.Name;
-            this.AttackDiceValue = data.AttackDiceValue;
-            this.SpawnTurn = spawnTurn;
-            this.Stat = new Stat
+            Id = data.Id;
+            Type = data.Type;
+            Name = data.Name;
+            AttackDiceValue = data.AttackDiceValue;
+            SpawnTurn = spawnTurn;
+            Stat = new Stat
             {
                 Hp = data.Stat.Hp,
                 MaxHp = data.Stat.MaxHp,
