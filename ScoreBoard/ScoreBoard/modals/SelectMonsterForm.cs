@@ -45,9 +45,6 @@ namespace ScoreBoard.modals
             foreach (var grade in MonsterGradeDict)
             {
                 var label = CreateListItem(null, grade.Key);
-
-                label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
-                label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
                 label.Click += (s, e) => ShowMonsters(grade.Value.Id);
                 gradeList.Controls.Add(label);
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
@@ -70,8 +67,10 @@ namespace ScoreBoard.modals
                 Cursor = Cursors.Hand,
                 Font = new Font("나눔고딕코딩", 25, FontStyle.Bold),
                 ForeColor = Color.FromArgb(100, 245, 245, 245),
-                Margin = new Padding(0, verticalSpace, 0, verticalSpace),
+                Margin = new Padding(0, verticalSpace, 0, verticalSpace)
             };
+            label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
+            label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
             if (name != null)
                 label.Name = name;
             return label;
@@ -95,9 +94,6 @@ namespace ScoreBoard.modals
             foreach (var member in membersMap)
             {
                 var label = CreateListItem(member.Key, member.Value);
-
-                label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
-                label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
                 label.Click += (s, e) => AddToReported(member.Key, member.Value);
                 monsterList.Controls.Add(label);
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
