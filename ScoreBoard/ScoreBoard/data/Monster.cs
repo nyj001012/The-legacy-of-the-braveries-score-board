@@ -9,7 +9,7 @@ namespace ScoreBoard.data
 {
     internal class Monster
     {
-        public ushort Type { get; private set; } // 몬스터 등급 (예: 0 보스, 1 엘리트, 2 일반).
+        public ushort Grade { get; private set; } // 몬스터 등급 (예: 0 보스, 1 엘리트, 2 일반).
         public ushort Id { get; private set; } // Id
         public string Name { get; private set; } = string.Empty!; // 이름
         public Stat Stat { get; private set; } = default!; // 스탯
@@ -24,7 +24,7 @@ namespace ScoreBoard.data
             var data = DataReader.ReadMonsterData(id) ?? throw new ArgumentException($"데이터 불러오기 오류: {id}");
 
             Id = data.Id;
-            Type = data.Type;
+            Grade = data.Grade;
             Name = data.Name;
             AttackDiceValue = data.AttackDiceValue;
             SpawnTurn = spawnTurn;
