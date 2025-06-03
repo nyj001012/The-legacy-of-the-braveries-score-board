@@ -13,6 +13,7 @@ namespace ScoreBoard.modals
     {
         private int labelHeight = 0; // 레이블의 총 높이. 동적 레이블 높이를 계산하기 위해 사용
         private readonly int verticalSpace = 20; // 레이블 간의 수직 여백. 동적으로 레이블을 생성할 때 사용
+        private List<(string id, string name, ushort count)> selectedMonsters = []; // 선택된 몬스터들을 저장하는 리스트 (monsterId, count)
 
         internal SelectMonsterForm()
         {
@@ -43,7 +44,7 @@ namespace ScoreBoard.modals
             }
             foreach (var grade in MonsterGradeDict)
             {
-                var label = CreateListItem(grade.Key);
+                var label = CreateListItem(null, grade.Key);
 
                 label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
                 label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
@@ -60,9 +61,9 @@ namespace ScoreBoard.modals
          * - text: 레이블에 표시할 텍스트
          * - return: 반투명한 레이블 객체
          */
-        private TransparentTextLabel CreateListItem(string text)
+        private TransparentTextLabel CreateListItem(string? name, string text)
         {
-            return new TransparentTextLabel
+            var label = new TransparentTextLabel()
             {
                 Text = text,
                 AutoSize = true,
@@ -71,6 +72,9 @@ namespace ScoreBoard.modals
                 ForeColor = Color.FromArgb(100, 245, 245, 245),
                 Margin = new Padding(0, verticalSpace, 0, verticalSpace),
             };
+            if (name != null)
+                label.Name = name;
+            return label;
         }
 
         /*
@@ -90,11 +94,11 @@ namespace ScoreBoard.modals
             monsterList.Controls.Clear(); // 이전 병사 리스트 초기화
             foreach (var member in membersMap)
             {
-                var label = CreateListItem(member.Value);
+                var label = CreateListItem(member.Key, member.Value);
 
                 label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
                 label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
-                label.Click += (s, e) => AddToReported(member.Key);
+                label.Click += (s, e) => AddToReported(member.Key, member.Value);
                 monsterList.Controls.Add(label);
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
@@ -104,14 +108,63 @@ namespace ScoreBoard.modals
 
         /*
          * AddToReported(string monsterId)
-         * - monsterId: 몬스터 ID
+         * - monsterName: 몬스터 이름
          * - 해당 몬스터를 reportedList에 추가
+         * - 이미 있는 몬스터라면 [monsterName](2) 형식으로 표현
          */
-        private void AddToReported(string monsterId)
+        private void AddToReported(string id, string monsterName)
         {
             this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
+            // id를 이용하여 이미 추가된 항목인지 확인
+            int index = selectedMonsters.FindIndex(monster => monster.id == id);
+            if (index == -1)
+            {
+                // 새로 추가한 몬스터라면 reportedList 및 List에 추가
+                (string id, string name, ushort count) newMonsterTuple = (id, monsterName, 1);
+                selectedMonsters.Add(newMonsterTuple);
+                var newLabel = CreateListItem(id, monsterName);
+                newLabel.Click += (s, e) => removeFromReported(newLabel, newMonsterTuple);
+                reportedList.Controls.Add(newLabel);
+            }
+            else
+            {
+                // 이미 추가되어 있다면 개수 +1
+                selectedMonsters[index] = (id, monsterName, (ushort)(selectedMonsters[index].count + 1));
+                // 레이블 텍스트 업데이트
+                if (reportedList.Controls.Find(id, true)[0] is TransparentTextLabel label)
+                {
+                    label.Text = $"{monsterName} ({selectedMonsters[index].count})";
+                }
+            }
+
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
         }
+
+        /*
+         * removeFromReported(TransparentTextLabel label, (string id, string name, ushort count) monster)
+         * - label: 텍스트를 갱신할 레이블
+         * - monster: count를 갱신하거나 삭제할 튜플
+         * 해당 monster 튜플을 selectedMonsters 리스트에서 count를 갱신하거나 삭제하고, label의 텍스트를 갱신
+         */
+        private void removeFromReported(TransparentTextLabel label, (string id, string name, ushort count) monster)
+        {
+            this.SuspendLayout();
+            int index = selectedMonsters.FindIndex(monster => monster.id == label.Name);
+            ushort newCount = (ushort)(selectedMonsters[index].count - 1);
+            if (newCount == 0)
+            {
+                selectedMonsters.RemoveAt(index);
+                reportedList.Controls.RemoveByKey(monster.id);
+                reportedList.Invalidate();
+            }
+            else
+            {
+                selectedMonsters[index] = (monster.id, monster.name, newCount);
+                label.Text = $"{monster.name} ({newCount})";
+            }
+            this.ResumeLayout();
+        }
+
 
         /*
          * SelectPlayerForm_KeyPress(object sender, KeyPressEventArgs e)
