@@ -30,8 +30,8 @@
             gradeList.Name = "gradeList";
             gradeList.Size = new Size(194, 714);
             gradeList.TabIndex = 0;
-            gradeList.MouseEnter += corpsList_MouseEnter;
-            gradeList.MouseWheel += corpsList_MouseWheel;
+            gradeList.MouseEnter += GradeList_MouseEnter;
+            gradeList.MouseWheel += GradeList_MouseWheel;
             // 
             // gradeScrollBar
             // 
@@ -181,6 +181,8 @@
             reportedList.Name = "reportedList";
             reportedList.Size = new Size(541, 476);
             reportedList.TabIndex = 0;
+            reportedList.MouseEnter += reportedList_MouseEnter;
+            reportedList.MouseWheel += reportedList_MouseWheel;
             // 
             // reportedScrollBar
             // 
@@ -247,6 +249,7 @@
             btnDecision.TabIndex = 9;
             btnDecision.TabStop = false;
             btnDecision.Visible = false;
+            btnDecision.Click += btnDecision_Click;
             // 
             // SelectMonsterForm
             // 
@@ -275,7 +278,7 @@
             TopMost = true;
             TransparencyKey = Color.FromArgb(64, 64, 64);
             Load += SelectMonsterForm_Load;
-            KeyPress += SelectPlayerForm_KeyPress;
+            KeyPress += SelectMonsterForm_KeyPress;
             gradeListContainer.ResumeLayout(false);
             monsterListContainer.ResumeLayout(false);
             reportedContainer.ResumeLayout(false);
