@@ -108,12 +108,13 @@ namespace ScoreBoard.content
 
         private void btnJoin_Click(object sender, EventArgs e)
         {
-            var selectMonsterModal = new SelectMonsterForm();
+            var selectMonsterModal = new SelectMonsterForm(selectedMonsters);
             if (selectMonsterModal.ShowDialog(this) == DialogResult.OK)
             {
-                selectedMonsters = selectMonsterModal.selectedMonsters;
+                selectedMonsters = selectMonsterModal.currentSelectedMonsters;
                 selectMonsterModal.Close();
             }
+            // TODO => 점수판 폼 호출 (selectedCharacters와 selectedMonsters 파라미터로 설정)
         }
     }
 }

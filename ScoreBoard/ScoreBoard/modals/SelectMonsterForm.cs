@@ -13,11 +13,11 @@ namespace ScoreBoard.modals
     {
         private int labelHeight = 0; // 레이블의 총 높이. 동적 레이블 높이를 계산하기 위해 사용
         private readonly int verticalSpace = 20; // 레이블 간의 수직 여백. 동적으로 레이블을 생성할 때 사용
-        internal List<(string id, string name, ushort count)> selectedMonsters = []; // 선택된 몬스터들을 저장하는 리스트 (monsterId, count)
+        internal readonly List<(string id, string name, ushort count)> currentSelectedMonsters = []; // 선택된 몬스터들을 저장하는 리스트 (monsterId, count)
         private Point dragStartPoint; // 드래그 시작 지점
         private TransparentTextLabel? draggedLabel = null; // 드래그된 레이블 저장
 
-        internal SelectMonsterForm()
+        internal SelectMonsterForm(List<(string id, string name, ushort count)> selectedMonsters)
         {
             this.DoubleBuffered = true; // 폼의 더블 버퍼링 활성화
             InitializeComponent();
@@ -27,11 +27,21 @@ namespace ScoreBoard.modals
             this.gradeScrollBar.Enabled = false;
             this.monsterScrollBar.Enabled = false;
             this.reportedScrollBar.Enabled = false;
+            this.currentSelectedMonsters = selectedMonsters;
         }
 
         private void SelectMonsterForm_Load(object sender, EventArgs e)
         {
             ShowMonsterGrade(); // 몬스터 종류 표시
+            reportedList.Controls.Clear();
+            if (currentSelectedMonsters != null) // 기존에 저장된 내용이 있다면 불러오기
+            {
+                foreach (var (id, name, count) in currentSelectedMonsters)
+                {
+                    var newLabel = CreateReportedLabel(id, name, count);
+                    reportedList.Controls.Add(newLabel);
+                }
+            }
         }
 
         /*
@@ -119,33 +129,48 @@ namespace ScoreBoard.modals
         private void AddToReported(string id, string monsterName)
         {
             this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
-            // id를 이용하여 이미 추가된 항목인지 확인
-            int index = selectedMonsters.FindIndex(monster => monster.id == id);
-            if (index == -1)
+
+            int index = currentSelectedMonsters.FindIndex(monster => monster.id == id);
+            bool isNew = index == -1; // currentSelectedMonsters에 없던 몬스터면 새로 추가한 것
+            ushort count = isNew ? (ushort)1 : (ushort)(currentSelectedMonsters[index].count + 1); // 아예 새로운 몬스터면 1마리
+
+            if (isNew)
             {
-                // 새로 추가한 몬스터라면 reportedList 및 List에 추가
-                (string id, string name, ushort count) newMonsterTuple = (id, monsterName, 1);
-                selectedMonsters.Add(newMonsterTuple);
-                var newLabel = CreateListItem(id, monsterName);
-                newLabel.Click += (s, e) => removeFromReported(newLabel, newMonsterTuple);
-                newLabel.DoubleClick += (s, e) => removeFromReported(newLabel, newMonsterTuple);
-                MakeDraggable(newLabel);
+                var newLabel = CreateReportedLabel(id, monsterName, count);
                 reportedList.Controls.Add(newLabel);
-                ScrollBarManager.SetScrollBar(reportedContainer, reportedList, reportedScrollBar);
             }
             else
             {
-                // 이미 추가되어 있다면 개수 +1
-                selectedMonsters[index] = (id, monsterName, (ushort)(selectedMonsters[index].count + 1));
-                // 레이블 텍스트 업데이트
-                if (reportedList.Controls.Find(id, true)[0] is TransparentTextLabel label)
+                currentSelectedMonsters[index] = (id, monsterName, count);
+
+                var found = reportedList.Controls.Find(id, true);
+                if (found.Length > 0 && found[0] is TransparentTextLabel label)
                 {
-                    label.Text = $"{monsterName} ({selectedMonsters[index].count})";
+                    label.Text = $"{monsterName} ({count})";
                 }
             }
 
+            ScrollBarManager.SetScrollBar(reportedContainer, reportedList, reportedScrollBar);
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
         }
+
+        /*
+         * CreateReportedLabel(string id, string name, ushort count)
+         * - id: 몬스터 id. label의 Name 속성
+         * - name: 몬스터 name. label의 Text에 포함
+         * - count: 몬스터 마리 수. label의 Text에 포함
+         * - 보고된 적에 추가할 레이블 생성
+         */
+        private TransparentTextLabel CreateReportedLabel(string id, string name, ushort count)
+        {
+            var label = CreateListItem(id, $"{name} ({count})");
+            label.Click += (s, e) => removeFromReported(label, (id, name, count));
+            label.DoubleClick += (s, e) => removeFromReported(label, (id, name, count));
+            MakeDraggable(label);
+            return label;
+        }
+
+
 
         /*
          * MakeDraggable(TransparentTextLabel label)
@@ -187,17 +212,17 @@ namespace ScoreBoard.modals
         private void removeFromReported(TransparentTextLabel label, (string id, string name, ushort count) monster)
         {
             this.SuspendLayout();
-            int index = selectedMonsters.FindIndex(monster => monster.id == label.Name);
-            ushort newCount = (ushort)(selectedMonsters[index].count - 1);
+            int index = currentSelectedMonsters.FindIndex(monster => monster.id == label.Name);
+            ushort newCount = (ushort)(currentSelectedMonsters[index].count - 1);
             if (newCount == 0)
             {
-                selectedMonsters.RemoveAt(index);
+                currentSelectedMonsters.RemoveAt(index);
                 reportedList.Controls.RemoveByKey(monster.id);
                 reportedList.Invalidate();
             }
             else
             {
-                selectedMonsters[index] = (monster.id, monster.name, newCount);
+                currentSelectedMonsters[index] = (monster.id, monster.name, newCount);
                 label.Text = $"{monster.name} ({newCount})";
             }
             this.ResumeLayout();
@@ -308,10 +333,10 @@ namespace ScoreBoard.modals
                         Point pt = reportedList.PointToClient(Cursor.Position);
                         if (!reportedList.ClientRectangle.Contains(pt))
                         {
-                            int index = selectedMonsters.FindIndex(m => m.id == labelToRemove.Name);
+                            int index = currentSelectedMonsters.FindIndex(m => m.id == labelToRemove.Name);
                             if (index != -1)
                             {
-                                selectedMonsters.RemoveAt(index);
+                                currentSelectedMonsters.RemoveAt(index);
                                 reportedList.Controls.Remove(labelToRemove);
                                 reportedList.Invalidate();
                             }
@@ -339,10 +364,10 @@ namespace ScoreBoard.modals
             // 바깥으로 드롭한 경우: 제거
             if (!reportedList.ClientRectangle.Contains(pt))
             {
-                int index = selectedMonsters.FindIndex(m => m.id == dragged.Name);
+                int index = currentSelectedMonsters.FindIndex(m => m.id == dragged.Name);
                 if (index != -1)
                 {
-                    selectedMonsters.RemoveAt(index);
+                    currentSelectedMonsters.RemoveAt(index);
                     reportedList.Controls.Remove(dragged);
                     reportedList.Invalidate();
                 }
@@ -361,9 +386,9 @@ namespace ScoreBoard.modals
 
             // selectedMonsters 재정렬
             string draggedId = dragged.Name;
-            var item = selectedMonsters.FirstOrDefault(m => m.id == draggedId);
-            selectedMonsters.Remove(item);
-            selectedMonsters.Insert(newIndex, item);
+            var item = currentSelectedMonsters.FirstOrDefault(m => m.id == draggedId);
+            currentSelectedMonsters.Remove(item);
+            currentSelectedMonsters.Insert(newIndex, item);
         }
     }
 }
