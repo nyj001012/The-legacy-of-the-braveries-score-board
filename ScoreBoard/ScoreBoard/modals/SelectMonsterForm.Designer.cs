@@ -25,6 +25,8 @@
             // 
             // gradeList
             // 
+            gradeList.BorderColor = Color.Transparent;
+            gradeList.BorderThickness = 0;
             gradeList.FlowDirection = FlowDirection.TopDown;
             gradeList.Location = new Point(0, 0);
             gradeList.Name = "gradeList";
@@ -146,6 +148,8 @@
             // monsterList
             // 
             monsterList.BackColor = Color.Transparent;
+            monsterList.BorderColor = Color.Transparent;
+            monsterList.BorderThickness = 0;
             monsterList.FlowDirection = FlowDirection.TopDown;
             monsterList.Location = new Point(301, 68);
             monsterList.Name = "monsterList";
@@ -154,13 +158,12 @@
             // 
             // transparentTextLabel1
             // 
-            transparentTextLabel1.AutoSize = true;
             transparentTextLabel1.BackColor = Color.Transparent;
             transparentTextLabel1.Font = new Font("나눔고딕코딩", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 129);
             transparentTextLabel1.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel1.Location = new Point(1015, 88);
+            transparentTextLabel1.Location = new Point(1034, 94);
             transparentTextLabel1.Name = "transparentTextLabel1";
-            transparentTextLabel1.Size = new Size(177, 35);
+            transparentTextLabel1.Size = new Size(158, 35);
             transparentTextLabel1.TabIndex = 0;
             transparentTextLabel1.Text = "보고된 적";
             // 
@@ -171,16 +174,23 @@
             reportedContainer.Controls.Add(reportedScrollBar);
             reportedContainer.Location = new Point(0, 3);
             reportedContainer.Name = "reportedContainer";
-            reportedContainer.Size = new Size(544, 482);
+            reportedContainer.Size = new Size(544, 517);
             reportedContainer.TabIndex = 11;
             // 
             // reportedList
             // 
+            reportedList.AllowDrop = true;
+            reportedList.BorderColor = Color.Transparent;
+            reportedList.BorderThickness = 0;
             reportedList.FlowDirection = FlowDirection.TopDown;
             reportedList.Location = new Point(3, 3);
             reportedList.Name = "reportedList";
-            reportedList.Size = new Size(541, 476);
+            reportedList.Padding = new Padding(20, 0, 20, 0);
+            reportedList.Size = new Size(541, 511);
             reportedList.TabIndex = 0;
+            reportedList.DragDrop += reportedList_DragDrop;
+            reportedList.DragEnter += reportedList_DragEnter;
+            reportedList.DragLeave += reportedList_DragLeave;
             reportedList.MouseEnter += reportedList_MouseEnter;
             reportedList.MouseWheel += reportedList_MouseWheel;
             // 
@@ -217,7 +227,7 @@
             reportedScrollBar.RGB = false;
             reportedScrollBar.Rounding = true;
             reportedScrollBar.RoundingInt = 7;
-            reportedScrollBar.Size = new Size(26, 476);
+            reportedScrollBar.Size = new Size(26, 511);
             reportedScrollBar.SmallStep = 10;
             reportedScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             reportedScrollBar.TabIndex = 1;
@@ -234,7 +244,7 @@
             panel1.Controls.Add(btnDecision);
             panel1.Location = new Point(828, 144);
             panel1.Name = "panel1";
-            panel1.Size = new Size(544, 646);
+            panel1.Size = new Size(544, 638);
             panel1.TabIndex = 12;
             // 
             // btnDecision
@@ -243,16 +253,16 @@
             btnDecision.BackgroundImage = Properties.Resources.BtnDecisionInMonitor;
             btnDecision.BackgroundImageLayout = ImageLayout.Stretch;
             btnDecision.Cursor = Cursors.Hand;
-            btnDecision.Location = new Point(187, 562);
+            btnDecision.Location = new Point(187, 550);
             btnDecision.Name = "btnDecision";
             btnDecision.Size = new Size(177, 60);
             btnDecision.TabIndex = 9;
             btnDecision.TabStop = false;
-            btnDecision.Visible = false;
             btnDecision.Click += btnDecision_Click;
             // 
             // SelectMonsterForm
             // 
+            AllowDrop = true;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
@@ -271,6 +281,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "SelectMonsterForm";
+            Padding = new Padding(20, 0, 20, 0);
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
@@ -285,7 +296,6 @@
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)btnDecision).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
         private ReaLTaiizor.Controls.CyberScrollBar gradeScrollBar;
         private controls.CustomFlowLayoutPanel gradeList;
