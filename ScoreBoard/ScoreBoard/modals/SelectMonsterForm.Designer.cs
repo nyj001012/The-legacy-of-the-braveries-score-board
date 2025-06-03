@@ -4,153 +4,153 @@
     {
         private void InitializeComponent()
         {
-            corpsList = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            corpsScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
-            corpsListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
-            MembersListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
-            membersScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
-            membersList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            gradeList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            gradeScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            gradeListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
+            monsterListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
+            monsterScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            monsterList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
-            statContainer = new ScoreBoard.controls.DoubleBufferedPanel();
-            statList = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            statScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            reportedContainer = new ScoreBoard.controls.DoubleBufferedPanel();
+            reportedList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            reportedScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             panel1 = new ScoreBoard.controls.DoubleBufferedPanel();
             btnDecision = new PictureBox();
-            corpsListContainer.SuspendLayout();
-            MembersListContainer.SuspendLayout();
-            statContainer.SuspendLayout();
+            gradeListContainer.SuspendLayout();
+            monsterListContainer.SuspendLayout();
+            reportedContainer.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnDecision).BeginInit();
             SuspendLayout();
             // 
-            // corpsList
+            // gradeList
             // 
-            corpsList.FlowDirection = FlowDirection.TopDown;
-            corpsList.Location = new Point(0, 0);
-            corpsList.Name = "corpsList";
-            corpsList.Size = new Size(194, 714);
-            corpsList.TabIndex = 0;
-            corpsList.MouseEnter += corpsList_MouseEnter;
-            corpsList.MouseWheel += corpsList_MouseWheel;
+            gradeList.FlowDirection = FlowDirection.TopDown;
+            gradeList.Location = new Point(0, 0);
+            gradeList.Name = "gradeList";
+            gradeList.Size = new Size(194, 714);
+            gradeList.TabIndex = 0;
+            gradeList.MouseEnter += corpsList_MouseEnter;
+            gradeList.MouseWheel += corpsList_MouseWheel;
             // 
-            // corpsScrollBar
+            // gradeScrollBar
             // 
-            corpsScrollBar.Alpha = 50;
-            corpsScrollBar.BackColor = Color.Transparent;
-            corpsScrollBar.Background = true;
-            corpsScrollBar.Background_WidthPen = 0F;
-            corpsScrollBar.BackgroundPen = false;
-            corpsScrollBar.ColorBackground = Color.Transparent;
-            corpsScrollBar.ColorBackground_1 = Color.FromArgb(37, 52, 68);
-            corpsScrollBar.ColorBackground_2 = Color.FromArgb(41, 63, 86);
-            corpsScrollBar.ColorBackground_Pen = Color.Transparent;
-            corpsScrollBar.ColorBackground_Value_1 = Color.FromArgb(28, 200, 238);
-            corpsScrollBar.ColorBackground_Value_2 = Color.FromArgb(100, 208, 232);
-            corpsScrollBar.ColorLighting = Color.FromArgb(29, 200, 238);
-            corpsScrollBar.ColorPen_1 = Color.FromArgb(37, 52, 68);
-            corpsScrollBar.ColorPen_2 = Color.FromArgb(41, 63, 86);
-            corpsScrollBar.ColorScrollBar = Color.FromArgb(29, 200, 238);
-            corpsScrollBar.ColorScrollBar_Transparency = 255;
-            corpsScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            corpsScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
-            corpsScrollBar.Lighting = false;
-            corpsScrollBar.LinearGradient_Background = false;
-            corpsScrollBar.LinearGradient_Value = false;
-            corpsScrollBar.LinearGradientPen = false;
-            corpsScrollBar.Location = new Point(193, 3);
-            corpsScrollBar.Maximum = 100;
-            corpsScrollBar.Minimum = 0;
-            corpsScrollBar.Name = "corpsScrollBar";
-            corpsScrollBar.OrientationValue = Orientation.Vertical;
-            corpsScrollBar.PenWidth = 10;
-            corpsScrollBar.RGB = false;
-            corpsScrollBar.Rounding = false;
-            corpsScrollBar.RoundingInt = 7;
-            corpsScrollBar.Size = new Size(10, 720);
-            corpsScrollBar.SmallStep = 10;
-            corpsScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            corpsScrollBar.TabIndex = 5;
-            corpsScrollBar.Tag = "Cyber";
-            corpsScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            corpsScrollBar.ThumbSize = 150;
-            corpsScrollBar.Timer_RGB = 300;
-            corpsScrollBar.Value = 0;
-            corpsScrollBar.Visible = false;
+            gradeScrollBar.Alpha = 50;
+            gradeScrollBar.BackColor = Color.Transparent;
+            gradeScrollBar.Background = true;
+            gradeScrollBar.Background_WidthPen = 0F;
+            gradeScrollBar.BackgroundPen = false;
+            gradeScrollBar.ColorBackground = Color.Transparent;
+            gradeScrollBar.ColorBackground_1 = Color.FromArgb(37, 52, 68);
+            gradeScrollBar.ColorBackground_2 = Color.FromArgb(41, 63, 86);
+            gradeScrollBar.ColorBackground_Pen = Color.Transparent;
+            gradeScrollBar.ColorBackground_Value_1 = Color.FromArgb(28, 200, 238);
+            gradeScrollBar.ColorBackground_Value_2 = Color.FromArgb(100, 208, 232);
+            gradeScrollBar.ColorLighting = Color.FromArgb(29, 200, 238);
+            gradeScrollBar.ColorPen_1 = Color.FromArgb(37, 52, 68);
+            gradeScrollBar.ColorPen_2 = Color.FromArgb(41, 63, 86);
+            gradeScrollBar.ColorScrollBar = Color.FromArgb(29, 200, 238);
+            gradeScrollBar.ColorScrollBar_Transparency = 255;
+            gradeScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            gradeScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
+            gradeScrollBar.Lighting = false;
+            gradeScrollBar.LinearGradient_Background = false;
+            gradeScrollBar.LinearGradient_Value = false;
+            gradeScrollBar.LinearGradientPen = false;
+            gradeScrollBar.Location = new Point(193, 3);
+            gradeScrollBar.Maximum = 100;
+            gradeScrollBar.Minimum = 0;
+            gradeScrollBar.Name = "gradeScrollBar";
+            gradeScrollBar.OrientationValue = Orientation.Vertical;
+            gradeScrollBar.PenWidth = 10;
+            gradeScrollBar.RGB = false;
+            gradeScrollBar.Rounding = false;
+            gradeScrollBar.RoundingInt = 7;
+            gradeScrollBar.Size = new Size(10, 720);
+            gradeScrollBar.SmallStep = 10;
+            gradeScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            gradeScrollBar.TabIndex = 5;
+            gradeScrollBar.Tag = "Cyber";
+            gradeScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            gradeScrollBar.ThumbSize = 150;
+            gradeScrollBar.Timer_RGB = 300;
+            gradeScrollBar.Value = 0;
+            gradeScrollBar.Visible = false;
             // 
-            // corpsListContainer
+            // gradeListContainer
             // 
-            corpsListContainer.BackColor = Color.Transparent;
-            corpsListContainer.BackgroundImage = Properties.Resources.ImgMajorListBackground;
-            corpsListContainer.BackgroundImageLayout = ImageLayout.Stretch;
-            corpsListContainer.Controls.Add(corpsList);
-            corpsListContainer.Controls.Add(corpsScrollBar);
-            corpsListContainer.Location = new Point(92, 68);
-            corpsListContainer.Name = "corpsListContainer";
-            corpsListContainer.Size = new Size(194, 720);
-            corpsListContainer.TabIndex = 5;
+            gradeListContainer.BackColor = Color.Transparent;
+            gradeListContainer.BackgroundImage = Properties.Resources.ImgMajorListBackground;
+            gradeListContainer.BackgroundImageLayout = ImageLayout.Stretch;
+            gradeListContainer.Controls.Add(gradeList);
+            gradeListContainer.Controls.Add(gradeScrollBar);
+            gradeListContainer.Location = new Point(92, 68);
+            gradeListContainer.Name = "gradeListContainer";
+            gradeListContainer.Size = new Size(194, 720);
+            gradeListContainer.TabIndex = 5;
             // 
-            // MembersListContainer
+            // monsterListContainer
             // 
-            MembersListContainer.BackColor = Color.Transparent;
-            MembersListContainer.BackgroundImageLayout = ImageLayout.Stretch;
-            MembersListContainer.Controls.Add(membersScrollBar);
-            MembersListContainer.Location = new Point(301, 68);
-            MembersListContainer.Name = "MembersListContainer";
-            MembersListContainer.Size = new Size(506, 720);
-            MembersListContainer.TabIndex = 6;
+            monsterListContainer.BackColor = Color.Transparent;
+            monsterListContainer.BackgroundImageLayout = ImageLayout.Stretch;
+            monsterListContainer.Controls.Add(monsterScrollBar);
+            monsterListContainer.Location = new Point(301, 68);
+            monsterListContainer.Name = "monsterListContainer";
+            monsterListContainer.Size = new Size(506, 720);
+            monsterListContainer.TabIndex = 6;
             // 
-            // membersScrollBar
+            // monsterScrollBar
             // 
-            membersScrollBar.Alpha = 50;
-            membersScrollBar.BackColor = Color.Transparent;
-            membersScrollBar.Background = true;
-            membersScrollBar.Background_WidthPen = 0F;
-            membersScrollBar.BackgroundPen = false;
-            membersScrollBar.ColorBackground = Color.Transparent;
-            membersScrollBar.ColorBackground_1 = Color.FromArgb(37, 52, 68);
-            membersScrollBar.ColorBackground_2 = Color.FromArgb(41, 63, 86);
-            membersScrollBar.ColorBackground_Pen = Color.Transparent;
-            membersScrollBar.ColorBackground_Value_1 = Color.FromArgb(28, 200, 238);
-            membersScrollBar.ColorBackground_Value_2 = Color.FromArgb(100, 208, 232);
-            membersScrollBar.ColorLighting = Color.FromArgb(29, 200, 238);
-            membersScrollBar.ColorPen_1 = Color.FromArgb(37, 52, 68);
-            membersScrollBar.ColorPen_2 = Color.FromArgb(41, 63, 86);
-            membersScrollBar.ColorScrollBar = Color.FromArgb(29, 200, 238);
-            membersScrollBar.ColorScrollBar_Transparency = 255;
-            membersScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            membersScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
-            membersScrollBar.Lighting = false;
-            membersScrollBar.LinearGradient_Background = false;
-            membersScrollBar.LinearGradient_Value = false;
-            membersScrollBar.LinearGradientPen = false;
-            membersScrollBar.Location = new Point(193, 3);
-            membersScrollBar.Maximum = 100;
-            membersScrollBar.Minimum = 0;
-            membersScrollBar.Name = "membersScrollBar";
-            membersScrollBar.OrientationValue = Orientation.Vertical;
-            membersScrollBar.PenWidth = 10;
-            membersScrollBar.RGB = false;
-            membersScrollBar.Rounding = false;
-            membersScrollBar.RoundingInt = 7;
-            membersScrollBar.Size = new Size(10, 720);
-            membersScrollBar.SmallStep = 10;
-            membersScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            membersScrollBar.TabIndex = 5;
-            membersScrollBar.Tag = "Cyber";
-            membersScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            membersScrollBar.ThumbSize = 150;
-            membersScrollBar.Timer_RGB = 300;
-            membersScrollBar.Value = 0;
-            membersScrollBar.Visible = false;
+            monsterScrollBar.Alpha = 50;
+            monsterScrollBar.BackColor = Color.Transparent;
+            monsterScrollBar.Background = true;
+            monsterScrollBar.Background_WidthPen = 0F;
+            monsterScrollBar.BackgroundPen = false;
+            monsterScrollBar.ColorBackground = Color.Transparent;
+            monsterScrollBar.ColorBackground_1 = Color.FromArgb(37, 52, 68);
+            monsterScrollBar.ColorBackground_2 = Color.FromArgb(41, 63, 86);
+            monsterScrollBar.ColorBackground_Pen = Color.Transparent;
+            monsterScrollBar.ColorBackground_Value_1 = Color.FromArgb(28, 200, 238);
+            monsterScrollBar.ColorBackground_Value_2 = Color.FromArgb(100, 208, 232);
+            monsterScrollBar.ColorLighting = Color.FromArgb(29, 200, 238);
+            monsterScrollBar.ColorPen_1 = Color.FromArgb(37, 52, 68);
+            monsterScrollBar.ColorPen_2 = Color.FromArgb(41, 63, 86);
+            monsterScrollBar.ColorScrollBar = Color.FromArgb(29, 200, 238);
+            monsterScrollBar.ColorScrollBar_Transparency = 255;
+            monsterScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            monsterScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
+            monsterScrollBar.Lighting = false;
+            monsterScrollBar.LinearGradient_Background = false;
+            monsterScrollBar.LinearGradient_Value = false;
+            monsterScrollBar.LinearGradientPen = false;
+            monsterScrollBar.Location = new Point(193, 3);
+            monsterScrollBar.Maximum = 100;
+            monsterScrollBar.Minimum = 0;
+            monsterScrollBar.Name = "monsterScrollBar";
+            monsterScrollBar.OrientationValue = Orientation.Vertical;
+            monsterScrollBar.PenWidth = 10;
+            monsterScrollBar.RGB = false;
+            monsterScrollBar.Rounding = false;
+            monsterScrollBar.RoundingInt = 7;
+            monsterScrollBar.Size = new Size(10, 720);
+            monsterScrollBar.SmallStep = 10;
+            monsterScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            monsterScrollBar.TabIndex = 5;
+            monsterScrollBar.Tag = "Cyber";
+            monsterScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            monsterScrollBar.ThumbSize = 150;
+            monsterScrollBar.Timer_RGB = 300;
+            monsterScrollBar.Value = 0;
+            monsterScrollBar.Visible = false;
             // 
-            // membersList
+            // monsterList
             // 
-            membersList.BackColor = Color.Transparent;
-            membersList.FlowDirection = FlowDirection.TopDown;
-            membersList.Location = new Point(301, 68);
-            membersList.Name = "membersList";
-            membersList.Size = new Size(506, 714);
-            membersList.TabIndex = 0;
+            monsterList.BackColor = Color.Transparent;
+            monsterList.FlowDirection = FlowDirection.TopDown;
+            monsterList.Location = new Point(301, 68);
+            monsterList.Name = "monsterList";
+            monsterList.Size = new Size(506, 714);
+            monsterList.TabIndex = 0;
             // 
             // transparentTextLabel1
             // 
@@ -164,71 +164,71 @@
             transparentTextLabel1.TabIndex = 0;
             transparentTextLabel1.Text = "보고된 적";
             // 
-            // statContainer
+            // reportedContainer
             // 
-            statContainer.BackColor = Color.Transparent;
-            statContainer.Controls.Add(statList);
-            statContainer.Controls.Add(statScrollBar);
-            statContainer.Location = new Point(0, 3);
-            statContainer.Name = "statContainer";
-            statContainer.Size = new Size(544, 482);
-            statContainer.TabIndex = 11;
+            reportedContainer.BackColor = Color.Transparent;
+            reportedContainer.Controls.Add(reportedList);
+            reportedContainer.Controls.Add(reportedScrollBar);
+            reportedContainer.Location = new Point(0, 3);
+            reportedContainer.Name = "reportedContainer";
+            reportedContainer.Size = new Size(544, 482);
+            reportedContainer.TabIndex = 11;
             // 
-            // statList
+            // reportedList
             // 
-            statList.FlowDirection = FlowDirection.TopDown;
-            statList.Location = new Point(3, 3);
-            statList.Name = "statList";
-            statList.Size = new Size(541, 476);
-            statList.TabIndex = 0;
+            reportedList.FlowDirection = FlowDirection.TopDown;
+            reportedList.Location = new Point(3, 3);
+            reportedList.Name = "reportedList";
+            reportedList.Size = new Size(541, 476);
+            reportedList.TabIndex = 0;
             // 
-            // statScrollBar
+            // reportedScrollBar
             // 
-            statScrollBar.Alpha = 50;
-            statScrollBar.BackColor = Color.Transparent;
-            statScrollBar.Background = true;
-            statScrollBar.Background_WidthPen = 3F;
-            statScrollBar.BackgroundPen = true;
-            statScrollBar.ColorBackground = Color.Transparent;
-            statScrollBar.ColorBackground_1 = Color.Transparent;
-            statScrollBar.ColorBackground_2 = Color.Transparent;
-            statScrollBar.ColorBackground_Pen = Color.Transparent;
-            statScrollBar.ColorBackground_Value_1 = Color.Transparent;
-            statScrollBar.ColorBackground_Value_2 = Color.Transparent;
-            statScrollBar.ColorLighting = Color.Transparent;
-            statScrollBar.ColorPen_1 = Color.Transparent;
-            statScrollBar.ColorPen_2 = Color.Transparent;
-            statScrollBar.ColorScrollBar = Color.Transparent;
-            statScrollBar.ColorScrollBar_Transparency = 255;
-            statScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            statScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
-            statScrollBar.Lighting = false;
-            statScrollBar.LinearGradient_Background = false;
-            statScrollBar.LinearGradient_Value = false;
-            statScrollBar.LinearGradientPen = false;
-            statScrollBar.Location = new Point(382, 3);
-            statScrollBar.Maximum = 100;
-            statScrollBar.Minimum = 0;
-            statScrollBar.Name = "statScrollBar";
-            statScrollBar.OrientationValue = Orientation.Vertical;
-            statScrollBar.PenWidth = 10;
-            statScrollBar.RGB = false;
-            statScrollBar.Rounding = true;
-            statScrollBar.RoundingInt = 7;
-            statScrollBar.Size = new Size(26, 476);
-            statScrollBar.SmallStep = 10;
-            statScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            statScrollBar.TabIndex = 1;
-            statScrollBar.Tag = "Cyber";
-            statScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            statScrollBar.ThumbSize = 60;
-            statScrollBar.Timer_RGB = 300;
-            statScrollBar.Value = 0;
+            reportedScrollBar.Alpha = 50;
+            reportedScrollBar.BackColor = Color.Transparent;
+            reportedScrollBar.Background = true;
+            reportedScrollBar.Background_WidthPen = 3F;
+            reportedScrollBar.BackgroundPen = true;
+            reportedScrollBar.ColorBackground = Color.Transparent;
+            reportedScrollBar.ColorBackground_1 = Color.Transparent;
+            reportedScrollBar.ColorBackground_2 = Color.Transparent;
+            reportedScrollBar.ColorBackground_Pen = Color.Transparent;
+            reportedScrollBar.ColorBackground_Value_1 = Color.Transparent;
+            reportedScrollBar.ColorBackground_Value_2 = Color.Transparent;
+            reportedScrollBar.ColorLighting = Color.Transparent;
+            reportedScrollBar.ColorPen_1 = Color.Transparent;
+            reportedScrollBar.ColorPen_2 = Color.Transparent;
+            reportedScrollBar.ColorScrollBar = Color.Transparent;
+            reportedScrollBar.ColorScrollBar_Transparency = 255;
+            reportedScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            reportedScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
+            reportedScrollBar.Lighting = false;
+            reportedScrollBar.LinearGradient_Background = false;
+            reportedScrollBar.LinearGradient_Value = false;
+            reportedScrollBar.LinearGradientPen = false;
+            reportedScrollBar.Location = new Point(382, 3);
+            reportedScrollBar.Maximum = 100;
+            reportedScrollBar.Minimum = 0;
+            reportedScrollBar.Name = "reportedScrollBar";
+            reportedScrollBar.OrientationValue = Orientation.Vertical;
+            reportedScrollBar.PenWidth = 10;
+            reportedScrollBar.RGB = false;
+            reportedScrollBar.Rounding = true;
+            reportedScrollBar.RoundingInt = 7;
+            reportedScrollBar.Size = new Size(26, 476);
+            reportedScrollBar.SmallStep = 10;
+            reportedScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            reportedScrollBar.TabIndex = 1;
+            reportedScrollBar.Tag = "Cyber";
+            reportedScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            reportedScrollBar.ThumbSize = 60;
+            reportedScrollBar.Timer_RGB = 300;
+            reportedScrollBar.Value = 0;
             // 
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
-            panel1.Controls.Add(statContainer);
+            panel1.Controls.Add(reportedContainer);
             panel1.Controls.Add(btnDecision);
             panel1.Location = new Point(828, 144);
             panel1.Name = "panel1";
@@ -259,9 +259,9 @@
             ClientSize = new Size(1452, 860);
             Controls.Add(panel1);
             Controls.Add(transparentTextLabel1);
-            Controls.Add(membersList);
-            Controls.Add(MembersListContainer);
-            Controls.Add(corpsListContainer);
+            Controls.Add(monsterList);
+            Controls.Add(monsterListContainer);
+            Controls.Add(gradeListContainer);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
@@ -276,24 +276,24 @@
             TransparencyKey = Color.FromArgb(64, 64, 64);
             Load += SelectMonsterForm_Load;
             KeyPress += SelectPlayerForm_KeyPress;
-            corpsListContainer.ResumeLayout(false);
-            MembersListContainer.ResumeLayout(false);
-            statContainer.ResumeLayout(false);
+            gradeListContainer.ResumeLayout(false);
+            monsterListContainer.ResumeLayout(false);
+            reportedContainer.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)btnDecision).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
-        private ReaLTaiizor.Controls.CyberScrollBar corpsScrollBar;
-        private controls.CustomFlowLayoutPanel corpsList;
-        private ScoreBoard.controls.DoubleBufferedPanel corpsListContainer;
-        private ScoreBoard.controls.DoubleBufferedPanel MembersListContainer;
-        private controls.CustomFlowLayoutPanel membersList;
-        private ReaLTaiizor.Controls.CyberScrollBar membersScrollBar;
+        private ReaLTaiizor.Controls.CyberScrollBar gradeScrollBar;
+        private controls.CustomFlowLayoutPanel gradeList;
+        private ScoreBoard.controls.DoubleBufferedPanel gradeListContainer;
+        private ScoreBoard.controls.DoubleBufferedPanel monsterListContainer;
+        private controls.CustomFlowLayoutPanel monsterList;
+        private ReaLTaiizor.Controls.CyberScrollBar monsterScrollBar;
         private controls.TransparentTextLabel transparentTextLabel1;
-        private controls.DoubleBufferedPanel statContainer;
-        private controls.CustomFlowLayoutPanel statList;
-        private ReaLTaiizor.Controls.CyberScrollBar statScrollBar;
+        private controls.DoubleBufferedPanel reportedContainer;
+        private controls.CustomFlowLayoutPanel reportedList;
+        private ReaLTaiizor.Controls.CyberScrollBar reportedScrollBar;
         private controls.DoubleBufferedPanel panel1;
         private PictureBox btnDecision;
     }

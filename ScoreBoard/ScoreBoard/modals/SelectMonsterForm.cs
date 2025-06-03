@@ -48,10 +48,10 @@ namespace ScoreBoard.modals
                 label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
                 label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
                 label.Click += (s, e) => ShowMonsters(grade.Value.Id);
-                corpsList.Controls.Add(label);
+                gradeList.Controls.Add(label);
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
-            ScrollBarManager.SetScrollBar(corpsListContainer, corpsList, corpsScrollBar); // 스크롤바 설정
+            ScrollBarManager.SetScrollBar(gradeListContainer, gradeList, gradeScrollBar); // 스크롤바 설정
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
         }
 
@@ -87,7 +87,7 @@ namespace ScoreBoard.modals
                 MessageBox.Show("해당 등급의 몬스터 정보가 없습니다.");
                 return;
             }
-            membersList.Controls.Clear(); // 이전 병사 리스트 초기화
+            monsterList.Controls.Clear(); // 이전 병사 리스트 초기화
             foreach (var member in membersMap)
             {
                 var label = CreateListItem(member.Value);
@@ -95,10 +95,10 @@ namespace ScoreBoard.modals
                 label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
                 label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
                 label.Click += (s, e) => ShowMemberStat(member.Key);
-                membersList.Controls.Add(label);
+                monsterList.Controls.Add(label);
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
-            ScrollBarManager.SetScrollBar(MembersListContainer, membersList, membersScrollBar); // 병사 리스트 스크롤바 설정
+            ScrollBarManager.SetScrollBar(monsterListContainer, monsterList, monsterScrollBar); // 병사 리스트 스크롤바 설정
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
         }
 
@@ -132,7 +132,7 @@ namespace ScoreBoard.modals
          */
         private void corpsList_MouseEnter(object sender, EventArgs e)
         {
-            corpsList.Focus();
+            gradeList.Focus();
         }
 
         /*
@@ -141,16 +141,16 @@ namespace ScoreBoard.modals
          */
         private void corpsList_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (!corpsScrollBar.Enabled) return;
+            if (!gradeScrollBar.Enabled) return;
 
-            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * corpsScrollBar.SmallStep;
-            int newScrollValue = corpsScrollBar.Value + delta;
+            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * gradeScrollBar.SmallStep;
+            int newScrollValue = gradeScrollBar.Value + delta;
 
             // 스크롤 범위 안에서만 동작하도록 조정
-            newScrollValue = Math.Max(corpsScrollBar.Minimum, Math.Min(corpsScrollBar.Maximum, newScrollValue));
+            newScrollValue = Math.Max(gradeScrollBar.Minimum, Math.Min(gradeScrollBar.Maximum, newScrollValue));
 
-            corpsScrollBar.Value = newScrollValue;
-            corpsList.Top = -newScrollValue;
+            gradeScrollBar.Value = newScrollValue;
+            gradeList.Top = -newScrollValue;
         }
 
         /*
@@ -160,21 +160,21 @@ namespace ScoreBoard.modals
          */
         private void statList_MouseEnter(object sender, EventArgs e)
         {
-            statList.Focus();
+            reportedList.Focus();
         }
 
         private void statList_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (!statScrollBar.Enabled) return;
+            if (!reportedScrollBar.Enabled) return;
 
-            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * statScrollBar.SmallStep;
-            int newScrollValue = statScrollBar.Value + delta;
+            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * reportedScrollBar.SmallStep;
+            int newScrollValue = reportedScrollBar.Value + delta;
 
             // 스크롤 범위 안에서만 동작하도록 조정
 
-            newScrollValue = Math.Max(statScrollBar.Minimum, Math.Min(statScrollBar.Maximum, newScrollValue));
-            statScrollBar.Value = newScrollValue;
-            statList.Top = -newScrollValue;
+            newScrollValue = Math.Max(reportedScrollBar.Minimum, Math.Min(reportedScrollBar.Maximum, newScrollValue));
+            reportedScrollBar.Value = newScrollValue;
+            reportedList.Top = -newScrollValue;
         }
 
         private void btnDecision_Click(object sender, EventArgs e)
