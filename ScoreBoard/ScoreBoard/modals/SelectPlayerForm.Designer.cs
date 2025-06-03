@@ -26,6 +26,8 @@
             // 
             // corpsList
             // 
+            corpsList.BorderColor = Color.Transparent;
+            corpsList.BorderThickness = 0;
             corpsList.FlowDirection = FlowDirection.TopDown;
             corpsList.Location = new Point(0, 0);
             corpsList.Name = "corpsList";
@@ -147,11 +149,15 @@
             // membersList
             // 
             membersList.BackColor = Color.Transparent;
+            membersList.BorderColor = Color.Transparent;
+            membersList.BorderThickness = 0;
             membersList.FlowDirection = FlowDirection.TopDown;
             membersList.Location = new Point(301, 68);
             membersList.Name = "membersList";
             membersList.Size = new Size(194, 714);
             membersList.TabIndex = 0;
+            membersList.MouseEnter += membersList_MouseEnter;
+            membersList.MouseWheel += memberList_MouseWheel;
             // 
             // characterImage
             // 
@@ -175,6 +181,8 @@
             // 
             // statList
             // 
+            statList.BorderColor = Color.Transparent;
+            statList.BorderThickness = 0;
             statList.FlowDirection = FlowDirection.TopDown;
             statList.Location = new Point(3, 3);
             statList.Name = "statList";
