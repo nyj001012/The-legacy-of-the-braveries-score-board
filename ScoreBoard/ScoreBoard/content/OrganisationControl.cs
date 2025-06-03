@@ -108,7 +108,11 @@ namespace ScoreBoard.content
 
         private void btnJoin_Click(object sender, EventArgs e)
         {
-            var selectMonsterModal = new SelectMonsterModal();
+            var selectMonsterModal = new SelectMonsterForm();
+            if (selectMonsterModal.ShowDialog() == DialogResult.OK)
+            {
+                selectMonsterModal.Close();
+            }
         }
     }
 }
