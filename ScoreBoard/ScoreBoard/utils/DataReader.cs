@@ -1,5 +1,4 @@
 ﻿using ScoreBoard.data;
-using ScoreBoard.data.monster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -137,6 +136,17 @@ namespace ScoreBoard.utils
             }
             string json = File.ReadAllText(jsonPath);
             return JsonSerializer.Deserialize<CorpsMember>(json, CachedJsonSerializerOptions);
+        }
+
+        internal static Dictionary<string, MonsterGrade>? ReadMonsterGrade()
+        {
+            string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "monster_type.json");
+            if (!File.Exists(jsonPath))
+            {
+                return null;
+            }
+            string json = File.ReadAllText(jsonPath);
+            return JsonSerializer.Deserialize<Dictionary<string, MonsterGrade>>(json, CachedJsonSerializerOptions);
         }
 
         /*
