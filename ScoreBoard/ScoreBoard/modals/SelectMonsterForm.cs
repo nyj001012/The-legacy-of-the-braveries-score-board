@@ -24,34 +24,33 @@ namespace ScoreBoard.modals
             this._selectedCharacters = selectedCharacters; // 선택된 병사들을 저장하는 딕셔너리 초기화
         }
 
-        private void SelectPlayerForm_Load(object sender, EventArgs e)
+        private void SelectMonsterForm_Load(object sender, EventArgs e)
         {
-            ShowCorps(); // 군단 리스트 표시
+            ShowMonsterGrade(); // 몬스터 종류 표시
         }
 
         /*
-         * ShowCorps()
-         * 군단 JSON 파일을 읽어와서 레이블로 표시하는 메서드
+         * ShowMonsterType()
+         * 몬스터 종류 JSON 파일을 읽어와서 레이블로 표시하는 메서드
          */
-        private void ShowCorps()
+        private void ShowMonsterGrade()
         {
             this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
             // 군단 JSON 파일 읽고 리스트에 표시
-            string corpsJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "corps.json");
-            Dictionary<string, string> corpsMap = DataReader.ReadCorpsData(corpsJsonPath);
+            Dictionary<string, MonsterGrade>? MonsterGradeDict = DataReader.ReadMonsterGrade();
 
-            if (corpsMap.Count == 0)
+            if (MonsterGradeDict == null)
             {
-                MessageBox.Show("군단 정보가 없습니다.");
+                MessageBox.Show("몬스터 정보가 없습니다.");
                 return;
             }
-            foreach (var unit in corpsMap)
+            foreach (var grade in MonsterGradeDict)
             {
-                var label = CreateListItem(unit.Value);
+                var label = CreateListItem(grade.Key);
 
                 label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
                 label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
-                label.Click += (s, e) => ShowCorpsMembers(unit.Key);
+                label.Click += (s, e) => ShowMonsters(grade.Value.Id);
                 corpsList.Controls.Add(label);
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
@@ -82,27 +81,27 @@ namespace ScoreBoard.modals
          * - corpsId: 군단 ID
          * - 해당 군단의 병사 리스트를 표시하는 메서드
          */
-        private void ShowCorpsMembers(string corpsId)
+        private void ShowMonsters(ushort gradeId)
         {
             this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
-            Dictionary<string, string> membersMap = DataReader.ReadCorpsMembersData(corpsId);
-            if (membersMap.Count == 0)
-            {
-                MessageBox.Show("해당 군단의 병사 정보가 없습니다.");
-                return;
-            }
-            membersList.Controls.Clear(); // 이전 병사 리스트 초기화
-            foreach (var member in membersMap)
-            {
-                var label = CreateListItem(member.Value);
+            //Dictionary<string, string> membersMap = DataReader.ReadCorpsMembersData(gradeId);
+            //if (membersMap.Count == 0)
+            //{
+            //    MessageBox.Show("해당 군단의 병사 정보가 없습니다.");
+            //    return;
+            //}
+            //membersList.Controls.Clear(); // 이전 병사 리스트 초기화
+            //foreach (var member in membersMap)
+            //{
+            //    var label = CreateListItem(member.Value);
 
-                label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
-                label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
-                label.Click += (s, e) => ShowMemberStat(member.Key);
-                membersList.Controls.Add(label);
-                labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
-            }
-            ScrollBarManager.SetScrollBar(MembersListContainer, membersList, membersScrollBar); // 병사 리스트 스크롤바 설정
+            //    label.MouseEnter += (s, e) => label.ForeColor = Color.FromArgb(255, 245, 245, 245);
+            //    label.MouseLeave += (s, e) => label.ForeColor = Color.FromArgb(100, 245, 245, 245);
+            //    label.Click += (s, e) => ShowMemberStat(member.Key);
+            //    membersList.Controls.Add(label);
+            //    labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
+            //}
+            //ScrollBarManager.SetScrollBar(MembersListContainer, membersList, membersScrollBar); // 병사 리스트 스크롤바 설정
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
         }
 
@@ -116,7 +115,6 @@ namespace ScoreBoard.modals
             this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
             CorpsMember member = GetMember(memberId);
             SelectedMember = member;
-            ShowMemberImage(memberId);
             ShowMemberStatText(member);
             // 이미 선택된 병사 객체가 selectedCharacters에 있으면 결정 버튼 비활성화
             btnDecision.Enabled = !_selectedCharacters.Values.Any(m => m.Id == member.Id);
@@ -254,25 +252,6 @@ namespace ScoreBoard.modals
             Font = new Font("나눔고딕코딩", 22),
             ForeColor = Color.FromArgb(255, 245, 245, 245),
         };
-
-
-        /*
-         * ShowMemberImage(string memberId)
-         * - memberId: 병사 ID
-         * - 병사의 이미지를 표시하는 메서드
-         */
-        private void ShowMemberImage(string memberId)
-        {
-            // 병사 이미지 표시
-            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "image", "character", $"{memberId}.png");
-            if (!File.Exists(imagePath))
-            {
-                MessageBox.Show($"병사 이미지가 없습니다: {imagePath}");
-                return;
-            }
-            characterImage.Image = Image.FromFile(imagePath);
-            characterImage.SizeMode = PictureBoxSizeMode.StretchImage;
-        }
 
         /*
          * GetMember(string memberId)

@@ -274,7 +274,7 @@
             Text = "SelectMonster";
             TopMost = true;
             TransparencyKey = Color.FromArgb(64, 64, 64);
-            Load += SelectPlayerForm_Load;
+            Load += SelectMonsterForm_Load;
             KeyPress += SelectPlayerForm_KeyPress;
             corpsListContainer.ResumeLayout(false);
             MembersListContainer.ResumeLayout(false);
