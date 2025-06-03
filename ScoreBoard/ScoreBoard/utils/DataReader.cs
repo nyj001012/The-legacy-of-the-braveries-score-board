@@ -1,4 +1,5 @@
 ﻿using ScoreBoard.data;
+using ScoreBoard.data.monster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace ScoreBoard.utils
 {
     public static class DataReader
     {
+        // 캐싱된 JsonSerializerOptions 인스턴스
+        private static readonly JsonSerializerOptions CachedJsonSerializerOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true // 대소문자 구분 없이 속성 이름을 매칭
+        };
+
         /*
          * JsonReader.ReadCorpsData(jsonPath)
          * - jsonPath: JSON 파일 경로
@@ -121,7 +128,7 @@ namespace ScoreBoard.utils
          * - id: 병사 ID
          * - return: 해당 병사의 JSON 데이터를 반환
          */
-        internal static CorpsMember? ReadMemberData (string id)
+        internal static CorpsMember? ReadMemberData(string id)
         {
             string jsonPath = @$"Resources/meta_data/character/{id}.json";
             if (!File.Exists(jsonPath))
@@ -129,10 +136,23 @@ namespace ScoreBoard.utils
                 return null;
             }
             string json = File.ReadAllText(jsonPath);
-            return JsonSerializer.Deserialize<CorpsMember>(json, new JsonSerializerOptions
+            return JsonSerializer.Deserialize<CorpsMember>(json, CachedJsonSerializerOptions);
+        }
+
+        /*
+         * JsonReader.ReadMonsterData(id)
+         * - id: 몬스터 ID
+         * - return: 해당 몬스터의 JSON 데이터를 반환
+         */
+        internal static Monster? ReadMonsterData(string id)
+        {
+            string jsonPath = $@"Resources/meta_data/monster/{id}.json";
+            if (!File.Exists(jsonPath))
             {
-                PropertyNameCaseInsensitive = true, // 대소문자 구분 없이 속성 이름을 매칭
-            });
+                return null;
+            }
+            string json = File.ReadAllText(jsonPath);
+            return JsonSerializer.Deserialize<Monster>(json, CachedJsonSerializerOptions);
         }
     }
 }

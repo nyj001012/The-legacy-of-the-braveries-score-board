@@ -8,9 +8,10 @@ namespace ScoreBoard.data.monster
 {
     internal class Monster
     {
-        public ushort Id { get; private set; }
+        public ushort Id { get; init; }
         public required string Name { get; init; }
         public required Stat Stat { get; init;}
         public required ushort[] AttackDiceValue { get; init; }
+        public required ushort SpawnTurn { get; init; }
     }
 }
