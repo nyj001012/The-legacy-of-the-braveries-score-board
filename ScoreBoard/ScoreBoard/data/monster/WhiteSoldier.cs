@@ -9,7 +9,7 @@ namespace ScoreBoard.data.monster
 {
     internal class WhiteSoldier : Monster
     {
-        public WhiteSoldier(string id) : base()
+        public WhiteSoldier(string id, ushort spawnTurn) : base()
         {
             Validator.ValidateNull(id, nameof(id));
             
@@ -19,6 +19,7 @@ namespace ScoreBoard.data.monster
             this.Id = data.Id;
             this.Name = data.Name;
             this.AttackDiceValue = data.AttackDiceValue;
+            this.SpawnTurn = spawnTurn;
             this.Stat = new Stat
             {
                 Hp = data.Stat.Hp,
