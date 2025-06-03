@@ -143,9 +143,9 @@ namespace ScoreBoard.utils
          * ReadMonsterGrade()
          * - return: 몬스터 등급 정보 반환
          */
-        internal static Dictionary<string, MonsterGrade>? ReadMonsterGrade()
+        public static Dictionary<string, MonsterGrade>? ReadMonsterGrade()
         {
-            string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "monster_type.json");
+            string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "monster_grade.json");
             if (!File.Exists(jsonPath))
             {
                 return null;
@@ -159,7 +159,7 @@ namespace ScoreBoard.utils
          * - id: 등급별 Id
          * - return: 등급별 몬스터 JSON 파일의 경로 배열
          */
-        internal static Dictionary<string, string> ReadMonsterDataByGradeId(ushort id)
+        public static Dictionary<string, string> ReadMonsterDataByGradeId(ushort id)
         {
             var membersMap = new Dictionary<string, string>();
             try

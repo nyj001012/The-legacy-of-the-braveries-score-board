@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data
 {
-    internal class MonsterGrade
+    public class MonsterGrade
     {
         public ushort Id { get; set; }
         public ushort SpawnTurn { get; set; }
