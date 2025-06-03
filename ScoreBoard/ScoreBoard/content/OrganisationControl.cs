@@ -15,7 +15,7 @@ namespace ScoreBoard.content
     public partial class OrganisationControl : UserControl
     {
         Dictionary<string, CorpsMember> selectedCharacters = [];
-        Dictionary<string, Monster> selectedMonsters = [];
+        List<(string id, string name, ushort count)> selectedMonsters = [];
 
         public OrganisationControl()
         {
@@ -111,6 +111,7 @@ namespace ScoreBoard.content
             var selectMonsterModal = new SelectMonsterForm();
             if (selectMonsterModal.ShowDialog(this) == DialogResult.OK)
             {
+                selectedMonsters = selectMonsterModal.selectedMonsters;
                 selectMonsterModal.Close();
             }
         }

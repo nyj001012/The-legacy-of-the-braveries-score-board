@@ -13,7 +13,7 @@ namespace ScoreBoard.modals
     {
         private int labelHeight = 0; // 레이블의 총 높이. 동적 레이블 높이를 계산하기 위해 사용
         private readonly int verticalSpace = 20; // 레이블 간의 수직 여백. 동적으로 레이블을 생성할 때 사용
-        private List<(string id, string name, ushort count)> selectedMonsters = []; // 선택된 몬스터들을 저장하는 리스트 (monsterId, count)
+        internal List<(string id, string name, ushort count)> selectedMonsters = []; // 선택된 몬스터들을 저장하는 리스트 (monsterId, count)
         private Point dragStartPoint; // 드래그 시작 지점
         private TransparentTextLabel? draggedLabel = null; // 드래그된 레이블 저장
 
