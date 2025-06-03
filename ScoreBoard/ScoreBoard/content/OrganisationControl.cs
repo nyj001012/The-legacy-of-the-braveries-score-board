@@ -15,6 +15,7 @@ namespace ScoreBoard.content
     public partial class OrganisationControl : UserControl
     {
         Dictionary<string, CorpsMember> selectedCharacters = [];
+        List<(string id, string name, ushort count)> selectedMonsters = [];
 
         public OrganisationControl()
         {
@@ -107,7 +108,13 @@ namespace ScoreBoard.content
 
         private void btnJoin_Click(object sender, EventArgs e)
         {
-
+            var selectMonsterModal = new SelectMonsterForm(selectedMonsters);
+            if (selectMonsterModal.ShowDialog(this) == DialogResult.OK)
+            {
+                selectedMonsters = selectMonsterModal.currentSelectedMonsters;
+                selectMonsterModal.Close();
+            }
+            // TODO => 점수판 폼 호출 (selectedCharacters와 selectedMonsters 파라미터로 설정)
         }
     }
 }

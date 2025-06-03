@@ -22,6 +22,9 @@ namespace ScoreBoard.modals
             InitializeComponent();
             this.KeyPreview = true; // 폼에서 키 입력을 우선하여 받을 수 있도록 설정
             this._selectedCharacters = selectedCharacters; // 선택된 병사들을 저장하는 딕셔너리 초기화
+            this.corpsScrollBar.Enabled = false;
+            this.membersScrollBar.Enabled = false;
+            this.statScrollBar.Enabled = false;
         }
 
         private void SelectPlayerForm_Load(object sender, EventArgs e)
@@ -365,6 +368,25 @@ namespace ScoreBoard.modals
         {
             this.DialogResult = DialogResult.OK; // 선택된 병사 객체가 있을 경우 OK 반환
             this.Close(); // 폼 닫기
+        }
+
+        private void membersList_MouseEnter(object sender, EventArgs e)
+        {
+            membersList.Focus();
+        }
+
+        private void memberList_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (!membersScrollBar.Enabled) return;
+
+            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * membersScrollBar.SmallStep;
+            int newScrollValue = membersScrollBar.Value + delta;
+
+            // 스크롤 범위 안에서만 동작하도록 조정
+
+            newScrollValue = Math.Max(membersScrollBar.Minimum, Math.Min(membersScrollBar.Maximum, newScrollValue));
+            membersScrollBar.Value = newScrollValue;
+            membersList.Top = -newScrollValue;
         }
     }
 }

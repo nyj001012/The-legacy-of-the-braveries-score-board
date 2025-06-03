@@ -62,7 +62,7 @@ namespace ScoreBoard.data.character
                         AttackCount = kv.Value.AttackCount,
                         Value = kv.Value.Value
                     }
-                ) ?? new Dictionary<string, CombatStat>()
+                ) ?? []
             };
         }
 

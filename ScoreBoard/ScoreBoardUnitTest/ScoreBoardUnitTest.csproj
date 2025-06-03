@@ -24,6 +24,15 @@
     <None Update="Resources\meta_data\corps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\meta_data\monster\2_01_white_soldier.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\meta_data\monster\2_02_black_knight.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\meta_data\monster_grade.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\units.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
