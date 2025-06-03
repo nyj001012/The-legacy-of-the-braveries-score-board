@@ -56,6 +56,13 @@
     <None Update="Resources\meta_data\corps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\meta_data\monster_type.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="data\monster\" />
   </ItemGroup>
 
 </Project>
