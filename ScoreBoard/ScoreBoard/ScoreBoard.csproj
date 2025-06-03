@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="Resources\meta_data\**\*.json">
+		<Content Include="Resources\**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
