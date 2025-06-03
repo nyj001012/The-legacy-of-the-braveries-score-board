@@ -16,6 +16,7 @@ namespace ScoreBoard.data.monster
             var data = DataReader.ReadMonsterData(id) ?? throw new ArgumentException($"데이터 불러오기 오류: {id}");
 
             // 필드 초기화
+            this.Type = data.Type;
             this.Id = data.Id;
             this.Name = data.Name;
             this.AttackDiceValue = data.AttackDiceValue;
@@ -34,7 +35,7 @@ namespace ScoreBoard.data.monster
                         AttackCount = kv.Value.AttackCount,
                         Value = kv.Value.Value
                     }
-                ) ?? new Dictionary<string, CombatStat>()
+                ) ?? []
             };
         }
     }
