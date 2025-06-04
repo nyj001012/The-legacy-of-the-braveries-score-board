@@ -136,13 +136,13 @@ namespace ScoreBoard.modals
 
             if (isNew)
             {
+                currentSelectedMonsters.Add((id, monsterName, count));
                 var newLabel = CreateReportedLabel(id, monsterName, count);
                 reportedList.Controls.Add(newLabel);
             }
             else
             {
                 currentSelectedMonsters[index] = (id, monsterName, count);
-
                 var found = reportedList.Controls.Find(id, true);
                 if (found.Length > 0 && found[0] is TransparentTextLabel label)
                 {
