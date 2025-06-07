@@ -129,7 +129,7 @@ namespace ScoreBoard.content
          */
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (sender is not Button cancelButton || cancelButton.Tag is null)
+            if (sender is not PictureBox cancelButton || cancelButton.Tag is null)
             {
                 return;
             }
