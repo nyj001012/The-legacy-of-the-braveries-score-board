@@ -129,15 +129,9 @@ namespace ScoreBoard.content
          */
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (sender is not PictureBox cancelButton || cancelButton.Tag is null)
-            {
-                return;
-            }
-            string? playerNumber = cancelButton.Tag.ToString();
-            if (playerNumber is null || !selectedCharacters.ContainsKey(playerNumber))
-            {
-                return;
-            }
+            if (sender is not PictureBox { Tag: string playerNumber }) return;
+            if (!selectedCharacters.Remove(playerNumber)) return;
+
             // 선택된 멤버를 제거합니다.
             selectedCharacters.Remove(playerNumber);
 
@@ -154,12 +148,9 @@ namespace ScoreBoard.content
                 button.BackgroundImage = Properties.Resources.BtnSelectCharacter;
             }
             // 취소 버튼을 숨깁니다.
-            cancelButton.Visible = false;
-            if (selectedCharacters.Count < 4)
-            {
-                btnJoin.Visible = false;
-                btnJoin.Enabled = false;
-            }
+            ((PictureBox)sender).Visible = false;
+            // Join 버튼의 가시성과 활성화 상태를 업데이트합니다.
+            btnJoin.Visible = btnJoin.Enabled = selectedCharacters.Count == 4;
         }
     }
 }
