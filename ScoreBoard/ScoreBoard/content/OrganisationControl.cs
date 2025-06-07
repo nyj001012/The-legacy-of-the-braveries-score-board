@@ -75,21 +75,25 @@ namespace ScoreBoard.content
                     btnSelect1P.BackgroundImage = Image.FromFile(imagePath);
                     lbl1P.Text = selectedData.Name;
                     lbl1P.Invalidate();
+                    btnCancel1P.Visible = true;
                     break;
                 case "2":
                     btnSelect2P.BackgroundImage = Image.FromFile(imagePath);
                     lbl2P.Text = selectedData.Name;
                     lbl2P.Invalidate();
+                    btnCancel2P.Visible = true;
                     break;
                 case "3":
                     btnSelect3P.BackgroundImage = Image.FromFile(imagePath);
                     lbl3P.Text = selectedData.Name;
                     lbl3P.Invalidate();
+                    btnCancel3P.Visible = true;
                     break;
                 case "4":
                     btnSelect4P.BackgroundImage = Image.FromFile(imagePath);
                     lbl4P.Text = selectedData.Name;
                     lbl4P.Invalidate();
+                    btnCancel4P.Visible = true;
                     break;
                 default:
                     break;

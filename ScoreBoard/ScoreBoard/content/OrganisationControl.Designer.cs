@@ -42,11 +42,19 @@
             lbl2P = new ScoreBoard.controls.GradientLabel();
             lbl3P = new ScoreBoard.controls.GradientLabel();
             lbl4P = new ScoreBoard.controls.GradientLabel();
+            btnCancel1P = new PictureBox();
+            btnCancel2P = new PictureBox();
+            btnCancel3P = new PictureBox();
+            btnCancel4P = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)btnSelect1P).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnSelect2P).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnSelect3P).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnSelect4P).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnJoin).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnCancel1P).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnCancel2P).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnCancel3P).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnCancel4P).BeginInit();
             SuspendLayout();
             // 
             // btnSelect1P
@@ -233,12 +241,64 @@
             lbl4P.Size = new Size(345, 50);
             lbl4P.TabIndex = 15;
             // 
+            // btnCancel1P
+            // 
+            btnCancel1P.BackColor = Color.Transparent;
+            btnCancel1P.BackgroundImage = Properties.Resources.BtnCross;
+            btnCancel1P.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancel1P.Location = new Point(403, 310);
+            btnCancel1P.Name = "btnCancel1P";
+            btnCancel1P.Size = new Size(50, 50);
+            btnCancel1P.TabIndex = 16;
+            btnCancel1P.TabStop = false;
+            btnCancel1P.Visible = false;
+            // 
+            // btnCancel2P
+            // 
+            btnCancel2P.BackColor = Color.Transparent;
+            btnCancel2P.BackgroundImage = Properties.Resources.BtnCross;
+            btnCancel2P.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancel2P.Location = new Point(856, 310);
+            btnCancel2P.Name = "btnCancel2P";
+            btnCancel2P.Size = new Size(50, 50);
+            btnCancel2P.TabIndex = 17;
+            btnCancel2P.TabStop = false;
+            btnCancel2P.Visible = false;
+            // 
+            // btnCancel3P
+            // 
+            btnCancel3P.BackColor = Color.Transparent;
+            btnCancel3P.BackgroundImage = Properties.Resources.BtnCross;
+            btnCancel3P.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancel3P.Location = new Point(1309, 310);
+            btnCancel3P.Name = "btnCancel3P";
+            btnCancel3P.Size = new Size(50, 50);
+            btnCancel3P.TabIndex = 18;
+            btnCancel3P.TabStop = false;
+            btnCancel3P.Visible = false;
+            // 
+            // btnCancel4P
+            // 
+            btnCancel4P.BackColor = Color.Transparent;
+            btnCancel4P.BackgroundImage = Properties.Resources.BtnCross;
+            btnCancel4P.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancel4P.Location = new Point(1762, 310);
+            btnCancel4P.Name = "btnCancel4P";
+            btnCancel4P.Size = new Size(50, 50);
+            btnCancel4P.TabIndex = 19;
+            btnCancel4P.TabStop = false;
+            btnCancel4P.Visible = false;
+            // 
             // OrganisationControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.ImgInGameBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
+            Controls.Add(btnCancel4P);
+            Controls.Add(btnCancel3P);
+            Controls.Add(btnCancel2P);
+            Controls.Add(btnCancel1P);
             Controls.Add(lbl4P);
             Controls.Add(lbl3P);
             Controls.Add(lbl2P);
@@ -262,6 +322,10 @@
             ((System.ComponentModel.ISupportInitialize)btnSelect3P).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnSelect4P).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnJoin).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnCancel1P).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnCancel2P).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnCancel3P).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnCancel4P).EndInit();
             ResumeLayout(false);
 
         }
@@ -282,5 +346,9 @@
         private controls.GradientLabel lbl2P;
         private controls.GradientLabel lbl3P;
         private controls.GradientLabel lbl4P;
+        private PictureBox btnCancel1P;
+        private PictureBox btnCancel2P;
+        private PictureBox btnCancel3P;
+        private PictureBox btnCancel4P;
     }
 }
