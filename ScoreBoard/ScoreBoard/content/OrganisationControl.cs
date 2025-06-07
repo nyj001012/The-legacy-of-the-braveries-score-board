@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScoreBoard.controls;
 using ScoreBoard.data;
 using ScoreBoard.modals;
 
@@ -75,21 +76,25 @@ namespace ScoreBoard.content
                     btnSelect1P.BackgroundImage = Image.FromFile(imagePath);
                     lbl1P.Text = selectedData.Name;
                     lbl1P.Invalidate();
+                    btnCancel1P.Visible = true;
                     break;
                 case "2":
                     btnSelect2P.BackgroundImage = Image.FromFile(imagePath);
                     lbl2P.Text = selectedData.Name;
                     lbl2P.Invalidate();
+                    btnCancel2P.Visible = true;
                     break;
                 case "3":
                     btnSelect3P.BackgroundImage = Image.FromFile(imagePath);
                     lbl3P.Text = selectedData.Name;
                     lbl3P.Invalidate();
+                    btnCancel3P.Visible = true;
                     break;
                 case "4":
                     btnSelect4P.BackgroundImage = Image.FromFile(imagePath);
                     lbl4P.Text = selectedData.Name;
                     lbl4P.Invalidate();
+                    btnCancel4P.Visible = true;
                     break;
                 default:
                     break;
@@ -115,6 +120,37 @@ namespace ScoreBoard.content
                 selectMonsterModal.Close();
             }
             // TODO => 점수판 폼 호출 (selectedCharacters와 selectedMonsters 파라미터로 설정)
+        }
+
+        /*
+         * btnCancel_Click(object sender, EventArgs e)
+         * 선택된 플레이어를 취소하는 메서드
+         * - sender: 취소 버튼 (예: btnCancel1P, btnCancel2P 등)
+         */
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (sender is not PictureBox { Tag: string playerNumber }) return;
+            if (!selectedCharacters.Remove(playerNumber)) return;
+
+            // 선택된 멤버를 제거합니다.
+            selectedCharacters.Remove(playerNumber);
+
+            // 해당 슬롯의 UI를 초기화합니다.
+            GradientLabel? label = this.Controls.Find($"lbl{playerNumber}P", true).FirstOrDefault() as GradientLabel;
+            PictureBox? button = this.Controls.Find($"btnSelect{playerNumber}P", true).FirstOrDefault() as PictureBox;
+            if (label is not null)
+            {
+                label.Text = "";
+                label.Invalidate();
+            }
+            if (button is not null)
+            {
+                button.BackgroundImage = Properties.Resources.BtnSelectCharacter;
+            }
+            // 취소 버튼을 숨깁니다.
+            ((PictureBox)sender).Visible = false;
+            // Join 버튼의 가시성과 활성화 상태를 업데이트합니다.
+            btnJoin.Visible = btnJoin.Enabled = selectedCharacters.Count == 4;
         }
     }
 }
