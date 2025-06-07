@@ -207,6 +207,7 @@
             lbl1P.Name = "lbl1P";
             lbl1P.Size = new Size(345, 50);
             lbl1P.TabIndex = 12;
+            lbl1P.Tag = "1";
             // 
             // lbl2P
             // 
@@ -218,6 +219,7 @@
             lbl2P.Name = "lbl2P";
             lbl2P.Size = new Size(345, 50);
             lbl2P.TabIndex = 13;
+            lbl2P.Tag = "2";
             // 
             // lbl3P
             // 
@@ -229,6 +231,7 @@
             lbl3P.Name = "lbl3P";
             lbl3P.Size = new Size(345, 50);
             lbl3P.TabIndex = 14;
+            lbl3P.Tag = "3";
             // 
             // lbl4P
             // 
@@ -240,54 +243,67 @@
             lbl4P.Name = "lbl4P";
             lbl4P.Size = new Size(345, 50);
             lbl4P.TabIndex = 15;
+            lbl4P.Tag = "4";
             // 
             // btnCancel1P
             // 
             btnCancel1P.BackColor = Color.Transparent;
             btnCancel1P.BackgroundImage = Properties.Resources.BtnCross;
             btnCancel1P.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancel1P.Cursor = Cursors.Hand;
             btnCancel1P.Location = new Point(403, 310);
             btnCancel1P.Name = "btnCancel1P";
             btnCancel1P.Size = new Size(50, 50);
             btnCancel1P.TabIndex = 16;
             btnCancel1P.TabStop = false;
+            btnCancel1P.Tag = "1";
             btnCancel1P.Visible = false;
+            btnCancel1P.Click += btnCancel_Click;
             // 
             // btnCancel2P
             // 
             btnCancel2P.BackColor = Color.Transparent;
             btnCancel2P.BackgroundImage = Properties.Resources.BtnCross;
             btnCancel2P.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancel2P.Cursor = Cursors.Hand;
             btnCancel2P.Location = new Point(856, 310);
             btnCancel2P.Name = "btnCancel2P";
             btnCancel2P.Size = new Size(50, 50);
             btnCancel2P.TabIndex = 17;
             btnCancel2P.TabStop = false;
+            btnCancel2P.Tag = "2";
             btnCancel2P.Visible = false;
+            btnCancel2P.Click += btnCancel_Click;
             // 
             // btnCancel3P
             // 
             btnCancel3P.BackColor = Color.Transparent;
             btnCancel3P.BackgroundImage = Properties.Resources.BtnCross;
             btnCancel3P.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancel3P.Cursor = Cursors.Hand;
             btnCancel3P.Location = new Point(1309, 310);
             btnCancel3P.Name = "btnCancel3P";
             btnCancel3P.Size = new Size(50, 50);
             btnCancel3P.TabIndex = 18;
             btnCancel3P.TabStop = false;
+            btnCancel3P.Tag = "3";
             btnCancel3P.Visible = false;
+            btnCancel3P.Click += btnCancel_Click;
             // 
             // btnCancel4P
             // 
             btnCancel4P.BackColor = Color.Transparent;
             btnCancel4P.BackgroundImage = Properties.Resources.BtnCross;
             btnCancel4P.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancel4P.Cursor = Cursors.Hand;
             btnCancel4P.Location = new Point(1762, 310);
             btnCancel4P.Name = "btnCancel4P";
             btnCancel4P.Size = new Size(50, 50);
             btnCancel4P.TabIndex = 19;
             btnCancel4P.TabStop = false;
+            btnCancel4P.Tag = "4";
             btnCancel4P.Visible = false;
+            btnCancel4P.Click += btnCancel_Click;
             // 
             // OrganisationControl
             // 
