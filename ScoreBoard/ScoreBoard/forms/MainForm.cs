@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -57,7 +58,7 @@ namespace ScoreBoard.forms
                     var (characters, monsters) = data;
                     ShowControl(new ScoreBoardControl(characters, monsters)); // 점수판 컨트롤 표시
                 };
-                ShowControl(new OrganisationControl()); // 부대 편성 컨트롤 표시
+                ShowControl(organisationControl); // 부대 편성 컨트롤 표시
             };
 
             ShowControl(mainControl);
