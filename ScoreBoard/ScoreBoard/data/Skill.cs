@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data
 {
-    internal class Skill()
+    public class Skill()
     {
         public string Name { get; set; } = string.Empty; // 기술 이름 (예: "불꽃의 검", "치유의 빛" 등)
         public ushort RequiredLevel { get; set; } // 기술을 사용할 수 있는 레벨 (예: 1, 2, 3 등)

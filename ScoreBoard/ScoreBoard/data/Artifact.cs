@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data
 {
-    internal class Artifact
+    public class Artifact
     {
 
     }
