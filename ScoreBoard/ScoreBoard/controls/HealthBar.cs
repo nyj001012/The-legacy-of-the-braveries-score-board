@@ -21,13 +21,13 @@ namespace ScoreBoard.controls
         public int CornerRadius { get; set; } = 10;
 
         [Category("Appearance")]
-        public Color HealthColor { get; set; } = Color.LimeGreen;
+        public Color HealthColor { get; set; } = Color.FromArgb(119, 185, 69);
 
         [Category("Appearance")]
-        public Color ShieldColor { get; set; } = Color.White;
+        public Color ShieldColor { get; set; } = Color.FromArgb(245, 245, 245);
 
         [Category("Appearance")]
-        public Color BorderColor { get; set; } = Color.Black;
+        public Color BorderColor { get; set; } = Color.FromArgb(50, 245, 245, 245);
 
         [Category("Appearance")]
         public float BorderThickness { get; set; } = 2f;
@@ -36,10 +36,7 @@ namespace ScoreBoard.controls
         public bool TextVisible { get; set; } = true;
 
         [Category("Appearance")]
-        public Font TextFont { get; set; } = new Font("Segoe UI", 9, FontStyle.Bold);
-
-        [Category("Appearance")]
-        public Color TextColor { get; set; } = Color.Black;
+        public Color TextColor { get; set; } = Color.FromArgb(245, 245, 245);
 
         public HealthBar()
         {
@@ -76,37 +73,54 @@ namespace ScoreBoard.controls
             Rectangle fullRect = new Rectangle(0, 0, width - 1, height - 1); // 테두리 고려
             Rectangle healthRect = new Rectangle(0, 0, healthWidth, height);
             Rectangle shieldRect = new Rectangle(healthWidth, 0, shieldWidth, height);
+            using GraphicsPath path = RoundedRect(fullRect, CornerRadius);
+            using Pen borderPen = new Pen(BorderColor, BorderThickness);
+            borderPen.Alignment = PenAlignment.Inset; // ✅ 추가: 경계선이 도형 안쪽에만 그려지게
 
-            using (GraphicsPath path = RoundedRect(fullRect, CornerRadius))
-            using (Pen borderPen = new Pen(BorderColor, BorderThickness))
-            using (Brush healthBrush = new SolidBrush(HealthColor))
-            using (Brush shieldBrush = new SolidBrush(ShieldColor))
+            using Brush healthBrush = new SolidBrush(HealthColor);
+            using Brush shieldBrush = new SolidBrush(ShieldColor);
+            // 클리핑 영역을 둥근 테두리로 제한
+            e.Graphics.SetClip(path);
+
+            // 체력 채우기
+            if (healthWidth > 0)
+                e.Graphics.FillRectangle(healthBrush, healthRect);
+
+            // 보호막 채우기
+            if (shieldWidth > 0)
+                e.Graphics.FillRectangle(shieldBrush, shieldRect);
+
+            // 테두리
+            e.Graphics.ResetClip(); // 테두리 클리핑 해제
+
+            Rectangle inflatedBounds = fullRect;
+            inflatedBounds.Inflate((int)(BorderThickness / 2f), (int)(BorderThickness / 2f));
+
+            using (GraphicsPath borderPath = RoundedRect(inflatedBounds, CornerRadius))
             {
-                // 클리핑 영역을 둥근 테두리로 제한
-                e.Graphics.SetClip(path);
+                e.Graphics.DrawPath(borderPen, borderPath);
+            }
 
-                // 체력 채우기
-                if (healthWidth > 0)
-                    e.Graphics.FillRectangle(healthBrush, healthRect);
+            // 텍스트 표시
+            if (TextVisible)
+            {
+                string text = $"{Health}" + (Shield > 0 ? $" (+{Shield})" : "") + $" / {MaxValue}";
+                SizeF textSize = e.Graphics.MeasureString(text, Font);
+                PointF textPos = new PointF((width - textSize.Width) / 2, (height - textSize.Height) / 2);
 
-                // 보호막 채우기
-                if (shieldWidth > 0)
-                    e.Graphics.FillRectangle(shieldBrush, shieldRect);
+                // 쉐도우 offset
+                PointF shadowPos = new PointF(textPos.X + 2, textPos.Y + 2);
 
-                // 테두리
-                e.Graphics.DrawPath(borderPen, path);
-
-                // 텍스트 표시
-                if (TextVisible)
+                using (Brush shadowBrush = new SolidBrush(Color.FromArgb(50, 0, 0, 0))) // 연한 검정색 그림자
+                using (Brush textBrush = new SolidBrush(TextColor)) // 본래 텍스트 색
                 {
-                    string text = $"{Health}" + (Shield > 0 ? $" (+{Shield})" : "") + $" / {MaxValue}";
-                    SizeF textSize = e.Graphics.MeasureString(text, TextFont);
-                    PointF textPos = new PointF((width - textSize.Width) / 2, (height - textSize.Height) / 2);
-                    using (Brush textBrush = new SolidBrush(TextColor))
-                    {
-                        e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-                        e.Graphics.DrawString(text, TextFont, textBrush, textPos);
-                    }
+                    e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+
+                    // 1. 쉐도우 먼저 그림
+                    e.Graphics.DrawString(text, Font, shadowBrush, shadowPos);
+
+                    // 2. 본 텍스트 덮어쓰기
+                    e.Graphics.DrawString(text, Font, textBrush, textPos);
                 }
             }
         }
@@ -139,7 +153,8 @@ namespace ScoreBoard.controls
 
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
-            if (BackColor == Color.Transparent && Parent != null)
+            // 디자인 모드에서는 절대 투명 처리하지 않음
+            if (!DesignMode && BackColor == Color.Transparent && Parent != null)
             {
                 using (Bitmap bmp = new Bitmap(Parent.Width, Parent.Height))
                 {
