@@ -98,6 +98,7 @@
             pn1P.Name = "pn1P";
             pn1P.Size = new Size(538, 245);
             pn1P.TabIndex = 0;
+            pn1P.ControlAdded += pnPlayer_CenterPanelChildrenVertically;
             // 
             // pn1PInform
             // 
@@ -105,7 +106,6 @@
             pn1PInform.Controls.Add(fpn1P);
             pn1PInform.Controls.Add(pb1PLv);
             pn1PInform.Controls.Add(lbl1PName);
-            pn1PInform.Dock = DockStyle.Right;
             pn1PInform.Location = new Point(89, 0);
             pn1PInform.Name = "pn1PInform";
             pn1PInform.Size = new Size(449, 245);
@@ -114,7 +114,7 @@
             // healthBar2
             // 
             healthBar2.BackColor = Color.Transparent;
-            healthBar2.BorderColor = Color.FromArgb(125, 245, 245, 245);
+            healthBar2.BorderColor = Color.FromArgb(75, 245, 245, 245);
             healthBar2.BorderThickness = 3F;
             healthBar2.CornerRadius = 15;
             healthBar2.Font = new Font("Danjo-bold", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -167,7 +167,7 @@
             // 
             // pb1PLv
             // 
-            pb1PLv.Location = new Point(391, 3);
+            pb1PLv.Location = new Point(391, 6);
             pb1PLv.Name = "pb1PLv";
             pb1PLv.Size = new Size(52, 52);
             pb1PLv.TabIndex = 1;
@@ -179,7 +179,7 @@
             lbl1PName.Font = new Font("Danjo-bold", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbl1PName.GradientEnd = Color.FromArgb(72, 144, 170);
             lbl1PName.GradientStart = Color.FromArgb(221, 237, 240);
-            lbl1PName.Location = new Point(3, 3);
+            lbl1PName.Location = new Point(3, 6);
             lbl1PName.Name = "lbl1PName";
             lbl1PName.RightToLeft = RightToLeft.No;
             lbl1PName.Size = new Size(382, 52);
@@ -198,14 +198,14 @@
             // 
             // lbl1P
             // 
+            lbl1P.Anchor = AnchorStyles.None;
             lbl1P.BackColor = Color.Transparent;
-            lbl1P.Dock = DockStyle.Fill;
             lbl1P.Font = new Font("Danjo-bold", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbl1P.GradientEnd = Color.FromArgb(107, 89, 50);
             lbl1P.GradientStart = Color.FromArgb(209, 162, 97);
-            lbl1P.Location = new Point(0, 0);
+            lbl1P.Location = new Point(0, 36);
             lbl1P.Name = "lbl1P";
-            lbl1P.Size = new Size(80, 245);
+            lbl1P.Size = new Size(80, 113);
             lbl1P.TabIndex = 0;
             lbl1P.Text = "1P";
             lbl1P.TextAlign = ContentAlignment.MiddleCenter;
