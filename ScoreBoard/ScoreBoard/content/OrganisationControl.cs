@@ -71,45 +71,20 @@ namespace ScoreBoard.content
                 MessageBox.Show($"이미지 파일이 존재하지 않습니다: {imagePath}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            switch (playerNumber)
+
+            if (this.Controls.Find($"btnSelect{playerNumber}P", true).FirstOrDefault() is not PictureBox pictureBox
+                || this.Controls.Find($"lbl{playerNumber}P", true).FirstOrDefault() is not GradientLabel label
+                || this.Controls.Find($"btnCancel{playerNumber}P", true).FirstOrDefault() is not PictureBox cancelButton)
             {
-                case "1":
-                    btnSelect1P.BackgroundImage = Image.FromFile(imagePath);
-                    lbl1P.Text = selectedData.Name;
-                    lbl1P.Invalidate();
-                    btnCancel1P.Visible = true;
-                    break;
-                case "2":
-                    btnSelect2P.BackgroundImage = Image.FromFile(imagePath);
-                    lbl2P.Text = selectedData.Name;
-                    lbl2P.Invalidate();
-                    btnCancel2P.Visible = true;
-                    break;
-                case "3":
-                    btnSelect3P.BackgroundImage = Image.FromFile(imagePath);
-                    lbl3P.Text = selectedData.Name;
-                    lbl3P.Invalidate();
-                    btnCancel3P.Visible = true;
-                    break;
-                case "4":
-                    btnSelect4P.BackgroundImage = Image.FromFile(imagePath);
-                    lbl4P.Text = selectedData.Name;
-                    lbl4P.Invalidate();
-                    btnCancel4P.Visible = true;
-                    break;
-                default:
-                    break;
+                MessageBox.Show($"UI 요소를 찾을 수 없습니다: btnSelect{playerNumber}P, lbl{playerNumber}P, btnCancel{playerNumber}P", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            if (selectedCharacters.Count == 4)
-            {
-                btnJoin.Visible = true;
-                btnJoin.Enabled = true;
-            }
-            else
-            {
-                btnJoin.Visible = false;
-                btnJoin.Enabled = false;
-            }
+
+            pictureBox.BackgroundImage = Image.FromFile(imagePath);
+            label.Text = selectedData.Name;
+            label.Invalidate();
+            cancelButton.Visible = true;
+            btnJoin.Visible = btnJoin.Enabled = selectedCharacters.Count == 4;
         }
 
         private void btnJoin_Click(object sender, EventArgs e)
