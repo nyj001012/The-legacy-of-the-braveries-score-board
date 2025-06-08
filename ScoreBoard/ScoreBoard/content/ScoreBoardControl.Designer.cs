@@ -31,7 +31,28 @@
             playerContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             playerList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             playerScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            pn1P = new ScoreBoard.controls.DoubleBufferedPanel();
+            pn2P = new ScoreBoard.controls.DoubleBufferedPanel();
+            pn3P = new ScoreBoard.controls.DoubleBufferedPanel();
+            pn4P = new ScoreBoard.controls.DoubleBufferedPanel();
+            doubleBufferedPanel1 = new ScoreBoard.controls.DoubleBufferedPanel();
+            lbl1P = new ScoreBoard.controls.GradientLabel();
+            lbl2P = new ScoreBoard.controls.GradientLabel();
+            doubleBufferedPanel2 = new ScoreBoard.controls.DoubleBufferedPanel();
+            gradientLabel2 = new ScoreBoard.controls.GradientLabel();
+            doubleBufferedPanel3 = new ScoreBoard.controls.DoubleBufferedPanel();
+            gradientLabel3 = new ScoreBoard.controls.GradientLabel();
+            doubleBufferedPanel4 = new ScoreBoard.controls.DoubleBufferedPanel();
             playerContainer.SuspendLayout();
+            playerList.SuspendLayout();
+            pn1P.SuspendLayout();
+            pn2P.SuspendLayout();
+            pn3P.SuspendLayout();
+            pn4P.SuspendLayout();
+            doubleBufferedPanel1.SuspendLayout();
+            doubleBufferedPanel2.SuspendLayout();
+            doubleBufferedPanel3.SuspendLayout();
+            doubleBufferedPanel4.SuspendLayout();
             SuspendLayout();
             // 
             // playerContainer
@@ -48,8 +69,13 @@
             // 
             playerList.BorderColor = Color.Transparent;
             playerList.BorderThickness = 0;
+            playerList.Controls.Add(pn1P);
+            playerList.Controls.Add(pn2P);
+            playerList.Controls.Add(pn3P);
+            playerList.Controls.Add(pn4P);
             playerList.Location = new Point(0, 0);
             playerList.Name = "playerList";
+            playerList.Padding = new Padding(15);
             playerList.Size = new Size(600, 980);
             playerList.TabIndex = 1;
             // 
@@ -95,6 +121,130 @@
             playerScrollBar.Timer_RGB = 300;
             playerScrollBar.Value = 0;
             // 
+            // pn1P
+            // 
+            pn1P.Controls.Add(doubleBufferedPanel1);
+            pn1P.Location = new Point(30, 30);
+            pn1P.Margin = new Padding(15, 15, 0, 15);
+            pn1P.Name = "pn1P";
+            pn1P.Size = new Size(538, 245);
+            pn1P.TabIndex = 0;
+            // 
+            // pn2P
+            // 
+            pn2P.Controls.Add(doubleBufferedPanel2);
+            pn2P.Location = new Point(30, 315);
+            pn2P.Margin = new Padding(15, 25, 3, 3);
+            pn2P.Name = "pn2P";
+            pn2P.Size = new Size(505, 200);
+            pn2P.TabIndex = 1;
+            // 
+            // pn3P
+            // 
+            pn3P.Controls.Add(doubleBufferedPanel3);
+            pn3P.Location = new Point(30, 543);
+            pn3P.Margin = new Padding(15, 25, 3, 3);
+            pn3P.Name = "pn3P";
+            pn3P.Size = new Size(505, 200);
+            pn3P.TabIndex = 2;
+            // 
+            // pn4P
+            // 
+            pn4P.Controls.Add(doubleBufferedPanel4);
+            pn4P.Location = new Point(30, 771);
+            pn4P.Margin = new Padding(15, 25, 3, 3);
+            pn4P.Name = "pn4P";
+            pn4P.Size = new Size(505, 200);
+            pn4P.TabIndex = 3;
+            // 
+            // doubleBufferedPanel1
+            // 
+            doubleBufferedPanel1.Controls.Add(lbl1P);
+            doubleBufferedPanel1.Location = new Point(0, 0);
+            doubleBufferedPanel1.Margin = new Padding(0);
+            doubleBufferedPanel1.Name = "doubleBufferedPanel1";
+            doubleBufferedPanel1.Size = new Size(80, 245);
+            doubleBufferedPanel1.TabIndex = 0;
+            // 
+            // lbl1P
+            // 
+            lbl1P.BackColor = Color.Transparent;
+            lbl1P.Dock = DockStyle.Fill;
+            lbl1P.Font = new Font("Danjo-bold", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl1P.GradientEnd = Color.FromArgb(107, 89, 50);
+            lbl1P.GradientStart = Color.FromArgb(209, 162, 97);
+            lbl1P.Location = new Point(0, 0);
+            lbl1P.Name = "lbl1P";
+            lbl1P.Size = new Size(80, 245);
+            lbl1P.TabIndex = 0;
+            lbl1P.Text = "1P";
+            // 
+            // lbl2P
+            // 
+            lbl2P.BackColor = Color.Transparent;
+            lbl2P.Dock = DockStyle.Fill;
+            lbl2P.Font = new Font("Danjo-bold", 27.7499962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl2P.GradientEnd = Color.FromArgb(107, 89, 50);
+            lbl2P.GradientStart = Color.FromArgb(209, 162, 97);
+            lbl2P.Location = new Point(0, 0);
+            lbl2P.Name = "lbl2P";
+            lbl2P.Size = new Size(80, 200);
+            lbl2P.TabIndex = 0;
+            lbl2P.Text = "2P";
+            // 
+            // doubleBufferedPanel2
+            // 
+            doubleBufferedPanel2.Controls.Add(lbl2P);
+            doubleBufferedPanel2.Location = new Point(0, 0);
+            doubleBufferedPanel2.Margin = new Padding(0);
+            doubleBufferedPanel2.Name = "doubleBufferedPanel2";
+            doubleBufferedPanel2.Size = new Size(80, 200);
+            doubleBufferedPanel2.TabIndex = 1;
+            // 
+            // gradientLabel2
+            // 
+            gradientLabel2.BackColor = Color.Transparent;
+            gradientLabel2.Dock = DockStyle.Fill;
+            gradientLabel2.Font = new Font("Danjo-bold", 27.7499962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gradientLabel2.GradientEnd = Color.FromArgb(107, 89, 50);
+            gradientLabel2.GradientStart = Color.FromArgb(209, 162, 97);
+            gradientLabel2.Location = new Point(0, 0);
+            gradientLabel2.Name = "gradientLabel2";
+            gradientLabel2.Size = new Size(80, 200);
+            gradientLabel2.TabIndex = 0;
+            gradientLabel2.Text = "3P";
+            // 
+            // doubleBufferedPanel3
+            // 
+            doubleBufferedPanel3.Controls.Add(gradientLabel2);
+            doubleBufferedPanel3.Location = new Point(0, 0);
+            doubleBufferedPanel3.Margin = new Padding(0);
+            doubleBufferedPanel3.Name = "doubleBufferedPanel3";
+            doubleBufferedPanel3.Size = new Size(80, 200);
+            doubleBufferedPanel3.TabIndex = 2;
+            // 
+            // gradientLabel3
+            // 
+            gradientLabel3.BackColor = Color.Transparent;
+            gradientLabel3.Dock = DockStyle.Fill;
+            gradientLabel3.Font = new Font("Danjo-bold", 27.7499962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gradientLabel3.GradientEnd = Color.FromArgb(107, 89, 50);
+            gradientLabel3.GradientStart = Color.FromArgb(209, 162, 97);
+            gradientLabel3.Location = new Point(0, 0);
+            gradientLabel3.Name = "gradientLabel3";
+            gradientLabel3.Size = new Size(80, 200);
+            gradientLabel3.TabIndex = 0;
+            gradientLabel3.Text = "4P";
+            // 
+            // doubleBufferedPanel4
+            // 
+            doubleBufferedPanel4.Controls.Add(gradientLabel3);
+            doubleBufferedPanel4.Location = new Point(0, 0);
+            doubleBufferedPanel4.Margin = new Padding(0);
+            doubleBufferedPanel4.Name = "doubleBufferedPanel4";
+            doubleBufferedPanel4.Size = new Size(80, 200);
+            doubleBufferedPanel4.TabIndex = 2;
+            // 
             // ScoreBoardControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -105,6 +255,15 @@
             Name = "ScoreBoardControl";
             Size = new Size(1920, 1080);
             playerContainer.ResumeLayout(false);
+            playerList.ResumeLayout(false);
+            pn1P.ResumeLayout(false);
+            pn2P.ResumeLayout(false);
+            pn3P.ResumeLayout(false);
+            pn4P.ResumeLayout(false);
+            doubleBufferedPanel1.ResumeLayout(false);
+            doubleBufferedPanel2.ResumeLayout(false);
+            doubleBufferedPanel3.ResumeLayout(false);
+            doubleBufferedPanel4.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -113,5 +272,17 @@
         private controls.DoubleBufferedPanel playerContainer;
         private ReaLTaiizor.Controls.CyberScrollBar playerScrollBar;
         private controls.CustomFlowLayoutPanel playerList;
+        private controls.DoubleBufferedPanel pn1P;
+        private controls.DoubleBufferedPanel pn2P;
+        private controls.DoubleBufferedPanel pn3P;
+        private controls.DoubleBufferedPanel pn4P;
+        private controls.DoubleBufferedPanel doubleBufferedPanel1;
+        private controls.GradientLabel lbl1P;
+        private controls.DoubleBufferedPanel doubleBufferedPanel2;
+        private controls.GradientLabel lbl2P;
+        private controls.DoubleBufferedPanel doubleBufferedPanel3;
+        private controls.GradientLabel gradientLabel2;
+        private controls.DoubleBufferedPanel doubleBufferedPanel4;
+        private controls.GradientLabel gradientLabel3;
     }
 }
