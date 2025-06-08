@@ -32,6 +32,7 @@
             playerList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             pn1P = new ScoreBoard.controls.DoubleBufferedPanel();
             pn1PInform = new ScoreBoard.controls.DoubleBufferedPanel();
+            healthBar2 = new ScoreBoard.controls.HealthBar();
             fpn1P = new ScoreBoard.controls.CustomFlowLayoutPanel();
             fpn1PStatus = new ScoreBoard.controls.CustomFlowLayoutPanel();
             fpn1PArtifact = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -100,6 +101,7 @@
             // 
             // pn1PInform
             // 
+            pn1PInform.Controls.Add(healthBar2);
             pn1PInform.Controls.Add(fpn1P);
             pn1PInform.Controls.Add(pb1PLv);
             pn1PInform.Controls.Add(lbl1PName);
@@ -108,6 +110,26 @@
             pn1PInform.Name = "pn1PInform";
             pn1PInform.Size = new Size(449, 245);
             pn1PInform.TabIndex = 1;
+            // 
+            // healthBar2
+            // 
+            healthBar2.BackColor = Color.Transparent;
+            healthBar2.BorderColor = Color.FromArgb(125, 245, 245, 245);
+            healthBar2.BorderThickness = 3F;
+            healthBar2.CornerRadius = 15;
+            healthBar2.Font = new Font("Danjo-bold", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            healthBar2.Health = 70;
+            healthBar2.HealthColor = Color.FromArgb(119, 185, 69);
+            healthBar2.Location = new Point(3, 132);
+            healthBar2.MaxValue = 100;
+            healthBar2.Name = "healthBar2";
+            healthBar2.Shield = 30;
+            healthBar2.ShieldColor = Color.FromArgb(245, 245, 245);
+            healthBar2.Size = new Size(440, 29);
+            healthBar2.TabIndex = 4;
+            healthBar2.Text = "healthBar2";
+            healthBar2.TextColor = Color.FromArgb(245, 245, 245);
+            healthBar2.TextVisible = true;
             // 
             // fpn1P
             // 
@@ -374,5 +396,6 @@
         private controls.CustomFlowLayoutPanel fpn1P;
         private controls.CustomFlowLayoutPanel fpn1PStatus;
         private controls.CustomFlowLayoutPanel fpn1PArtifact;
+        private controls.HealthBar healthBar2;
     }
 }
