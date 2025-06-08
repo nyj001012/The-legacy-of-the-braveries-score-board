@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScoreBoard.data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace ScoreBoard.content
 {
     public partial class ScoreBoardControl : UserControl
     {
-        public ScoreBoardControl()
+        public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)
         {
             InitializeComponent();
         }

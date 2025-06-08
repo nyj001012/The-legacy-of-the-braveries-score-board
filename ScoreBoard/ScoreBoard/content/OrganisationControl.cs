@@ -15,6 +15,7 @@ namespace ScoreBoard.content
 {
     public partial class OrganisationControl : UserControl
     {
+        public event EventHandler<(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)>? RequestScoreBoard; // 점수판 요청 이벤트
         Dictionary<string, CorpsMember> selectedCharacters = [];
         List<(string id, string name, ushort count)> selectedMonsters = [];
 
@@ -118,6 +119,7 @@ namespace ScoreBoard.content
             {
                 selectedMonsters = selectMonsterModal.currentSelectedMonsters;
                 selectMonsterModal.Close();
+                RequestScoreBoard?.Invoke(this, (selectedCharacters, selectedMonsters));
             }
             // TODO => 점수판 폼 호출 (selectedCharacters와 selectedMonsters 파라미터로 설정)
         }
