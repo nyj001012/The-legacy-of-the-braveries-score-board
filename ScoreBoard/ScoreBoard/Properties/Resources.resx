@@ -173,4 +173,7 @@
   <data name="BtnMore" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\더보기 버튼.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BtnDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\행동 완료 버튼 이미지.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

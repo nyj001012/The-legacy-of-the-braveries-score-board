@@ -82,8 +82,8 @@
             transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
             fpnStatusDetail = new ScoreBoard.controls.CustomFlowLayoutPanel();
             doubleBufferedPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            transparentTextLabel5 = new ScoreBoard.controls.TransparentTextLabel();
             transparentTextLabel6 = new ScoreBoard.controls.TransparentTextLabel();
+            transparentTextLabel5 = new ScoreBoard.controls.TransparentTextLabel();
             doubleBufferedPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel4 = new ScoreBoard.controls.TransparentTextLabel();
             pictureBox2 = new PictureBox();
@@ -98,7 +98,6 @@
             pictureBox4 = new PictureBox();
             transparentTextLabel13 = new ScoreBoard.controls.TransparentTextLabel();
             transparentTextLabel14 = new ScoreBoard.controls.TransparentTextLabel();
-            detailScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             customFlowLayoutPanel2 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel8 = new ScoreBoard.controls.TransparentTextLabel();
             transparentTextLabel9 = new ScoreBoard.controls.TransparentTextLabel();
@@ -113,8 +112,17 @@
             pictureBox8 = new PictureBox();
             pictureBox9 = new PictureBox();
             doubleBufferedPanel6 = new ScoreBoard.controls.DoubleBufferedPanel();
-            transparentTextLabel16 = new ScoreBoard.controls.TransparentTextLabel();
             richTextBox1 = new RichTextBox();
+            transparentTextLabel16 = new ScoreBoard.controls.TransparentTextLabel();
+            detailScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            enemyContainer = new ScoreBoard.controls.DoubleBufferedPanel();
+            enemyList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            doubleBufferedPanel11 = new ScoreBoard.controls.DoubleBufferedPanel();
+            healthBar2 = new ScoreBoard.controls.HealthBar();
+            customFlowLayoutPanel9 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            gradientLabel4 = new ScoreBoard.controls.GradientLabel();
+            enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            pictureBox10 = new PictureBox();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -156,6 +164,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
             doubleBufferedPanel6.SuspendLayout();
+            enemyContainer.SuspendLayout();
+            enemyList.SuspendLayout();
+            doubleBufferedPanel11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
             SuspendLayout();
             // 
             // playerContainer
@@ -166,7 +178,7 @@
             playerContainer.Location = new Point(0, 112);
             playerContainer.Margin = new Padding(0);
             playerContainer.Name = "playerContainer";
-            playerContainer.Size = new Size(600, 968);
+            playerContainer.Size = new Size(600, 930);
             playerContainer.TabIndex = 0;
             // 
             // playerList
@@ -682,7 +694,7 @@
             playerScrollBar.RGB = false;
             playerScrollBar.Rounding = true;
             playerScrollBar.RoundingInt = 7;
-            playerScrollBar.Size = new Size(26, 968);
+            playerScrollBar.Size = new Size(26, 930);
             playerScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             playerScrollBar.TabIndex = 0;
             playerScrollBar.Tag = "Cyber";
@@ -886,19 +898,6 @@
             doubleBufferedPanel4.Size = new Size(599, 45);
             doubleBufferedPanel4.TabIndex = 2;
             // 
-            // transparentTextLabel5
-            // 
-            transparentTextLabel5.AutoSize = true;
-            transparentTextLabel5.BackColor = Color.Transparent;
-            transparentTextLabel5.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel5.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel5.Location = new Point(167, 0);
-            transparentTextLabel5.Margin = new Padding(0);
-            transparentTextLabel5.Name = "transparentTextLabel5";
-            transparentTextLabel5.Size = new Size(40, 42);
-            transparentTextLabel5.TabIndex = 1;
-            transparentTextLabel5.Text = "2";
-            // 
             // transparentTextLabel6
             // 
             transparentTextLabel6.AutoSize = true;
@@ -911,6 +910,19 @@
             transparentTextLabel6.Size = new Size(167, 42);
             transparentTextLabel6.TabIndex = 0;
             transparentTextLabel6.Text = "이동속도:";
+            // 
+            // transparentTextLabel5
+            // 
+            transparentTextLabel5.AutoSize = true;
+            transparentTextLabel5.BackColor = Color.Transparent;
+            transparentTextLabel5.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel5.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel5.Location = new Point(167, 0);
+            transparentTextLabel5.Margin = new Padding(0);
+            transparentTextLabel5.Name = "transparentTextLabel5";
+            transparentTextLabel5.Size = new Size(40, 42);
+            transparentTextLabel5.TabIndex = 1;
+            transparentTextLabel5.Text = "2";
             // 
             // doubleBufferedPanel3
             // 
@@ -1091,49 +1103,6 @@
             transparentTextLabel14.TabIndex = 5;
             transparentTextLabel14.Text = "{2}";
             // 
-            // detailScrollBar
-            // 
-            detailScrollBar.Alpha = 50;
-            detailScrollBar.BackColor = Color.Transparent;
-            detailScrollBar.Background = true;
-            detailScrollBar.Background_WidthPen = 3F;
-            detailScrollBar.BackgroundPen = true;
-            detailScrollBar.ColorBackground = Color.FromArgb(37, 52, 68);
-            detailScrollBar.ColorBackground_1 = Color.FromArgb(37, 52, 68);
-            detailScrollBar.ColorBackground_2 = Color.FromArgb(41, 63, 86);
-            detailScrollBar.ColorBackground_Pen = Color.FromArgb(29, 200, 238);
-            detailScrollBar.ColorBackground_Value_1 = Color.FromArgb(28, 200, 238);
-            detailScrollBar.ColorBackground_Value_2 = Color.FromArgb(100, 208, 232);
-            detailScrollBar.ColorLighting = Color.FromArgb(29, 200, 238);
-            detailScrollBar.ColorPen_1 = Color.FromArgb(37, 52, 68);
-            detailScrollBar.ColorPen_2 = Color.FromArgb(41, 63, 86);
-            detailScrollBar.ColorScrollBar = Color.FromArgb(29, 200, 238);
-            detailScrollBar.ColorScrollBar_Transparency = 255;
-            detailScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            detailScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
-            detailScrollBar.Lighting = false;
-            detailScrollBar.LinearGradient_Background = false;
-            detailScrollBar.LinearGradient_Value = false;
-            detailScrollBar.LinearGradientPen = false;
-            detailScrollBar.Location = new Point(694, 0);
-            detailScrollBar.Margin = new Padding(0);
-            detailScrollBar.Maximum = 100;
-            detailScrollBar.Minimum = 0;
-            detailScrollBar.Name = "detailScrollBar";
-            detailScrollBar.OrientationValue = Orientation.Vertical;
-            detailScrollBar.PenWidth = 10;
-            detailScrollBar.RGB = false;
-            detailScrollBar.Rounding = true;
-            detailScrollBar.RoundingInt = 7;
-            detailScrollBar.Size = new Size(26, 930);
-            detailScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            detailScrollBar.TabIndex = 0;
-            detailScrollBar.Tag = "Cyber";
-            detailScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            detailScrollBar.ThumbSize = 60;
-            detailScrollBar.Timer_RGB = 300;
-            detailScrollBar.Value = 0;
-            // 
             // customFlowLayoutPanel2
             // 
             customFlowLayoutPanel2.BorderColor = Color.Transparent;
@@ -1291,6 +1260,15 @@
             doubleBufferedPanel6.Size = new Size(599, 45);
             doubleBufferedPanel6.TabIndex = 12;
             // 
+            // richTextBox1
+            // 
+            richTextBox1.BorderStyle = BorderStyle.None;
+            richTextBox1.Location = new Point(86, 0);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(513, 45);
+            richTextBox1.TabIndex = 1;
+            richTextBox1.Text = "";
+            // 
             // transparentTextLabel16
             // 
             transparentTextLabel16.AutoSize = true;
@@ -1304,14 +1282,184 @@
             transparentTextLabel16.TabIndex = 0;
             transparentTextLabel16.Text = "기타:";
             // 
-            // richTextBox1
+            // detailScrollBar
             // 
-            richTextBox1.BorderStyle = BorderStyle.None;
-            richTextBox1.Location = new Point(86, 0);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(513, 45);
-            richTextBox1.TabIndex = 1;
-            richTextBox1.Text = "";
+            detailScrollBar.Alpha = 50;
+            detailScrollBar.BackColor = Color.Transparent;
+            detailScrollBar.Background = true;
+            detailScrollBar.Background_WidthPen = 3F;
+            detailScrollBar.BackgroundPen = true;
+            detailScrollBar.ColorBackground = Color.FromArgb(37, 52, 68);
+            detailScrollBar.ColorBackground_1 = Color.FromArgb(37, 52, 68);
+            detailScrollBar.ColorBackground_2 = Color.FromArgb(41, 63, 86);
+            detailScrollBar.ColorBackground_Pen = Color.FromArgb(29, 200, 238);
+            detailScrollBar.ColorBackground_Value_1 = Color.FromArgb(28, 200, 238);
+            detailScrollBar.ColorBackground_Value_2 = Color.FromArgb(100, 208, 232);
+            detailScrollBar.ColorLighting = Color.FromArgb(29, 200, 238);
+            detailScrollBar.ColorPen_1 = Color.FromArgb(37, 52, 68);
+            detailScrollBar.ColorPen_2 = Color.FromArgb(41, 63, 86);
+            detailScrollBar.ColorScrollBar = Color.FromArgb(29, 200, 238);
+            detailScrollBar.ColorScrollBar_Transparency = 255;
+            detailScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            detailScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
+            detailScrollBar.Lighting = false;
+            detailScrollBar.LinearGradient_Background = false;
+            detailScrollBar.LinearGradient_Value = false;
+            detailScrollBar.LinearGradientPen = false;
+            detailScrollBar.Location = new Point(694, 0);
+            detailScrollBar.Margin = new Padding(0);
+            detailScrollBar.Maximum = 100;
+            detailScrollBar.Minimum = 0;
+            detailScrollBar.Name = "detailScrollBar";
+            detailScrollBar.OrientationValue = Orientation.Vertical;
+            detailScrollBar.PenWidth = 10;
+            detailScrollBar.RGB = false;
+            detailScrollBar.Rounding = true;
+            detailScrollBar.RoundingInt = 7;
+            detailScrollBar.Size = new Size(26, 930);
+            detailScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            detailScrollBar.TabIndex = 0;
+            detailScrollBar.Tag = "Cyber";
+            detailScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            detailScrollBar.ThumbSize = 60;
+            detailScrollBar.Timer_RGB = 300;
+            detailScrollBar.Value = 0;
+            // 
+            // enemyContainer
+            // 
+            enemyContainer.BackColor = Color.Transparent;
+            enemyContainer.Controls.Add(enemyList);
+            enemyContainer.Controls.Add(enemyScrollBar);
+            enemyContainer.Location = new Point(1323, 112);
+            enemyContainer.Margin = new Padding(0);
+            enemyContainer.Name = "enemyContainer";
+            enemyContainer.Size = new Size(600, 786);
+            enemyContainer.TabIndex = 7;
+            // 
+            // enemyList
+            // 
+            enemyList.BorderColor = Color.Transparent;
+            enemyList.BorderThickness = 0;
+            enemyList.Controls.Add(doubleBufferedPanel11);
+            enemyList.Location = new Point(0, 0);
+            enemyList.Margin = new Padding(0);
+            enemyList.Name = "enemyList";
+            enemyList.Padding = new Padding(25, 35, 25, 35);
+            enemyList.Size = new Size(600, 786);
+            enemyList.TabIndex = 1;
+            // 
+            // doubleBufferedPanel11
+            // 
+            doubleBufferedPanel11.Controls.Add(healthBar2);
+            doubleBufferedPanel11.Controls.Add(customFlowLayoutPanel9);
+            doubleBufferedPanel11.Controls.Add(gradientLabel4);
+            doubleBufferedPanel11.Location = new Point(25, 35);
+            doubleBufferedPanel11.Margin = new Padding(0);
+            doubleBufferedPanel11.Name = "doubleBufferedPanel11";
+            doubleBufferedPanel11.Size = new Size(546, 172);
+            doubleBufferedPanel11.TabIndex = 3;
+            // 
+            // healthBar2
+            // 
+            healthBar2.BackColor = Color.Transparent;
+            healthBar2.BorderColor = Color.FromArgb(75, 245, 245, 245);
+            healthBar2.BorderThickness = 3F;
+            healthBar2.CornerRadius = 15;
+            healthBar2.Font = new Font("Danjo-bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            healthBar2.Health = -1;
+            healthBar2.HealthColor = Color.FromArgb(145, 145, 145);
+            healthBar2.Location = new Point(0, 121);
+            healthBar2.Margin = new Padding(0, 15, 0, 15);
+            healthBar2.MaxValue = -1;
+            healthBar2.Name = "healthBar2";
+            healthBar2.Shield = 0;
+            healthBar2.ShieldColor = Color.FromArgb(245, 245, 245);
+            healthBar2.Size = new Size(545, 34);
+            healthBar2.TabIndex = 4;
+            healthBar2.Text = "healthBar1";
+            healthBar2.TextColor = Color.FromArgb(245, 245, 245);
+            healthBar2.TextVisible = true;
+            // 
+            // customFlowLayoutPanel9
+            // 
+            customFlowLayoutPanel9.BorderColor = Color.Transparent;
+            customFlowLayoutPanel9.BorderThickness = 0;
+            customFlowLayoutPanel9.Location = new Point(1, 61);
+            customFlowLayoutPanel9.Margin = new Padding(0, 15, 0, 0);
+            customFlowLayoutPanel9.Name = "customFlowLayoutPanel9";
+            customFlowLayoutPanel9.Size = new Size(545, 45);
+            customFlowLayoutPanel9.TabIndex = 2;
+            // 
+            // gradientLabel4
+            // 
+            gradientLabel4.BackColor = Color.Transparent;
+            gradientLabel4.Font = new Font("Danjo-bold", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gradientLabel4.GradientEnd = Color.WhiteSmoke;
+            gradientLabel4.GradientStart = Color.WhiteSmoke;
+            gradientLabel4.Location = new Point(1, 1);
+            gradientLabel4.Margin = new Padding(0, 0, 15, 0);
+            gradientLabel4.Name = "gradientLabel4";
+            gradientLabel4.RightToLeft = RightToLeft.No;
+            gradientLabel4.Size = new Size(544, 45);
+            gradientLabel4.TabIndex = 0;
+            gradientLabel4.Text = "미확인";
+            gradientLabel4.TextAlign = ContentAlignment.BottomLeft;
+            // 
+            // enemyScrollBar
+            // 
+            enemyScrollBar.Alpha = 50;
+            enemyScrollBar.BackColor = Color.Transparent;
+            enemyScrollBar.Background = true;
+            enemyScrollBar.Background_WidthPen = 3F;
+            enemyScrollBar.BackgroundPen = false;
+            enemyScrollBar.ColorBackground = Color.Transparent;
+            enemyScrollBar.ColorBackground_1 = Color.Transparent;
+            enemyScrollBar.ColorBackground_2 = Color.Transparent;
+            enemyScrollBar.ColorBackground_Pen = Color.Transparent;
+            enemyScrollBar.ColorBackground_Value_1 = Color.Transparent;
+            enemyScrollBar.ColorBackground_Value_2 = Color.Transparent;
+            enemyScrollBar.ColorLighting = Color.Transparent;
+            enemyScrollBar.ColorPen_1 = Color.Transparent;
+            enemyScrollBar.ColorPen_2 = Color.Transparent;
+            enemyScrollBar.ColorScrollBar = Color.Transparent;
+            enemyScrollBar.ColorScrollBar_Transparency = 255;
+            enemyScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            enemyScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
+            enemyScrollBar.Lighting = false;
+            enemyScrollBar.LinearGradient_Background = false;
+            enemyScrollBar.LinearGradient_Value = false;
+            enemyScrollBar.LinearGradientPen = false;
+            enemyScrollBar.Location = new Point(571, 0);
+            enemyScrollBar.Margin = new Padding(0);
+            enemyScrollBar.Maximum = 100;
+            enemyScrollBar.Minimum = 0;
+            enemyScrollBar.Name = "enemyScrollBar";
+            enemyScrollBar.OrientationValue = Orientation.Vertical;
+            enemyScrollBar.PenWidth = 10;
+            enemyScrollBar.RGB = false;
+            enemyScrollBar.Rounding = true;
+            enemyScrollBar.RoundingInt = 7;
+            enemyScrollBar.Size = new Size(26, 786);
+            enemyScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            enemyScrollBar.TabIndex = 0;
+            enemyScrollBar.Tag = "Cyber";
+            enemyScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            enemyScrollBar.ThumbSize = 60;
+            enemyScrollBar.Timer_RGB = 300;
+            enemyScrollBar.Value = 0;
+            // 
+            // pictureBox10
+            // 
+            pictureBox10.BackColor = Color.Transparent;
+            pictureBox10.BackgroundImage = Properties.Resources.BtnDone;
+            pictureBox10.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox10.Cursor = Cursors.Hand;
+            pictureBox10.Location = new Point(1506, 911);
+            pictureBox10.Margin = new Padding(0);
+            pictureBox10.Name = "pictureBox10";
+            pictureBox10.Size = new Size(244, 110);
+            pictureBox10.TabIndex = 8;
+            pictureBox10.TabStop = false;
             // 
             // ScoreBoardControl
             // 
@@ -1319,6 +1467,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.ImgInGameBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
+            Controls.Add(pictureBox10);
+            Controls.Add(enemyContainer);
             Controls.Add(doubleBufferedPanel1);
             Controls.Add(playerContainer);
             Controls.Add(detailContainer);
@@ -1378,6 +1528,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
             doubleBufferedPanel6.ResumeLayout(false);
             doubleBufferedPanel6.PerformLayout();
+            enemyContainer.ResumeLayout(false);
+            enemyList.ResumeLayout(false);
+            doubleBufferedPanel11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
             ResumeLayout(false);
         }
 
@@ -1470,5 +1624,13 @@
         private controls.DoubleBufferedPanel doubleBufferedPanel6;
         private controls.TransparentTextLabel transparentTextLabel16;
         private RichTextBox richTextBox1;
+        private controls.DoubleBufferedPanel enemyContainer;
+        private controls.CustomFlowLayoutPanel enemyList;
+        private ReaLTaiizor.Controls.CyberScrollBar enemyScrollBar;
+        private controls.DoubleBufferedPanel doubleBufferedPanel11;
+        private controls.HealthBar healthBar2;
+        private controls.CustomFlowLayoutPanel customFlowLayoutPanel9;
+        private controls.GradientLabel gradientLabel4;
+        private PictureBox pictureBox10;
     }
 }

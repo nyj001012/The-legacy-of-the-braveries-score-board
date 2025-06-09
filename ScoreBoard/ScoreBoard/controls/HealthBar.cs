@@ -104,7 +104,9 @@ namespace ScoreBoard.controls
             // 텍스트 표시
             if (TextVisible)
             {
-                string text = $"{Health}" + (Shield > 0 ? $" (+{Shield})" : "") + $" / {MaxValue}";
+                string text = (Health >= 0 ? Health : "?")
+                            + (Shield > 0 ? $" (+{Shield})" : "") + " / "
+                            + (MaxValue >= 0 ? MaxValue : "?");
                 SizeF textSize = e.Graphics.MeasureString(text, Font);
                 PointF textPos = new PointF((width - textSize.Width) / 2, (height - textSize.Height) / 2);
 
