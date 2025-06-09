@@ -68,9 +68,16 @@
             lbl4PName = new ScoreBoard.controls.GradientLabel();
             playerScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             doubleBufferedPanel1 = new ScoreBoard.controls.DoubleBufferedPanel();
-            lblTurn = new ScoreBoard.controls.GradientLabel();
-            pbWeather = new PictureBox();
             lblWeather = new ScoreBoard.controls.GradientLabel();
+            pbWeather = new PictureBox();
+            lblTurn = new ScoreBoard.controls.GradientLabel();
+            detailContainer = new ScoreBoard.controls.DoubleBufferedPanel();
+            detailList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            detailScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            pnBasicStatus = new ScoreBoard.controls.DoubleBufferedPanel();
+            lblName = new ScoreBoard.controls.TransparentTextLabel();
+            lblDice1 = new ScoreBoard.controls.TransparentTextLabel();
+            lblDiceCritical = new ScoreBoard.controls.TransparentTextLabel();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -91,6 +98,9 @@
             ((System.ComponentModel.ISupportInitialize)pb4PLv).BeginInit();
             doubleBufferedPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbWeather).BeginInit();
+            detailContainer.SuspendLayout();
+            detailList.SuspendLayout();
+            pnBasicStatus.SuspendLayout();
             SuspendLayout();
             // 
             // playerContainer
@@ -638,6 +648,28 @@
             doubleBufferedPanel1.Size = new Size(1920, 112);
             doubleBufferedPanel1.TabIndex = 1;
             // 
+            // lblWeather
+            // 
+            lblWeather.BackColor = Color.Transparent;
+            lblWeather.Font = new Font("Danjo-bold", 30F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblWeather.GradientEnd = Color.FromArgb(107, 89, 50);
+            lblWeather.GradientStart = Color.FromArgb(209, 162, 97);
+            lblWeather.Location = new Point(1181, 25);
+            lblWeather.Name = "lblWeather";
+            lblWeather.Size = new Size(145, 70);
+            lblWeather.TabIndex = 2;
+            lblWeather.Text = "1";
+            lblWeather.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pbWeather
+            // 
+            pbWeather.Location = new Point(1083, 16);
+            pbWeather.Margin = new Padding(0, 0, 15, 0);
+            pbWeather.Name = "pbWeather";
+            pbWeather.Size = new Size(80, 80);
+            pbWeather.TabIndex = 1;
+            pbWeather.TabStop = false;
+            // 
             // lblTurn
             // 
             lblTurn.BackColor = Color.Transparent;
@@ -652,27 +684,126 @@
             lblTurn.Text = "1턴";
             lblTurn.TextAlign = ContentAlignment.BottomCenter;
             // 
-            // pbWeather
+            // detailContainer
             // 
-            pbWeather.Location = new Point(1083, 16);
-            pbWeather.Margin = new Padding(0, 0, 15, 0);
-            pbWeather.Name = "pbWeather";
-            pbWeather.Size = new Size(80, 80);
-            pbWeather.TabIndex = 1;
-            pbWeather.TabStop = false;
+            detailContainer.BackColor = Color.Transparent;
+            detailContainer.Controls.Add(detailList);
+            detailContainer.Controls.Add(detailScrollBar);
+            detailContainer.Location = new Point(603, 112);
+            detailContainer.Margin = new Padding(0);
+            detailContainer.Name = "detailContainer";
+            detailContainer.Size = new Size(750, 968);
+            detailContainer.TabIndex = 6;
             // 
-            // lblWeather
+            // detailList
             // 
-            lblWeather.BackColor = Color.Transparent;
-            lblWeather.Font = new Font("Danjo-bold", 30F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblWeather.GradientEnd = Color.FromArgb(107, 89, 50);
-            lblWeather.GradientStart = Color.FromArgb(209, 162, 97);
-            lblWeather.Location = new Point(1181, 25);
-            lblWeather.Name = "lblWeather";
-            lblWeather.Size = new Size(145, 70);
-            lblWeather.TabIndex = 2;
-            lblWeather.Text = "1";
-            lblWeather.TextAlign = ContentAlignment.MiddleLeft;
+            detailList.BackgroundImage = Properties.Resources.ImgDetail;
+            detailList.BackgroundImageLayout = ImageLayout.Stretch;
+            detailList.BorderColor = Color.Transparent;
+            detailList.BorderThickness = 0;
+            detailList.Controls.Add(pnBasicStatus);
+            detailList.Location = new Point(0, 0);
+            detailList.Margin = new Padding(0);
+            detailList.Name = "detailList";
+            detailList.Padding = new Padding(60, 120, 60, 60);
+            detailList.Size = new Size(750, 968);
+            detailList.TabIndex = 1;
+            // 
+            // detailScrollBar
+            // 
+            detailScrollBar.Alpha = 50;
+            detailScrollBar.BackColor = Color.Transparent;
+            detailScrollBar.Background = true;
+            detailScrollBar.Background_WidthPen = 3F;
+            detailScrollBar.BackgroundPen = true;
+            detailScrollBar.ColorBackground = Color.FromArgb(37, 52, 68);
+            detailScrollBar.ColorBackground_1 = Color.FromArgb(37, 52, 68);
+            detailScrollBar.ColorBackground_2 = Color.FromArgb(41, 63, 86);
+            detailScrollBar.ColorBackground_Pen = Color.FromArgb(29, 200, 238);
+            detailScrollBar.ColorBackground_Value_1 = Color.FromArgb(28, 200, 238);
+            detailScrollBar.ColorBackground_Value_2 = Color.FromArgb(100, 208, 232);
+            detailScrollBar.ColorLighting = Color.FromArgb(29, 200, 238);
+            detailScrollBar.ColorPen_1 = Color.FromArgb(37, 52, 68);
+            detailScrollBar.ColorPen_2 = Color.FromArgb(41, 63, 86);
+            detailScrollBar.ColorScrollBar = Color.FromArgb(29, 200, 238);
+            detailScrollBar.ColorScrollBar_Transparency = 255;
+            detailScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            detailScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
+            detailScrollBar.Lighting = false;
+            detailScrollBar.LinearGradient_Background = false;
+            detailScrollBar.LinearGradient_Value = false;
+            detailScrollBar.LinearGradientPen = false;
+            detailScrollBar.Location = new Point(724, 0);
+            detailScrollBar.Margin = new Padding(0);
+            detailScrollBar.Maximum = 100;
+            detailScrollBar.Minimum = 0;
+            detailScrollBar.Name = "detailScrollBar";
+            detailScrollBar.OrientationValue = Orientation.Vertical;
+            detailScrollBar.PenWidth = 10;
+            detailScrollBar.RGB = false;
+            detailScrollBar.Rounding = true;
+            detailScrollBar.RoundingInt = 7;
+            detailScrollBar.Size = new Size(26, 968);
+            detailScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            detailScrollBar.TabIndex = 0;
+            detailScrollBar.Tag = "Cyber";
+            detailScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            detailScrollBar.ThumbSize = 60;
+            detailScrollBar.Timer_RGB = 300;
+            detailScrollBar.Value = 0;
+            // 
+            // pnBasicStatus
+            // 
+            pnBasicStatus.Controls.Add(lblDiceCritical);
+            pnBasicStatus.Controls.Add(lblDice1);
+            pnBasicStatus.Controls.Add(lblName);
+            pnBasicStatus.Location = new Point(60, 120);
+            pnBasicStatus.Margin = new Padding(0);
+            pnBasicStatus.Name = "pnBasicStatus";
+            pnBasicStatus.Size = new Size(630, 45);
+            pnBasicStatus.TabIndex = 0;
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.BackColor = Color.Transparent;
+            lblName.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblName.ForeColor = Color.FromArgb(255, 217, 0);
+            lblName.Location = new Point(2, 2);
+            lblName.Margin = new Padding(0, 0, 15, 0);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(275, 42);
+            lblName.TabIndex = 0;
+            lblName.Text = "1P 플레이어 이름";
+            lblName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblDice1
+            // 
+            lblDice1.AutoSize = true;
+            lblDice1.BackColor = Color.Transparent;
+            lblDice1.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDice1.ForeColor = Color.WhiteSmoke;
+            lblDice1.Location = new Point(543, 2);
+            lblDice1.Margin = new Padding(0);
+            lblDice1.Name = "lblDice1";
+            lblDice1.Size = new Size(41, 42);
+            lblDice1.TabIndex = 1;
+            lblDice1.Text = "3";
+            lblDice1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblDiceCritical
+            // 
+            lblDiceCritical.AutoSize = true;
+            lblDiceCritical.BackColor = Color.Transparent;
+            lblDiceCritical.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDiceCritical.ForeColor = Color.FromArgb(255, 217, 0);
+            lblDiceCritical.Location = new Point(589, 2);
+            lblDiceCritical.Margin = new Padding(0);
+            lblDiceCritical.Name = "lblDiceCritical";
+            lblDiceCritical.Size = new Size(41, 42);
+            lblDiceCritical.TabIndex = 2;
+            lblDiceCritical.Text = "4";
+            lblDiceCritical.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // ScoreBoardControl
             // 
@@ -682,6 +813,7 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             Controls.Add(doubleBufferedPanel1);
             Controls.Add(playerContainer);
+            Controls.Add(detailContainer);
             Name = "ScoreBoardControl";
             Size = new Size(1920, 1080);
             Load += ScoreBoardControl_Load;
@@ -705,6 +837,10 @@
             ((System.ComponentModel.ISupportInitialize)pb4PLv).EndInit();
             doubleBufferedPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbWeather).EndInit();
+            detailContainer.ResumeLayout(false);
+            detailList.ResumeLayout(false);
+            pnBasicStatus.ResumeLayout(false);
+            pnBasicStatus.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -753,5 +889,12 @@
         private controls.GradientLabel lblTurn;
         private PictureBox pbWeather;
         private controls.GradientLabel lblWeather;
+        private controls.DoubleBufferedPanel detailContainer;
+        private ReaLTaiizor.Controls.CyberScrollBar detailScrollBar;
+        private controls.CustomFlowLayoutPanel detailList;
+        private controls.DoubleBufferedPanel pnBasicStatus;
+        private controls.TransparentTextLabel lblName;
+        private controls.TransparentTextLabel lblDice1;
+        private controls.TransparentTextLabel lblDiceCritical;
     }
 }
