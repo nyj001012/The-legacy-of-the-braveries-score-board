@@ -113,6 +113,16 @@ namespace ScoreBoard.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap BtnMore {
+            get {
+                object obj = ResourceManager.GetObject("BtnMore", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap BtnOrganise {
             get {
                 object obj = ResourceManager.GetObject("BtnOrganise", resourceCulture);
