@@ -28,7 +28,7 @@ namespace ScoreBoard.forms
         public MainForm()
         {
             InitializeComponent();
-            this.Size = new Size(1920, 1080);
+            this.ClientSize = new Size(1920, 1080);
         }
 
         /*

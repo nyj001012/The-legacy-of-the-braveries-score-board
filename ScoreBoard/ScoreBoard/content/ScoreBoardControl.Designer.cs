@@ -68,9 +68,53 @@
             lbl4PName = new ScoreBoard.controls.GradientLabel();
             playerScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             doubleBufferedPanel1 = new ScoreBoard.controls.DoubleBufferedPanel();
-            lblTurn = new ScoreBoard.controls.GradientLabel();
-            pbWeather = new PictureBox();
             lblWeather = new ScoreBoard.controls.GradientLabel();
+            pbWeather = new PictureBox();
+            lblTurn = new ScoreBoard.controls.GradientLabel();
+            detailContainer = new ScoreBoard.controls.DoubleBufferedPanel();
+            detailList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            pnBasicStatus = new ScoreBoard.controls.DoubleBufferedPanel();
+            lblDiceCritical = new ScoreBoard.controls.TransparentTextLabel();
+            lblDice1 = new ScoreBoard.controls.TransparentTextLabel();
+            lblName = new ScoreBoard.controls.TransparentTextLabel();
+            doubleBufferedPanel2 = new ScoreBoard.controls.DoubleBufferedPanel();
+            transparentTextLabel2 = new ScoreBoard.controls.TransparentTextLabel();
+            transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
+            fpnStatusDetail = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            doubleBufferedPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            transparentTextLabel5 = new ScoreBoard.controls.TransparentTextLabel();
+            transparentTextLabel6 = new ScoreBoard.controls.TransparentTextLabel();
+            doubleBufferedPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            transparentTextLabel4 = new ScoreBoard.controls.TransparentTextLabel();
+            pictureBox2 = new PictureBox();
+            transparentTextLabel7 = new ScoreBoard.controls.TransparentTextLabel();
+            pictureBox1 = new PictureBox();
+            transparentTextLabel3 = new ScoreBoard.controls.TransparentTextLabel();
+            customFlowLayoutPanel1 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            transparentTextLabel10 = new ScoreBoard.controls.TransparentTextLabel();
+            pictureBox3 = new PictureBox();
+            transparentTextLabel11 = new ScoreBoard.controls.TransparentTextLabel();
+            transparentTextLabel12 = new ScoreBoard.controls.TransparentTextLabel();
+            pictureBox4 = new PictureBox();
+            transparentTextLabel13 = new ScoreBoard.controls.TransparentTextLabel();
+            transparentTextLabel14 = new ScoreBoard.controls.TransparentTextLabel();
+            detailScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            customFlowLayoutPanel2 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            transparentTextLabel8 = new ScoreBoard.controls.TransparentTextLabel();
+            transparentTextLabel9 = new ScoreBoard.controls.TransparentTextLabel();
+            customFlowLayoutPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            transparentTextLabel15 = new ScoreBoard.controls.TransparentTextLabel();
+            pictureBox5 = new PictureBox();
+            doubleBufferedPanel5 = new ScoreBoard.controls.DoubleBufferedPanel();
+            transparentTextLabel17 = new ScoreBoard.controls.TransparentTextLabel();
+            customFlowLayoutPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            pictureBox6 = new PictureBox();
+            pictureBox7 = new PictureBox();
+            pictureBox8 = new PictureBox();
+            pictureBox9 = new PictureBox();
+            doubleBufferedPanel6 = new ScoreBoard.controls.DoubleBufferedPanel();
+            transparentTextLabel16 = new ScoreBoard.controls.TransparentTextLabel();
+            richTextBox1 = new RichTextBox();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -91,6 +135,27 @@
             ((System.ComponentModel.ISupportInitialize)pb4PLv).BeginInit();
             doubleBufferedPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbWeather).BeginInit();
+            detailContainer.SuspendLayout();
+            detailList.SuspendLayout();
+            pnBasicStatus.SuspendLayout();
+            doubleBufferedPanel2.SuspendLayout();
+            doubleBufferedPanel4.SuspendLayout();
+            doubleBufferedPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            customFlowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            customFlowLayoutPanel2.SuspendLayout();
+            customFlowLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            doubleBufferedPanel5.SuspendLayout();
+            customFlowLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
+            doubleBufferedPanel6.SuspendLayout();
             SuspendLayout();
             // 
             // playerContainer
@@ -115,7 +180,7 @@
             playerList.Location = new Point(0, 0);
             playerList.Name = "playerList";
             playerList.Padding = new Padding(15, 35, 15, 35);
-            playerList.Size = new Size(600, 968);
+            playerList.Size = new Size(600, 930);
             playerList.TabIndex = 1;
             // 
             // pn1P
@@ -638,6 +703,28 @@
             doubleBufferedPanel1.Size = new Size(1920, 112);
             doubleBufferedPanel1.TabIndex = 1;
             // 
+            // lblWeather
+            // 
+            lblWeather.BackColor = Color.Transparent;
+            lblWeather.Font = new Font("Danjo-bold", 30F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblWeather.GradientEnd = Color.FromArgb(107, 89, 50);
+            lblWeather.GradientStart = Color.FromArgb(209, 162, 97);
+            lblWeather.Location = new Point(1181, 25);
+            lblWeather.Name = "lblWeather";
+            lblWeather.Size = new Size(145, 70);
+            lblWeather.TabIndex = 2;
+            lblWeather.Text = "1";
+            lblWeather.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pbWeather
+            // 
+            pbWeather.Location = new Point(1083, 16);
+            pbWeather.Margin = new Padding(0, 0, 15, 0);
+            pbWeather.Name = "pbWeather";
+            pbWeather.Size = new Size(80, 80);
+            pbWeather.TabIndex = 1;
+            pbWeather.TabStop = false;
+            // 
             // lblTurn
             // 
             lblTurn.BackColor = Color.Transparent;
@@ -652,27 +739,579 @@
             lblTurn.Text = "1턴";
             lblTurn.TextAlign = ContentAlignment.BottomCenter;
             // 
-            // pbWeather
+            // detailContainer
             // 
-            pbWeather.Location = new Point(1083, 16);
-            pbWeather.Margin = new Padding(0, 0, 15, 0);
-            pbWeather.Name = "pbWeather";
-            pbWeather.Size = new Size(80, 80);
-            pbWeather.TabIndex = 1;
-            pbWeather.TabStop = false;
+            detailContainer.BackColor = Color.Transparent;
+            detailContainer.Controls.Add(detailList);
+            detailContainer.Controls.Add(detailScrollBar);
+            detailContainer.Location = new Point(603, 112);
+            detailContainer.Margin = new Padding(0);
+            detailContainer.Name = "detailContainer";
+            detailContainer.Size = new Size(720, 930);
+            detailContainer.TabIndex = 6;
             // 
-            // lblWeather
+            // detailList
             // 
-            lblWeather.BackColor = Color.Transparent;
-            lblWeather.Font = new Font("Danjo-bold", 30F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblWeather.GradientEnd = Color.FromArgb(107, 89, 50);
-            lblWeather.GradientStart = Color.FromArgb(209, 162, 97);
-            lblWeather.Location = new Point(1181, 25);
-            lblWeather.Name = "lblWeather";
-            lblWeather.Size = new Size(145, 70);
-            lblWeather.TabIndex = 2;
-            lblWeather.Text = "1";
-            lblWeather.TextAlign = ContentAlignment.MiddleLeft;
+            detailList.BackgroundImage = Properties.Resources.ImgDetail;
+            detailList.BackgroundImageLayout = ImageLayout.Stretch;
+            detailList.BorderColor = Color.Transparent;
+            detailList.BorderThickness = 0;
+            detailList.Controls.Add(pnBasicStatus);
+            detailList.Controls.Add(doubleBufferedPanel2);
+            detailList.Controls.Add(fpnStatusDetail);
+            detailList.Controls.Add(doubleBufferedPanel4);
+            detailList.Controls.Add(doubleBufferedPanel3);
+            detailList.Controls.Add(customFlowLayoutPanel1);
+            detailList.Controls.Add(customFlowLayoutPanel2);
+            detailList.Controls.Add(customFlowLayoutPanel3);
+            detailList.Controls.Add(doubleBufferedPanel5);
+            detailList.Controls.Add(customFlowLayoutPanel4);
+            detailList.Controls.Add(doubleBufferedPanel6);
+            detailList.Location = new Point(0, 0);
+            detailList.Margin = new Padding(0);
+            detailList.Name = "detailList";
+            detailList.Padding = new Padding(60, 120, 60, 60);
+            detailList.Size = new Size(720, 930);
+            detailList.TabIndex = 1;
+            // 
+            // pnBasicStatus
+            // 
+            pnBasicStatus.Controls.Add(lblDiceCritical);
+            pnBasicStatus.Controls.Add(lblDice1);
+            pnBasicStatus.Controls.Add(lblName);
+            pnBasicStatus.Location = new Point(60, 120);
+            pnBasicStatus.Margin = new Padding(0);
+            pnBasicStatus.Name = "pnBasicStatus";
+            pnBasicStatus.Size = new Size(600, 45);
+            pnBasicStatus.TabIndex = 0;
+            // 
+            // lblDiceCritical
+            // 
+            lblDiceCritical.AutoSize = true;
+            lblDiceCritical.BackColor = Color.Transparent;
+            lblDiceCritical.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDiceCritical.ForeColor = Color.FromArgb(255, 217, 0);
+            lblDiceCritical.Location = new Point(558, 2);
+            lblDiceCritical.Margin = new Padding(0);
+            lblDiceCritical.Name = "lblDiceCritical";
+            lblDiceCritical.Size = new Size(41, 42);
+            lblDiceCritical.TabIndex = 2;
+            lblDiceCritical.Text = "4";
+            lblDiceCritical.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblDice1
+            // 
+            lblDice1.AutoSize = true;
+            lblDice1.BackColor = Color.Transparent;
+            lblDice1.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDice1.ForeColor = Color.WhiteSmoke;
+            lblDice1.Location = new Point(512, 2);
+            lblDice1.Margin = new Padding(0);
+            lblDice1.Name = "lblDice1";
+            lblDice1.Size = new Size(41, 42);
+            lblDice1.TabIndex = 1;
+            lblDice1.Text = "3";
+            lblDice1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.BackColor = Color.Transparent;
+            lblName.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblName.ForeColor = Color.FromArgb(255, 217, 0);
+            lblName.Location = new Point(2, 2);
+            lblName.Margin = new Padding(0, 0, 15, 0);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(275, 42);
+            lblName.TabIndex = 0;
+            lblName.Text = "1P 플레이어 이름";
+            lblName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // doubleBufferedPanel2
+            // 
+            doubleBufferedPanel2.Controls.Add(transparentTextLabel2);
+            doubleBufferedPanel2.Controls.Add(transparentTextLabel1);
+            doubleBufferedPanel2.Location = new Point(60, 180);
+            doubleBufferedPanel2.Margin = new Padding(0, 15, 0, 0);
+            doubleBufferedPanel2.Name = "doubleBufferedPanel2";
+            doubleBufferedPanel2.Size = new Size(599, 45);
+            doubleBufferedPanel2.TabIndex = 1;
+            // 
+            // transparentTextLabel2
+            // 
+            transparentTextLabel2.AutoSize = true;
+            transparentTextLabel2.BackColor = Color.Transparent;
+            transparentTextLabel2.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel2.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel2.Location = new Point(103, 2);
+            transparentTextLabel2.Margin = new Padding(0);
+            transparentTextLabel2.Name = "transparentTextLabel2";
+            transparentTextLabel2.Size = new Size(366, 42);
+            transparentTextLabel2.TabIndex = 1;
+            transparentTextLabel2.Text = "1000(+2000)/2000";
+            // 
+            // transparentTextLabel1
+            // 
+            transparentTextLabel1.AutoSize = true;
+            transparentTextLabel1.BackColor = Color.Transparent;
+            transparentTextLabel1.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel1.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel1.Location = new Point(0, 2);
+            transparentTextLabel1.Margin = new Padding(0);
+            transparentTextLabel1.Name = "transparentTextLabel1";
+            transparentTextLabel1.Size = new Size(99, 42);
+            transparentTextLabel1.TabIndex = 0;
+            transparentTextLabel1.Text = "체력:";
+            // 
+            // fpnStatusDetail
+            // 
+            fpnStatusDetail.BorderColor = Color.Transparent;
+            fpnStatusDetail.BorderThickness = 0;
+            fpnStatusDetail.Location = new Point(60, 240);
+            fpnStatusDetail.Margin = new Padding(0, 15, 0, 0);
+            fpnStatusDetail.Name = "fpnStatusDetail";
+            fpnStatusDetail.Padding = new Padding(0, 0, 10, 0);
+            fpnStatusDetail.Size = new Size(599, 45);
+            fpnStatusDetail.TabIndex = 2;
+            // 
+            // doubleBufferedPanel4
+            // 
+            doubleBufferedPanel4.BorderColor = Color.Transparent;
+            doubleBufferedPanel4.BorderThickness = 0;
+            doubleBufferedPanel4.Controls.Add(transparentTextLabel6);
+            doubleBufferedPanel4.Controls.Add(transparentTextLabel5);
+            doubleBufferedPanel4.Location = new Point(60, 300);
+            doubleBufferedPanel4.Margin = new Padding(0, 15, 0, 0);
+            doubleBufferedPanel4.Name = "doubleBufferedPanel4";
+            doubleBufferedPanel4.Size = new Size(599, 45);
+            doubleBufferedPanel4.TabIndex = 2;
+            // 
+            // transparentTextLabel5
+            // 
+            transparentTextLabel5.AutoSize = true;
+            transparentTextLabel5.BackColor = Color.Transparent;
+            transparentTextLabel5.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel5.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel5.Location = new Point(167, 0);
+            transparentTextLabel5.Margin = new Padding(0);
+            transparentTextLabel5.Name = "transparentTextLabel5";
+            transparentTextLabel5.Size = new Size(40, 42);
+            transparentTextLabel5.TabIndex = 1;
+            transparentTextLabel5.Text = "2";
+            // 
+            // transparentTextLabel6
+            // 
+            transparentTextLabel6.AutoSize = true;
+            transparentTextLabel6.BackColor = Color.Transparent;
+            transparentTextLabel6.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel6.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel6.Location = new Point(0, 0);
+            transparentTextLabel6.Margin = new Padding(0);
+            transparentTextLabel6.Name = "transparentTextLabel6";
+            transparentTextLabel6.Size = new Size(167, 42);
+            transparentTextLabel6.TabIndex = 0;
+            transparentTextLabel6.Text = "이동속도:";
+            // 
+            // doubleBufferedPanel3
+            // 
+            doubleBufferedPanel3.BorderColor = Color.Transparent;
+            doubleBufferedPanel3.BorderThickness = 0;
+            doubleBufferedPanel3.Controls.Add(transparentTextLabel4);
+            doubleBufferedPanel3.Controls.Add(pictureBox2);
+            doubleBufferedPanel3.Controls.Add(transparentTextLabel7);
+            doubleBufferedPanel3.Controls.Add(pictureBox1);
+            doubleBufferedPanel3.Controls.Add(transparentTextLabel3);
+            doubleBufferedPanel3.Location = new Point(60, 360);
+            doubleBufferedPanel3.Margin = new Padding(0, 15, 0, 0);
+            doubleBufferedPanel3.Name = "doubleBufferedPanel3";
+            doubleBufferedPanel3.Size = new Size(599, 45);
+            doubleBufferedPanel3.TabIndex = 3;
+            // 
+            // transparentTextLabel4
+            // 
+            transparentTextLabel4.AutoSize = true;
+            transparentTextLabel4.BackColor = Color.Transparent;
+            transparentTextLabel4.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel4.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel4.Location = new Point(0, 0);
+            transparentTextLabel4.Margin = new Padding(0);
+            transparentTextLabel4.Name = "transparentTextLabel4";
+            transparentTextLabel4.Size = new Size(208, 42);
+            transparentTextLabel4.TabIndex = 0;
+            transparentTextLabel4.Text = "전투 사거리:";
+            transparentTextLabel4.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Location = new Point(208, 0);
+            pictureBox2.Margin = new Padding(0, 0, 10, 0);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(45, 45);
+            pictureBox2.TabIndex = 4;
+            pictureBox2.TabStop = false;
+            // 
+            // transparentTextLabel7
+            // 
+            transparentTextLabel7.AutoSize = true;
+            transparentTextLabel7.BackColor = Color.Transparent;
+            transparentTextLabel7.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel7.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel7.Location = new Point(263, 0);
+            transparentTextLabel7.Margin = new Padding(0, 0, 20, 0);
+            transparentTextLabel7.Name = "transparentTextLabel7";
+            transparentTextLabel7.Size = new Size(40, 42);
+            transparentTextLabel7.TabIndex = 3;
+            transparentTextLabel7.Text = "2";
+            transparentTextLabel7.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(323, 0);
+            pictureBox1.Margin = new Padding(0, 0, 10, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(45, 45);
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
+            // 
+            // transparentTextLabel3
+            // 
+            transparentTextLabel3.AutoSize = true;
+            transparentTextLabel3.BackColor = Color.Transparent;
+            transparentTextLabel3.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel3.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel3.Location = new Point(378, 0);
+            transparentTextLabel3.Margin = new Padding(0);
+            transparentTextLabel3.Name = "transparentTextLabel3";
+            transparentTextLabel3.Size = new Size(40, 42);
+            transparentTextLabel3.TabIndex = 1;
+            transparentTextLabel3.Text = "2";
+            transparentTextLabel3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // customFlowLayoutPanel1
+            // 
+            customFlowLayoutPanel1.BorderColor = Color.Transparent;
+            customFlowLayoutPanel1.BorderThickness = 0;
+            customFlowLayoutPanel1.Controls.Add(transparentTextLabel10);
+            customFlowLayoutPanel1.Controls.Add(pictureBox3);
+            customFlowLayoutPanel1.Controls.Add(transparentTextLabel11);
+            customFlowLayoutPanel1.Controls.Add(transparentTextLabel12);
+            customFlowLayoutPanel1.Controls.Add(pictureBox4);
+            customFlowLayoutPanel1.Controls.Add(transparentTextLabel13);
+            customFlowLayoutPanel1.Controls.Add(transparentTextLabel14);
+            customFlowLayoutPanel1.Location = new Point(60, 420);
+            customFlowLayoutPanel1.Margin = new Padding(0, 15, 0, 0);
+            customFlowLayoutPanel1.Name = "customFlowLayoutPanel1";
+            customFlowLayoutPanel1.Size = new Size(599, 45);
+            customFlowLayoutPanel1.TabIndex = 7;
+            // 
+            // transparentTextLabel10
+            // 
+            transparentTextLabel10.AutoSize = true;
+            transparentTextLabel10.BackColor = Color.Transparent;
+            transparentTextLabel10.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel10.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel10.Location = new Point(0, 0);
+            transparentTextLabel10.Margin = new Padding(0);
+            transparentTextLabel10.Name = "transparentTextLabel10";
+            transparentTextLabel10.Size = new Size(133, 42);
+            transparentTextLabel10.TabIndex = 0;
+            transparentTextLabel10.Text = "공격력:";
+            transparentTextLabel10.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Location = new Point(133, 0);
+            pictureBox3.Margin = new Padding(0, 0, 10, 0);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(45, 45);
+            pictureBox3.TabIndex = 4;
+            pictureBox3.TabStop = false;
+            // 
+            // transparentTextLabel11
+            // 
+            transparentTextLabel11.AutoSize = true;
+            transparentTextLabel11.BackColor = Color.Transparent;
+            transparentTextLabel11.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel11.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel11.Location = new Point(188, 0);
+            transparentTextLabel11.Margin = new Padding(0, 0, 10, 0);
+            transparentTextLabel11.Name = "transparentTextLabel11";
+            transparentTextLabel11.Size = new Size(40, 42);
+            transparentTextLabel11.TabIndex = 3;
+            transparentTextLabel11.Text = "2";
+            transparentTextLabel11.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // transparentTextLabel12
+            // 
+            transparentTextLabel12.AutoSize = true;
+            transparentTextLabel12.BackColor = Color.Transparent;
+            transparentTextLabel12.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel12.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel12.Location = new Point(238, 0);
+            transparentTextLabel12.Margin = new Padding(0, 0, 20, 0);
+            transparentTextLabel12.Name = "transparentTextLabel12";
+            transparentTextLabel12.Size = new Size(76, 42);
+            transparentTextLabel12.TabIndex = 6;
+            transparentTextLabel12.Text = "{2}";
+            transparentTextLabel12.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Location = new Point(334, 0);
+            pictureBox4.Margin = new Padding(0, 0, 10, 0);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(45, 45);
+            pictureBox4.TabIndex = 2;
+            pictureBox4.TabStop = false;
+            // 
+            // transparentTextLabel13
+            // 
+            transparentTextLabel13.AutoSize = true;
+            transparentTextLabel13.BackColor = Color.Transparent;
+            transparentTextLabel13.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel13.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel13.Location = new Point(389, 0);
+            transparentTextLabel13.Margin = new Padding(0, 0, 10, 0);
+            transparentTextLabel13.Name = "transparentTextLabel13";
+            transparentTextLabel13.Size = new Size(40, 42);
+            transparentTextLabel13.TabIndex = 1;
+            transparentTextLabel13.Text = "2";
+            transparentTextLabel13.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // transparentTextLabel14
+            // 
+            transparentTextLabel14.AutoSize = true;
+            transparentTextLabel14.BackColor = Color.Transparent;
+            transparentTextLabel14.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel14.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel14.Location = new Point(439, 0);
+            transparentTextLabel14.Margin = new Padding(0);
+            transparentTextLabel14.Name = "transparentTextLabel14";
+            transparentTextLabel14.Size = new Size(76, 42);
+            transparentTextLabel14.TabIndex = 5;
+            transparentTextLabel14.Text = "{2}";
+            // 
+            // detailScrollBar
+            // 
+            detailScrollBar.Alpha = 50;
+            detailScrollBar.BackColor = Color.Transparent;
+            detailScrollBar.Background = true;
+            detailScrollBar.Background_WidthPen = 3F;
+            detailScrollBar.BackgroundPen = true;
+            detailScrollBar.ColorBackground = Color.FromArgb(37, 52, 68);
+            detailScrollBar.ColorBackground_1 = Color.FromArgb(37, 52, 68);
+            detailScrollBar.ColorBackground_2 = Color.FromArgb(41, 63, 86);
+            detailScrollBar.ColorBackground_Pen = Color.FromArgb(29, 200, 238);
+            detailScrollBar.ColorBackground_Value_1 = Color.FromArgb(28, 200, 238);
+            detailScrollBar.ColorBackground_Value_2 = Color.FromArgb(100, 208, 232);
+            detailScrollBar.ColorLighting = Color.FromArgb(29, 200, 238);
+            detailScrollBar.ColorPen_1 = Color.FromArgb(37, 52, 68);
+            detailScrollBar.ColorPen_2 = Color.FromArgb(41, 63, 86);
+            detailScrollBar.ColorScrollBar = Color.FromArgb(29, 200, 238);
+            detailScrollBar.ColorScrollBar_Transparency = 255;
+            detailScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            detailScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
+            detailScrollBar.Lighting = false;
+            detailScrollBar.LinearGradient_Background = false;
+            detailScrollBar.LinearGradient_Value = false;
+            detailScrollBar.LinearGradientPen = false;
+            detailScrollBar.Location = new Point(694, 0);
+            detailScrollBar.Margin = new Padding(0);
+            detailScrollBar.Maximum = 100;
+            detailScrollBar.Minimum = 0;
+            detailScrollBar.Name = "detailScrollBar";
+            detailScrollBar.OrientationValue = Orientation.Vertical;
+            detailScrollBar.PenWidth = 10;
+            detailScrollBar.RGB = false;
+            detailScrollBar.Rounding = true;
+            detailScrollBar.RoundingInt = 7;
+            detailScrollBar.Size = new Size(26, 930);
+            detailScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            detailScrollBar.TabIndex = 0;
+            detailScrollBar.Tag = "Cyber";
+            detailScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            detailScrollBar.ThumbSize = 60;
+            detailScrollBar.Timer_RGB = 300;
+            detailScrollBar.Value = 0;
+            // 
+            // customFlowLayoutPanel2
+            // 
+            customFlowLayoutPanel2.BorderColor = Color.Transparent;
+            customFlowLayoutPanel2.BorderThickness = 0;
+            customFlowLayoutPanel2.Controls.Add(transparentTextLabel8);
+            customFlowLayoutPanel2.Controls.Add(transparentTextLabel9);
+            customFlowLayoutPanel2.Location = new Point(60, 480);
+            customFlowLayoutPanel2.Margin = new Padding(0, 15, 0, 0);
+            customFlowLayoutPanel2.Name = "customFlowLayoutPanel2";
+            customFlowLayoutPanel2.Size = new Size(599, 45);
+            customFlowLayoutPanel2.TabIndex = 8;
+            // 
+            // transparentTextLabel8
+            // 
+            transparentTextLabel8.AutoSize = true;
+            transparentTextLabel8.BackColor = Color.Transparent;
+            transparentTextLabel8.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel8.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel8.Location = new Point(0, 0);
+            transparentTextLabel8.Margin = new Padding(0);
+            transparentTextLabel8.Name = "transparentTextLabel8";
+            transparentTextLabel8.Size = new Size(133, 42);
+            transparentTextLabel8.TabIndex = 0;
+            transparentTextLabel8.Text = "주문력:";
+            // 
+            // transparentTextLabel9
+            // 
+            transparentTextLabel9.AutoSize = true;
+            transparentTextLabel9.BackColor = Color.Transparent;
+            transparentTextLabel9.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel9.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel9.Location = new Point(133, 0);
+            transparentTextLabel9.Margin = new Padding(0);
+            transparentTextLabel9.Name = "transparentTextLabel9";
+            transparentTextLabel9.Size = new Size(40, 42);
+            transparentTextLabel9.TabIndex = 1;
+            transparentTextLabel9.Text = "2";
+            // 
+            // customFlowLayoutPanel3
+            // 
+            customFlowLayoutPanel3.BorderColor = Color.Transparent;
+            customFlowLayoutPanel3.BorderThickness = 0;
+            customFlowLayoutPanel3.Controls.Add(transparentTextLabel15);
+            customFlowLayoutPanel3.Controls.Add(pictureBox5);
+            customFlowLayoutPanel3.Location = new Point(60, 540);
+            customFlowLayoutPanel3.Margin = new Padding(0, 15, 0, 0);
+            customFlowLayoutPanel3.Name = "customFlowLayoutPanel3";
+            customFlowLayoutPanel3.Size = new Size(599, 45);
+            customFlowLayoutPanel3.TabIndex = 9;
+            // 
+            // transparentTextLabel15
+            // 
+            transparentTextLabel15.AutoSize = true;
+            transparentTextLabel15.BackColor = Color.Transparent;
+            transparentTextLabel15.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel15.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel15.Location = new Point(0, 0);
+            transparentTextLabel15.Margin = new Padding(0);
+            transparentTextLabel15.Name = "transparentTextLabel15";
+            transparentTextLabel15.Size = new Size(86, 42);
+            transparentTextLabel15.TabIndex = 0;
+            transparentTextLabel15.Text = "스킬";
+            transparentTextLabel15.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.BackgroundImage = Properties.Resources.BtnMore;
+            pictureBox5.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox5.Location = new Point(86, 0);
+            pictureBox5.Margin = new Padding(0, 0, 10, 0);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(45, 45);
+            pictureBox5.TabIndex = 5;
+            pictureBox5.TabStop = false;
+            // 
+            // doubleBufferedPanel5
+            // 
+            doubleBufferedPanel5.Controls.Add(transparentTextLabel17);
+            doubleBufferedPanel5.Location = new Point(60, 600);
+            doubleBufferedPanel5.Margin = new Padding(0, 15, 0, 0);
+            doubleBufferedPanel5.Name = "doubleBufferedPanel5";
+            doubleBufferedPanel5.Size = new Size(599, 45);
+            doubleBufferedPanel5.TabIndex = 10;
+            // 
+            // transparentTextLabel17
+            // 
+            transparentTextLabel17.AutoSize = true;
+            transparentTextLabel17.BackColor = Color.Transparent;
+            transparentTextLabel17.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel17.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel17.Location = new Point(0, 2);
+            transparentTextLabel17.Margin = new Padding(0);
+            transparentTextLabel17.Name = "transparentTextLabel17";
+            transparentTextLabel17.Size = new Size(99, 42);
+            transparentTextLabel17.TabIndex = 0;
+            transparentTextLabel17.Text = "장비:";
+            // 
+            // customFlowLayoutPanel4
+            // 
+            customFlowLayoutPanel4.BorderColor = Color.Transparent;
+            customFlowLayoutPanel4.BorderThickness = 0;
+            customFlowLayoutPanel4.Controls.Add(pictureBox6);
+            customFlowLayoutPanel4.Controls.Add(pictureBox7);
+            customFlowLayoutPanel4.Controls.Add(pictureBox8);
+            customFlowLayoutPanel4.Controls.Add(pictureBox9);
+            customFlowLayoutPanel4.Location = new Point(60, 660);
+            customFlowLayoutPanel4.Margin = new Padding(0, 15, 0, 0);
+            customFlowLayoutPanel4.Name = "customFlowLayoutPanel4";
+            customFlowLayoutPanel4.Size = new Size(599, 134);
+            customFlowLayoutPanel4.TabIndex = 11;
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.Location = new Point(0, 0);
+            pictureBox6.Margin = new Padding(0, 0, 20, 0);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(134, 134);
+            pictureBox6.TabIndex = 0;
+            pictureBox6.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.Location = new Point(154, 0);
+            pictureBox7.Margin = new Padding(0, 0, 20, 0);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(134, 134);
+            pictureBox7.TabIndex = 1;
+            pictureBox7.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            pictureBox8.Location = new Point(308, 0);
+            pictureBox8.Margin = new Padding(0, 0, 20, 0);
+            pictureBox8.Name = "pictureBox8";
+            pictureBox8.Size = new Size(134, 134);
+            pictureBox8.TabIndex = 2;
+            pictureBox8.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            pictureBox9.Location = new Point(462, 0);
+            pictureBox9.Margin = new Padding(0);
+            pictureBox9.Name = "pictureBox9";
+            pictureBox9.Size = new Size(134, 134);
+            pictureBox9.TabIndex = 3;
+            pictureBox9.TabStop = false;
+            // 
+            // doubleBufferedPanel6
+            // 
+            doubleBufferedPanel6.Controls.Add(richTextBox1);
+            doubleBufferedPanel6.Controls.Add(transparentTextLabel16);
+            doubleBufferedPanel6.Location = new Point(60, 809);
+            doubleBufferedPanel6.Margin = new Padding(0, 15, 0, 0);
+            doubleBufferedPanel6.Name = "doubleBufferedPanel6";
+            doubleBufferedPanel6.Size = new Size(599, 45);
+            doubleBufferedPanel6.TabIndex = 12;
+            // 
+            // transparentTextLabel16
+            // 
+            transparentTextLabel16.AutoSize = true;
+            transparentTextLabel16.BackColor = Color.Transparent;
+            transparentTextLabel16.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel16.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel16.Location = new Point(0, 2);
+            transparentTextLabel16.Margin = new Padding(0);
+            transparentTextLabel16.Name = "transparentTextLabel16";
+            transparentTextLabel16.Size = new Size(99, 42);
+            transparentTextLabel16.TabIndex = 0;
+            transparentTextLabel16.Text = "기타:";
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.BorderStyle = BorderStyle.None;
+            richTextBox1.Location = new Point(86, 0);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(513, 45);
+            richTextBox1.TabIndex = 1;
+            richTextBox1.Text = "";
             // 
             // ScoreBoardControl
             // 
@@ -682,6 +1321,10 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             Controls.Add(doubleBufferedPanel1);
             Controls.Add(playerContainer);
+            Controls.Add(detailContainer);
+            Margin = new Padding(0);
+            MaximumSize = new Size(1920, 1080);
+            MinimumSize = new Size(1920, 1080);
             Name = "ScoreBoardControl";
             Size = new Size(1920, 1080);
             Load += ScoreBoardControl_Load;
@@ -705,6 +1348,36 @@
             ((System.ComponentModel.ISupportInitialize)pb4PLv).EndInit();
             doubleBufferedPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbWeather).EndInit();
+            detailContainer.ResumeLayout(false);
+            detailList.ResumeLayout(false);
+            pnBasicStatus.ResumeLayout(false);
+            pnBasicStatus.PerformLayout();
+            doubleBufferedPanel2.ResumeLayout(false);
+            doubleBufferedPanel2.PerformLayout();
+            doubleBufferedPanel4.ResumeLayout(false);
+            doubleBufferedPanel4.PerformLayout();
+            doubleBufferedPanel3.ResumeLayout(false);
+            doubleBufferedPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            customFlowLayoutPanel1.ResumeLayout(false);
+            customFlowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            customFlowLayoutPanel2.ResumeLayout(false);
+            customFlowLayoutPanel2.PerformLayout();
+            customFlowLayoutPanel3.ResumeLayout(false);
+            customFlowLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            doubleBufferedPanel5.ResumeLayout(false);
+            doubleBufferedPanel5.PerformLayout();
+            customFlowLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
+            doubleBufferedPanel6.ResumeLayout(false);
+            doubleBufferedPanel6.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -753,5 +1426,49 @@
         private controls.GradientLabel lblTurn;
         private PictureBox pbWeather;
         private controls.GradientLabel lblWeather;
+        private controls.DoubleBufferedPanel detailContainer;
+        private ReaLTaiizor.Controls.CyberScrollBar detailScrollBar;
+        private controls.CustomFlowLayoutPanel detailList;
+        private controls.DoubleBufferedPanel pnBasicStatus;
+        private controls.TransparentTextLabel lblName;
+        private controls.TransparentTextLabel lblDice1;
+        private controls.TransparentTextLabel lblDiceCritical;
+        private controls.DoubleBufferedPanel doubleBufferedPanel2;
+        private controls.TransparentTextLabel transparentTextLabel1;
+        private controls.TransparentTextLabel transparentTextLabel2;
+        private controls.CustomFlowLayoutPanel fpnStatusDetail;
+        private controls.CustomFlowLayoutPanel doubleBufferedPanel4;
+        private controls.TransparentTextLabel transparentTextLabel5;
+        private controls.TransparentTextLabel transparentTextLabel6;
+        private controls.CustomFlowLayoutPanel doubleBufferedPanel3;
+        private PictureBox pictureBox1;
+        private controls.TransparentTextLabel transparentTextLabel3;
+        private controls.TransparentTextLabel transparentTextLabel4;
+        private PictureBox pictureBox2;
+        private controls.TransparentTextLabel transparentTextLabel7;
+        private controls.CustomFlowLayoutPanel customFlowLayoutPanel1;
+        private controls.TransparentTextLabel transparentTextLabel10;
+        private PictureBox pictureBox3;
+        private controls.TransparentTextLabel transparentTextLabel11;
+        private controls.TransparentTextLabel transparentTextLabel12;
+        private PictureBox pictureBox4;
+        private controls.TransparentTextLabel transparentTextLabel13;
+        private controls.TransparentTextLabel transparentTextLabel14;
+        private controls.CustomFlowLayoutPanel customFlowLayoutPanel2;
+        private controls.TransparentTextLabel transparentTextLabel8;
+        private controls.TransparentTextLabel transparentTextLabel9;
+        private controls.CustomFlowLayoutPanel customFlowLayoutPanel3;
+        private controls.TransparentTextLabel transparentTextLabel15;
+        private PictureBox pictureBox5;
+        private controls.DoubleBufferedPanel doubleBufferedPanel5;
+        private controls.TransparentTextLabel transparentTextLabel17;
+        private controls.CustomFlowLayoutPanel customFlowLayoutPanel4;
+        private PictureBox pictureBox6;
+        private PictureBox pictureBox7;
+        private PictureBox pictureBox8;
+        private PictureBox pictureBox9;
+        private controls.DoubleBufferedPanel doubleBufferedPanel6;
+        private controls.TransparentTextLabel transparentTextLabel16;
+        private RichTextBox richTextBox1;
     }
 }

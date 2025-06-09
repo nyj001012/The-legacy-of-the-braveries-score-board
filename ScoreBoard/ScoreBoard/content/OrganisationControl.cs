@@ -22,7 +22,6 @@ namespace ScoreBoard.content
         public OrganisationControl()
         {
             InitializeComponent();
-            this.Size = new Size(1920, 1080);
         }
 
         /*
