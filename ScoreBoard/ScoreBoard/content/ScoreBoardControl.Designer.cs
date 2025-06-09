@@ -69,6 +69,8 @@
             playerScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             doubleBufferedPanel1 = new ScoreBoard.controls.DoubleBufferedPanel();
             lblTurn = new ScoreBoard.controls.GradientLabel();
+            pbWeather = new PictureBox();
+            lblWeather = new ScoreBoard.controls.GradientLabel();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -88,6 +90,7 @@
             fpn4P.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pb4PLv).BeginInit();
             doubleBufferedPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbWeather).BeginInit();
             SuspendLayout();
             // 
             // playerContainer
@@ -626,6 +629,8 @@
             // doubleBufferedPanel1
             // 
             doubleBufferedPanel1.BackColor = Color.Transparent;
+            doubleBufferedPanel1.Controls.Add(lblWeather);
+            doubleBufferedPanel1.Controls.Add(pbWeather);
             doubleBufferedPanel1.Controls.Add(lblTurn);
             doubleBufferedPanel1.Location = new Point(0, 0);
             doubleBufferedPanel1.Margin = new Padding(0);
@@ -646,6 +651,28 @@
             lblTurn.TabIndex = 0;
             lblTurn.Text = "1턴";
             lblTurn.TextAlign = ContentAlignment.BottomCenter;
+            // 
+            // pbWeather
+            // 
+            pbWeather.Location = new Point(1083, 16);
+            pbWeather.Margin = new Padding(0, 0, 15, 0);
+            pbWeather.Name = "pbWeather";
+            pbWeather.Size = new Size(80, 80);
+            pbWeather.TabIndex = 1;
+            pbWeather.TabStop = false;
+            // 
+            // lblWeather
+            // 
+            lblWeather.BackColor = Color.Transparent;
+            lblWeather.Font = new Font("Danjo-bold", 30F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblWeather.GradientEnd = Color.FromArgb(107, 89, 50);
+            lblWeather.GradientStart = Color.FromArgb(209, 162, 97);
+            lblWeather.Location = new Point(1181, 25);
+            lblWeather.Name = "lblWeather";
+            lblWeather.Size = new Size(145, 70);
+            lblWeather.TabIndex = 2;
+            lblWeather.Text = "1";
+            lblWeather.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // ScoreBoardControl
             // 
@@ -677,6 +704,7 @@
             fpn4P.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pb4PLv).EndInit();
             doubleBufferedPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbWeather).EndInit();
             ResumeLayout(false);
         }
 
@@ -723,5 +751,7 @@
         private controls.GradientLabel lbl4PName;
         private controls.DoubleBufferedPanel doubleBufferedPanel1;
         private controls.GradientLabel lblTurn;
+        private PictureBox pbWeather;
+        private controls.GradientLabel lblWeather;
     }
 }
