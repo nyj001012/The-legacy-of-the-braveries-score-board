@@ -117,11 +117,12 @@
             detailScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             enemyContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             enemyList = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             doubleBufferedPanel11 = new ScoreBoard.controls.DoubleBufferedPanel();
             healthBar2 = new ScoreBoard.controls.HealthBar();
             customFlowLayoutPanel9 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             gradientLabel4 = new ScoreBoard.controls.GradientLabel();
+            enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
+            pictureBox10 = new PictureBox();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -166,6 +167,7 @@
             enemyContainer.SuspendLayout();
             enemyList.SuspendLayout();
             doubleBufferedPanel11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
             SuspendLayout();
             // 
             // playerContainer
@@ -1346,49 +1348,6 @@
             enemyList.Size = new Size(600, 786);
             enemyList.TabIndex = 1;
             // 
-            // enemyScrollBar
-            // 
-            enemyScrollBar.Alpha = 50;
-            enemyScrollBar.BackColor = Color.Transparent;
-            enemyScrollBar.Background = true;
-            enemyScrollBar.Background_WidthPen = 3F;
-            enemyScrollBar.BackgroundPen = false;
-            enemyScrollBar.ColorBackground = Color.Transparent;
-            enemyScrollBar.ColorBackground_1 = Color.Transparent;
-            enemyScrollBar.ColorBackground_2 = Color.Transparent;
-            enemyScrollBar.ColorBackground_Pen = Color.Transparent;
-            enemyScrollBar.ColorBackground_Value_1 = Color.Transparent;
-            enemyScrollBar.ColorBackground_Value_2 = Color.Transparent;
-            enemyScrollBar.ColorLighting = Color.Transparent;
-            enemyScrollBar.ColorPen_1 = Color.Transparent;
-            enemyScrollBar.ColorPen_2 = Color.Transparent;
-            enemyScrollBar.ColorScrollBar = Color.Transparent;
-            enemyScrollBar.ColorScrollBar_Transparency = 255;
-            enemyScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            enemyScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
-            enemyScrollBar.Lighting = false;
-            enemyScrollBar.LinearGradient_Background = false;
-            enemyScrollBar.LinearGradient_Value = false;
-            enemyScrollBar.LinearGradientPen = false;
-            enemyScrollBar.Location = new Point(571, 0);
-            enemyScrollBar.Margin = new Padding(0);
-            enemyScrollBar.Maximum = 100;
-            enemyScrollBar.Minimum = 0;
-            enemyScrollBar.Name = "enemyScrollBar";
-            enemyScrollBar.OrientationValue = Orientation.Vertical;
-            enemyScrollBar.PenWidth = 10;
-            enemyScrollBar.RGB = false;
-            enemyScrollBar.Rounding = true;
-            enemyScrollBar.RoundingInt = 7;
-            enemyScrollBar.Size = new Size(26, 786);
-            enemyScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            enemyScrollBar.TabIndex = 0;
-            enemyScrollBar.Tag = "Cyber";
-            enemyScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            enemyScrollBar.ThumbSize = 60;
-            enemyScrollBar.Timer_RGB = 300;
-            enemyScrollBar.Value = 0;
-            // 
             // doubleBufferedPanel11
             // 
             doubleBufferedPanel11.Controls.Add(healthBar2);
@@ -1446,12 +1405,69 @@
             gradientLabel4.Text = "미확인";
             gradientLabel4.TextAlign = ContentAlignment.BottomLeft;
             // 
+            // enemyScrollBar
+            // 
+            enemyScrollBar.Alpha = 50;
+            enemyScrollBar.BackColor = Color.Transparent;
+            enemyScrollBar.Background = true;
+            enemyScrollBar.Background_WidthPen = 3F;
+            enemyScrollBar.BackgroundPen = false;
+            enemyScrollBar.ColorBackground = Color.Transparent;
+            enemyScrollBar.ColorBackground_1 = Color.Transparent;
+            enemyScrollBar.ColorBackground_2 = Color.Transparent;
+            enemyScrollBar.ColorBackground_Pen = Color.Transparent;
+            enemyScrollBar.ColorBackground_Value_1 = Color.Transparent;
+            enemyScrollBar.ColorBackground_Value_2 = Color.Transparent;
+            enemyScrollBar.ColorLighting = Color.Transparent;
+            enemyScrollBar.ColorPen_1 = Color.Transparent;
+            enemyScrollBar.ColorPen_2 = Color.Transparent;
+            enemyScrollBar.ColorScrollBar = Color.Transparent;
+            enemyScrollBar.ColorScrollBar_Transparency = 255;
+            enemyScrollBar.CyberScrollBarStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            enemyScrollBar.ForeColor = Color.FromArgb(245, 245, 245);
+            enemyScrollBar.Lighting = false;
+            enemyScrollBar.LinearGradient_Background = false;
+            enemyScrollBar.LinearGradient_Value = false;
+            enemyScrollBar.LinearGradientPen = false;
+            enemyScrollBar.Location = new Point(571, 0);
+            enemyScrollBar.Margin = new Padding(0);
+            enemyScrollBar.Maximum = 100;
+            enemyScrollBar.Minimum = 0;
+            enemyScrollBar.Name = "enemyScrollBar";
+            enemyScrollBar.OrientationValue = Orientation.Vertical;
+            enemyScrollBar.PenWidth = 10;
+            enemyScrollBar.RGB = false;
+            enemyScrollBar.Rounding = true;
+            enemyScrollBar.RoundingInt = 7;
+            enemyScrollBar.Size = new Size(26, 786);
+            enemyScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            enemyScrollBar.TabIndex = 0;
+            enemyScrollBar.Tag = "Cyber";
+            enemyScrollBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            enemyScrollBar.ThumbSize = 60;
+            enemyScrollBar.Timer_RGB = 300;
+            enemyScrollBar.Value = 0;
+            // 
+            // pictureBox10
+            // 
+            pictureBox10.BackColor = Color.Transparent;
+            pictureBox10.BackgroundImage = Properties.Resources.BtnDone;
+            pictureBox10.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox10.Cursor = Cursors.Hand;
+            pictureBox10.Location = new Point(1506, 911);
+            pictureBox10.Margin = new Padding(0);
+            pictureBox10.Name = "pictureBox10";
+            pictureBox10.Size = new Size(244, 110);
+            pictureBox10.TabIndex = 8;
+            pictureBox10.TabStop = false;
+            // 
             // ScoreBoardControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.ImgInGameBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
+            Controls.Add(pictureBox10);
             Controls.Add(enemyContainer);
             Controls.Add(doubleBufferedPanel1);
             Controls.Add(playerContainer);
@@ -1515,6 +1531,7 @@
             enemyContainer.ResumeLayout(false);
             enemyList.ResumeLayout(false);
             doubleBufferedPanel11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
             ResumeLayout(false);
         }
 
@@ -1614,5 +1631,6 @@
         private controls.HealthBar healthBar2;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel9;
         private controls.GradientLabel gradientLabel4;
+        private PictureBox pictureBox10;
     }
 }
