@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data
 {
-    internal class CorpsMember
+    public class CorpsMember
     {
         public string Id { get; set; } = string.Empty; // 멤버 ID: [군단 ID]_[번호]_이름
         public string Name { get; set; } = string.Empty; // 멤버 이름 (예: 루다, 스카이하늘소라텐등)

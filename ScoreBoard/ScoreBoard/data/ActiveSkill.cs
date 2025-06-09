@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data
 {
-    internal class ActiveSkill : Skill
+    public class ActiveSkill : Skill
     {
         public ushort Cooldown { get; set; } = 3; // 기술 사용 후 재사용 대기 시간 (예: 3턴 후 재사용 가능)
         public bool isOnCooldown { get; set; } = false; // 기술이 현재 재사용 대기 중인지 여부

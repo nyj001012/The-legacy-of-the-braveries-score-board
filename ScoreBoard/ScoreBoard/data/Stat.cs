@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data
 {
-    internal class Stat
+    public class Stat
     {
         public ushort Hp { get; set; } // 체력 (예: 10, 20 등)
         public ushort MaxHp { get; set; } // 최대 체력 (예: 10, 20 등)
