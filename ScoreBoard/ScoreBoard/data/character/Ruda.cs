@@ -45,8 +45,8 @@ namespace ScoreBoard.data.character
 
             Stat = new Stat
             {
-                Hp = statData.Hp,
-                MaxHp = statData.MaxHp, // 시작 시, 현재 체력은 최대 체력
+                Hp = statData.Hp, // 시작 시, 현재 체력은 최대 체력
+                MaxHp = statData.Hp,
                 Movement = statData.Movement,
                 Wisdom = statData.Wisdom, // nullable 또는 기본값 처리
                 CombatStats = statData.CombatStats.ToDictionary(
