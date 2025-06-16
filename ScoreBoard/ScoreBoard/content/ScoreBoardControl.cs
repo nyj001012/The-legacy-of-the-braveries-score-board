@@ -86,10 +86,14 @@ namespace ScoreBoard.content
         {
             statusFlowLayoutPanel.SuspendLayout();
             statusFlowLayoutPanel.Controls.Clear(); // 기존 컨트롤 제거
-            // TODO: stat에서 상태이상 정보를 가져와서 동적으로 추가
             if (stat.StatusEffects.Count > 0)
             {
-
+                statusFlowLayoutPanel.Visible = true; // 상태이상 정보가 있으면 보임 처리
+                // TODO: stat에서 상태이상 정보를 가져와서 동적으로 추가
+            }
+            else
+            {
+                statusFlowLayoutPanel.Visible = false; // 상태이상 정보가 없으면 숨김 처리
             }
             statusFlowLayoutPanel.ResumeLayout();
         }
@@ -101,8 +105,26 @@ namespace ScoreBoard.content
         {
             artifactFlowLayoutPanel.SuspendLayout();
             artifactFlowLayoutPanel.Controls.Clear(); // 기존 컨트롤 제거
-            // TODO: 최대 슬롯 수에 따라 유물 아이콘을 동적으로 추가
-            // TODO: 빈 슬롯은 빈 아이콘으로 표시
+            for (int i = 0; i < maxSlots; i++)
+            {
+                if (artifacts.ElementAtOrDefault(i) != null)
+                {
+                    // TODO: 유물 아이콘 동적 추가
+                }
+                else
+                {
+                    // 빈 슬롯 아이콘 추가 (예: Properties.Resources.EmptyArtifactSlot)
+                    PictureBox emptySlot = new PictureBox
+                    {
+                        Name = $"EmptyArtifactSlot{i + 1}",
+                        Size = new Size(50, 50), // 아이콘 크기 조정
+                        Image = Properties.Resources.EmptyArtifactSlot, // 빈 슬롯 아이콘 이미지
+                        SizeMode = PictureBoxSizeMode.Zoom,
+                        Margin = new Padding(5)
+                    };
+                    artifactFlowLayoutPanel.Controls.Add(emptySlot);
+                }
+            }
             artifactFlowLayoutPanel.ResumeLayout();
         }
     }
