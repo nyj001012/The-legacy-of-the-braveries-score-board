@@ -29,7 +29,7 @@ namespace ScoreBoard.content
 
         private void ScoreBoardControl_Load(object sender, EventArgs e)
         {
-            InitPlayerList();
+            BeginInvoke(() => InitPlayerList());
             ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
         }
 
@@ -39,18 +39,17 @@ namespace ScoreBoard.content
         private void InitPlayerList()
         {
             int index = 1;
-            playerList.Controls.Clear(); // 기존 컨트롤 제거
             foreach (var character in _characters.Values)
             {
-                if (playerList.Controls.Find($"pn{index}PInfo", false)[0] is not DoubleBufferedPanel playerControl)
+                if (playerList.Controls.Find($"pn{index}P", true)[0] is not DoubleBufferedPanel playerControl)
                 {
-                    throw new InvalidOperationException($"pn{index}PInfo 컨트롤을 찾지 못했습니다.");
+                    throw new InvalidOperationException($"pn{index}P 컨트롤을 찾지 못했습니다.");
                 }
-                if (playerControl.Controls.Find($"lbl{index}PName", false)[0] is not GradientLabel nameLabel
-                    || playerControl.Controls.Find($"pb{index}PLv", false)[0] is not PictureBox levelPictureBox
-                    || playerControl.Controls.Find($"fpn{index}PStatus", false)[0] is not CustomFlowLayoutPanel statusFlowLayoutPanel
-                    || playerControl.Controls.Find($"fpn{index}PArtifact", false)[0] is not CustomFlowLayoutPanel artifactFlowLayoutPanel
-                    || playerControl.Controls.Find($"hb{index}P", false)[0] is not HealthBar healthBar)
+                if (playerControl.Controls.Find($"lbl{index}PName", true)[0] is not GradientLabel nameLabel
+                    || playerControl.Controls.Find($"pb{index}PLv", true)[0] is not PictureBox levelPictureBox
+                    || playerControl.Controls.Find($"fpn{index}PStatus", true)[0] is not CustomFlowLayoutPanel statusFlowLayoutPanel
+                    || playerControl.Controls.Find($"fpn{index}PArtifact", true)[0] is not CustomFlowLayoutPanel artifactFlowLayoutPanel
+                    || playerControl.Controls.Find($"hb{index}P", true)[0] is not HealthBar healthBar)
                 {
                     throw new InvalidOperationException($"컨트롤 중 하나가 누락되었습니다: {playerControl.Name}");
                 }
@@ -60,6 +59,7 @@ namespace ScoreBoard.content
                 InitArtifact(artifactFlowLayoutPanel, character.ArtifactSlot, character.MaxArtifactSlot);
                 healthBar.SetValues(character.Stat.Hp, character.Stat.Shield, character.Stat.MaxHp);
                 playerList.Controls.Add(playerControl);
+                index++;
             }
         }
 
@@ -103,6 +103,7 @@ namespace ScoreBoard.content
          */
         private void InitArtifact(CustomFlowLayoutPanel artifactFlowLayoutPanel, List<Artifact> artifacts, ushort maxSlots)
         {
+            int size = artifactFlowLayoutPanel.Size.Height;
             artifactFlowLayoutPanel.SuspendLayout();
             artifactFlowLayoutPanel.Controls.Clear(); // 기존 컨트롤 제거
             for (int i = 0; i < maxSlots; i++)
@@ -117,10 +118,9 @@ namespace ScoreBoard.content
                     PictureBox emptySlot = new PictureBox
                     {
                         Name = $"EmptyArtifactSlot{i + 1}",
-                        Size = new Size(50, 50), // 아이콘 크기 조정
+                        Size = new Size(size, size), // 아이콘 크기 조정
                         Image = Properties.Resources.EmptyArtifactSlot, // 빈 슬롯 아이콘 이미지
-                        SizeMode = PictureBoxSizeMode.Zoom,
-                        Margin = new Padding(5)
+                        SizeMode = PictureBoxSizeMode.StretchImage,
                     };
                     artifactFlowLayoutPanel.Controls.Add(emptySlot);
                 }
