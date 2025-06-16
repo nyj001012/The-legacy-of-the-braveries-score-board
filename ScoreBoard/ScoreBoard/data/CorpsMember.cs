@@ -17,5 +17,6 @@ namespace ScoreBoard.data
         public List<ActiveSkill> Actives { get; set; } = []; // 멤버의 능력치 정보
         public List<Artifact> ArtifactSlot { get; set; } = []; // 멤버의 유물 슬롯 정보 (예: 무기, 방어구 등)
         public ushort MaxArtifactSlot { get; set; } = 3; // 최대 유물 슬롯 수 (예: 3개)
+        public ushort Level { get; set; } = 0; // 멤버의 레벨 (예: 1, 2, 3 등)
     }
 }
