@@ -1,6 +1,6 @@
 ﻿using ScoreBoard.controls;
-using ScoreBoard.data;
 using ScoreBoard.data.character;
+using ScoreBoard.data.skill;
 using ScoreBoard.Properties;
 using ScoreBoard.utils;
 using System.Data;
@@ -171,7 +171,7 @@ namespace ScoreBoard.modals
          * - requiredLevel: 요구 레벨
          * - text: 스킬 레벨에 대한 설명 텍스트 (예: "기본", "1강", "2강", "궁극 강화" 등)
          */
-        private void BuildSkillText(IEnumerable<Skill> passives, IEnumerable<Skill> actives, StringBuilder sb, ushort requiredLevel, string text)
+        private void BuildSkillText(IEnumerable<SkillBase> passives, IEnumerable<SkillBase> actives, StringBuilder sb, ushort requiredLevel, string text)
         {
             var validSkills = passives.Concat(actives).Where(s => s.RequiredLevel == requiredLevel).ToList();
             if (validSkills.Count == 0) return; // 해당 레벨의 스킬이 없으면 반환

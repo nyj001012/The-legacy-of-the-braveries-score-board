@@ -176,4 +176,16 @@
   <data name="BtnDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\행동 완료 버튼 이미지.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Lv1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\first.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lv2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\second.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lv3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ultimate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EmptyArtifactSlot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\equipment_empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
