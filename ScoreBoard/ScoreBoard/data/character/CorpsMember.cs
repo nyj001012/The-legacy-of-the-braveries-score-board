@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data.stat;
+﻿using ScoreBoard.data.skill;
+using ScoreBoard.data.stat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
