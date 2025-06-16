@@ -290,6 +290,7 @@
             // 
             // pb1PLv
             // 
+            pb1PLv.BackgroundImageLayout = ImageLayout.Stretch;
             pb1PLv.Location = new Point(412, 1);
             pb1PLv.Margin = new Padding(0);
             pb1PLv.Name = "pb1PLv";
@@ -406,6 +407,7 @@
             // 
             // pb2PLv
             // 
+            pb2PLv.BackgroundImageLayout = ImageLayout.Stretch;
             pb2PLv.Location = new Point(374, 1);
             pb2PLv.Margin = new Padding(0);
             pb2PLv.Name = "pb2PLv";
@@ -522,6 +524,7 @@
             // 
             // pb3PLv
             // 
+            pb3PLv.BackgroundImageLayout = ImageLayout.Stretch;
             pb3PLv.Location = new Point(374, 1);
             pb3PLv.Margin = new Padding(0);
             pb3PLv.Name = "pb3PLv";
@@ -638,6 +641,7 @@
             // 
             // pb4PLv
             // 
+            pb4PLv.BackgroundImageLayout = ImageLayout.Stretch;
             pb4PLv.Location = new Point(374, 1);
             pb4PLv.Margin = new Padding(0);
             pb4PLv.Name = "pb4PLv";
