@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ScoreBoard.controls;
-using ScoreBoard.data;
+using ScoreBoard.data.character;
 using ScoreBoard.modals;
 
 namespace ScoreBoard.content

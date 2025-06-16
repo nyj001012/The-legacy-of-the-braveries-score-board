@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ScoreBoard.data.stat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScoreBoard.data
+namespace ScoreBoard.data.character
 {
     public class CorpsMember
     {

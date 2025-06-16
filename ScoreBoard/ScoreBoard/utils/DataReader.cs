@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data;
+﻿using ScoreBoard.data.character;
+using ScoreBoard.data.monster;
 using System;
 using System.Collections.Generic;
 using System.Linq;

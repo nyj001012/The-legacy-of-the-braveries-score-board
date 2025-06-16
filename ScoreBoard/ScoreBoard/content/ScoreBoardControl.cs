@@ -1,5 +1,7 @@
 ﻿using ScoreBoard.controls;
 using ScoreBoard.data;
+using ScoreBoard.data.character;
+using ScoreBoard.data.stat;
 using ScoreBoard.utils;
 using System;
 using System.Collections.Generic;
@@ -85,6 +87,10 @@ namespace ScoreBoard.content
             statusFlowLayoutPanel.SuspendLayout();
             statusFlowLayoutPanel.Controls.Clear(); // 기존 컨트롤 제거
             // TODO: stat에서 상태이상 정보를 가져와서 동적으로 추가
+            if (stat.StatusEffects.Count > 0)
+            {
+
+            }
             statusFlowLayoutPanel.ResumeLayout();
         }
 

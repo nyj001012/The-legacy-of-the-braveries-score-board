@@ -1,6 +1,6 @@
 ﻿using ScoreBoard.controls;
-using ScoreBoard.data;
 using ScoreBoard.data.character;
+using ScoreBoard.data.monster;
 using ScoreBoard.Properties;
 using ScoreBoard.utils;
 using System.Data;
