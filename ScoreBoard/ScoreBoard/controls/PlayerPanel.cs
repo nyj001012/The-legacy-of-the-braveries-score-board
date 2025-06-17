@@ -19,6 +19,7 @@ namespace ScoreBoard.controls
         {
             InitializeComponent();
             lblName.Text = player.Name;
+            lblOrder.Text = $"{order.ToString()}P";
             InitLevel(player.Level);
             InitStatus(player.Stat);
             InitArtifact(player.ArtifactSlot, player.MaxArtifactSlot);

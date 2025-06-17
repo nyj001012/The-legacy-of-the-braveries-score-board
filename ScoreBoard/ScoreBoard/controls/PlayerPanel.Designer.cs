@@ -48,7 +48,7 @@
             pn2P.Controls.Add(lblOrder);
             pn2P.Controls.Add(pn2PInfo);
             pn2P.Location = new Point(0, 0);
-            pn2P.Margin = new Padding(15, 25, 15, 25);
+            pn2P.Margin = new Padding(0);
             pn2P.Name = "pn2P";
             pn2P.Size = new Size(511, 146);
             pn2P.TabIndex = 2;
@@ -166,6 +166,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Transparent;
             Controls.Add(pn2P);
+            Margin = new Padding(15, 25, 15, 25);
             Name = "PlayerPanel";
             Size = new Size(511, 146);
             pn2P.ResumeLayout(false);
