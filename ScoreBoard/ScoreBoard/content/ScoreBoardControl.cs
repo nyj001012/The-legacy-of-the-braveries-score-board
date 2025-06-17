@@ -70,6 +70,7 @@ namespace ScoreBoard.content
                     {
                         Name = $"pn{character.Id}"
                     };
+                    playerList.Controls.Add(firstPlayer);
                 }
                 else
                 {
