@@ -12,9 +12,10 @@ namespace ScoreBoard.controls
 {
     public partial class EnemyPanel : UserControl
     {
-        public EnemyPanel()
+        public EnemyPanel(string id, string name, ushort count)
         {
             InitializeComponent();
+            lblName.Text = $"{name} ({count})";
         }
     }
 }
