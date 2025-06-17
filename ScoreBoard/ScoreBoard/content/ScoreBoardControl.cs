@@ -66,8 +66,18 @@ namespace ScoreBoard.content
             {
                 if (index == 1)
                 {
-                    CurrentPlayerPanel firstPlayer = new CurrentPlayerPanel(character, index);
-                    firstPlayer.Name = $"pn{character.Id}";
+                    CurrentPlayerPanel firstPlayer = new(character, index)
+                    {
+                        Name = $"pn{character.Id}"
+                    };
+                }
+                else
+                {
+                    PlayerPanel playerControl = new(character, index)
+                    {
+                        Name = $"pn{character.Id}"
+                    };
+                    playerList.Controls.Add(playerControl);
                 }
                 index++;
             }

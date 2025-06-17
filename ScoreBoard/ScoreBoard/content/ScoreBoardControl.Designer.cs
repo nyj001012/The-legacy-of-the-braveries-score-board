@@ -1349,7 +1349,7 @@
             enemyList.Margin = new Padding(0);
             enemyList.Name = "enemyList";
             enemyList.Padding = new Padding(25, 35, 25, 35);
-            enemyList.Size = new Size(600, 786);
+            enemyList.Size = new Size(597, 786);
             enemyList.TabIndex = 1;
             // 
             // pnEnemy1
