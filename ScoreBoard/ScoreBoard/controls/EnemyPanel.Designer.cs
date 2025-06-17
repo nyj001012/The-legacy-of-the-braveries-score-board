@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             pnEnemy = new DoubleBufferedPanel();
-            hbEnemy = new HealthBar();
             fpnStatus = new CustomFlowLayoutPanel();
+            hbEnemy = new HealthBar();
             lblName = new GradientLabel();
             pnEnemy.SuspendLayout();
             SuspendLayout();
@@ -43,8 +43,18 @@
             pnEnemy.Location = new Point(0, 0);
             pnEnemy.Margin = new Padding(0);
             pnEnemy.Name = "pnEnemy";
-            pnEnemy.Size = new Size(546, 172);
+            pnEnemy.Size = new Size(526, 172);
             pnEnemy.TabIndex = 4;
+            // 
+            // fpnStatus
+            // 
+            fpnStatus.BorderColor = Color.Transparent;
+            fpnStatus.BorderThickness = 0;
+            fpnStatus.Location = new Point(1, 67);
+            fpnStatus.Margin = new Padding(0, 15, 0, 0);
+            fpnStatus.Name = "fpnStatus";
+            fpnStatus.Size = new Size(525, 45);
+            fpnStatus.TabIndex = 2;
             // 
             // hbEnemy
             // 
@@ -61,21 +71,11 @@
             hbEnemy.Name = "hbEnemy";
             hbEnemy.Shield = 0;
             hbEnemy.ShieldColor = Color.FromArgb(245, 245, 245);
-            hbEnemy.Size = new Size(545, 34);
+            hbEnemy.Size = new Size(526, 34);
             hbEnemy.TabIndex = 4;
             hbEnemy.Text = "healthBar1";
             hbEnemy.TextColor = Color.FromArgb(245, 245, 245);
             hbEnemy.TextVisible = true;
-            // 
-            // fpnStatus
-            // 
-            fpnStatus.BorderColor = Color.Transparent;
-            fpnStatus.BorderThickness = 0;
-            fpnStatus.Location = new Point(1, 67);
-            fpnStatus.Margin = new Padding(0, 15, 0, 0);
-            fpnStatus.Name = "fpnStatus";
-            fpnStatus.Size = new Size(545, 45);
-            fpnStatus.TabIndex = 2;
             // 
             // lblName
             // 
@@ -87,7 +87,7 @@
             lblName.Margin = new Padding(0, 0, 15, 0);
             lblName.Name = "lblName";
             lblName.RightToLeft = RightToLeft.No;
-            lblName.Size = new Size(544, 45);
+            lblName.Size = new Size(526, 45);
             lblName.TabIndex = 0;
             lblName.Text = "미확인";
             lblName.TextAlign = ContentAlignment.BottomLeft;
@@ -98,8 +98,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Transparent;
             Controls.Add(pnEnemy);
+            Margin = new Padding(0, 25, 0, 25);
             Name = "EnemyPanel";
-            Size = new Size(546, 172);
+            Size = new Size(526, 172);
             pnEnemy.ResumeLayout(false);
             ResumeLayout(false);
         }
