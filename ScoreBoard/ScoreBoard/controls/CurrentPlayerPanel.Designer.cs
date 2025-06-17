@@ -28,165 +28,165 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pn1P = new DoubleBufferedPanel();
-            lbl1P = new GradientLabel();
-            fpn1P = new CustomFlowLayoutPanel();
-            fpn1PStatus = new CustomFlowLayoutPanel();
-            fpn1PArtifact = new CustomFlowLayoutPanel();
+            pnPlayer = new DoubleBufferedPanel();
+            lblOrder = new GradientLabel();
             pn1PInfo = new DoubleBufferedPanel();
-            hb1P = new HealthBar();
-            pb1PLv = new PictureBox();
-            lbl1PName = new GradientLabel();
-            pn1P.SuspendLayout();
-            fpn1P.SuspendLayout();
+            hbPlayer = new HealthBar();
+            fpnPlayer = new CustomFlowLayoutPanel();
+            fpnStatus = new CustomFlowLayoutPanel();
+            fpnArtifact = new CustomFlowLayoutPanel();
+            pbLv = new PictureBox();
+            lblName = new GradientLabel();
+            pnPlayer.SuspendLayout();
             pn1PInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pb1PLv).BeginInit();
+            fpnPlayer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbLv).BeginInit();
             SuspendLayout();
             // 
-            // pn1P
+            // pnPlayer
             // 
-            pn1P.Controls.Add(lbl1P);
-            pn1P.Controls.Add(pn1PInfo);
-            pn1P.Location = new Point(0, 0);
-            pn1P.Margin = new Padding(15, 25, 15, 25);
-            pn1P.Name = "pn1P";
-            pn1P.Size = new Size(555, 183);
-            pn1P.TabIndex = 1;
-            pn1P.Tag = "1";
+            pnPlayer.Controls.Add(lblOrder);
+            pnPlayer.Controls.Add(pn1PInfo);
+            pnPlayer.Location = new Point(0, 0);
+            pnPlayer.Margin = new Padding(15, 25, 15, 25);
+            pnPlayer.Name = "pnPlayer";
+            pnPlayer.Size = new Size(555, 183);
+            pnPlayer.TabIndex = 1;
+            pnPlayer.Tag = "1";
             // 
-            // lbl1P
+            // lblOrder
             // 
-            lbl1P.Anchor = AnchorStyles.None;
-            lbl1P.BackColor = Color.Transparent;
-            lbl1P.Font = new Font("Danjo-bold", 33.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl1P.GradientEnd = Color.FromArgb(107, 89, 50);
-            lbl1P.GradientStart = Color.FromArgb(209, 162, 97);
-            lbl1P.Location = new Point(0, 1);
-            lbl1P.Margin = new Padding(0);
-            lbl1P.Name = "lbl1P";
-            lbl1P.Size = new Size(88, 181);
-            lbl1P.TabIndex = 0;
-            lbl1P.Text = "1P";
-            lbl1P.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // fpn1P
-            // 
-            fpn1P.BorderColor = Color.Transparent;
-            fpn1P.BorderThickness = 0;
-            fpn1P.Controls.Add(fpn1PStatus);
-            fpn1P.Controls.Add(fpn1PArtifact);
-            fpn1P.Location = new Point(1, 68);
-            fpn1P.Margin = new Padding(0, 15, 0, 0);
-            fpn1P.Name = "fpn1P";
-            fpn1P.Size = new Size(466, 52);
-            fpn1P.TabIndex = 2;
-            // 
-            // fpn1PStatus
-            // 
-            fpn1PStatus.BorderColor = Color.Transparent;
-            fpn1PStatus.BorderThickness = 0;
-            fpn1PStatus.Location = new Point(0, 0);
-            fpn1PStatus.Margin = new Padding(0, 0, 15, 0);
-            fpn1PStatus.Name = "fpn1PStatus";
-            fpn1PStatus.Padding = new Padding(0, 0, 5, 0);
-            fpn1PStatus.Size = new Size(225, 52);
-            fpn1PStatus.TabIndex = 0;
-            // 
-            // fpn1PArtifact
-            // 
-            fpn1PArtifact.BorderColor = Color.Transparent;
-            fpn1PArtifact.BorderThickness = 0;
-            fpn1PArtifact.Location = new Point(240, 0);
-            fpn1PArtifact.Margin = new Padding(0);
-            fpn1PArtifact.Name = "fpn1PArtifact";
-            fpn1PArtifact.Padding = new Padding(0, 0, 5, 0);
-            fpn1PArtifact.Size = new Size(225, 52);
-            fpn1PArtifact.TabIndex = 1;
+            lblOrder.Anchor = AnchorStyles.None;
+            lblOrder.BackColor = Color.Transparent;
+            lblOrder.Font = new Font("Danjo-bold", 33.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblOrder.GradientEnd = Color.FromArgb(107, 89, 50);
+            lblOrder.GradientStart = Color.FromArgb(209, 162, 97);
+            lblOrder.Location = new Point(0, 1);
+            lblOrder.Margin = new Padding(0);
+            lblOrder.Name = "lblOrder";
+            lblOrder.Size = new Size(88, 181);
+            lblOrder.TabIndex = 0;
+            lblOrder.Text = "1P";
+            lblOrder.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pn1PInfo
             // 
-            pn1PInfo.Controls.Add(hb1P);
-            pn1PInfo.Controls.Add(fpn1P);
-            pn1PInfo.Controls.Add(pb1PLv);
-            pn1PInfo.Controls.Add(lbl1PName);
+            pn1PInfo.Controls.Add(hbPlayer);
+            pn1PInfo.Controls.Add(fpnPlayer);
+            pn1PInfo.Controls.Add(pbLv);
+            pn1PInfo.Controls.Add(lblName);
             pn1PInfo.Location = new Point(89, 0);
             pn1PInfo.Margin = new Padding(0);
             pn1PInfo.Name = "pn1PInfo";
             pn1PInfo.Size = new Size(466, 182);
             pn1PInfo.TabIndex = 1;
             // 
-            // hb1P
+            // hbPlayer
             // 
-            hb1P.BackColor = Color.Transparent;
-            hb1P.BorderColor = Color.FromArgb(75, 245, 245, 245);
-            hb1P.BorderThickness = 3F;
-            hb1P.CornerRadius = 15;
-            hb1P.Font = new Font("Danjo-bold", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            hb1P.Health = 70;
-            hb1P.HealthColor = Color.FromArgb(119, 185, 69);
-            hb1P.Location = new Point(1, 135);
-            hb1P.Margin = new Padding(0, 15, 0, 15);
-            hb1P.MaxValue = 100;
-            hb1P.Name = "hb1P";
-            hb1P.Shield = 30;
-            hb1P.ShieldColor = Color.FromArgb(245, 245, 245);
-            hb1P.Size = new Size(466, 32);
-            hb1P.TabIndex = 4;
-            hb1P.Text = "healthBar2";
-            hb1P.TextColor = Color.FromArgb(245, 245, 245);
-            hb1P.TextVisible = true;
+            hbPlayer.BackColor = Color.Transparent;
+            hbPlayer.BorderColor = Color.FromArgb(75, 245, 245, 245);
+            hbPlayer.BorderThickness = 3F;
+            hbPlayer.CornerRadius = 15;
+            hbPlayer.Font = new Font("Danjo-bold", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            hbPlayer.Health = 70;
+            hbPlayer.HealthColor = Color.FromArgb(119, 185, 69);
+            hbPlayer.Location = new Point(1, 135);
+            hbPlayer.Margin = new Padding(0, 15, 0, 15);
+            hbPlayer.MaxValue = 100;
+            hbPlayer.Name = "hbPlayer";
+            hbPlayer.Shield = 30;
+            hbPlayer.ShieldColor = Color.FromArgb(245, 245, 245);
+            hbPlayer.Size = new Size(466, 32);
+            hbPlayer.TabIndex = 4;
+            hbPlayer.Text = "healthBar2";
+            hbPlayer.TextColor = Color.FromArgb(245, 245, 245);
+            hbPlayer.TextVisible = true;
             // 
-            // pb1PLv
+            // fpnPlayer
             // 
-            pb1PLv.BackgroundImageLayout = ImageLayout.Stretch;
-            pb1PLv.Location = new Point(411, 12);
-            pb1PLv.Margin = new Padding(0);
-            pb1PLv.Name = "pb1PLv";
-            pb1PLv.Size = new Size(53, 53);
-            pb1PLv.TabIndex = 1;
-            pb1PLv.TabStop = false;
+            fpnPlayer.BorderColor = Color.Transparent;
+            fpnPlayer.BorderThickness = 0;
+            fpnPlayer.Controls.Add(fpnStatus);
+            fpnPlayer.Controls.Add(fpnArtifact);
+            fpnPlayer.Location = new Point(1, 68);
+            fpnPlayer.Margin = new Padding(0, 15, 0, 0);
+            fpnPlayer.Name = "fpnPlayer";
+            fpnPlayer.Size = new Size(466, 52);
+            fpnPlayer.TabIndex = 2;
             // 
-            // lbl1PName
+            // fpnStatus
             // 
-            lbl1PName.BackColor = Color.Transparent;
-            lbl1PName.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl1PName.GradientEnd = Color.FromArgb(72, 144, 170);
-            lbl1PName.GradientStart = Color.FromArgb(221, 237, 240);
-            lbl1PName.Location = new Point(0, 13);
-            lbl1PName.Margin = new Padding(0, 0, 15, 0);
-            lbl1PName.Name = "lbl1PName";
-            lbl1PName.RightToLeft = RightToLeft.No;
-            lbl1PName.Size = new Size(396, 52);
-            lbl1PName.TabIndex = 0;
-            lbl1PName.Text = "예시샘플입니다.";
-            lbl1PName.TextAlign = ContentAlignment.BottomLeft;
+            fpnStatus.BorderColor = Color.Transparent;
+            fpnStatus.BorderThickness = 0;
+            fpnStatus.Location = new Point(0, 0);
+            fpnStatus.Margin = new Padding(0, 0, 15, 0);
+            fpnStatus.Name = "fpnStatus";
+            fpnStatus.Padding = new Padding(0, 0, 5, 0);
+            fpnStatus.Size = new Size(225, 52);
+            fpnStatus.TabIndex = 0;
+            // 
+            // fpnArtifact
+            // 
+            fpnArtifact.BorderColor = Color.Transparent;
+            fpnArtifact.BorderThickness = 0;
+            fpnArtifact.Location = new Point(240, 0);
+            fpnArtifact.Margin = new Padding(0);
+            fpnArtifact.Name = "fpnArtifact";
+            fpnArtifact.Padding = new Padding(0, 0, 5, 0);
+            fpnArtifact.Size = new Size(225, 52);
+            fpnArtifact.TabIndex = 1;
+            // 
+            // pbLv
+            // 
+            pbLv.BackgroundImageLayout = ImageLayout.Stretch;
+            pbLv.Location = new Point(411, 12);
+            pbLv.Margin = new Padding(0);
+            pbLv.Name = "pbLv";
+            pbLv.Size = new Size(53, 53);
+            pbLv.TabIndex = 1;
+            pbLv.TabStop = false;
+            // 
+            // lblName
+            // 
+            lblName.BackColor = Color.Transparent;
+            lblName.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblName.GradientEnd = Color.FromArgb(72, 144, 170);
+            lblName.GradientStart = Color.FromArgb(221, 237, 240);
+            lblName.Location = new Point(0, 13);
+            lblName.Margin = new Padding(0, 0, 15, 0);
+            lblName.Name = "lblName";
+            lblName.RightToLeft = RightToLeft.No;
+            lblName.Size = new Size(396, 52);
+            lblName.TabIndex = 0;
+            lblName.Text = "예시샘플입니다.";
+            lblName.TextAlign = ContentAlignment.BottomLeft;
             // 
             // CurrentPlayerPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Transparent;
-            Controls.Add(pn1P);
+            Controls.Add(pnPlayer);
             Margin = new Padding(15, 25, 15, 25);
             Name = "CurrentPlayerPanel";
             Size = new Size(555, 183);
-            pn1P.ResumeLayout(false);
-            fpn1P.ResumeLayout(false);
+            pnPlayer.ResumeLayout(false);
             pn1PInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pb1PLv).EndInit();
+            fpnPlayer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbLv).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DoubleBufferedPanel pn1P;
-        private GradientLabel lbl1P;
-        private CustomFlowLayoutPanel fpn1P;
-        private CustomFlowLayoutPanel fpn1PStatus;
-        private CustomFlowLayoutPanel fpn1PArtifact;
+        private DoubleBufferedPanel pnPlayer;
+        private GradientLabel lblOrder;
+        private CustomFlowLayoutPanel fpnPlayer;
+        private CustomFlowLayoutPanel fpnStatus;
+        private CustomFlowLayoutPanel fpnArtifact;
         private DoubleBufferedPanel pn1PInfo;
-        private HealthBar hb1P;
-        private PictureBox pb1PLv;
-        private GradientLabel lbl1PName;
+        private HealthBar hbPlayer;
+        private PictureBox pbLv;
+        private GradientLabel lblName;
     }
 }
