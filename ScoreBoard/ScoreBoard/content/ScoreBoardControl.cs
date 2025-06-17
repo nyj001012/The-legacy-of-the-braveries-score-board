@@ -30,7 +30,27 @@ namespace ScoreBoard.content
         private void ScoreBoardControl_Load(object sender, EventArgs e)
         {
             BeginInvoke(() => InitPlayerList());
+            BeginInvoke(() => InitEnemyList());
             ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
+        }
+
+        /*
+         * enemyList 컨트롤에 적 정보를 초기화
+         */
+        private void InitEnemyList()
+        {
+            enemyList.SuspendLayout();
+            enemyList.Controls.Clear(); // 기존 컨트롤 제거
+
+            foreach (var (id, name, count) in _monsters)
+            {
+                // EnemyPanel 생성자에 id, name, count 받기
+                EnemyPanel enemyControl = new EnemyPanel(id, name, count);
+                enemyControl.Name = $"pn{id}";
+                enemyList.Controls.Add(enemyControl);
+            }
+
+            enemyList.ResumeLayout();
         }
 
         /*
