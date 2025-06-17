@@ -117,10 +117,10 @@
             detailScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             enemyContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             enemyList = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            doubleBufferedPanel11 = new ScoreBoard.controls.DoubleBufferedPanel();
-            healthBar2 = new ScoreBoard.controls.HealthBar();
-            customFlowLayoutPanel9 = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            gradientLabel4 = new ScoreBoard.controls.GradientLabel();
+            pnEnemy1 = new ScoreBoard.controls.DoubleBufferedPanel();
+            hbEnemy1 = new ScoreBoard.controls.HealthBar();
+            fpnEnemy1Status = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            lblEnemy1Name = new ScoreBoard.controls.GradientLabel();
             enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             pictureBox10 = new PictureBox();
             playerContainer.SuspendLayout();
@@ -166,7 +166,7 @@
             doubleBufferedPanel6.SuspendLayout();
             enemyContainer.SuspendLayout();
             enemyList.SuspendLayout();
-            doubleBufferedPanel11.SuspendLayout();
+            pnEnemy1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
             SuspendLayout();
             // 
@@ -1344,7 +1344,7 @@
             // 
             enemyList.BorderColor = Color.Transparent;
             enemyList.BorderThickness = 0;
-            enemyList.Controls.Add(doubleBufferedPanel11);
+            enemyList.Controls.Add(pnEnemy1);
             enemyList.Location = new Point(0, 0);
             enemyList.Margin = new Padding(0);
             enemyList.Name = "enemyList";
@@ -1352,62 +1352,62 @@
             enemyList.Size = new Size(600, 786);
             enemyList.TabIndex = 1;
             // 
-            // doubleBufferedPanel11
+            // pnEnemy1
             // 
-            doubleBufferedPanel11.Controls.Add(healthBar2);
-            doubleBufferedPanel11.Controls.Add(customFlowLayoutPanel9);
-            doubleBufferedPanel11.Controls.Add(gradientLabel4);
-            doubleBufferedPanel11.Location = new Point(25, 35);
-            doubleBufferedPanel11.Margin = new Padding(0);
-            doubleBufferedPanel11.Name = "doubleBufferedPanel11";
-            doubleBufferedPanel11.Size = new Size(546, 172);
-            doubleBufferedPanel11.TabIndex = 3;
+            pnEnemy1.Controls.Add(hbEnemy1);
+            pnEnemy1.Controls.Add(fpnEnemy1Status);
+            pnEnemy1.Controls.Add(lblEnemy1Name);
+            pnEnemy1.Location = new Point(25, 35);
+            pnEnemy1.Margin = new Padding(0);
+            pnEnemy1.Name = "pnEnemy1";
+            pnEnemy1.Size = new Size(546, 172);
+            pnEnemy1.TabIndex = 3;
             // 
-            // healthBar2
+            // hbEnemy1
             // 
-            healthBar2.BackColor = Color.Transparent;
-            healthBar2.BorderColor = Color.FromArgb(75, 245, 245, 245);
-            healthBar2.BorderThickness = 3F;
-            healthBar2.CornerRadius = 15;
-            healthBar2.Font = new Font("Danjo-bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            healthBar2.Health = -1;
-            healthBar2.HealthColor = Color.FromArgb(145, 145, 145);
-            healthBar2.Location = new Point(0, 121);
-            healthBar2.Margin = new Padding(0, 15, 0, 15);
-            healthBar2.MaxValue = -1;
-            healthBar2.Name = "healthBar2";
-            healthBar2.Shield = 0;
-            healthBar2.ShieldColor = Color.FromArgb(245, 245, 245);
-            healthBar2.Size = new Size(545, 34);
-            healthBar2.TabIndex = 4;
-            healthBar2.Text = "healthBar1";
-            healthBar2.TextColor = Color.FromArgb(245, 245, 245);
-            healthBar2.TextVisible = true;
+            hbEnemy1.BackColor = Color.Transparent;
+            hbEnemy1.BorderColor = Color.FromArgb(75, 245, 245, 245);
+            hbEnemy1.BorderThickness = 3F;
+            hbEnemy1.CornerRadius = 15;
+            hbEnemy1.Font = new Font("Danjo-bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            hbEnemy1.Health = -1;
+            hbEnemy1.HealthColor = Color.FromArgb(145, 145, 145);
+            hbEnemy1.Location = new Point(0, 121);
+            hbEnemy1.Margin = new Padding(0, 15, 0, 15);
+            hbEnemy1.MaxValue = -1;
+            hbEnemy1.Name = "hbEnemy1";
+            hbEnemy1.Shield = 0;
+            hbEnemy1.ShieldColor = Color.FromArgb(245, 245, 245);
+            hbEnemy1.Size = new Size(545, 34);
+            hbEnemy1.TabIndex = 4;
+            hbEnemy1.Text = "healthBar1";
+            hbEnemy1.TextColor = Color.FromArgb(245, 245, 245);
+            hbEnemy1.TextVisible = true;
             // 
-            // customFlowLayoutPanel9
+            // fpnEnemy1Status
             // 
-            customFlowLayoutPanel9.BorderColor = Color.Transparent;
-            customFlowLayoutPanel9.BorderThickness = 0;
-            customFlowLayoutPanel9.Location = new Point(1, 61);
-            customFlowLayoutPanel9.Margin = new Padding(0, 15, 0, 0);
-            customFlowLayoutPanel9.Name = "customFlowLayoutPanel9";
-            customFlowLayoutPanel9.Size = new Size(545, 45);
-            customFlowLayoutPanel9.TabIndex = 2;
+            fpnEnemy1Status.BorderColor = Color.Transparent;
+            fpnEnemy1Status.BorderThickness = 0;
+            fpnEnemy1Status.Location = new Point(1, 61);
+            fpnEnemy1Status.Margin = new Padding(0, 15, 0, 0);
+            fpnEnemy1Status.Name = "fpnEnemy1Status";
+            fpnEnemy1Status.Size = new Size(545, 45);
+            fpnEnemy1Status.TabIndex = 2;
             // 
-            // gradientLabel4
+            // lblEnemy1Name
             // 
-            gradientLabel4.BackColor = Color.Transparent;
-            gradientLabel4.Font = new Font("Danjo-bold", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gradientLabel4.GradientEnd = Color.WhiteSmoke;
-            gradientLabel4.GradientStart = Color.WhiteSmoke;
-            gradientLabel4.Location = new Point(1, 1);
-            gradientLabel4.Margin = new Padding(0, 0, 15, 0);
-            gradientLabel4.Name = "gradientLabel4";
-            gradientLabel4.RightToLeft = RightToLeft.No;
-            gradientLabel4.Size = new Size(544, 45);
-            gradientLabel4.TabIndex = 0;
-            gradientLabel4.Text = "미확인";
-            gradientLabel4.TextAlign = ContentAlignment.BottomLeft;
+            lblEnemy1Name.BackColor = Color.Transparent;
+            lblEnemy1Name.Font = new Font("Danjo-bold", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblEnemy1Name.GradientEnd = Color.WhiteSmoke;
+            lblEnemy1Name.GradientStart = Color.WhiteSmoke;
+            lblEnemy1Name.Location = new Point(1, 1);
+            lblEnemy1Name.Margin = new Padding(0, 0, 15, 0);
+            lblEnemy1Name.Name = "lblEnemy1Name";
+            lblEnemy1Name.RightToLeft = RightToLeft.No;
+            lblEnemy1Name.Size = new Size(544, 45);
+            lblEnemy1Name.TabIndex = 0;
+            lblEnemy1Name.Text = "미확인";
+            lblEnemy1Name.TextAlign = ContentAlignment.BottomLeft;
             // 
             // enemyScrollBar
             // 
@@ -1534,7 +1534,7 @@
             doubleBufferedPanel6.PerformLayout();
             enemyContainer.ResumeLayout(false);
             enemyList.ResumeLayout(false);
-            doubleBufferedPanel11.ResumeLayout(false);
+            pnEnemy1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
             ResumeLayout(false);
         }
@@ -1631,10 +1631,10 @@
         private controls.DoubleBufferedPanel enemyContainer;
         private controls.CustomFlowLayoutPanel enemyList;
         private ReaLTaiizor.Controls.CyberScrollBar enemyScrollBar;
-        private controls.DoubleBufferedPanel doubleBufferedPanel11;
-        private controls.HealthBar healthBar2;
-        private controls.CustomFlowLayoutPanel customFlowLayoutPanel9;
-        private controls.GradientLabel gradientLabel4;
+        private controls.DoubleBufferedPanel pnEnemy1;
+        private controls.HealthBar hbEnemy1;
+        private controls.CustomFlowLayoutPanel fpnEnemy1Status;
+        private controls.GradientLabel lblEnemy1Name;
         private PictureBox pictureBox10;
     }
 }
