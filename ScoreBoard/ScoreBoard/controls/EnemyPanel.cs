@@ -74,8 +74,12 @@ namespace ScoreBoard.controls
         private void ShowEnemyStatus()
         {
             // 적의 id를 바탕으로 Monster 데이터 불러오기
-            Monster monster = DataReader.ReadMonsterData(_id)
-                              ?? throw new ArgumentException("몬스터 데이터를 불러올 수 없습니다.");
+            Monster monster = _id switch
+            {
+                "2_01_white_soldier" => new BlackKnight(_id, 0),// 스폰 턴은 0으로 설정
+                "2_02_black_knight" => new WhiteSoldier(_id, 0),
+                _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {_id}"),
+            };
             // Monster의 Stat을 바탕으로 체력바 세팅
             hbEnemy.SetValues(monster.Stat.Hp, 0, monster.Stat.MaxHp);
         }
