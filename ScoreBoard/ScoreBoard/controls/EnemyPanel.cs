@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ScoreBoard.data.monster;
+using ScoreBoard.utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,13 +32,26 @@ namespace ScoreBoard.controls
             longPressTimer.Tick += LongPressTimer_Tick;
         }
 
+        /*
+         * ShowEnemyStatus()
+         * - 적의 상태를 표시하는 메서드
+         */
+        private void ShowEnemyStatus()
+        {
+            // 적의 id를 바탕으로 Monster 데이터 불러오기
+            Monster monster = DataReader.ReadMonsterData("monsterId")
+                              ?? throw new ArgumentException("몬스터 데이터를 불러올 수 없습니다.");
+            // Monster의 Stat을 바탕으로 체력바 세팅
+            hbEnemy.SetValues(monster.Stat.Hp, 0, monster.Stat.MaxHp);
+        }
+
         private void LongPressTimer_Tick(object? sender, EventArgs e)
         {
             if (isLongPressing)
             {
                 // 롱 프레스 상태가 유지되고 있다면 타이머를 중지하고 롱 프레스 이벤트를 발생시킴
                 longPressTimer.Stop();
-                // TODO: ShowEnemyStatus() 구현
+                ShowEnemyStatus();
                 isLongPressing = false;
             }
         }
