@@ -95,7 +95,6 @@ namespace ScoreBoard.content
                 selectMonsterModal.Close();
                 RequestScoreBoard?.Invoke(this, (selectedCharacters, selectedMonsters));
             }
-            // TODO => 점수판 폼 호출 (selectedCharacters와 selectedMonsters 파라미터로 설정)
         }
 
         /*
