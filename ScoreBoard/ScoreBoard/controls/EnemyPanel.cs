@@ -20,8 +20,18 @@ namespace ScoreBoard.controls
         private bool isLongPressing = false; // 롱 프레스 상태 변수
         private const int LongPressThreshold = 1000; // 롱 프레스 시간 임계값 (ms)
 
+        private readonly string _id;
+        private readonly string _name;
+        private readonly ushort _count;
+
         public EnemyPanel(string id, string name, ushort count)
         {
+            // 생성자에서 id, name, count 초기화
+            _id = id;
+            _name = name;
+            _count = count;
+
+            // 컨트롤 초기화
             InitializeComponent();
             lblName.Text = $"{name} ({count})";
 
@@ -64,7 +74,7 @@ namespace ScoreBoard.controls
         private void ShowEnemyStatus()
         {
             // 적의 id를 바탕으로 Monster 데이터 불러오기
-            Monster monster = DataReader.ReadMonsterData("monsterId")
+            Monster monster = DataReader.ReadMonsterData(_id)
                               ?? throw new ArgumentException("몬스터 데이터를 불러올 수 없습니다.");
             // Monster의 Stat을 바탕으로 체력바 세팅
             hbEnemy.SetValues(monster.Stat.Hp, 0, monster.Stat.MaxHp);
