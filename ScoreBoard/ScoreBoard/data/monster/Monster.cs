@@ -33,7 +33,7 @@ namespace ScoreBoard.data.monster
             Stat = new Stat
             {
                 Hp = data.Stat.Hp,
-                MaxHp = data.Stat.MaxHp,
+                MaxHp = data.Stat.Hp, // 최대 체력은 현재 체력과 동일
                 Movement = data.Stat.Movement,
                 CombatStats = data.Stat.CombatStats.ToDictionary(
                     kv => kv.Key,
