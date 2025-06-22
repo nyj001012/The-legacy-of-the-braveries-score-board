@@ -82,6 +82,7 @@ namespace ScoreBoard.controls
             };
             // Monster의 Stat을 바탕으로 체력바 세팅
             hbEnemy.SetValues(monster.Stat.Hp, 0, monster.Stat.MaxHp);
+            hbEnemy.HealthColor = Color.FromArgb(119, 185, 69);
         }
 
         private void LongPressTimer_Tick(object? sender, EventArgs e)
