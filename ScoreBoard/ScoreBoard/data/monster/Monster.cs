@@ -11,12 +11,12 @@ namespace ScoreBoard.data.monster
 {
     internal class Monster
     {
-        public ushort Grade { get; private set; } // 몬스터 등급 (예: 0 보스, 1 엘리트, 2 일반).
-        public ushort Id { get; private set; } // Id
-        public string Name { get; private set; } = string.Empty!; // 이름
-        public Stat Stat { get; private set; } = default!; // 스탯
-        public ushort[] AttackDiceValue { get; private set; } = default!; // 공격이 유효한 주사위 숫자
-        public ushort SpawnTurn { get; private set; } // 스폰 가능한 턴
+        public ushort Grade { get; set; } // 몬스터 등급 (예: 0 보스, 1 엘리트, 2 일반).
+        public string Id { get; set; } = string.Empty!; // Id
+        public string Name { get; set; } = string.Empty!; // 이름
+        public Stat Stat { get; set; } = default!; // 스탯
+        public ushort[] AttackDiceValue { get; set; } = default!; // 공격이 유효한 주사위 숫자
+        public ushort SpawnTurn { get; set; } // 스폰 가능한 턴
         public SkillBase? SpawnElites { get; set; } // 보스 몬스터는 엘리트 몬스터를 소환할 수 있음
 
         protected void InitialiseNormalElite(string id, ushort spawnTurn)
@@ -33,7 +33,7 @@ namespace ScoreBoard.data.monster
             Stat = new Stat
             {
                 Hp = data.Stat.Hp,
-                MaxHp = data.Stat.MaxHp,
+                MaxHp = data.Stat.Hp, // 최대 체력은 현재 체력과 동일
                 Movement = data.Stat.Movement,
                 CombatStats = data.Stat.CombatStats.ToDictionary(
                     kv => kv.Key,

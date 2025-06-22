@@ -98,6 +98,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Transparent;
             Controls.Add(pnEnemy);
+            Cursor = Cursors.Hand;
             Margin = new Padding(0, 25, 0, 25);
             Name = "EnemyPanel";
             Size = new Size(526, 172);
