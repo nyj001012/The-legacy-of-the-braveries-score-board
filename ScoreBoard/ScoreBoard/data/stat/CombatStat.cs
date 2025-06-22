@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScoreBoard.data
+namespace ScoreBoard.data.stat
 {
-    internal class CombatStat()
+    public class CombatStat()
     {
         public string Type { get; set; } = string.Empty; // 공격 타입 (예: 물리(atk), 마법(sp))
         public ushort Range { get; set; } // 공격 사거리 (예: 1, 2, 3 등)

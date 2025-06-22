@@ -1,12 +1,14 @@
-﻿using System;
+﻿using ScoreBoard.data.skill;
+using ScoreBoard.data.stat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScoreBoard.data
+namespace ScoreBoard.data.character
 {
-    internal class CorpsMember
+    public class CorpsMember
     {
         public string Id { get; set; } = string.Empty; // 멤버 ID: [군단 ID]_[번호]_이름
         public string Name { get; set; } = string.Empty; // 멤버 이름 (예: 루다, 스카이하늘소라텐등)
@@ -17,5 +19,6 @@ namespace ScoreBoard.data
         public List<ActiveSkill> Actives { get; set; } = []; // 멤버의 능력치 정보
         public List<Artifact> ArtifactSlot { get; set; } = []; // 멤버의 유물 슬롯 정보 (예: 무기, 방어구 등)
         public ushort MaxArtifactSlot { get; set; } = 3; // 최대 유물 슬롯 수 (예: 3개)
+        public ushort Level { get; set; } = 0; // 멤버의 레벨 (예: 1, 2, 3 등)
     }
 }

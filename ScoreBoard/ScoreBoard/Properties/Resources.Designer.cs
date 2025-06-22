@@ -93,6 +93,16 @@ namespace ScoreBoard.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap BtnDone {
+            get {
+                object obj = ResourceManager.GetObject("BtnDone", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap BtnGuide {
             get {
                 object obj = ResourceManager.GetObject("BtnGuide", resourceCulture);
@@ -106,6 +116,16 @@ namespace ScoreBoard.Properties {
         internal static System.Drawing.Bitmap BtnJoin {
             get {
                 object obj = ResourceManager.GetObject("BtnJoin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap BtnMore {
+            get {
+                object obj = ResourceManager.GetObject("BtnMore", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,6 +163,16 @@ namespace ScoreBoard.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap EmptyArtifactSlot {
+            get {
+                object obj = ResourceManager.GetObject("EmptyArtifactSlot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap ImgBackground {
             get {
                 object obj = ResourceManager.GetObject("ImgBackground", resourceCulture);
@@ -156,6 +186,16 @@ namespace ScoreBoard.Properties {
         internal static System.Drawing.Bitmap ImgBanner {
             get {
                 object obj = ResourceManager.GetObject("ImgBanner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ImgDetail {
+            get {
+                object obj = ResourceManager.GetObject("ImgDetail", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +226,36 @@ namespace ScoreBoard.Properties {
         internal static System.Drawing.Bitmap ImgModalBackground {
             get {
                 object obj = ResourceManager.GetObject("ImgModalBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lv1 {
+            get {
+                object obj = ResourceManager.GetObject("Lv1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lv2 {
+            get {
+                object obj = ResourceManager.GetObject("Lv2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lv3 {
+            get {
+                object obj = ResourceManager.GetObject("Lv3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

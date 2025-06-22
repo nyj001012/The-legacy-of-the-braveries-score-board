@@ -14,6 +14,7 @@ namespace ScoreBoard
     public partial class MainControl : UserControl
     {
         public event EventHandler OrganiseButtonClicked = delegate { }; // null 방지를 위한 기본값 설정
+        public event EventHandler ShowScoreBoard = delegate { }; // null 방지를 위한 기본값 설정
 
         public MainControl()
         {

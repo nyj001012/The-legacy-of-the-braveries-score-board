@@ -188,6 +188,8 @@
             reportedList.Padding = new Padding(20, 0, 20, 0);
             reportedList.Size = new Size(541, 511);
             reportedList.TabIndex = 0;
+            reportedList.ControlAdded += reportedList_UpdateBtnDecisionVisibility;
+            reportedList.ControlRemoved += reportedList_UpdateBtnDecisionVisibility;
             reportedList.DragDrop += reportedList_DragDrop;
             reportedList.DragEnter += reportedList_DragEnter;
             reportedList.DragLeave += reportedList_DragLeave;
@@ -258,6 +260,7 @@
             btnDecision.Size = new Size(177, 60);
             btnDecision.TabIndex = 9;
             btnDecision.TabStop = false;
+            btnDecision.Visible = false;
             btnDecision.Click += btnDecision_Click;
             // 
             // SelectMonsterForm

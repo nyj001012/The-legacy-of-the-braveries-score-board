@@ -1,6 +1,6 @@
 ﻿using ScoreBoard.controls;
-using ScoreBoard.data;
 using ScoreBoard.data.character;
+using ScoreBoard.data.monster;
 using ScoreBoard.Properties;
 using ScoreBoard.utils;
 using System.Data;
@@ -149,7 +149,6 @@ namespace ScoreBoard.modals
                     label.Text = $"{monsterName} ({count})";
                 }
             }
-
             ScrollBarManager.SetScrollBar(reportedContainer, reportedList, reportedScrollBar);
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
         }
@@ -389,6 +388,11 @@ namespace ScoreBoard.modals
             var item = currentSelectedMonsters.FirstOrDefault(m => m.id == draggedId);
             currentSelectedMonsters.Remove(item);
             currentSelectedMonsters.Insert(newIndex, item);
+        }
+
+        private void reportedList_UpdateBtnDecisionVisibility(object sender, ControlEventArgs e)
+        {
+            btnDecision.Visible = currentSelectedMonsters.Count > 0;
         }
     }
 }

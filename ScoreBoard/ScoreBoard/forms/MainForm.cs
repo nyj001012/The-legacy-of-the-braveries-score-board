@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace ScoreBoard.forms
         public MainForm()
         {
             InitializeComponent();
-            this.Size = new Size(1920, 1080);
+            this.ClientSize = new Size(1920, 1080);
         }
 
         /*
@@ -51,7 +52,13 @@ namespace ScoreBoard.forms
             var mainControl = new MainControl();
             mainControl.OrganiseButtonClicked += (s, e) =>
             {
-                ShowControl(new OrganisationControl()); // 부대 편성 컨트롤 표시
+                var organisationControl = new OrganisationControl();
+                organisationControl.RequestScoreBoard += (_, data) =>
+                {
+                    var (characters, monsters) = data;
+                    ShowControl(new ScoreBoardControl(characters, monsters)); // 점수판 컨트롤 표시
+                };
+                ShowControl(organisationControl); // 부대 편성 컨트롤 표시
             };
 
             ShowControl(mainControl);
