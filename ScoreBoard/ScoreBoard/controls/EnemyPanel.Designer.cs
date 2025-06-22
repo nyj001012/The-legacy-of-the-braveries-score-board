@@ -102,9 +102,6 @@
             Margin = new Padding(0, 25, 0, 25);
             Name = "EnemyPanel";
             Size = new Size(526, 172);
-            MouseDown += EnemyPanel_StartLongPress;
-            MouseLeave += EnemyPanel_MouseLeave;
-            MouseUp += EnemyPanel_MouseUp;
             pnEnemy.ResumeLayout(false);
             ResumeLayout(false);
         }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,12 +25,36 @@ namespace ScoreBoard.controls
             InitializeComponent();
             lblName.Text = $"{name} ({count})";
 
+            // EnemyPanel 컨트롤의 마우스 이벤트 핸들러 등록
+            RegisterMouseEvents(this);
+
             // 타이머 초기화
             longPressTimer = new Timer
             {
                 Interval = 1000 // 1초
             };
             longPressTimer.Tick += LongPressTimer_Tick;
+        }
+
+        /*
+         * RegisterMouseEvents(Control control)
+         * - 적 패널의 마우스 이벤트를 등록하는 메서드
+         * - control: 이벤트를 등록할 컨트롤
+         */
+        private void RegisterMouseEvents(Control control)
+        {
+            // 이미 연결되어 있을 수도 있으니 중복 등록 방지
+            control.MouseDown -= EnemyPanel_MouseDown;
+            control.MouseDown += EnemyPanel_MouseDown;
+            control.MouseUp -= EnemyPanel_MouseUp;
+            control.MouseUp += EnemyPanel_MouseUp;
+            control.MouseLeave -= EnemyPanel_MouseLeave;
+            control.MouseLeave += EnemyPanel_MouseLeave;
+
+            foreach (Control child in control.Controls)
+            {
+                RegisterMouseEvents(child); // 자식도 재귀적으로 등록
+            }
         }
 
         /*
@@ -56,7 +81,7 @@ namespace ScoreBoard.controls
             }
         }
 
-        private void EnemyPanel_StartLongPress(object sender, MouseEventArgs e)
+        private void EnemyPanel_MouseDown(object? sender, MouseEventArgs e)
         {
             isLongPressing = true; // 롱 프레스 상태 시작
             longPressTimer.Start(); // 타이머 시작
@@ -68,12 +93,12 @@ namespace ScoreBoard.controls
             isLongPressing = false; // 롱 프레스 상태 종료
         }
 
-        private void EnemyPanel_MouseLeave(object sender, EventArgs e)
+        private void EnemyPanel_MouseLeave(object? sender, EventArgs e)
         {
             ResetLongPress(); // 마우스가 컨트롤을 떠날 때 롱 프레스 상태를 초기화
         }
 
-        private void EnemyPanel_MouseUp(object sender, MouseEventArgs e)
+        private void EnemyPanel_MouseUp(object? sender, MouseEventArgs e)
         {
             ResetLongPress(); // 마우스 버튼을 놓을 때 롱 프레스 상태를 초기화
         }
