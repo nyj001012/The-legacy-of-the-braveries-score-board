@@ -1,0 +1,12 @@
+﻿{
+  "id": "1_04_Underwear",
+  "name": "빤스",
+  "type": "armour",
+  "rarity": "rare",
+  "equipEffect": {
+    "spellPower": 100
+  },
+  "description": [
+    "주문력 +100"
+  ]
+}

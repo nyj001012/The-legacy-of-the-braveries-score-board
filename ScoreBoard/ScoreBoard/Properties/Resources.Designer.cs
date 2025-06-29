@@ -163,9 +163,39 @@ namespace ScoreBoard.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap EmptyAccessorySlot {
+            get {
+                object obj = ResourceManager.GetObject("EmptyAccessorySlot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap EmptyArmourSlot {
+            get {
+                object obj = ResourceManager.GetObject("EmptyArmourSlot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap EmptyArtifactSlot {
             get {
                 object obj = ResourceManager.GetObject("EmptyArtifactSlot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap EmptyWeaponSlot {
+            get {
+                object obj = ResourceManager.GetObject("EmptyWeaponSlot", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

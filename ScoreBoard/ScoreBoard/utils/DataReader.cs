@@ -1,10 +1,12 @@
-﻿using ScoreBoard.data.character;
+﻿using ScoreBoard.data.artifact;
+using ScoreBoard.data.character;
 using ScoreBoard.data.monster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ScoreBoard.utils
@@ -201,6 +203,23 @@ namespace ScoreBoard.utils
             }
             string json = File.ReadAllText(jsonPath);
             return JsonSerializer.Deserialize<Monster>(json, CachedJsonSerializerOptions);
+        }
+
+        /*
+         * JsonReader.ReadArtifactData(id)
+         * - id: 유물 ID
+         * - return: 해당 유물의 JSON 데이터를 반환
+         */
+        public static Artifact? ReadArtifactData(string id)
+        {
+            string jsonPath = $@"Resources/meta_data/artifact/{id}.json";
+            if (!File.Exists(jsonPath))
+            {
+                return null;
+            }
+            string json = File.ReadAllText(jsonPath);
+            CachedJsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            return JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions);
         }
     }
 }
