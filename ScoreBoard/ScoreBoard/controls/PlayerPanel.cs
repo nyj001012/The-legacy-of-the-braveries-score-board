@@ -1,4 +1,4 @@
-﻿using ScoreBoard.data;
+﻿using ScoreBoard.data.artifact;
 using ScoreBoard.data.character;
 using ScoreBoard.data.stat;
 using System;
