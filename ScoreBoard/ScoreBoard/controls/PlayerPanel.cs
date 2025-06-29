@@ -66,7 +66,6 @@ namespace ScoreBoard.controls
          */
         private void InitArtifact(List<Artifact> artifacts, ushort maxSlots)
         {
-            int size = fpnArtifact.Size.Height;
             fpnArtifact.SuspendLayout();
             fpnArtifact.Controls.Clear(); // 기존 컨트롤 제거
             for (int i = 0; i < maxSlots; i++)
@@ -89,6 +88,8 @@ namespace ScoreBoard.controls
          */
         private void SetDefaultArtifactSlot(int index)
         {
+            int size = fpnArtifact.Size.Height;
+
             Image image = index switch
             {
                 0 => Properties.Resources.EmptyWeaponSlot, // 첫 번째 슬롯 이미지
@@ -99,7 +100,7 @@ namespace ScoreBoard.controls
             PictureBox pb = new PictureBox
             {
                 Name = $"pbArtifact{index}",
-                Size = fpnArtifact.Size,
+                Size = new Size(size, size),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = image, // 위에서 결정된 이미지 사용
                 Tag = index // 슬롯 인덱스 저장
