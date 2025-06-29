@@ -98,6 +98,7 @@ namespace ScoreBoard.controls
 
             PictureBox pb = new PictureBox
             {
+                Name = $"pbArtifact{index}",
                 Size = fpnArtifact.Size,
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = image, // 위에서 결정된 이미지 사용
