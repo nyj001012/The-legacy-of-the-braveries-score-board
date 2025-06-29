@@ -93,7 +93,7 @@ namespace ScoreBoard.controls
             {
                 0 => Properties.Resources.EmptyWeaponSlot, // 첫 번째 슬롯 이미지
                 1 => Properties.Resources.EmptyArmourSlot, // 두 번째 슬롯 이미지
-                _ => Properties.Resources.EmptyAccessorySlot, // 기본 유물 슬롯 이미지
+                _ => Properties.Resources.EmptyAccessorySlot, // 세 번째, (네 번째) 유물 슬롯 이미지
             };
 
             PictureBox pb = new PictureBox
