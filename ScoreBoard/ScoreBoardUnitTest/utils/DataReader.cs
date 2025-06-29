@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ScoreBoard.data.artifact;
 using ScoreBoard.data.monster;
 using static ScoreBoard.utils.DataReader;
 
@@ -72,6 +73,21 @@ namespace ScoreBoardUnitTest.utils
                 { "2_02", "흑기사" }
             };
             CollectionAssert.AreEquivalent(expectedDict, actualDict);
+        }
+
+        [TestMethod]
+        public void TestReadArtifactDataById()
+        {
+            string id = "0_01_DingDingSword"; // 예시 유물 ID
+            var artifact = ReadArtifactData(id);
+            Assert.IsNotNull(artifact);
+            Assert.AreEqual("0_01_DingDingSword", artifact.Id);
+            Assert.AreEqual("딩딩 검", artifact.Name);
+            Assert.IsTrue(artifact.Description.Length > 0);
+            Assert.IsTrue(artifact.Description[0].Contains("공격력 +50"));
+            Assert.IsTrue(artifact.Description[1].Contains("체력 +100"));
+            Assert.AreEqual(Artifact.ArtifactType.Weapon, artifact.Type);
+            Assert.AreEqual(Artifact.ArtifactRarity.Rare, artifact.Rarity);
         }
     }
 }
