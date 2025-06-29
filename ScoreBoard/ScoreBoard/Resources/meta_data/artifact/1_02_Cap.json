@@ -1,0 +1,12 @@
+﻿{
+  "id": "1_02_Cap",
+  "name": "모자",
+  "type": "armour",
+  "rarity": "normal",
+  "equipEffect": {
+    "atk": 20
+  },
+  "description": [
+    "공격력 +20"
+  ]
+}
