@@ -73,22 +73,37 @@ namespace ScoreBoard.controls
             {
                 if (artifacts.ElementAtOrDefault(i) != null)
                 {
-                    // TODO: 유물 아이콘 동적 추가
+                    // TODO: 착용 중인 유물 아이콘 동적 추가
                 }
                 else
                 {
-                    // 빈 슬롯 아이콘 추가 (예: Properties.Resources.EmptyArtifactSlot)
-                    PictureBox emptySlot = new PictureBox
-                    {
-                        Name = $"EmptyArtifactSlot{i + 1}",
-                        Size = new Size(size, size), // 아이콘 크기 조정
-                        Image = Properties.Resources.EmptyArtifactSlot, // 빈 슬롯 아이콘 이미지
-                        SizeMode = PictureBoxSizeMode.StretchImage,
-                    };
-                    fpnArtifact.Controls.Add(emptySlot);
+                    SetDefaultArtifactSlot(i);
                 }
             }
             fpnArtifact.ResumeLayout();
+        }
+
+        /*
+         * fpnArtifact 컨트롤에 기본 유물 슬롯을 설정
+         * 첫 번째 슬롯은 무기, 두 번째는 방어구, 세 번째부터는 액세서리로 설정
+         */
+        private void SetDefaultArtifactSlot(int index)
+        {
+            Image image = index switch
+            {
+                0 => Properties.Resources.EmptyWeaponSlot, // 첫 번째 슬롯 이미지
+                1 => Properties.Resources.EmptyArmourSlot, // 두 번째 슬롯 이미지
+                _ => Properties.Resources.EmptyAccessorySlot, // 기본 유물 슬롯 이미지
+            };
+
+            PictureBox pb = new PictureBox
+            {
+                Size = fpnArtifact.Size,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Image = image, // 위에서 결정된 이미지 사용
+                Tag = index // 슬롯 인덱스 저장
+            };
+            fpnArtifact.Controls.Add(pb);
         }
     }
 }
