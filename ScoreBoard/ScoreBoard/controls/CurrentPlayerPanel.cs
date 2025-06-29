@@ -68,29 +68,46 @@ namespace ScoreBoard.controls
          */
         private void InitArtifact(List<Artifact> artifacts, ushort maxSlots)
         {
-            int size = fpnArtifact.Size.Height;
             fpnArtifact.SuspendLayout();
             fpnArtifact.Controls.Clear(); // 기존 컨트롤 제거
             for (int i = 0; i < maxSlots; i++)
             {
                 if (artifacts.ElementAtOrDefault(i) != null)
                 {
-                    // TODO: 유물 아이콘 동적 추가
+                    // TODO: 착용 중인 유물 아이콘 동적 추가
                 }
                 else
                 {
-                    // 빈 슬롯 아이콘 추가 (예: Properties.Resources.EmptyArtifactSlot)
-                    PictureBox emptySlot = new PictureBox
-                    {
-                        Name = $"EmptyArtifactSlot{i + 1}",
-                        Size = new Size(size, size), // 아이콘 크기 조정
-                        Image = Properties.Resources.EmptyArtifactSlot, // 빈 슬롯 아이콘 이미지
-                        SizeMode = PictureBoxSizeMode.StretchImage,
-                    };
-                    fpnArtifact.Controls.Add(emptySlot);
+                    SetDefaultArtifactSlot(i);
                 }
             }
             fpnArtifact.ResumeLayout();
+        }
+
+        /*
+         * fpnArtifact 컨트롤에 기본 유물 슬롯을 설정
+         * 첫 번째 슬롯은 무기, 두 번째는 방어구, 세 번째부터는 액세서리로 설정
+         */
+        private void SetDefaultArtifactSlot(int index)
+        {
+            int size = fpnArtifact.Size.Height;
+
+            Image image = index switch
+            {
+                0 => Properties.Resources.EmptyWeaponSlot, // 첫 번째 슬롯 이미지
+                1 => Properties.Resources.EmptyArmourSlot, // 두 번째 슬롯 이미지
+                _ => Properties.Resources.EmptyAccessorySlot, // 세 번째, (네 번째) 유물 슬롯 이미지
+            };
+
+            PictureBox pb = new PictureBox
+            {
+                Name = $"pbArtifact{index}",
+                Size = new Size(size, size),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Image = image, // 위에서 결정된 이미지 사용
+                Tag = index // 슬롯 인덱스 저장
+            };
+            fpnArtifact.Controls.Add(pb);
         }
     }
 }
