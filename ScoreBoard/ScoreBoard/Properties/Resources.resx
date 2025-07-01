@@ -197,4 +197,7 @@
   <data name="EmptyAccessorySlot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\equipment_empty_accessory.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BtnDice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\주사위.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -73,10 +73,9 @@
             lblTurn = new ScoreBoard.controls.GradientLabel();
             detailContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             detailList = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            pnBasicStatus = new ScoreBoard.controls.DoubleBufferedPanel();
-            lblDiceCritical = new ScoreBoard.controls.TransparentTextLabel();
-            lblDice1 = new ScoreBoard.controls.TransparentTextLabel();
+            fpnBasicStatus = new ScoreBoard.controls.CustomFlowLayoutPanel();
             lblName = new ScoreBoard.controls.TransparentTextLabel();
+            pbDice = new PictureBox();
             doubleBufferedPanel2 = new ScoreBoard.controls.DoubleBufferedPanel();
             transparentTextLabel2 = new ScoreBoard.controls.TransparentTextLabel();
             transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
@@ -145,7 +144,8 @@
             ((System.ComponentModel.ISupportInitialize)pbWeather).BeginInit();
             detailContainer.SuspendLayout();
             detailList.SuspendLayout();
-            pnBasicStatus.SuspendLayout();
+            fpnBasicStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbDice).BeginInit();
             doubleBufferedPanel2.SuspendLayout();
             doubleBufferedPanel4.SuspendLayout();
             doubleBufferedPanel3.SuspendLayout();
@@ -772,7 +772,7 @@
             detailList.BackgroundImageLayout = ImageLayout.Stretch;
             detailList.BorderColor = Color.Transparent;
             detailList.BorderThickness = 0;
-            detailList.Controls.Add(pnBasicStatus);
+            detailList.Controls.Add(fpnBasicStatus);
             detailList.Controls.Add(doubleBufferedPanel2);
             detailList.Controls.Add(fpnStatusDetail);
             detailList.Controls.Add(doubleBufferedPanel4);
@@ -790,44 +790,17 @@
             detailList.Size = new Size(720, 930);
             detailList.TabIndex = 1;
             // 
-            // pnBasicStatus
+            // fpnBasicStatus
             // 
-            pnBasicStatus.Controls.Add(lblDiceCritical);
-            pnBasicStatus.Controls.Add(lblDice1);
-            pnBasicStatus.Controls.Add(lblName);
-            pnBasicStatus.Location = new Point(60, 120);
-            pnBasicStatus.Margin = new Padding(0);
-            pnBasicStatus.Name = "pnBasicStatus";
-            pnBasicStatus.Size = new Size(600, 45);
-            pnBasicStatus.TabIndex = 0;
-            // 
-            // lblDiceCritical
-            // 
-            lblDiceCritical.AutoSize = true;
-            lblDiceCritical.BackColor = Color.Transparent;
-            lblDiceCritical.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDiceCritical.ForeColor = Color.FromArgb(255, 217, 0);
-            lblDiceCritical.Location = new Point(558, 2);
-            lblDiceCritical.Margin = new Padding(0);
-            lblDiceCritical.Name = "lblDiceCritical";
-            lblDiceCritical.Size = new Size(41, 42);
-            lblDiceCritical.TabIndex = 2;
-            lblDiceCritical.Text = "4";
-            lblDiceCritical.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblDice1
-            // 
-            lblDice1.AutoSize = true;
-            lblDice1.BackColor = Color.Transparent;
-            lblDice1.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDice1.ForeColor = Color.WhiteSmoke;
-            lblDice1.Location = new Point(512, 2);
-            lblDice1.Margin = new Padding(0);
-            lblDice1.Name = "lblDice1";
-            lblDice1.Size = new Size(41, 42);
-            lblDice1.TabIndex = 1;
-            lblDice1.Text = "3";
-            lblDice1.TextAlign = ContentAlignment.MiddleLeft;
+            fpnBasicStatus.BorderColor = Color.Transparent;
+            fpnBasicStatus.BorderThickness = 0;
+            fpnBasicStatus.Controls.Add(lblName);
+            fpnBasicStatus.Controls.Add(pbDice);
+            fpnBasicStatus.Location = new Point(60, 120);
+            fpnBasicStatus.Margin = new Padding(0);
+            fpnBasicStatus.Name = "fpnBasicStatus";
+            fpnBasicStatus.Size = new Size(600, 45);
+            fpnBasicStatus.TabIndex = 0;
             // 
             // lblName
             // 
@@ -835,13 +808,27 @@
             lblName.BackColor = Color.Transparent;
             lblName.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblName.ForeColor = Color.FromArgb(255, 217, 0);
-            lblName.Location = new Point(2, 2);
+            lblName.Location = new Point(0, 0);
             lblName.Margin = new Padding(0, 0, 15, 0);
             lblName.Name = "lblName";
             lblName.Size = new Size(275, 42);
             lblName.TabIndex = 0;
             lblName.Text = "1P 플레이어 이름";
             lblName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pbDice
+            // 
+            pbDice.BackgroundImage = Properties.Resources.BtnDice;
+            pbDice.BackgroundImageLayout = ImageLayout.Stretch;
+            pbDice.Cursor = Cursors.Hand;
+            pbDice.Image = Properties.Resources.BtnDice;
+            pbDice.Location = new Point(290, 0);
+            pbDice.Margin = new Padding(0);
+            pbDice.Name = "pbDice";
+            pbDice.Size = new Size(45, 45);
+            pbDice.TabIndex = 3;
+            pbDice.TabStop = false;
+            pbDice.Click += pbDice_Click;
             // 
             // doubleBufferedPanel2
             // 
@@ -1504,8 +1491,9 @@
             ((System.ComponentModel.ISupportInitialize)pbWeather).EndInit();
             detailContainer.ResumeLayout(false);
             detailList.ResumeLayout(false);
-            pnBasicStatus.ResumeLayout(false);
-            pnBasicStatus.PerformLayout();
+            fpnBasicStatus.ResumeLayout(false);
+            fpnBasicStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbDice).EndInit();
             doubleBufferedPanel2.ResumeLayout(false);
             doubleBufferedPanel2.PerformLayout();
             doubleBufferedPanel4.ResumeLayout(false);
@@ -1587,10 +1575,8 @@
         private controls.DoubleBufferedPanel detailContainer;
         private ReaLTaiizor.Controls.CyberScrollBar detailScrollBar;
         private controls.CustomFlowLayoutPanel detailList;
-        private controls.DoubleBufferedPanel pnBasicStatus;
+        private controls.CustomFlowLayoutPanel fpnBasicStatus;
         private controls.TransparentTextLabel lblName;
-        private controls.TransparentTextLabel lblDice1;
-        private controls.TransparentTextLabel lblDiceCritical;
         private controls.DoubleBufferedPanel doubleBufferedPanel2;
         private controls.TransparentTextLabel transparentTextLabel1;
         private controls.TransparentTextLabel transparentTextLabel2;
@@ -1636,5 +1622,6 @@
         private controls.CustomFlowLayoutPanel fpnEnemy1Status;
         private controls.GradientLabel lblEnemy1Name;
         private PictureBox pictureBox10;
+        private PictureBox pbDice;
     }
 }
