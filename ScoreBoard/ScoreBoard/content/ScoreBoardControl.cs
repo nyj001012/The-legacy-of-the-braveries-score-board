@@ -104,16 +104,20 @@ namespace ScoreBoard.content
          */
         private void ShowAttackValue(CorpsMember player)
         {
+            if (player.Stat.CombatStats.Count == 0)
+            {
+                fpnAttackValue.Visible = false; // 공격력 패널 숨기기
+                return;
+            }
             fpnAttackValue.SuspendLayout();
             // 기존 컨트롤 invisible로 초기화
             pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
             lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
             lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
 
-            foreach (var s in player.Stat.CombatStats)
+            foreach (var (type, combatStat) in player.Stat.CombatStats)
             {
-                CombatStat combatStat = s.Value; // CombatStat 객체 가져오기
-                if (s.Key == "melee")
+                if (type == "melee")
                 {
                     pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true; // 근접 공격 아이콘, 레이블 보이기
                     lblMeleeAttack.Text = $"{combatStat.Value}"; // 근접 공격력 표시
@@ -143,10 +147,9 @@ namespace ScoreBoard.content
             lblMeleeRange.Visible = false;
             lblRangedRange.Visible = false;
 
-            foreach (var s in player.Stat.CombatStats)
+            foreach (var (type, combatStat) in player.Stat.CombatStats)
             {
-                CombatStat combatStat = s.Value; // CombatStat 객체 가져오기
-                if (s.Key == "melee")
+                if (type == "melee")
                 {
                     pbMelee.Visible = true; // 근접 공격 아이콘 보이기
                     lblMeleeRange.Visible = true; // 근접 공격 사거리 레이블 보이기
