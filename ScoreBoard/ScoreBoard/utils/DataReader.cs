@@ -221,5 +221,23 @@ namespace ScoreBoard.utils
             CachedJsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             return JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions);
         }
+
+        /*
+         * JsonReader.GetArtifactImage(id)
+         * - id: 유물 ID
+         * - return: 해당 유물의 이미지 반환
+         */
+        internal static Image GetArtifactImage(string id)
+        {
+            string imagePath = $@"Resources/meta_data/artifact/{id}.png";
+            if (File.Exists(imagePath))
+            {
+                return Image.FromFile(imagePath);
+            }
+            else
+            {
+                throw new FileNotFoundException($"유물 이미지 파일을 찾을 수 없습니다: {imagePath}");
+            }
+        }
     }
 }
