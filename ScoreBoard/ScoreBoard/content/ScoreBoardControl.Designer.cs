@@ -89,14 +89,14 @@
             lblMeleeRange = new ScoreBoard.controls.TransparentTextLabel();
             pbRanged = new PictureBox();
             lblRangedRange = new ScoreBoard.controls.TransparentTextLabel();
-            customFlowLayoutPanel1 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            fpnAttackValue = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel10 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox3 = new PictureBox();
-            transparentTextLabel11 = new ScoreBoard.controls.TransparentTextLabel();
-            transparentTextLabel12 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox4 = new PictureBox();
-            transparentTextLabel13 = new ScoreBoard.controls.TransparentTextLabel();
-            transparentTextLabel14 = new ScoreBoard.controls.TransparentTextLabel();
+            pbMeleeAttack = new PictureBox();
+            lblMeleeAttack = new ScoreBoard.controls.TransparentTextLabel();
+            lblMeleeAttackCount = new ScoreBoard.controls.TransparentTextLabel();
+            pbRangedAttack = new PictureBox();
+            lblRangedAttack = new ScoreBoard.controls.TransparentTextLabel();
+            lblRangedAttackCount = new ScoreBoard.controls.TransparentTextLabel();
             customFlowLayoutPanel2 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel8 = new ScoreBoard.controls.TransparentTextLabel();
             transparentTextLabel9 = new ScoreBoard.controls.TransparentTextLabel();
@@ -151,9 +151,9 @@
             fpnRange.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMelee).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbRanged).BeginInit();
-            customFlowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            fpnAttackValue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMeleeAttack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbRangedAttack).BeginInit();
             customFlowLayoutPanel2.SuspendLayout();
             customFlowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -777,7 +777,7 @@
             detailList.Controls.Add(fpnStatusDetail);
             detailList.Controls.Add(doubleBufferedPanel4);
             detailList.Controls.Add(fpnRange);
-            detailList.Controls.Add(customFlowLayoutPanel1);
+            detailList.Controls.Add(fpnAttackValue);
             detailList.Controls.Add(customFlowLayoutPanel2);
             detailList.Controls.Add(customFlowLayoutPanel3);
             detailList.Controls.Add(doubleBufferedPanel5);
@@ -949,7 +949,7 @@
             pbMelee.BackgroundImage = Properties.Resources.ImgMelee;
             pbMelee.BackgroundImageLayout = ImageLayout.Stretch;
             pbMelee.Location = new Point(208, 0);
-            pbMelee.Margin = new Padding(0, 0, 10, 0);
+            pbMelee.Margin = new Padding(0);
             pbMelee.Name = "pbMelee";
             pbMelee.Size = new Size(45, 45);
             pbMelee.TabIndex = 4;
@@ -961,7 +961,7 @@
             lblMeleeRange.BackColor = Color.Transparent;
             lblMeleeRange.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblMeleeRange.ForeColor = Color.WhiteSmoke;
-            lblMeleeRange.Location = new Point(263, 0);
+            lblMeleeRange.Location = new Point(253, 0);
             lblMeleeRange.Margin = new Padding(0, 0, 20, 0);
             lblMeleeRange.Name = "lblMeleeRange";
             lblMeleeRange.Size = new Size(40, 42);
@@ -973,8 +973,8 @@
             // 
             pbRanged.BackgroundImage = Properties.Resources.ImgRanged;
             pbRanged.BackgroundImageLayout = ImageLayout.Stretch;
-            pbRanged.Location = new Point(323, 0);
-            pbRanged.Margin = new Padding(0, 0, 10, 0);
+            pbRanged.Location = new Point(313, 0);
+            pbRanged.Margin = new Padding(0);
             pbRanged.Name = "pbRanged";
             pbRanged.Size = new Size(45, 45);
             pbRanged.TabIndex = 2;
@@ -986,7 +986,7 @@
             lblRangedRange.BackColor = Color.Transparent;
             lblRangedRange.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblRangedRange.ForeColor = Color.WhiteSmoke;
-            lblRangedRange.Location = new Point(378, 0);
+            lblRangedRange.Location = new Point(358, 0);
             lblRangedRange.Margin = new Padding(0);
             lblRangedRange.Name = "lblRangedRange";
             lblRangedRange.Size = new Size(40, 42);
@@ -994,22 +994,22 @@
             lblRangedRange.Text = "2";
             lblRangedRange.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // customFlowLayoutPanel1
+            // fpnAttackValue
             // 
-            customFlowLayoutPanel1.BorderColor = Color.Transparent;
-            customFlowLayoutPanel1.BorderThickness = 0;
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel10);
-            customFlowLayoutPanel1.Controls.Add(pictureBox3);
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel11);
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel12);
-            customFlowLayoutPanel1.Controls.Add(pictureBox4);
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel13);
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel14);
-            customFlowLayoutPanel1.Location = new Point(60, 420);
-            customFlowLayoutPanel1.Margin = new Padding(0, 15, 0, 0);
-            customFlowLayoutPanel1.Name = "customFlowLayoutPanel1";
-            customFlowLayoutPanel1.Size = new Size(599, 45);
-            customFlowLayoutPanel1.TabIndex = 7;
+            fpnAttackValue.BorderColor = Color.Transparent;
+            fpnAttackValue.BorderThickness = 0;
+            fpnAttackValue.Controls.Add(transparentTextLabel10);
+            fpnAttackValue.Controls.Add(pbMeleeAttack);
+            fpnAttackValue.Controls.Add(lblMeleeAttack);
+            fpnAttackValue.Controls.Add(lblMeleeAttackCount);
+            fpnAttackValue.Controls.Add(pbRangedAttack);
+            fpnAttackValue.Controls.Add(lblRangedAttack);
+            fpnAttackValue.Controls.Add(lblRangedAttackCount);
+            fpnAttackValue.Location = new Point(60, 420);
+            fpnAttackValue.Margin = new Padding(0, 15, 0, 0);
+            fpnAttackValue.Name = "fpnAttackValue";
+            fpnAttackValue.Size = new Size(599, 45);
+            fpnAttackValue.TabIndex = 7;
             // 
             // transparentTextLabel10
             // 
@@ -1025,78 +1025,82 @@
             transparentTextLabel10.Text = "공격력:";
             transparentTextLabel10.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox3
+            // pbMeleeAttack
             // 
-            pictureBox3.Location = new Point(133, 0);
-            pictureBox3.Margin = new Padding(0, 0, 10, 0);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(45, 45);
-            pictureBox3.TabIndex = 4;
-            pictureBox3.TabStop = false;
+            pbMeleeAttack.BackgroundImage = Properties.Resources.ImgMelee;
+            pbMeleeAttack.BackgroundImageLayout = ImageLayout.Stretch;
+            pbMeleeAttack.Location = new Point(133, 0);
+            pbMeleeAttack.Margin = new Padding(0);
+            pbMeleeAttack.Name = "pbMeleeAttack";
+            pbMeleeAttack.Size = new Size(45, 45);
+            pbMeleeAttack.TabIndex = 4;
+            pbMeleeAttack.TabStop = false;
             // 
-            // transparentTextLabel11
+            // lblMeleeAttack
             // 
-            transparentTextLabel11.AutoSize = true;
-            transparentTextLabel11.BackColor = Color.Transparent;
-            transparentTextLabel11.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel11.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel11.Location = new Point(188, 0);
-            transparentTextLabel11.Margin = new Padding(0, 0, 10, 0);
-            transparentTextLabel11.Name = "transparentTextLabel11";
-            transparentTextLabel11.Size = new Size(40, 42);
-            transparentTextLabel11.TabIndex = 3;
-            transparentTextLabel11.Text = "2";
-            transparentTextLabel11.TextAlign = ContentAlignment.MiddleCenter;
+            lblMeleeAttack.AutoSize = true;
+            lblMeleeAttack.BackColor = Color.Transparent;
+            lblMeleeAttack.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMeleeAttack.ForeColor = Color.WhiteSmoke;
+            lblMeleeAttack.Location = new Point(178, 0);
+            lblMeleeAttack.Margin = new Padding(0);
+            lblMeleeAttack.Name = "lblMeleeAttack";
+            lblMeleeAttack.Size = new Size(40, 42);
+            lblMeleeAttack.TabIndex = 3;
+            lblMeleeAttack.Text = "2";
+            lblMeleeAttack.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // transparentTextLabel12
+            // lblMeleeAttackCount
             // 
-            transparentTextLabel12.AutoSize = true;
-            transparentTextLabel12.BackColor = Color.Transparent;
-            transparentTextLabel12.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel12.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel12.Location = new Point(238, 0);
-            transparentTextLabel12.Margin = new Padding(0, 0, 20, 0);
-            transparentTextLabel12.Name = "transparentTextLabel12";
-            transparentTextLabel12.Size = new Size(76, 42);
-            transparentTextLabel12.TabIndex = 6;
-            transparentTextLabel12.Text = "{2}";
-            transparentTextLabel12.TextAlign = ContentAlignment.MiddleCenter;
+            lblMeleeAttackCount.AutoSize = true;
+            lblMeleeAttackCount.BackColor = Color.Transparent;
+            lblMeleeAttackCount.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMeleeAttackCount.ForeColor = Color.WhiteSmoke;
+            lblMeleeAttackCount.Location = new Point(218, 0);
+            lblMeleeAttackCount.Margin = new Padding(0, 0, 20, 0);
+            lblMeleeAttackCount.Name = "lblMeleeAttackCount";
+            lblMeleeAttackCount.Size = new Size(76, 42);
+            lblMeleeAttackCount.TabIndex = 6;
+            lblMeleeAttackCount.Text = "{2}";
+            lblMeleeAttackCount.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox4
+            // pbRangedAttack
             // 
-            pictureBox4.Location = new Point(334, 0);
-            pictureBox4.Margin = new Padding(0, 0, 10, 0);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(45, 45);
-            pictureBox4.TabIndex = 2;
-            pictureBox4.TabStop = false;
+            pbRangedAttack.BackgroundImage = Properties.Resources.ImgRanged;
+            pbRangedAttack.BackgroundImageLayout = ImageLayout.Stretch;
+            pbRangedAttack.Location = new Point(314, 0);
+            pbRangedAttack.Margin = new Padding(0);
+            pbRangedAttack.Name = "pbRangedAttack";
+            pbRangedAttack.Size = new Size(45, 45);
+            pbRangedAttack.TabIndex = 2;
+            pbRangedAttack.TabStop = false;
             // 
-            // transparentTextLabel13
+            // lblRangedAttack
             // 
-            transparentTextLabel13.AutoSize = true;
-            transparentTextLabel13.BackColor = Color.Transparent;
-            transparentTextLabel13.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel13.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel13.Location = new Point(389, 0);
-            transparentTextLabel13.Margin = new Padding(0, 0, 10, 0);
-            transparentTextLabel13.Name = "transparentTextLabel13";
-            transparentTextLabel13.Size = new Size(40, 42);
-            transparentTextLabel13.TabIndex = 1;
-            transparentTextLabel13.Text = "2";
-            transparentTextLabel13.TextAlign = ContentAlignment.MiddleCenter;
+            lblRangedAttack.AutoSize = true;
+            lblRangedAttack.BackColor = Color.Transparent;
+            lblRangedAttack.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRangedAttack.ForeColor = Color.WhiteSmoke;
+            lblRangedAttack.Location = new Point(359, 0);
+            lblRangedAttack.Margin = new Padding(0);
+            lblRangedAttack.Name = "lblRangedAttack";
+            lblRangedAttack.Size = new Size(40, 42);
+            lblRangedAttack.TabIndex = 1;
+            lblRangedAttack.Text = "2";
+            lblRangedAttack.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // transparentTextLabel14
+            // lblRangedAttackCount
             // 
-            transparentTextLabel14.AutoSize = true;
-            transparentTextLabel14.BackColor = Color.Transparent;
-            transparentTextLabel14.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel14.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel14.Location = new Point(439, 0);
-            transparentTextLabel14.Margin = new Padding(0);
-            transparentTextLabel14.Name = "transparentTextLabel14";
-            transparentTextLabel14.Size = new Size(76, 42);
-            transparentTextLabel14.TabIndex = 5;
-            transparentTextLabel14.Text = "{2}";
+            lblRangedAttackCount.AutoSize = true;
+            lblRangedAttackCount.BackColor = Color.Transparent;
+            lblRangedAttackCount.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRangedAttackCount.ForeColor = Color.WhiteSmoke;
+            lblRangedAttackCount.Location = new Point(399, 0);
+            lblRangedAttackCount.Margin = new Padding(0);
+            lblRangedAttackCount.Name = "lblRangedAttackCount";
+            lblRangedAttackCount.Size = new Size(76, 42);
+            lblRangedAttackCount.TabIndex = 5;
+            lblRangedAttackCount.Text = "{2}";
             // 
             // customFlowLayoutPanel2
             // 
@@ -1506,10 +1510,10 @@
             fpnRange.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbMelee).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbRanged).EndInit();
-            customFlowLayoutPanel1.ResumeLayout(false);
-            customFlowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            fpnAttackValue.ResumeLayout(false);
+            fpnAttackValue.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMeleeAttack).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbRangedAttack).EndInit();
             customFlowLayoutPanel2.ResumeLayout(false);
             customFlowLayoutPanel2.PerformLayout();
             customFlowLayoutPanel3.ResumeLayout(false);
@@ -1594,14 +1598,14 @@
         private controls.TransparentTextLabel transparentTextLabel4;
         private PictureBox pbMelee;
         private controls.TransparentTextLabel lblMeleeRange;
-        private controls.CustomFlowLayoutPanel customFlowLayoutPanel1;
+        private controls.CustomFlowLayoutPanel fpnAttackValue;
         private controls.TransparentTextLabel transparentTextLabel10;
-        private PictureBox pictureBox3;
-        private controls.TransparentTextLabel transparentTextLabel11;
-        private controls.TransparentTextLabel transparentTextLabel12;
-        private PictureBox pictureBox4;
-        private controls.TransparentTextLabel transparentTextLabel13;
-        private controls.TransparentTextLabel transparentTextLabel14;
+        private PictureBox pbMeleeAttack;
+        private controls.TransparentTextLabel lblMeleeAttack;
+        private controls.TransparentTextLabel lblMeleeAttackCount;
+        private PictureBox pbRangedAttack;
+        private controls.TransparentTextLabel lblRangedAttack;
+        private controls.TransparentTextLabel lblRangedAttackCount;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel2;
         private controls.TransparentTextLabel transparentTextLabel8;
         private controls.TransparentTextLabel transparentTextLabel9;

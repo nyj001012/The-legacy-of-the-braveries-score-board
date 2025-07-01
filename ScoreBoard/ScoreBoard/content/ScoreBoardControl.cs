@@ -94,6 +94,39 @@ namespace ScoreBoard.content
             ShowStatusEffect(player); // 상태 이상 표시
             ShowMovement(player); // 이동 정보 표시
             ShowAttackRange(player); // 공격 사거리 표시
+            ShowAttackValue(player); // 공격력, 공격 가능 횟수(속도) 표시
+        }
+
+        /*
+         * ShowAttackValue(CorpsMember player)
+         * - 플레이어의 공격력, 공격 가능 횟수(속도)을 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void ShowAttackValue(CorpsMember player)
+        {
+            fpnAttackValue.SuspendLayout();
+            // 기존 컨트롤 invisible로 초기화
+            pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
+            lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
+            lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
+
+            foreach (var s in player.Stat.CombatStats)
+            {
+                CombatStat combatStat = s.Value; // CombatStat 객체 가져오기
+                if (s.Key == "melee")
+                {
+                    pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true; // 근접 공격 아이콘, 레이블 보이기
+                    lblMeleeAttack.Text = $"{combatStat.Value}"; // 근접 공격력 표시
+                    lblMeleeAttackCount.Text = "{" + combatStat.AttackCount + "}"; // 근접 공격 가능 횟수(속도) 표시
+                }
+                else
+                {
+                    pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true; // 원거리 공격 아이콘, 레이블 보이기
+                    lblRangedAttack.Text = $"{combatStat.Value}"; // 원거리 공격력 표시
+                    lblRangedAttackCount.Text = "{" + combatStat.AttackCount + "}"; // 원거리 공격 가능 횟수(속도) 표시
+                }
+            }
+            fpnAttackValue.ResumeLayout();
         }
 
         /*
@@ -112,17 +145,18 @@ namespace ScoreBoard.content
 
             foreach (var s in player.Stat.CombatStats)
             {
+                CombatStat combatStat = s.Value; // CombatStat 객체 가져오기
                 if (s.Key == "melee")
                 {
                     pbMelee.Visible = true; // 근접 공격 아이콘 보이기
                     lblMeleeRange.Visible = true; // 근접 공격 사거리 레이블 보이기
-                    lblMeleeRange.Text = $"{s.Value.Range}"; // 근접 공격 사거리 표시
+                    lblMeleeRange.Text = $"{combatStat.Range}"; // 근접 공격 사거리 표시
                 }
                 else
                 {
                     pbRanged.Visible = true; // 원거리 공격 아이콘 보이기
                     lblRangedRange.Visible = true; // 원거리 공격 사거리 레이블 보이기
-                    lblRangedRange.Text = $"{s.Value.Range}"; // 원거리 공격 사거리 표시
+                    lblRangedRange.Text = $"{combatStat.Range}"; // 원거리 공격 사거리 표시
                 }
             }
             fpnRange.ResumeLayout();
