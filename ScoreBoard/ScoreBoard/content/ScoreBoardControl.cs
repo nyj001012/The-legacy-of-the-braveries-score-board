@@ -86,9 +86,21 @@ namespace ScoreBoard.content
         private void ShowDetail(CorpsMember player)
         {
             // 플레이어 상세 정보 표시 로직 구현
-            // 이름, 주사위 표시
-            ShowBasicInfo(player);
+            ShowBasicInfo(player); // 기본 정보 표시
+            ShowHealth(player); // 체력 표시
+        }
 
+        /*
+         * ShowHealth(CorpsMember player)
+         * - 플레이어의 체력을 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void ShowHealth(CorpsMember player)
+        {
+            // 플레이어의 체력 정보를 표시하는 로직 구현
+            lblHealth.Text = $"{player.Stat.Hp}"; // 현재 체력 표시
+            lblHealth.Text += player.Stat.Shield > 0 ? $"(+{player.Stat.Shield})" : ""; // 보호막 표시
+            lblHealth.Text += $"/{player.Stat.MaxHp}"; // 최대 체력 표시
         }
 
         /*

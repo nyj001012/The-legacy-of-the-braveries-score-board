@@ -77,7 +77,7 @@
             lblName = new ScoreBoard.controls.TransparentTextLabel();
             pbDice = new PictureBox();
             doubleBufferedPanel2 = new ScoreBoard.controls.DoubleBufferedPanel();
-            transparentTextLabel2 = new ScoreBoard.controls.TransparentTextLabel();
+            lblHealth = new ScoreBoard.controls.TransparentTextLabel();
             transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
             fpnStatusDetail = new ScoreBoard.controls.CustomFlowLayoutPanel();
             doubleBufferedPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -832,7 +832,7 @@
             // 
             // doubleBufferedPanel2
             // 
-            doubleBufferedPanel2.Controls.Add(transparentTextLabel2);
+            doubleBufferedPanel2.Controls.Add(lblHealth);
             doubleBufferedPanel2.Controls.Add(transparentTextLabel1);
             doubleBufferedPanel2.Location = new Point(60, 180);
             doubleBufferedPanel2.Margin = new Padding(0, 15, 0, 0);
@@ -840,18 +840,18 @@
             doubleBufferedPanel2.Size = new Size(599, 45);
             doubleBufferedPanel2.TabIndex = 1;
             // 
-            // transparentTextLabel2
+            // lblHealth
             // 
-            transparentTextLabel2.AutoSize = true;
-            transparentTextLabel2.BackColor = Color.Transparent;
-            transparentTextLabel2.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel2.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel2.Location = new Point(103, 2);
-            transparentTextLabel2.Margin = new Padding(0);
-            transparentTextLabel2.Name = "transparentTextLabel2";
-            transparentTextLabel2.Size = new Size(366, 42);
-            transparentTextLabel2.TabIndex = 1;
-            transparentTextLabel2.Text = "1000(+2000)/2000";
+            lblHealth.AutoSize = true;
+            lblHealth.BackColor = Color.Transparent;
+            lblHealth.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHealth.ForeColor = Color.WhiteSmoke;
+            lblHealth.Location = new Point(103, 2);
+            lblHealth.Margin = new Padding(0);
+            lblHealth.Name = "lblHealth";
+            lblHealth.Size = new Size(366, 42);
+            lblHealth.TabIndex = 1;
+            lblHealth.Text = "1000(+2000)/2000";
             // 
             // transparentTextLabel1
             // 
@@ -1579,7 +1579,7 @@
         private controls.TransparentTextLabel lblName;
         private controls.DoubleBufferedPanel doubleBufferedPanel2;
         private controls.TransparentTextLabel transparentTextLabel1;
-        private controls.TransparentTextLabel transparentTextLabel2;
+        private controls.TransparentTextLabel lblHealth;
         private controls.CustomFlowLayoutPanel fpnStatusDetail;
         private controls.CustomFlowLayoutPanel doubleBufferedPanel4;
         private controls.TransparentTextLabel transparentTextLabel5;
