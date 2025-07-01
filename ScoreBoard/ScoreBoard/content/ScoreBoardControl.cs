@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -78,11 +79,22 @@ namespace ScoreBoard.content
                     {
                         Name = $"pn{character.Id}"
                     };
+                    playerControl.Click += (s, e) => ShowDetail(character);
                     playerList.Controls.Add(playerControl);
                 }
                 index++;
             }
             playerList.ResumeLayout();
+        }
+
+        /*
+         * ShowDetail(CorpsMember player)
+         * - 플레이어 상세 정보를 표시하는 메서드
+         */
+        private void ShowDetail(CorpsMember player)
+        {
+            // 플레이어 상세 정보 표시 로직 구현
+            Debug.WriteLine($"플레이어 상세 정보: {player.Name} (ID: {player.Id})");
         }
     }
 }
