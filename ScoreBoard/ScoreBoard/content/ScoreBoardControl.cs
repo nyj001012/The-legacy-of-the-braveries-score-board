@@ -32,6 +32,7 @@ namespace ScoreBoard.content
         {
             BeginInvoke(() => InitPlayerList());
             BeginInvoke(() => InitEnemyList());
+            BeginInvoke(() => ShowDetail(_characters.ElementAt(0).Value));
             ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
         }
 
