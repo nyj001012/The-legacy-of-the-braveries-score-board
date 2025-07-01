@@ -88,6 +88,7 @@ namespace ScoreBoard.content
          */
         private void ShowDetail(CorpsMember player)
         {
+            detailList.SuspendLayout();
             // 플레이어 상세 정보 표시 로직 구현
             ShowBasicInfo(player); // 기본 정보 표시
             ShowHealth(player); // 체력 표시
@@ -95,6 +96,24 @@ namespace ScoreBoard.content
             ShowMovement(player); // 이동 정보 표시
             ShowAttackRange(player); // 공격 사거리 표시
             ShowAttackValue(player); // 공격력, 공격 가능 횟수(속도) 표시
+            ShowSpellPower(player); // 주문력 표시
+            detailList.ResumeLayout();
+        }
+
+        /*
+         * ShowSpellPower(CorpsMember player)
+         * - 플레이어의 주문력을 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void ShowSpellPower(CorpsMember player)
+        {
+            if (player.Stat.SpellPower == null)
+            {
+                fpnSpellPower.Visible = false; // 주문력 패널 숨기기
+                return;
+            }
+            fpnSpellPower.Visible = true; // 주문력 패널 보이기
+            lblSpellPower.Text = $"{player.Stat.SpellPower.Value}"; // 주문력 표시
         }
 
         /*
@@ -109,7 +128,6 @@ namespace ScoreBoard.content
                 fpnAttackValue.Visible = false; // 공격력 패널 숨기기
                 return;
             }
-            fpnAttackValue.SuspendLayout();
             // 기존 컨트롤 invisible로 초기화
             pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
             lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
@@ -130,7 +148,6 @@ namespace ScoreBoard.content
                     lblRangedAttackCount.Text = "{" + combatStat.AttackCount + "}"; // 원거리 공격 가능 횟수(속도) 표시
                 }
             }
-            fpnAttackValue.ResumeLayout();
         }
 
         /*
@@ -140,7 +157,6 @@ namespace ScoreBoard.content
          */
         private void ShowAttackRange(CorpsMember player)
         {
-            fpnRange.SuspendLayout();
             // 전부 invisible로 초기화
             pbMelee.Visible = false;
             pbRanged.Visible = false;
@@ -162,7 +178,6 @@ namespace ScoreBoard.content
                     lblRangedRange.Text = $"{combatStat.Range}"; // 원거리 공격 사거리 표시
                 }
             }
-            fpnRange.ResumeLayout();
         }
 
         /*
@@ -191,9 +206,7 @@ namespace ScoreBoard.content
             }
             fpnStatusDetail.Visible = true; // 상태 이상 패널 보이기
             fpnStatusDetail.Controls.Clear(); // 기존 컨트롤 제거
-            fpnStatusDetail.SuspendLayout();
             // TODO => 상태 이상 정보를 표시하는 로직 구현
-            fpnStatusDetail.ResumeLayout();
         }
 
         /*
