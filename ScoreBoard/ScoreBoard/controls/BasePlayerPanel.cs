@@ -19,12 +19,25 @@ namespace ScoreBoard.controls
 
         protected void InitBase(CorpsMember player, int order)
         {
+            this.Cursor = Cursors.Hand;
             LblName.Text = player.Name;
             LblOrder.Text = $"{order}P";
             InitLevel(player.Level);
             InitStatus(player.Stat);
             InitArtifact(player.ArtifactSlot, player.MaxArtifactSlot);
             HbPlayer.SetValues(player.Stat.Hp, player.Stat.Shield, player.Stat.MaxHp);
+
+            RegisterClickRecursive(this);
+        }
+
+        private void RegisterClickRecursive(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                c.Click += (s, e) => this.OnClick(e);
+                if (c.HasChildren)
+                    RegisterClickRecursive(c);
+            }
         }
 
         protected void InitLevel(ushort level)
