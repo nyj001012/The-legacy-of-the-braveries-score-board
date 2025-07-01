@@ -65,23 +65,15 @@ namespace ScoreBoard.content
             int index = 1;
             foreach (var character in _characters.Values)
             {
-                if (index == 1)
-                {
-                    CurrentPlayerPanel firstPlayer = new(character, index)
-                    {
-                        Name = $"pn{character.Id}"
-                    };
-                    playerList.Controls.Add(firstPlayer);
-                }
-                else
-                {
-                    PlayerPanel playerControl = new(character, index)
-                    {
-                        Name = $"pn{character.Id}"
-                    };
-                    playerControl.Click += (s, e) => ShowDetail(character);
-                    playerList.Controls.Add(playerControl);
-                }
+                // 1P는 CurrentPlayerPanel, 나머지는 PlayerPanel
+                UserControl panel = (index == 1)
+                    ? new CurrentPlayerPanel(character, index)
+                    : new PlayerPanel(character, index);
+
+                panel.Name = $"pn{character.Id}";
+                panel.Click += (s, e) => ShowDetail(character);
+
+                playerList.Controls.Add(panel);
                 index++;
             }
             playerList.ResumeLayout();
