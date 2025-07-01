@@ -73,47 +73,49 @@
             lblTurn = new ScoreBoard.controls.GradientLabel();
             detailContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             detailList = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            pnBasicStatus = new ScoreBoard.controls.DoubleBufferedPanel();
-            lblDiceCritical = new ScoreBoard.controls.TransparentTextLabel();
-            lblDice1 = new ScoreBoard.controls.TransparentTextLabel();
+            fpnBasicStatus = new ScoreBoard.controls.CustomFlowLayoutPanel();
             lblName = new ScoreBoard.controls.TransparentTextLabel();
+            pbDice = new PictureBox();
             doubleBufferedPanel2 = new ScoreBoard.controls.DoubleBufferedPanel();
-            transparentTextLabel2 = new ScoreBoard.controls.TransparentTextLabel();
+            lblHealth = new ScoreBoard.controls.TransparentTextLabel();
             transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
             fpnStatusDetail = new ScoreBoard.controls.CustomFlowLayoutPanel();
             doubleBufferedPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel6 = new ScoreBoard.controls.TransparentTextLabel();
-            transparentTextLabel5 = new ScoreBoard.controls.TransparentTextLabel();
-            doubleBufferedPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            lblMovement = new ScoreBoard.controls.TransparentTextLabel();
+            fpnRange = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel4 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox2 = new PictureBox();
-            transparentTextLabel7 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox1 = new PictureBox();
-            transparentTextLabel3 = new ScoreBoard.controls.TransparentTextLabel();
-            customFlowLayoutPanel1 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            pbMelee = new PictureBox();
+            lblMeleeRange = new ScoreBoard.controls.TransparentTextLabel();
+            pbRanged = new PictureBox();
+            lblRangedRange = new ScoreBoard.controls.TransparentTextLabel();
+            fpnAttackValue = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel10 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox3 = new PictureBox();
-            transparentTextLabel11 = new ScoreBoard.controls.TransparentTextLabel();
-            transparentTextLabel12 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox4 = new PictureBox();
-            transparentTextLabel13 = new ScoreBoard.controls.TransparentTextLabel();
-            transparentTextLabel14 = new ScoreBoard.controls.TransparentTextLabel();
-            customFlowLayoutPanel2 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            pbMeleeAttack = new PictureBox();
+            lblMeleeAttack = new ScoreBoard.controls.TransparentTextLabel();
+            lblMeleeAttackCount = new ScoreBoard.controls.TransparentTextLabel();
+            pbRangedAttack = new PictureBox();
+            lblRangedAttack = new ScoreBoard.controls.TransparentTextLabel();
+            lblRangedAttackCount = new ScoreBoard.controls.TransparentTextLabel();
+            fpnSpellPower = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel8 = new ScoreBoard.controls.TransparentTextLabel();
-            transparentTextLabel9 = new ScoreBoard.controls.TransparentTextLabel();
+            lblSpellPower = new ScoreBoard.controls.TransparentTextLabel();
+            fpnWisdom = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            transparentTextLabel2 = new ScoreBoard.controls.TransparentTextLabel();
+            lblWisdom = new ScoreBoard.controls.TransparentTextLabel();
             customFlowLayoutPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel15 = new ScoreBoard.controls.TransparentTextLabel();
             pictureBox5 = new PictureBox();
             doubleBufferedPanel5 = new ScoreBoard.controls.DoubleBufferedPanel();
             transparentTextLabel17 = new ScoreBoard.controls.TransparentTextLabel();
             customFlowLayoutPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            pictureBox6 = new PictureBox();
-            pictureBox7 = new PictureBox();
-            pictureBox8 = new PictureBox();
-            pictureBox9 = new PictureBox();
-            doubleBufferedPanel6 = new ScoreBoard.controls.DoubleBufferedPanel();
+            pbWeapon = new PictureBox();
+            pbArmour = new PictureBox();
+            pbAccessory1 = new PictureBox();
+            pbAccessory2 = new PictureBox();
+            doubleBufferedPanel3 = new ScoreBoard.controls.DoubleBufferedPanel();
             richTextBox1 = new RichTextBox();
-            transparentTextLabel16 = new ScoreBoard.controls.TransparentTextLabel();
+            transparentTextLabel3 = new ScoreBoard.controls.TransparentTextLabel();
             detailScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             enemyContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             enemyList = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -145,25 +147,27 @@
             ((System.ComponentModel.ISupportInitialize)pbWeather).BeginInit();
             detailContainer.SuspendLayout();
             detailList.SuspendLayout();
-            pnBasicStatus.SuspendLayout();
+            fpnBasicStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbDice).BeginInit();
             doubleBufferedPanel2.SuspendLayout();
             doubleBufferedPanel4.SuspendLayout();
-            doubleBufferedPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            customFlowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            customFlowLayoutPanel2.SuspendLayout();
+            fpnRange.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMelee).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbRanged).BeginInit();
+            fpnAttackValue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMeleeAttack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbRangedAttack).BeginInit();
+            fpnSpellPower.SuspendLayout();
+            fpnWisdom.SuspendLayout();
             customFlowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             doubleBufferedPanel5.SuspendLayout();
             customFlowLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
-            doubleBufferedPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbWeapon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbArmour).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbAccessory1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbAccessory2).BeginInit();
+            doubleBufferedPanel3.SuspendLayout();
             enemyContainer.SuspendLayout();
             enemyList.SuspendLayout();
             pnEnemy1.SuspendLayout();
@@ -772,17 +776,18 @@
             detailList.BackgroundImageLayout = ImageLayout.Stretch;
             detailList.BorderColor = Color.Transparent;
             detailList.BorderThickness = 0;
-            detailList.Controls.Add(pnBasicStatus);
+            detailList.Controls.Add(fpnBasicStatus);
             detailList.Controls.Add(doubleBufferedPanel2);
             detailList.Controls.Add(fpnStatusDetail);
             detailList.Controls.Add(doubleBufferedPanel4);
-            detailList.Controls.Add(doubleBufferedPanel3);
-            detailList.Controls.Add(customFlowLayoutPanel1);
-            detailList.Controls.Add(customFlowLayoutPanel2);
+            detailList.Controls.Add(fpnRange);
+            detailList.Controls.Add(fpnAttackValue);
+            detailList.Controls.Add(fpnSpellPower);
+            detailList.Controls.Add(fpnWisdom);
             detailList.Controls.Add(customFlowLayoutPanel3);
             detailList.Controls.Add(doubleBufferedPanel5);
             detailList.Controls.Add(customFlowLayoutPanel4);
-            detailList.Controls.Add(doubleBufferedPanel6);
+            detailList.Controls.Add(doubleBufferedPanel3);
             detailList.Location = new Point(0, 0);
             detailList.Margin = new Padding(0);
             detailList.Name = "detailList";
@@ -790,44 +795,17 @@
             detailList.Size = new Size(720, 930);
             detailList.TabIndex = 1;
             // 
-            // pnBasicStatus
+            // fpnBasicStatus
             // 
-            pnBasicStatus.Controls.Add(lblDiceCritical);
-            pnBasicStatus.Controls.Add(lblDice1);
-            pnBasicStatus.Controls.Add(lblName);
-            pnBasicStatus.Location = new Point(60, 120);
-            pnBasicStatus.Margin = new Padding(0);
-            pnBasicStatus.Name = "pnBasicStatus";
-            pnBasicStatus.Size = new Size(600, 45);
-            pnBasicStatus.TabIndex = 0;
-            // 
-            // lblDiceCritical
-            // 
-            lblDiceCritical.AutoSize = true;
-            lblDiceCritical.BackColor = Color.Transparent;
-            lblDiceCritical.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDiceCritical.ForeColor = Color.FromArgb(255, 217, 0);
-            lblDiceCritical.Location = new Point(558, 2);
-            lblDiceCritical.Margin = new Padding(0);
-            lblDiceCritical.Name = "lblDiceCritical";
-            lblDiceCritical.Size = new Size(41, 42);
-            lblDiceCritical.TabIndex = 2;
-            lblDiceCritical.Text = "4";
-            lblDiceCritical.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblDice1
-            // 
-            lblDice1.AutoSize = true;
-            lblDice1.BackColor = Color.Transparent;
-            lblDice1.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDice1.ForeColor = Color.WhiteSmoke;
-            lblDice1.Location = new Point(512, 2);
-            lblDice1.Margin = new Padding(0);
-            lblDice1.Name = "lblDice1";
-            lblDice1.Size = new Size(41, 42);
-            lblDice1.TabIndex = 1;
-            lblDice1.Text = "3";
-            lblDice1.TextAlign = ContentAlignment.MiddleLeft;
+            fpnBasicStatus.BorderColor = Color.Transparent;
+            fpnBasicStatus.BorderThickness = 0;
+            fpnBasicStatus.Controls.Add(lblName);
+            fpnBasicStatus.Controls.Add(pbDice);
+            fpnBasicStatus.Location = new Point(60, 120);
+            fpnBasicStatus.Margin = new Padding(0);
+            fpnBasicStatus.Name = "fpnBasicStatus";
+            fpnBasicStatus.Size = new Size(600, 45);
+            fpnBasicStatus.TabIndex = 0;
             // 
             // lblName
             // 
@@ -835,7 +813,7 @@
             lblName.BackColor = Color.Transparent;
             lblName.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblName.ForeColor = Color.FromArgb(255, 217, 0);
-            lblName.Location = new Point(2, 2);
+            lblName.Location = new Point(0, 0);
             lblName.Margin = new Padding(0, 0, 15, 0);
             lblName.Name = "lblName";
             lblName.Size = new Size(275, 42);
@@ -843,9 +821,23 @@
             lblName.Text = "1P 플레이어 이름";
             lblName.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // pbDice
+            // 
+            pbDice.BackgroundImage = Properties.Resources.BtnDice;
+            pbDice.BackgroundImageLayout = ImageLayout.Stretch;
+            pbDice.Cursor = Cursors.Hand;
+            pbDice.Image = Properties.Resources.BtnDice;
+            pbDice.Location = new Point(290, 0);
+            pbDice.Margin = new Padding(0);
+            pbDice.Name = "pbDice";
+            pbDice.Size = new Size(45, 45);
+            pbDice.TabIndex = 3;
+            pbDice.TabStop = false;
+            pbDice.Click += pbDice_Click;
+            // 
             // doubleBufferedPanel2
             // 
-            doubleBufferedPanel2.Controls.Add(transparentTextLabel2);
+            doubleBufferedPanel2.Controls.Add(lblHealth);
             doubleBufferedPanel2.Controls.Add(transparentTextLabel1);
             doubleBufferedPanel2.Location = new Point(60, 180);
             doubleBufferedPanel2.Margin = new Padding(0, 15, 0, 0);
@@ -853,18 +845,18 @@
             doubleBufferedPanel2.Size = new Size(599, 45);
             doubleBufferedPanel2.TabIndex = 1;
             // 
-            // transparentTextLabel2
+            // lblHealth
             // 
-            transparentTextLabel2.AutoSize = true;
-            transparentTextLabel2.BackColor = Color.Transparent;
-            transparentTextLabel2.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel2.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel2.Location = new Point(103, 2);
-            transparentTextLabel2.Margin = new Padding(0);
-            transparentTextLabel2.Name = "transparentTextLabel2";
-            transparentTextLabel2.Size = new Size(366, 42);
-            transparentTextLabel2.TabIndex = 1;
-            transparentTextLabel2.Text = "1000(+2000)/2000";
+            lblHealth.AutoSize = true;
+            lblHealth.BackColor = Color.Transparent;
+            lblHealth.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHealth.ForeColor = Color.WhiteSmoke;
+            lblHealth.Location = new Point(103, 2);
+            lblHealth.Margin = new Padding(0);
+            lblHealth.Name = "lblHealth";
+            lblHealth.Size = new Size(366, 42);
+            lblHealth.TabIndex = 1;
+            lblHealth.Text = "1000(+2000)/2000";
             // 
             // transparentTextLabel1
             // 
@@ -895,7 +887,7 @@
             doubleBufferedPanel4.BorderColor = Color.Transparent;
             doubleBufferedPanel4.BorderThickness = 0;
             doubleBufferedPanel4.Controls.Add(transparentTextLabel6);
-            doubleBufferedPanel4.Controls.Add(transparentTextLabel5);
+            doubleBufferedPanel4.Controls.Add(lblMovement);
             doubleBufferedPanel4.Location = new Point(60, 300);
             doubleBufferedPanel4.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel4.Name = "doubleBufferedPanel4";
@@ -915,33 +907,33 @@
             transparentTextLabel6.TabIndex = 0;
             transparentTextLabel6.Text = "이동속도:";
             // 
-            // transparentTextLabel5
+            // lblMovement
             // 
-            transparentTextLabel5.AutoSize = true;
-            transparentTextLabel5.BackColor = Color.Transparent;
-            transparentTextLabel5.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel5.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel5.Location = new Point(167, 0);
-            transparentTextLabel5.Margin = new Padding(0);
-            transparentTextLabel5.Name = "transparentTextLabel5";
-            transparentTextLabel5.Size = new Size(40, 42);
-            transparentTextLabel5.TabIndex = 1;
-            transparentTextLabel5.Text = "2";
+            lblMovement.AutoSize = true;
+            lblMovement.BackColor = Color.Transparent;
+            lblMovement.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMovement.ForeColor = Color.WhiteSmoke;
+            lblMovement.Location = new Point(167, 0);
+            lblMovement.Margin = new Padding(0);
+            lblMovement.Name = "lblMovement";
+            lblMovement.Size = new Size(40, 42);
+            lblMovement.TabIndex = 1;
+            lblMovement.Text = "2";
             // 
-            // doubleBufferedPanel3
+            // fpnRange
             // 
-            doubleBufferedPanel3.BorderColor = Color.Transparent;
-            doubleBufferedPanel3.BorderThickness = 0;
-            doubleBufferedPanel3.Controls.Add(transparentTextLabel4);
-            doubleBufferedPanel3.Controls.Add(pictureBox2);
-            doubleBufferedPanel3.Controls.Add(transparentTextLabel7);
-            doubleBufferedPanel3.Controls.Add(pictureBox1);
-            doubleBufferedPanel3.Controls.Add(transparentTextLabel3);
-            doubleBufferedPanel3.Location = new Point(60, 360);
-            doubleBufferedPanel3.Margin = new Padding(0, 15, 0, 0);
-            doubleBufferedPanel3.Name = "doubleBufferedPanel3";
-            doubleBufferedPanel3.Size = new Size(599, 45);
-            doubleBufferedPanel3.TabIndex = 3;
+            fpnRange.BorderColor = Color.Transparent;
+            fpnRange.BorderThickness = 0;
+            fpnRange.Controls.Add(transparentTextLabel4);
+            fpnRange.Controls.Add(pbMelee);
+            fpnRange.Controls.Add(lblMeleeRange);
+            fpnRange.Controls.Add(pbRanged);
+            fpnRange.Controls.Add(lblRangedRange);
+            fpnRange.Location = new Point(60, 360);
+            fpnRange.Margin = new Padding(0, 15, 0, 0);
+            fpnRange.Name = "fpnRange";
+            fpnRange.Size = new Size(599, 45);
+            fpnRange.TabIndex = 3;
             // 
             // transparentTextLabel4
             // 
@@ -957,68 +949,72 @@
             transparentTextLabel4.Text = "전투 사거리:";
             transparentTextLabel4.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox2
+            // pbMelee
             // 
-            pictureBox2.Location = new Point(208, 0);
-            pictureBox2.Margin = new Padding(0, 0, 10, 0);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(45, 45);
-            pictureBox2.TabIndex = 4;
-            pictureBox2.TabStop = false;
+            pbMelee.BackgroundImage = Properties.Resources.ImgMelee;
+            pbMelee.BackgroundImageLayout = ImageLayout.Stretch;
+            pbMelee.Location = new Point(208, 0);
+            pbMelee.Margin = new Padding(0);
+            pbMelee.Name = "pbMelee";
+            pbMelee.Size = new Size(45, 45);
+            pbMelee.TabIndex = 4;
+            pbMelee.TabStop = false;
             // 
-            // transparentTextLabel7
+            // lblMeleeRange
             // 
-            transparentTextLabel7.AutoSize = true;
-            transparentTextLabel7.BackColor = Color.Transparent;
-            transparentTextLabel7.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel7.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel7.Location = new Point(263, 0);
-            transparentTextLabel7.Margin = new Padding(0, 0, 20, 0);
-            transparentTextLabel7.Name = "transparentTextLabel7";
-            transparentTextLabel7.Size = new Size(40, 42);
-            transparentTextLabel7.TabIndex = 3;
-            transparentTextLabel7.Text = "2";
-            transparentTextLabel7.TextAlign = ContentAlignment.MiddleCenter;
+            lblMeleeRange.AutoSize = true;
+            lblMeleeRange.BackColor = Color.Transparent;
+            lblMeleeRange.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMeleeRange.ForeColor = Color.WhiteSmoke;
+            lblMeleeRange.Location = new Point(253, 0);
+            lblMeleeRange.Margin = new Padding(0, 0, 20, 0);
+            lblMeleeRange.Name = "lblMeleeRange";
+            lblMeleeRange.Size = new Size(40, 42);
+            lblMeleeRange.TabIndex = 3;
+            lblMeleeRange.Text = "2";
+            lblMeleeRange.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
+            // pbRanged
             // 
-            pictureBox1.Location = new Point(323, 0);
-            pictureBox1.Margin = new Padding(0, 0, 10, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(45, 45);
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
+            pbRanged.BackgroundImage = Properties.Resources.ImgRanged;
+            pbRanged.BackgroundImageLayout = ImageLayout.Stretch;
+            pbRanged.Location = new Point(313, 0);
+            pbRanged.Margin = new Padding(0);
+            pbRanged.Name = "pbRanged";
+            pbRanged.Size = new Size(45, 45);
+            pbRanged.TabIndex = 2;
+            pbRanged.TabStop = false;
             // 
-            // transparentTextLabel3
+            // lblRangedRange
             // 
-            transparentTextLabel3.AutoSize = true;
-            transparentTextLabel3.BackColor = Color.Transparent;
-            transparentTextLabel3.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel3.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel3.Location = new Point(378, 0);
-            transparentTextLabel3.Margin = new Padding(0);
-            transparentTextLabel3.Name = "transparentTextLabel3";
-            transparentTextLabel3.Size = new Size(40, 42);
-            transparentTextLabel3.TabIndex = 1;
-            transparentTextLabel3.Text = "2";
-            transparentTextLabel3.TextAlign = ContentAlignment.MiddleCenter;
+            lblRangedRange.AutoSize = true;
+            lblRangedRange.BackColor = Color.Transparent;
+            lblRangedRange.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRangedRange.ForeColor = Color.WhiteSmoke;
+            lblRangedRange.Location = new Point(358, 0);
+            lblRangedRange.Margin = new Padding(0);
+            lblRangedRange.Name = "lblRangedRange";
+            lblRangedRange.Size = new Size(40, 42);
+            lblRangedRange.TabIndex = 1;
+            lblRangedRange.Text = "2";
+            lblRangedRange.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // customFlowLayoutPanel1
+            // fpnAttackValue
             // 
-            customFlowLayoutPanel1.BorderColor = Color.Transparent;
-            customFlowLayoutPanel1.BorderThickness = 0;
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel10);
-            customFlowLayoutPanel1.Controls.Add(pictureBox3);
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel11);
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel12);
-            customFlowLayoutPanel1.Controls.Add(pictureBox4);
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel13);
-            customFlowLayoutPanel1.Controls.Add(transparentTextLabel14);
-            customFlowLayoutPanel1.Location = new Point(60, 420);
-            customFlowLayoutPanel1.Margin = new Padding(0, 15, 0, 0);
-            customFlowLayoutPanel1.Name = "customFlowLayoutPanel1";
-            customFlowLayoutPanel1.Size = new Size(599, 45);
-            customFlowLayoutPanel1.TabIndex = 7;
+            fpnAttackValue.BorderColor = Color.Transparent;
+            fpnAttackValue.BorderThickness = 0;
+            fpnAttackValue.Controls.Add(transparentTextLabel10);
+            fpnAttackValue.Controls.Add(pbMeleeAttack);
+            fpnAttackValue.Controls.Add(lblMeleeAttack);
+            fpnAttackValue.Controls.Add(lblMeleeAttackCount);
+            fpnAttackValue.Controls.Add(pbRangedAttack);
+            fpnAttackValue.Controls.Add(lblRangedAttack);
+            fpnAttackValue.Controls.Add(lblRangedAttackCount);
+            fpnAttackValue.Location = new Point(60, 420);
+            fpnAttackValue.Margin = new Padding(0, 15, 0, 0);
+            fpnAttackValue.Name = "fpnAttackValue";
+            fpnAttackValue.Size = new Size(599, 45);
+            fpnAttackValue.TabIndex = 7;
             // 
             // transparentTextLabel10
             // 
@@ -1034,90 +1030,94 @@
             transparentTextLabel10.Text = "공격력:";
             transparentTextLabel10.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox3
+            // pbMeleeAttack
             // 
-            pictureBox3.Location = new Point(133, 0);
-            pictureBox3.Margin = new Padding(0, 0, 10, 0);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(45, 45);
-            pictureBox3.TabIndex = 4;
-            pictureBox3.TabStop = false;
+            pbMeleeAttack.BackgroundImage = Properties.Resources.ImgMelee;
+            pbMeleeAttack.BackgroundImageLayout = ImageLayout.Stretch;
+            pbMeleeAttack.Location = new Point(133, 0);
+            pbMeleeAttack.Margin = new Padding(0);
+            pbMeleeAttack.Name = "pbMeleeAttack";
+            pbMeleeAttack.Size = new Size(45, 45);
+            pbMeleeAttack.TabIndex = 4;
+            pbMeleeAttack.TabStop = false;
             // 
-            // transparentTextLabel11
+            // lblMeleeAttack
             // 
-            transparentTextLabel11.AutoSize = true;
-            transparentTextLabel11.BackColor = Color.Transparent;
-            transparentTextLabel11.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel11.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel11.Location = new Point(188, 0);
-            transparentTextLabel11.Margin = new Padding(0, 0, 10, 0);
-            transparentTextLabel11.Name = "transparentTextLabel11";
-            transparentTextLabel11.Size = new Size(40, 42);
-            transparentTextLabel11.TabIndex = 3;
-            transparentTextLabel11.Text = "2";
-            transparentTextLabel11.TextAlign = ContentAlignment.MiddleCenter;
+            lblMeleeAttack.AutoSize = true;
+            lblMeleeAttack.BackColor = Color.Transparent;
+            lblMeleeAttack.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMeleeAttack.ForeColor = Color.WhiteSmoke;
+            lblMeleeAttack.Location = new Point(178, 0);
+            lblMeleeAttack.Margin = new Padding(0);
+            lblMeleeAttack.Name = "lblMeleeAttack";
+            lblMeleeAttack.Size = new Size(40, 42);
+            lblMeleeAttack.TabIndex = 3;
+            lblMeleeAttack.Text = "2";
+            lblMeleeAttack.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // transparentTextLabel12
+            // lblMeleeAttackCount
             // 
-            transparentTextLabel12.AutoSize = true;
-            transparentTextLabel12.BackColor = Color.Transparent;
-            transparentTextLabel12.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel12.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel12.Location = new Point(238, 0);
-            transparentTextLabel12.Margin = new Padding(0, 0, 20, 0);
-            transparentTextLabel12.Name = "transparentTextLabel12";
-            transparentTextLabel12.Size = new Size(76, 42);
-            transparentTextLabel12.TabIndex = 6;
-            transparentTextLabel12.Text = "{2}";
-            transparentTextLabel12.TextAlign = ContentAlignment.MiddleCenter;
+            lblMeleeAttackCount.AutoSize = true;
+            lblMeleeAttackCount.BackColor = Color.Transparent;
+            lblMeleeAttackCount.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMeleeAttackCount.ForeColor = Color.WhiteSmoke;
+            lblMeleeAttackCount.Location = new Point(218, 0);
+            lblMeleeAttackCount.Margin = new Padding(0, 0, 20, 0);
+            lblMeleeAttackCount.Name = "lblMeleeAttackCount";
+            lblMeleeAttackCount.Size = new Size(76, 42);
+            lblMeleeAttackCount.TabIndex = 6;
+            lblMeleeAttackCount.Text = "{2}";
+            lblMeleeAttackCount.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox4
+            // pbRangedAttack
             // 
-            pictureBox4.Location = new Point(334, 0);
-            pictureBox4.Margin = new Padding(0, 0, 10, 0);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(45, 45);
-            pictureBox4.TabIndex = 2;
-            pictureBox4.TabStop = false;
+            pbRangedAttack.BackgroundImage = Properties.Resources.ImgRanged;
+            pbRangedAttack.BackgroundImageLayout = ImageLayout.Stretch;
+            pbRangedAttack.Location = new Point(314, 0);
+            pbRangedAttack.Margin = new Padding(0);
+            pbRangedAttack.Name = "pbRangedAttack";
+            pbRangedAttack.Size = new Size(45, 45);
+            pbRangedAttack.TabIndex = 2;
+            pbRangedAttack.TabStop = false;
             // 
-            // transparentTextLabel13
+            // lblRangedAttack
             // 
-            transparentTextLabel13.AutoSize = true;
-            transparentTextLabel13.BackColor = Color.Transparent;
-            transparentTextLabel13.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel13.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel13.Location = new Point(389, 0);
-            transparentTextLabel13.Margin = new Padding(0, 0, 10, 0);
-            transparentTextLabel13.Name = "transparentTextLabel13";
-            transparentTextLabel13.Size = new Size(40, 42);
-            transparentTextLabel13.TabIndex = 1;
-            transparentTextLabel13.Text = "2";
-            transparentTextLabel13.TextAlign = ContentAlignment.MiddleCenter;
+            lblRangedAttack.AutoSize = true;
+            lblRangedAttack.BackColor = Color.Transparent;
+            lblRangedAttack.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRangedAttack.ForeColor = Color.WhiteSmoke;
+            lblRangedAttack.Location = new Point(359, 0);
+            lblRangedAttack.Margin = new Padding(0);
+            lblRangedAttack.Name = "lblRangedAttack";
+            lblRangedAttack.Size = new Size(40, 42);
+            lblRangedAttack.TabIndex = 1;
+            lblRangedAttack.Text = "2";
+            lblRangedAttack.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // transparentTextLabel14
+            // lblRangedAttackCount
             // 
-            transparentTextLabel14.AutoSize = true;
-            transparentTextLabel14.BackColor = Color.Transparent;
-            transparentTextLabel14.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel14.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel14.Location = new Point(439, 0);
-            transparentTextLabel14.Margin = new Padding(0);
-            transparentTextLabel14.Name = "transparentTextLabel14";
-            transparentTextLabel14.Size = new Size(76, 42);
-            transparentTextLabel14.TabIndex = 5;
-            transparentTextLabel14.Text = "{2}";
+            lblRangedAttackCount.AutoSize = true;
+            lblRangedAttackCount.BackColor = Color.Transparent;
+            lblRangedAttackCount.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRangedAttackCount.ForeColor = Color.WhiteSmoke;
+            lblRangedAttackCount.Location = new Point(399, 0);
+            lblRangedAttackCount.Margin = new Padding(0);
+            lblRangedAttackCount.Name = "lblRangedAttackCount";
+            lblRangedAttackCount.Size = new Size(76, 42);
+            lblRangedAttackCount.TabIndex = 5;
+            lblRangedAttackCount.Text = "{2}";
             // 
-            // customFlowLayoutPanel2
+            // fpnSpellPower
             // 
-            customFlowLayoutPanel2.BorderColor = Color.Transparent;
-            customFlowLayoutPanel2.BorderThickness = 0;
-            customFlowLayoutPanel2.Controls.Add(transparentTextLabel8);
-            customFlowLayoutPanel2.Controls.Add(transparentTextLabel9);
-            customFlowLayoutPanel2.Location = new Point(60, 480);
-            customFlowLayoutPanel2.Margin = new Padding(0, 15, 0, 0);
-            customFlowLayoutPanel2.Name = "customFlowLayoutPanel2";
-            customFlowLayoutPanel2.Size = new Size(599, 45);
-            customFlowLayoutPanel2.TabIndex = 8;
+            fpnSpellPower.BorderColor = Color.Transparent;
+            fpnSpellPower.BorderThickness = 0;
+            fpnSpellPower.Controls.Add(transparentTextLabel8);
+            fpnSpellPower.Controls.Add(lblSpellPower);
+            fpnSpellPower.Location = new Point(60, 480);
+            fpnSpellPower.Margin = new Padding(0, 15, 0, 0);
+            fpnSpellPower.Name = "fpnSpellPower";
+            fpnSpellPower.Size = new Size(599, 45);
+            fpnSpellPower.TabIndex = 9;
             // 
             // transparentTextLabel8
             // 
@@ -1132,18 +1132,56 @@
             transparentTextLabel8.TabIndex = 0;
             transparentTextLabel8.Text = "주문력:";
             // 
-            // transparentTextLabel9
+            // lblSpellPower
             // 
-            transparentTextLabel9.AutoSize = true;
-            transparentTextLabel9.BackColor = Color.Transparent;
-            transparentTextLabel9.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel9.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel9.Location = new Point(133, 0);
-            transparentTextLabel9.Margin = new Padding(0);
-            transparentTextLabel9.Name = "transparentTextLabel9";
-            transparentTextLabel9.Size = new Size(40, 42);
-            transparentTextLabel9.TabIndex = 1;
-            transparentTextLabel9.Text = "2";
+            lblSpellPower.AutoSize = true;
+            lblSpellPower.BackColor = Color.Transparent;
+            lblSpellPower.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSpellPower.ForeColor = Color.WhiteSmoke;
+            lblSpellPower.Location = new Point(133, 0);
+            lblSpellPower.Margin = new Padding(0);
+            lblSpellPower.Name = "lblSpellPower";
+            lblSpellPower.Size = new Size(40, 42);
+            lblSpellPower.TabIndex = 1;
+            lblSpellPower.Text = "2";
+            // 
+            // fpnWisdom
+            // 
+            fpnWisdom.BorderColor = Color.Transparent;
+            fpnWisdom.BorderThickness = 0;
+            fpnWisdom.Controls.Add(transparentTextLabel2);
+            fpnWisdom.Controls.Add(lblWisdom);
+            fpnWisdom.Location = new Point(60, 540);
+            fpnWisdom.Margin = new Padding(0, 15, 0, 0);
+            fpnWisdom.Name = "fpnWisdom";
+            fpnWisdom.Size = new Size(599, 45);
+            fpnWisdom.TabIndex = 10;
+            // 
+            // transparentTextLabel2
+            // 
+            transparentTextLabel2.AutoSize = true;
+            transparentTextLabel2.BackColor = Color.Transparent;
+            transparentTextLabel2.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel2.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel2.Location = new Point(0, 0);
+            transparentTextLabel2.Margin = new Padding(0);
+            transparentTextLabel2.Name = "transparentTextLabel2";
+            transparentTextLabel2.Size = new Size(99, 42);
+            transparentTextLabel2.TabIndex = 0;
+            transparentTextLabel2.Text = "지혜:";
+            // 
+            // lblWisdom
+            // 
+            lblWisdom.AutoSize = true;
+            lblWisdom.BackColor = Color.Transparent;
+            lblWisdom.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblWisdom.ForeColor = Color.WhiteSmoke;
+            lblWisdom.Location = new Point(99, 0);
+            lblWisdom.Margin = new Padding(0);
+            lblWisdom.Name = "lblWisdom";
+            lblWisdom.Size = new Size(40, 42);
+            lblWisdom.TabIndex = 1;
+            lblWisdom.Text = "2";
             // 
             // customFlowLayoutPanel3
             // 
@@ -1151,11 +1189,11 @@
             customFlowLayoutPanel3.BorderThickness = 0;
             customFlowLayoutPanel3.Controls.Add(transparentTextLabel15);
             customFlowLayoutPanel3.Controls.Add(pictureBox5);
-            customFlowLayoutPanel3.Location = new Point(60, 540);
+            customFlowLayoutPanel3.Location = new Point(60, 600);
             customFlowLayoutPanel3.Margin = new Padding(0, 15, 0, 0);
             customFlowLayoutPanel3.Name = "customFlowLayoutPanel3";
             customFlowLayoutPanel3.Size = new Size(599, 45);
-            customFlowLayoutPanel3.TabIndex = 9;
+            customFlowLayoutPanel3.TabIndex = 10;
             // 
             // transparentTextLabel15
             // 
@@ -1185,11 +1223,11 @@
             // doubleBufferedPanel5
             // 
             doubleBufferedPanel5.Controls.Add(transparentTextLabel17);
-            doubleBufferedPanel5.Location = new Point(60, 600);
+            doubleBufferedPanel5.Location = new Point(60, 660);
             doubleBufferedPanel5.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel5.Name = "doubleBufferedPanel5";
             doubleBufferedPanel5.Size = new Size(599, 45);
-            doubleBufferedPanel5.TabIndex = 10;
+            doubleBufferedPanel5.TabIndex = 11;
             // 
             // transparentTextLabel17
             // 
@@ -1208,83 +1246,84 @@
             // 
             customFlowLayoutPanel4.BorderColor = Color.Transparent;
             customFlowLayoutPanel4.BorderThickness = 0;
-            customFlowLayoutPanel4.Controls.Add(pictureBox6);
-            customFlowLayoutPanel4.Controls.Add(pictureBox7);
-            customFlowLayoutPanel4.Controls.Add(pictureBox8);
-            customFlowLayoutPanel4.Controls.Add(pictureBox9);
-            customFlowLayoutPanel4.Location = new Point(60, 660);
+            customFlowLayoutPanel4.Controls.Add(pbWeapon);
+            customFlowLayoutPanel4.Controls.Add(pbArmour);
+            customFlowLayoutPanel4.Controls.Add(pbAccessory1);
+            customFlowLayoutPanel4.Controls.Add(pbAccessory2);
+            customFlowLayoutPanel4.Location = new Point(60, 720);
             customFlowLayoutPanel4.Margin = new Padding(0, 15, 0, 0);
             customFlowLayoutPanel4.Name = "customFlowLayoutPanel4";
             customFlowLayoutPanel4.Size = new Size(599, 134);
-            customFlowLayoutPanel4.TabIndex = 11;
+            customFlowLayoutPanel4.TabIndex = 12;
             // 
-            // pictureBox6
+            // pbWeapon
             // 
-            pictureBox6.Location = new Point(0, 0);
-            pictureBox6.Margin = new Padding(0, 0, 20, 0);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(134, 134);
-            pictureBox6.TabIndex = 0;
-            pictureBox6.TabStop = false;
+            pbWeapon.Location = new Point(0, 0);
+            pbWeapon.Margin = new Padding(0, 0, 20, 0);
+            pbWeapon.Name = "pbWeapon";
+            pbWeapon.Size = new Size(134, 134);
+            pbWeapon.TabIndex = 0;
+            pbWeapon.TabStop = false;
             // 
-            // pictureBox7
+            // pbArmour
             // 
-            pictureBox7.Location = new Point(154, 0);
-            pictureBox7.Margin = new Padding(0, 0, 20, 0);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(134, 134);
-            pictureBox7.TabIndex = 1;
-            pictureBox7.TabStop = false;
+            pbArmour.Location = new Point(154, 0);
+            pbArmour.Margin = new Padding(0, 0, 20, 0);
+            pbArmour.Name = "pbArmour";
+            pbArmour.Size = new Size(134, 134);
+            pbArmour.TabIndex = 1;
+            pbArmour.TabStop = false;
             // 
-            // pictureBox8
+            // pbAccessory1
             // 
-            pictureBox8.Location = new Point(308, 0);
-            pictureBox8.Margin = new Padding(0, 0, 20, 0);
-            pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(134, 134);
-            pictureBox8.TabIndex = 2;
-            pictureBox8.TabStop = false;
+            pbAccessory1.Location = new Point(308, 0);
+            pbAccessory1.Margin = new Padding(0, 0, 20, 0);
+            pbAccessory1.Name = "pbAccessory1";
+            pbAccessory1.Size = new Size(134, 134);
+            pbAccessory1.TabIndex = 2;
+            pbAccessory1.TabStop = false;
             // 
-            // pictureBox9
+            // pbAccessory2
             // 
-            pictureBox9.Location = new Point(462, 0);
-            pictureBox9.Margin = new Padding(0);
-            pictureBox9.Name = "pictureBox9";
-            pictureBox9.Size = new Size(134, 134);
-            pictureBox9.TabIndex = 3;
-            pictureBox9.TabStop = false;
+            pbAccessory2.Location = new Point(462, 0);
+            pbAccessory2.Margin = new Padding(0);
+            pbAccessory2.Name = "pbAccessory2";
+            pbAccessory2.Size = new Size(134, 134);
+            pbAccessory2.TabIndex = 3;
+            pbAccessory2.TabStop = false;
             // 
-            // doubleBufferedPanel6
+            // doubleBufferedPanel3
             // 
-            doubleBufferedPanel6.Controls.Add(richTextBox1);
-            doubleBufferedPanel6.Controls.Add(transparentTextLabel16);
-            doubleBufferedPanel6.Location = new Point(60, 809);
-            doubleBufferedPanel6.Margin = new Padding(0, 15, 0, 0);
-            doubleBufferedPanel6.Name = "doubleBufferedPanel6";
-            doubleBufferedPanel6.Size = new Size(599, 45);
-            doubleBufferedPanel6.TabIndex = 12;
+            doubleBufferedPanel3.Controls.Add(richTextBox1);
+            doubleBufferedPanel3.Controls.Add(transparentTextLabel3);
+            doubleBufferedPanel3.Location = new Point(60, 869);
+            doubleBufferedPanel3.Margin = new Padding(0, 15, 0, 0);
+            doubleBufferedPanel3.Name = "doubleBufferedPanel3";
+            doubleBufferedPanel3.Size = new Size(599, 45);
+            doubleBufferedPanel3.TabIndex = 12;
             // 
             // richTextBox1
             // 
             richTextBox1.BorderStyle = BorderStyle.None;
-            richTextBox1.Location = new Point(86, 0);
+            richTextBox1.Location = new Point(154, -2);
+            richTextBox1.Margin = new Padding(0);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(513, 45);
+            richTextBox1.Size = new Size(429, 42);
             richTextBox1.TabIndex = 1;
             richTextBox1.Text = "";
             // 
-            // transparentTextLabel16
+            // transparentTextLabel3
             // 
-            transparentTextLabel16.AutoSize = true;
-            transparentTextLabel16.BackColor = Color.Transparent;
-            transparentTextLabel16.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel16.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel16.Location = new Point(0, 2);
-            transparentTextLabel16.Margin = new Padding(0);
-            transparentTextLabel16.Name = "transparentTextLabel16";
-            transparentTextLabel16.Size = new Size(99, 42);
-            transparentTextLabel16.TabIndex = 0;
-            transparentTextLabel16.Text = "기타:";
+            transparentTextLabel3.AutoSize = true;
+            transparentTextLabel3.BackColor = Color.Transparent;
+            transparentTextLabel3.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel3.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel3.Location = new Point(0, 2);
+            transparentTextLabel3.Margin = new Padding(0);
+            transparentTextLabel3.Name = "transparentTextLabel3";
+            transparentTextLabel3.Size = new Size(167, 42);
+            transparentTextLabel3.TabIndex = 0;
+            transparentTextLabel3.Text = "특이사항:";
             // 
             // detailScrollBar
             // 
@@ -1504,34 +1543,37 @@
             ((System.ComponentModel.ISupportInitialize)pbWeather).EndInit();
             detailContainer.ResumeLayout(false);
             detailList.ResumeLayout(false);
-            pnBasicStatus.ResumeLayout(false);
-            pnBasicStatus.PerformLayout();
+            fpnBasicStatus.ResumeLayout(false);
+            fpnBasicStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbDice).EndInit();
             doubleBufferedPanel2.ResumeLayout(false);
             doubleBufferedPanel2.PerformLayout();
             doubleBufferedPanel4.ResumeLayout(false);
             doubleBufferedPanel4.PerformLayout();
-            doubleBufferedPanel3.ResumeLayout(false);
-            doubleBufferedPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            customFlowLayoutPanel1.ResumeLayout(false);
-            customFlowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            customFlowLayoutPanel2.ResumeLayout(false);
-            customFlowLayoutPanel2.PerformLayout();
+            fpnRange.ResumeLayout(false);
+            fpnRange.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMelee).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbRanged).EndInit();
+            fpnAttackValue.ResumeLayout(false);
+            fpnAttackValue.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMeleeAttack).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbRangedAttack).EndInit();
+            fpnSpellPower.ResumeLayout(false);
+            fpnSpellPower.PerformLayout();
+            fpnWisdom.ResumeLayout(false);
+            fpnWisdom.PerformLayout();
             customFlowLayoutPanel3.ResumeLayout(false);
             customFlowLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             doubleBufferedPanel5.ResumeLayout(false);
             doubleBufferedPanel5.PerformLayout();
             customFlowLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
-            doubleBufferedPanel6.ResumeLayout(false);
-            doubleBufferedPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbWeapon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbArmour).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbAccessory1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbAccessory2).EndInit();
+            doubleBufferedPanel3.ResumeLayout(false);
+            doubleBufferedPanel3.PerformLayout();
             enemyContainer.ResumeLayout(false);
             enemyList.ResumeLayout(false);
             pnEnemy1.ResumeLayout(false);
@@ -1587,47 +1629,42 @@
         private controls.DoubleBufferedPanel detailContainer;
         private ReaLTaiizor.Controls.CyberScrollBar detailScrollBar;
         private controls.CustomFlowLayoutPanel detailList;
-        private controls.DoubleBufferedPanel pnBasicStatus;
+        private controls.CustomFlowLayoutPanel fpnBasicStatus;
         private controls.TransparentTextLabel lblName;
-        private controls.TransparentTextLabel lblDice1;
-        private controls.TransparentTextLabel lblDiceCritical;
         private controls.DoubleBufferedPanel doubleBufferedPanel2;
         private controls.TransparentTextLabel transparentTextLabel1;
-        private controls.TransparentTextLabel transparentTextLabel2;
+        private controls.TransparentTextLabel lblHealth;
         private controls.CustomFlowLayoutPanel fpnStatusDetail;
         private controls.CustomFlowLayoutPanel doubleBufferedPanel4;
-        private controls.TransparentTextLabel transparentTextLabel5;
+        private controls.TransparentTextLabel lblMovement;
         private controls.TransparentTextLabel transparentTextLabel6;
-        private controls.CustomFlowLayoutPanel doubleBufferedPanel3;
-        private PictureBox pictureBox1;
-        private controls.TransparentTextLabel transparentTextLabel3;
+        private controls.CustomFlowLayoutPanel fpnRange;
+        private PictureBox pbRanged;
+        private controls.TransparentTextLabel lblRangedRange;
         private controls.TransparentTextLabel transparentTextLabel4;
-        private PictureBox pictureBox2;
-        private controls.TransparentTextLabel transparentTextLabel7;
-        private controls.CustomFlowLayoutPanel customFlowLayoutPanel1;
+        private PictureBox pbMelee;
+        private controls.TransparentTextLabel lblMeleeRange;
+        private controls.CustomFlowLayoutPanel fpnAttackValue;
         private controls.TransparentTextLabel transparentTextLabel10;
-        private PictureBox pictureBox3;
-        private controls.TransparentTextLabel transparentTextLabel11;
-        private controls.TransparentTextLabel transparentTextLabel12;
-        private PictureBox pictureBox4;
-        private controls.TransparentTextLabel transparentTextLabel13;
-        private controls.TransparentTextLabel transparentTextLabel14;
-        private controls.CustomFlowLayoutPanel customFlowLayoutPanel2;
+        private PictureBox pbMeleeAttack;
+        private controls.TransparentTextLabel lblMeleeAttack;
+        private controls.TransparentTextLabel lblMeleeAttackCount;
+        private PictureBox pbRangedAttack;
+        private controls.TransparentTextLabel lblRangedAttack;
+        private controls.TransparentTextLabel lblRangedAttackCount;
+        private controls.CustomFlowLayoutPanel fpnSpellPower;
         private controls.TransparentTextLabel transparentTextLabel8;
-        private controls.TransparentTextLabel transparentTextLabel9;
+        private controls.TransparentTextLabel lblSpellPower;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel3;
         private controls.TransparentTextLabel transparentTextLabel15;
         private PictureBox pictureBox5;
         private controls.DoubleBufferedPanel doubleBufferedPanel5;
         private controls.TransparentTextLabel transparentTextLabel17;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel4;
-        private PictureBox pictureBox6;
-        private PictureBox pictureBox7;
-        private PictureBox pictureBox8;
-        private PictureBox pictureBox9;
-        private controls.DoubleBufferedPanel doubleBufferedPanel6;
-        private controls.TransparentTextLabel transparentTextLabel16;
-        private RichTextBox richTextBox1;
+        private PictureBox pbWeapon;
+        private PictureBox pbArmour;
+        private PictureBox pbAccessory1;
+        private PictureBox pbAccessory2;
         private controls.DoubleBufferedPanel enemyContainer;
         private controls.CustomFlowLayoutPanel enemyList;
         private ReaLTaiizor.Controls.CyberScrollBar enemyScrollBar;
@@ -1636,5 +1673,12 @@
         private controls.CustomFlowLayoutPanel fpnEnemy1Status;
         private controls.GradientLabel lblEnemy1Name;
         private PictureBox pictureBox10;
+        private PictureBox pbDice;
+        private controls.CustomFlowLayoutPanel fpnWisdom;
+        private controls.TransparentTextLabel transparentTextLabel2;
+        private controls.TransparentTextLabel lblWisdom;
+        private controls.DoubleBufferedPanel doubleBufferedPanel3;
+        private controls.TransparentTextLabel transparentTextLabel3;
+        private RichTextBox richTextBox1;
     }
 }

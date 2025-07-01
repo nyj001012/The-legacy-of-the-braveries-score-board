@@ -93,6 +93,16 @@ namespace ScoreBoard.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap BtnDice {
+            get {
+                object obj = ResourceManager.GetObject("BtnDice", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap BtnDone {
             get {
                 object obj = ResourceManager.GetObject("BtnDone", resourceCulture);
@@ -253,9 +263,29 @@ namespace ScoreBoard.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap ImgMelee {
+            get {
+                object obj = ResourceManager.GetObject("ImgMelee", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap ImgModalBackground {
             get {
                 object obj = ResourceManager.GetObject("ImgModalBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ImgRanged {
+            get {
+                object obj = ResourceManager.GetObject("ImgRanged", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
