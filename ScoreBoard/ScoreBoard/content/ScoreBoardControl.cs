@@ -2,6 +2,7 @@
 using ScoreBoard.data;
 using ScoreBoard.data.character;
 using ScoreBoard.data.stat;
+using ScoreBoard.Properties;
 using ScoreBoard.utils;
 using System;
 using System.Collections.Generic;
@@ -97,7 +98,59 @@ namespace ScoreBoard.content
             ShowAttackRange(player); // 공격 사거리 표시
             ShowAttackValue(player); // 공격력, 공격 가능 횟수(속도) 표시
             ShowSpellPower(player); // 주문력 표시
+            ShowWisdom(player); // 지혜 표시
+            ShowArtifact(player); // 유물 표시
             detailList.ResumeLayout();
+        }
+
+        /*
+         * ShowArtifact(CorpsMember player)
+         * - 플레이어의 유물을 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void ShowArtifact(CorpsMember player)
+        {
+            PictureBox[] slotPics = { pbWeapon, pbArmour, pbAccessory1, pbAccessory2 };
+            string[] emptySlotResourceNames = { "EmptyWeaponSlot", "EmptyArmourSlot", "EmptyAccessorySlot", "EmptyAccessorySlot" };
+
+            for (int i = 0; i < slotPics.Length; i++)
+            {
+                // 네 번째 슬롯(pbaAccessory2)만 예외 처리
+                if (i == 3 && player.ArtifactSlot.Count <= i)
+                {
+                    slotPics[i].Visible = false;  // 아예 안 보이게
+                    continue;
+                }
+                else
+                {
+                    slotPics[i].Visible = true;   // 그 외엔 항상 표시
+                }
+
+                if (player.ArtifactSlot.Count <= i || player.ArtifactSlot[i] == null)
+                {
+                    slotPics[i].Image = (Image)Resources.ResourceManager.GetObject(emptySlotResourceNames[i])!;
+                }
+                else
+                {
+                    slotPics[i].Image = DataReader.GetArtifactImage(player.ArtifactSlot[i].Id);
+                }
+            }
+        }
+
+        /*
+         * ShowWisdom(CorpsMember player)
+         * - 플레이어의 지혜를 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void ShowWisdom(CorpsMember player)
+        {
+            if (player.Stat.Wisdom == null)
+            {
+                fpnWisdom.Visible = false; // 지혜 패널 숨기기
+                return;
+            }
+            fpnWisdom.Visible = true; // 지혜 패널 보이기
+            lblWisdom.Text = $"{player.Stat.Wisdom.Value}"; // 지혜 표시
         }
 
         /*

@@ -109,11 +109,12 @@
             doubleBufferedPanel5 = new ScoreBoard.controls.DoubleBufferedPanel();
             transparentTextLabel17 = new ScoreBoard.controls.TransparentTextLabel();
             customFlowLayoutPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            pictureBox6 = new PictureBox();
-            pictureBox7 = new PictureBox();
-            pictureBox8 = new PictureBox();
-            pictureBox9 = new PictureBox();
+            pbWeapon = new PictureBox();
+            pbArmour = new PictureBox();
+            pbAccessory1 = new PictureBox();
+            pbAccessory2 = new PictureBox();
             doubleBufferedPanel3 = new ScoreBoard.controls.DoubleBufferedPanel();
+            richTextBox1 = new RichTextBox();
             transparentTextLabel3 = new ScoreBoard.controls.TransparentTextLabel();
             detailScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             enemyContainer = new ScoreBoard.controls.DoubleBufferedPanel();
@@ -124,7 +125,6 @@
             lblEnemy1Name = new ScoreBoard.controls.GradientLabel();
             enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             pictureBox10 = new PictureBox();
-            richTextBox1 = new RichTextBox();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -163,10 +163,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             doubleBufferedPanel5.SuspendLayout();
             customFlowLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbWeapon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbArmour).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbAccessory1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbAccessory2).BeginInit();
             doubleBufferedPanel3.SuspendLayout();
             enemyContainer.SuspendLayout();
             enemyList.SuspendLayout();
@@ -1246,51 +1246,51 @@
             // 
             customFlowLayoutPanel4.BorderColor = Color.Transparent;
             customFlowLayoutPanel4.BorderThickness = 0;
-            customFlowLayoutPanel4.Controls.Add(pictureBox6);
-            customFlowLayoutPanel4.Controls.Add(pictureBox7);
-            customFlowLayoutPanel4.Controls.Add(pictureBox8);
-            customFlowLayoutPanel4.Controls.Add(pictureBox9);
+            customFlowLayoutPanel4.Controls.Add(pbWeapon);
+            customFlowLayoutPanel4.Controls.Add(pbArmour);
+            customFlowLayoutPanel4.Controls.Add(pbAccessory1);
+            customFlowLayoutPanel4.Controls.Add(pbAccessory2);
             customFlowLayoutPanel4.Location = new Point(60, 720);
             customFlowLayoutPanel4.Margin = new Padding(0, 15, 0, 0);
             customFlowLayoutPanel4.Name = "customFlowLayoutPanel4";
             customFlowLayoutPanel4.Size = new Size(599, 134);
             customFlowLayoutPanel4.TabIndex = 12;
             // 
-            // pictureBox6
+            // pbWeapon
             // 
-            pictureBox6.Location = new Point(0, 0);
-            pictureBox6.Margin = new Padding(0, 0, 20, 0);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(134, 134);
-            pictureBox6.TabIndex = 0;
-            pictureBox6.TabStop = false;
+            pbWeapon.Location = new Point(0, 0);
+            pbWeapon.Margin = new Padding(0, 0, 20, 0);
+            pbWeapon.Name = "pbWeapon";
+            pbWeapon.Size = new Size(134, 134);
+            pbWeapon.TabIndex = 0;
+            pbWeapon.TabStop = false;
             // 
-            // pictureBox7
+            // pbArmour
             // 
-            pictureBox7.Location = new Point(154, 0);
-            pictureBox7.Margin = new Padding(0, 0, 20, 0);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(134, 134);
-            pictureBox7.TabIndex = 1;
-            pictureBox7.TabStop = false;
+            pbArmour.Location = new Point(154, 0);
+            pbArmour.Margin = new Padding(0, 0, 20, 0);
+            pbArmour.Name = "pbArmour";
+            pbArmour.Size = new Size(134, 134);
+            pbArmour.TabIndex = 1;
+            pbArmour.TabStop = false;
             // 
-            // pictureBox8
+            // pbAccessory1
             // 
-            pictureBox8.Location = new Point(308, 0);
-            pictureBox8.Margin = new Padding(0, 0, 20, 0);
-            pictureBox8.Name = "pictureBox8";
-            pictureBox8.Size = new Size(134, 134);
-            pictureBox8.TabIndex = 2;
-            pictureBox8.TabStop = false;
+            pbAccessory1.Location = new Point(308, 0);
+            pbAccessory1.Margin = new Padding(0, 0, 20, 0);
+            pbAccessory1.Name = "pbAccessory1";
+            pbAccessory1.Size = new Size(134, 134);
+            pbAccessory1.TabIndex = 2;
+            pbAccessory1.TabStop = false;
             // 
-            // pictureBox9
+            // pbAccessory2
             // 
-            pictureBox9.Location = new Point(462, 0);
-            pictureBox9.Margin = new Padding(0);
-            pictureBox9.Name = "pictureBox9";
-            pictureBox9.Size = new Size(134, 134);
-            pictureBox9.TabIndex = 3;
-            pictureBox9.TabStop = false;
+            pbAccessory2.Location = new Point(462, 0);
+            pbAccessory2.Margin = new Padding(0);
+            pbAccessory2.Name = "pbAccessory2";
+            pbAccessory2.Size = new Size(134, 134);
+            pbAccessory2.TabIndex = 3;
+            pbAccessory2.TabStop = false;
             // 
             // doubleBufferedPanel3
             // 
@@ -1301,6 +1301,16 @@
             doubleBufferedPanel3.Name = "doubleBufferedPanel3";
             doubleBufferedPanel3.Size = new Size(599, 45);
             doubleBufferedPanel3.TabIndex = 12;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.BorderStyle = BorderStyle.None;
+            richTextBox1.Location = new Point(154, -2);
+            richTextBox1.Margin = new Padding(0);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(429, 42);
+            richTextBox1.TabIndex = 1;
+            richTextBox1.Text = "";
             // 
             // transparentTextLabel3
             // 
@@ -1494,16 +1504,6 @@
             pictureBox10.TabIndex = 8;
             pictureBox10.TabStop = false;
             // 
-            // richTextBox1
-            // 
-            richTextBox1.BorderStyle = BorderStyle.None;
-            richTextBox1.Location = new Point(154, -2);
-            richTextBox1.Margin = new Padding(0);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(429, 42);
-            richTextBox1.TabIndex = 1;
-            richTextBox1.Text = "";
-            // 
             // ScoreBoardControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1568,10 +1568,10 @@
             doubleBufferedPanel5.ResumeLayout(false);
             doubleBufferedPanel5.PerformLayout();
             customFlowLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbWeapon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbArmour).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbAccessory1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbAccessory2).EndInit();
             doubleBufferedPanel3.ResumeLayout(false);
             doubleBufferedPanel3.PerformLayout();
             enemyContainer.ResumeLayout(false);
@@ -1661,10 +1661,10 @@
         private controls.DoubleBufferedPanel doubleBufferedPanel5;
         private controls.TransparentTextLabel transparentTextLabel17;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel4;
-        private PictureBox pictureBox6;
-        private PictureBox pictureBox7;
-        private PictureBox pictureBox8;
-        private PictureBox pictureBox9;
+        private PictureBox pbWeapon;
+        private PictureBox pbArmour;
+        private PictureBox pbAccessory1;
+        private PictureBox pbAccessory2;
         private controls.DoubleBufferedPanel enemyContainer;
         private controls.CustomFlowLayoutPanel enemyList;
         private ReaLTaiizor.Controls.CyberScrollBar enemyScrollBar;
