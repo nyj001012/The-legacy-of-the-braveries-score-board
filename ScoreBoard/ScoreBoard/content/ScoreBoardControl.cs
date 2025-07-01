@@ -86,7 +86,39 @@ namespace ScoreBoard.content
         private void ShowDetail(CorpsMember player)
         {
             // 플레이어 상세 정보 표시 로직 구현
-            Debug.WriteLine($"플레이어 상세 정보: {player.Name} (ID: {player.Id})");
+            // 이름, 주사위 표시
+            ShowBasicInfo(player);
+
+        }
+
+        /*
+         * ShowBasicInfo(CorpsMember player)
+         * - 플레이어의 기본 정보를 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void ShowBasicInfo(CorpsMember player)
+        {
+            // 플레이어의 기본 정보 표시 로직 구현
+            lblName.Text = player.Name;
+            if (player.RequiredDiceValues.Count > 0)
+            {
+                foreach (var diceValue in player.RequiredDiceValues) // key: 주사위 값, value: 치명타 여부
+                {
+                    TransparentTextLabel label = new TransparentTextLabel
+                    {
+                        Text = diceValue.Key.ToString(),
+                        ForeColor = diceValue.Value ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke, // 치명타는 노란색
+                        AutoSize = true,
+                        Margin = new Padding(0, 0, 10, 0)
+                    };
+                    fpnBasicStatus.Controls.Add(label);
+                }
+            }
+        }
+
+        private void pbDice_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
