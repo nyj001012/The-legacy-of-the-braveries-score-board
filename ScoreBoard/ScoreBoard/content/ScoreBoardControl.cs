@@ -20,6 +20,8 @@ namespace ScoreBoard.content
     {
         private readonly Dictionary<string, CorpsMember> _characters;
         private readonly List<(string id, string name, ushort count)> _monsters;
+        private const int IconSize = 45; // 아이콘 크기 설정
+        private const int MarginInPanel = 10; // 오른쪽 여백 설정
 
         public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)
         {
@@ -91,8 +93,46 @@ namespace ScoreBoard.content
             ShowHealth(player); // 체력 표시
             ShowStatusEffect(player); // 상태 이상 표시
             ShowMovement(player); // 이동 정보 표시
+            ShowAttackRange(player); // 공격 사거리 표시
         }
 
+        /*
+         * ShowAttackRange(CorpsMember player)
+         * - 플레이어의 공격 사거리를 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void ShowAttackRange(CorpsMember player)
+        {
+            fpnRange.SuspendLayout();
+            // 전부 invisible로 초기화
+            pbMelee.Visible = false;
+            pbRanged.Visible = false;
+            lblMeleeRange.Visible = false;
+            lblRangedRange.Visible = false;
+
+            foreach (var s in player.Stat.CombatStats)
+            {
+                if (s.Key == "melee")
+                {
+                    pbMelee.Visible = true; // 근접 공격 아이콘 보이기
+                    lblMeleeRange.Visible = true; // 근접 공격 사거리 레이블 보이기
+                    lblMeleeRange.Text = $"{s.Value.Range}"; // 근접 공격 사거리 표시
+                }
+                else
+                {
+                    pbRanged.Visible = true; // 원거리 공격 아이콘 보이기
+                    lblRangedRange.Visible = true; // 원거리 공격 사거리 레이블 보이기
+                    lblRangedRange.Text = $"{s.Value.Range}"; // 원거리 공격 사거리 표시
+                }
+            }
+            fpnRange.ResumeLayout();
+        }
+
+        /*
+         * ShowMovement(CorpsMember player)
+         * - 플레이어의 이동 속도를 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
         private void ShowMovement(CorpsMember player)
         {
             // 이동 정보 표시 로직 구현
@@ -150,7 +190,7 @@ namespace ScoreBoard.content
                         Text = diceValue.Key.ToString(),
                         ForeColor = diceValue.Value ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke, // 치명타는 노란색
                         AutoSize = true,
-                        Margin = new Padding(0, 0, 10, 0)
+                        Margin = new Padding(0, 0, MarginInPanel, 0), // 오른쪽 여백 적용
                     };
                     fpnBasicStatus.Controls.Add(label);
                 }

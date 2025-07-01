@@ -83,12 +83,12 @@
             doubleBufferedPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel6 = new ScoreBoard.controls.TransparentTextLabel();
             lblMovement = new ScoreBoard.controls.TransparentTextLabel();
-            doubleBufferedPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            fpnRange = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel4 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox2 = new PictureBox();
-            transparentTextLabel7 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox1 = new PictureBox();
-            transparentTextLabel3 = new ScoreBoard.controls.TransparentTextLabel();
+            pbMelee = new PictureBox();
+            lblMeleeRange = new ScoreBoard.controls.TransparentTextLabel();
+            pbRanged = new PictureBox();
+            lblRangedRange = new ScoreBoard.controls.TransparentTextLabel();
             customFlowLayoutPanel1 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel10 = new ScoreBoard.controls.TransparentTextLabel();
             pictureBox3 = new PictureBox();
@@ -148,9 +148,9 @@
             ((System.ComponentModel.ISupportInitialize)pbDice).BeginInit();
             doubleBufferedPanel2.SuspendLayout();
             doubleBufferedPanel4.SuspendLayout();
-            doubleBufferedPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            fpnRange.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMelee).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbRanged).BeginInit();
             customFlowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -776,7 +776,7 @@
             detailList.Controls.Add(doubleBufferedPanel2);
             detailList.Controls.Add(fpnStatusDetail);
             detailList.Controls.Add(doubleBufferedPanel4);
-            detailList.Controls.Add(doubleBufferedPanel3);
+            detailList.Controls.Add(fpnRange);
             detailList.Controls.Add(customFlowLayoutPanel1);
             detailList.Controls.Add(customFlowLayoutPanel2);
             detailList.Controls.Add(customFlowLayoutPanel3);
@@ -915,20 +915,20 @@
             lblMovement.TabIndex = 1;
             lblMovement.Text = "2";
             // 
-            // doubleBufferedPanel3
+            // fpnRange
             // 
-            doubleBufferedPanel3.BorderColor = Color.Transparent;
-            doubleBufferedPanel3.BorderThickness = 0;
-            doubleBufferedPanel3.Controls.Add(transparentTextLabel4);
-            doubleBufferedPanel3.Controls.Add(pictureBox2);
-            doubleBufferedPanel3.Controls.Add(transparentTextLabel7);
-            doubleBufferedPanel3.Controls.Add(pictureBox1);
-            doubleBufferedPanel3.Controls.Add(transparentTextLabel3);
-            doubleBufferedPanel3.Location = new Point(60, 360);
-            doubleBufferedPanel3.Margin = new Padding(0, 15, 0, 0);
-            doubleBufferedPanel3.Name = "doubleBufferedPanel3";
-            doubleBufferedPanel3.Size = new Size(599, 45);
-            doubleBufferedPanel3.TabIndex = 3;
+            fpnRange.BorderColor = Color.Transparent;
+            fpnRange.BorderThickness = 0;
+            fpnRange.Controls.Add(transparentTextLabel4);
+            fpnRange.Controls.Add(pbMelee);
+            fpnRange.Controls.Add(lblMeleeRange);
+            fpnRange.Controls.Add(pbRanged);
+            fpnRange.Controls.Add(lblRangedRange);
+            fpnRange.Location = new Point(60, 360);
+            fpnRange.Margin = new Padding(0, 15, 0, 0);
+            fpnRange.Name = "fpnRange";
+            fpnRange.Size = new Size(599, 45);
+            fpnRange.TabIndex = 3;
             // 
             // transparentTextLabel4
             // 
@@ -944,51 +944,55 @@
             transparentTextLabel4.Text = "전투 사거리:";
             transparentTextLabel4.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox2
+            // pbMelee
             // 
-            pictureBox2.Location = new Point(208, 0);
-            pictureBox2.Margin = new Padding(0, 0, 10, 0);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(45, 45);
-            pictureBox2.TabIndex = 4;
-            pictureBox2.TabStop = false;
+            pbMelee.BackgroundImage = Properties.Resources.ImgMelee;
+            pbMelee.BackgroundImageLayout = ImageLayout.Stretch;
+            pbMelee.Location = new Point(208, 0);
+            pbMelee.Margin = new Padding(0, 0, 10, 0);
+            pbMelee.Name = "pbMelee";
+            pbMelee.Size = new Size(45, 45);
+            pbMelee.TabIndex = 4;
+            pbMelee.TabStop = false;
             // 
-            // transparentTextLabel7
+            // lblMeleeRange
             // 
-            transparentTextLabel7.AutoSize = true;
-            transparentTextLabel7.BackColor = Color.Transparent;
-            transparentTextLabel7.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel7.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel7.Location = new Point(263, 0);
-            transparentTextLabel7.Margin = new Padding(0, 0, 20, 0);
-            transparentTextLabel7.Name = "transparentTextLabel7";
-            transparentTextLabel7.Size = new Size(40, 42);
-            transparentTextLabel7.TabIndex = 3;
-            transparentTextLabel7.Text = "2";
-            transparentTextLabel7.TextAlign = ContentAlignment.MiddleCenter;
+            lblMeleeRange.AutoSize = true;
+            lblMeleeRange.BackColor = Color.Transparent;
+            lblMeleeRange.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMeleeRange.ForeColor = Color.WhiteSmoke;
+            lblMeleeRange.Location = new Point(263, 0);
+            lblMeleeRange.Margin = new Padding(0, 0, 20, 0);
+            lblMeleeRange.Name = "lblMeleeRange";
+            lblMeleeRange.Size = new Size(40, 42);
+            lblMeleeRange.TabIndex = 3;
+            lblMeleeRange.Text = "2";
+            lblMeleeRange.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
+            // pbRanged
             // 
-            pictureBox1.Location = new Point(323, 0);
-            pictureBox1.Margin = new Padding(0, 0, 10, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(45, 45);
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
+            pbRanged.BackgroundImage = Properties.Resources.ImgRanged;
+            pbRanged.BackgroundImageLayout = ImageLayout.Stretch;
+            pbRanged.Location = new Point(323, 0);
+            pbRanged.Margin = new Padding(0, 0, 10, 0);
+            pbRanged.Name = "pbRanged";
+            pbRanged.Size = new Size(45, 45);
+            pbRanged.TabIndex = 2;
+            pbRanged.TabStop = false;
             // 
-            // transparentTextLabel3
+            // lblRangedRange
             // 
-            transparentTextLabel3.AutoSize = true;
-            transparentTextLabel3.BackColor = Color.Transparent;
-            transparentTextLabel3.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel3.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel3.Location = new Point(378, 0);
-            transparentTextLabel3.Margin = new Padding(0);
-            transparentTextLabel3.Name = "transparentTextLabel3";
-            transparentTextLabel3.Size = new Size(40, 42);
-            transparentTextLabel3.TabIndex = 1;
-            transparentTextLabel3.Text = "2";
-            transparentTextLabel3.TextAlign = ContentAlignment.MiddleCenter;
+            lblRangedRange.AutoSize = true;
+            lblRangedRange.BackColor = Color.Transparent;
+            lblRangedRange.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRangedRange.ForeColor = Color.WhiteSmoke;
+            lblRangedRange.Location = new Point(378, 0);
+            lblRangedRange.Margin = new Padding(0);
+            lblRangedRange.Name = "lblRangedRange";
+            lblRangedRange.Size = new Size(40, 42);
+            lblRangedRange.TabIndex = 1;
+            lblRangedRange.Text = "2";
+            lblRangedRange.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // customFlowLayoutPanel1
             // 
@@ -1498,10 +1502,10 @@
             doubleBufferedPanel2.PerformLayout();
             doubleBufferedPanel4.ResumeLayout(false);
             doubleBufferedPanel4.PerformLayout();
-            doubleBufferedPanel3.ResumeLayout(false);
-            doubleBufferedPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            fpnRange.ResumeLayout(false);
+            fpnRange.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMelee).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbRanged).EndInit();
             customFlowLayoutPanel1.ResumeLayout(false);
             customFlowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -1584,12 +1588,12 @@
         private controls.CustomFlowLayoutPanel doubleBufferedPanel4;
         private controls.TransparentTextLabel lblMovement;
         private controls.TransparentTextLabel transparentTextLabel6;
-        private controls.CustomFlowLayoutPanel doubleBufferedPanel3;
-        private PictureBox pictureBox1;
-        private controls.TransparentTextLabel transparentTextLabel3;
+        private controls.CustomFlowLayoutPanel fpnRange;
+        private PictureBox pbRanged;
+        private controls.TransparentTextLabel lblRangedRange;
         private controls.TransparentTextLabel transparentTextLabel4;
-        private PictureBox pictureBox2;
-        private controls.TransparentTextLabel transparentTextLabel7;
+        private PictureBox pbMelee;
+        private controls.TransparentTextLabel lblMeleeRange;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel1;
         private controls.TransparentTextLabel transparentTextLabel10;
         private PictureBox pictureBox3;
