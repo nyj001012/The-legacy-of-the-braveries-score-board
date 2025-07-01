@@ -89,6 +89,34 @@ namespace ScoreBoard.content
             // 플레이어 상세 정보 표시 로직 구현
             ShowBasicInfo(player); // 기본 정보 표시
             ShowHealth(player); // 체력 표시
+            ShowStatusEffect(player); // 상태 이상 표시
+            ShowMovement(player); // 이동 정보 표시
+        }
+
+        private void ShowMovement(CorpsMember player)
+        {
+            // 이동 정보 표시 로직 구현
+            lblMovement.Text = $"{player.Stat.Movement}"; // 현재 이동력 표시
+        }
+
+        /*
+         * ShowStatusEffect(CorpsMember player)
+         * - 플레이어의 상태 이상을 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void ShowStatusEffect(CorpsMember player)
+        {
+            if (player.Stat.StatusEffects.Count == 0)
+            {
+                fpnStatusDetail.Controls.Clear(); // 상태 이상이 없으면 컨트롤 비우기
+                fpnStatusDetail.Visible = false; // 상태 이상 패널 숨기기
+                return;
+            }
+            fpnStatusDetail.Visible = true; // 상태 이상 패널 보이기
+            fpnStatusDetail.Controls.Clear(); // 기존 컨트롤 제거
+            fpnStatusDetail.SuspendLayout();
+            // TODO => 상태 이상 정보를 표시하는 로직 구현
+            fpnStatusDetail.ResumeLayout();
         }
 
         /*

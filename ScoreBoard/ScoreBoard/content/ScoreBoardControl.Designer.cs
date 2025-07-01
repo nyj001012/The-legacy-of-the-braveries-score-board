@@ -82,7 +82,7 @@
             fpnStatusDetail = new ScoreBoard.controls.CustomFlowLayoutPanel();
             doubleBufferedPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel6 = new ScoreBoard.controls.TransparentTextLabel();
-            transparentTextLabel5 = new ScoreBoard.controls.TransparentTextLabel();
+            lblMovement = new ScoreBoard.controls.TransparentTextLabel();
             doubleBufferedPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel4 = new ScoreBoard.controls.TransparentTextLabel();
             pictureBox2 = new PictureBox();
@@ -882,7 +882,7 @@
             doubleBufferedPanel4.BorderColor = Color.Transparent;
             doubleBufferedPanel4.BorderThickness = 0;
             doubleBufferedPanel4.Controls.Add(transparentTextLabel6);
-            doubleBufferedPanel4.Controls.Add(transparentTextLabel5);
+            doubleBufferedPanel4.Controls.Add(lblMovement);
             doubleBufferedPanel4.Location = new Point(60, 300);
             doubleBufferedPanel4.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel4.Name = "doubleBufferedPanel4";
@@ -902,18 +902,18 @@
             transparentTextLabel6.TabIndex = 0;
             transparentTextLabel6.Text = "이동속도:";
             // 
-            // transparentTextLabel5
+            // lblMovement
             // 
-            transparentTextLabel5.AutoSize = true;
-            transparentTextLabel5.BackColor = Color.Transparent;
-            transparentTextLabel5.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            transparentTextLabel5.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel5.Location = new Point(167, 0);
-            transparentTextLabel5.Margin = new Padding(0);
-            transparentTextLabel5.Name = "transparentTextLabel5";
-            transparentTextLabel5.Size = new Size(40, 42);
-            transparentTextLabel5.TabIndex = 1;
-            transparentTextLabel5.Text = "2";
+            lblMovement.AutoSize = true;
+            lblMovement.BackColor = Color.Transparent;
+            lblMovement.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMovement.ForeColor = Color.WhiteSmoke;
+            lblMovement.Location = new Point(167, 0);
+            lblMovement.Margin = new Padding(0);
+            lblMovement.Name = "lblMovement";
+            lblMovement.Size = new Size(40, 42);
+            lblMovement.TabIndex = 1;
+            lblMovement.Text = "2";
             // 
             // doubleBufferedPanel3
             // 
@@ -1582,7 +1582,7 @@
         private controls.TransparentTextLabel lblHealth;
         private controls.CustomFlowLayoutPanel fpnStatusDetail;
         private controls.CustomFlowLayoutPanel doubleBufferedPanel4;
-        private controls.TransparentTextLabel transparentTextLabel5;
+        private controls.TransparentTextLabel lblMovement;
         private controls.TransparentTextLabel transparentTextLabel6;
         private controls.CustomFlowLayoutPanel doubleBufferedPanel3;
         private PictureBox pictureBox1;
