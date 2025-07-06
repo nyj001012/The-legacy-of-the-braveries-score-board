@@ -15,9 +15,12 @@ namespace ScoreBoard.controls
     {
         private readonly List<PassiveSkill> _passives;
         private readonly List<ActiveSkill> _actives;
+
         private const int PADDING_BOTTOM = 30;
         private const int FONT_SIZE = 22;
-        private CustomFlowLayoutPanel _passivePanel = new()
+        private const int MAX_WIDTH = 579;
+
+        private readonly CustomFlowLayoutPanel _passivePanel = new()
         {
             Width = 599,
             AutoScroll = false,
@@ -31,73 +34,74 @@ namespace ScoreBoard.controls
         public SkillDescriptionPanel(List<PassiveSkill>? passives, List<ActiveSkill>? actives)
         {
             InitializeComponent();
-            this._passives = passives ?? [];
-            this._actives = actives ?? [];
-            this.Controls.Clear();
-            this.Controls.Add(_passivePanel);
+            _passives = passives ?? [];
+            _actives = actives ?? [];
+
+            Controls.Clear();
+            Controls.Add(_passivePanel);
+
             ShowPassives();
         }
 
+        /*
+         * GetPassiveDisplayName(SkillBase skill)
+         * - 패시브 기술의 이름을 레벨에 따라 다르게 표시하는 메서드입니다.
+         */
+        string GetPassiveDisplayName(SkillBase skill)
+        {
+            return skill.RequiredLevel switch
+            {
+                0 => $"{skill.Name} (기본)",
+                3 => $"{skill.Name} (궁극 강화)",
+                _ => $"{skill.Name} ({skill.RequiredLevel}강)"
+            };
+        }
+
+        /*
+         * ShowPassives()
+         * - 패시브 기술을 표시하는 메서드입니다.
+         */
         private void ShowPassives()
         {
-            TransparentTextLabel label = new()
-            {
-                AutoSize = true,
-                MaximumSize = new Size(579, 0),
-                Text = "[패시브]",
-                Font = new Font("Danjo-bold", FONT_SIZE),
-                ForeColor = Color.WhiteSmoke,
-            };
-            _passivePanel.Controls.Add(label);
+            _passivePanel.Controls.Add(CreateLabel("[패시브]", Color.WhiteSmoke));
 
             if (_passives.Count == 0)
             {
-                TransparentTextLabel noPassivesLabel = new()
-                {
-                    AutoSize = true,
-                    MaximumSize = new Size(579, 0),
-                    Text = "패시브 기술이 없습니다.",
-                    Font = new Font("Danjo-bold", FONT_SIZE),
-                    ForeColor = Color.WhiteSmoke,
-                };
-                _passivePanel.Controls.Add(noPassivesLabel);
+                _passivePanel.Controls.Add(CreateLabel("패시브 기술이 없습니다.", Color.WhiteSmoke));
+                return;
             }
-            else
+
+            foreach (var passive in _passives)
             {
-                foreach (var passive in _passives)
-                {
-                    Color foreColour = passive.isActivated ? Color.WhiteSmoke : Color.FromArgb(100, 245, 245, 245);
-                    TransparentTextLabel passiveLabel = new()
-                    {
-                        AutoSize = true,
-                        MaximumSize = new Size(579, 0),
-                        Text = passive.Name,
-                        Font = new Font("Danjo-bold", FONT_SIZE),
-                        ForeColor = foreColour,
-                    };
-                    _passivePanel.Controls.Add(passiveLabel);
+                Color foreColor = passive.isActivated ? Color.WhiteSmoke : Color.FromArgb(100, 245, 245, 245);
 
-                    foreach (var description in passive.Description)
-                    {
-                        TransparentTextLabel descriptionLabel = new()
-                        {
-                            AutoSize = true,
-                            MaximumSize = new Size(579, 0),
-                            Text = $"= {description}",
-                            Font = new Font("Danjo-bold", FONT_SIZE),
-                            ForeColor = foreColour,
-                        };
+                _passivePanel.Controls.Add(CreateLabel(GetPassiveDisplayName(passive), foreColor));
 
-                        // 마지막 줄에만 패딩 추가
-                        if (description == passive.Description.Last())
-                        {
+                for (int i = 0; i < passive.Description.Length; i++)
+                    {
+                        var descriptionLabel = CreateLabel("= " + passive.Description[i], foreColor);
+                        if (i == passive.Description.Length - 1)
                             descriptionLabel.Margin = new Padding(0, 0, 0, PADDING_BOTTOM);
-                        }
 
                         _passivePanel.Controls.Add(descriptionLabel);
                     }
-                }
             }
+        }
+
+        /*
+         * CreateLabel(string text, Color foreColor)
+         * - 주어진 텍스트와 색상으로 투명한 레이블을 생성하는 메서드입니다.
+         */
+        private TransparentTextLabel CreateLabel(string text, Color foreColor)
+        {
+            return new TransparentTextLabel
+            {
+                AutoSize = true,
+                MaximumSize = new Size(MAX_WIDTH, 0),
+                Text = text,
+                Font = new Font("Danjo-bold", FONT_SIZE),
+                ForeColor = foreColor
+            };
         }
     }
 }
