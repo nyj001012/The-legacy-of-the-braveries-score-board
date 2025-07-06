@@ -299,6 +299,10 @@ namespace ScoreBoard.content
                 detailViewport.Controls.Remove(skillDescriptionPanel);
                 skillDescriptionPanel.Dispose();
                 skillDescriptionPanel = null;
+                // 스크롤 위치 초기화
+                detailViewport.Top = 0;
+                detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
+                detailViewport.PerformLayout();
             }
 
             detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
