@@ -138,7 +138,7 @@ namespace ScoreBoard.content
         {
             bool hasWisdom = player.Stat.Wisdom != null;
             fpnWisdom.Visible = hasWisdom;
-            if (hasWisdom) lblWisdom.Text = player.Stat.Wisdom.Value.ToString();
+            if (hasWisdom) lblWisdom.Text = player.Stat.Wisdom!.Value.ToString();
         }
 
         /*
@@ -150,7 +150,7 @@ namespace ScoreBoard.content
         {
             bool hasSpellPower = player.Stat.SpellPower != null;
             fpnSpellPower.Visible = hasSpellPower;
-            if (hasSpellPower) lblSpellPower.Text = player.Stat.SpellPower.Value.ToString();
+            if (hasSpellPower) lblSpellPower.Text = player.Stat.SpellPower!.Value.ToString();
         }
 
         /*
