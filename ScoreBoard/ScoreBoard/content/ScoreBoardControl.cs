@@ -47,13 +47,14 @@ namespace ScoreBoard.content
         private void InitEnemyList()
         {
             enemyList.SuspendLayout();
-            enemyList.Controls.Clear(); // 기존 컨트롤 제거
+            enemyList.Controls.Clear();
 
             foreach (var (id, name, count) in _monsters)
             {
-                // EnemyPanel 생성자에 id, name, count 받기
-                EnemyPanel enemyControl = new EnemyPanel(id, name, count);
-                enemyControl.Name = $"pn{id}";
+                EnemyPanel enemyControl = new EnemyPanel(id, name, count)
+                {
+                    Name = $"pn{id}"
+                };
                 enemyList.Controls.Add(enemyControl);
             }
 
@@ -66,12 +67,11 @@ namespace ScoreBoard.content
         private void InitPlayerList()
         {
             playerList.SuspendLayout();
-            playerList.Controls.Clear(); // 기존 컨트롤 제거
+            playerList.Controls.Clear();
 
             int index = 1;
             foreach (var character in _characters.Values)
             {
-                // 1P는 CurrentPlayerPanel, 나머지는 PlayerPanel
                 UserControl panel = (index == 1)
                     ? new CurrentPlayerPanel(character, index)
                     : new PlayerPanel(character, index);
@@ -82,6 +82,7 @@ namespace ScoreBoard.content
                 playerList.Controls.Add(panel);
                 index++;
             }
+
             playerList.ResumeLayout();
         }
 
@@ -91,19 +92,20 @@ namespace ScoreBoard.content
          */
         private void ShowDetail(CorpsMember player)
         {
-            currentShowingPlayer = player; // 현재 표시 중인 플레이어 저장
-            detailList.SuspendLayout();
-            // 플레이어 상세 정보 표시 로직 구현
-            ShowBasicInfo(player); // 기본 정보 표시
-            ShowHealth(player); // 체력 표시
-            ShowStatusEffect(player); // 상태 이상 표시
-            ShowMovement(player); // 이동 정보 표시
-            ShowAttackRange(player); // 공격 사거리 표시
-            ShowAttackValue(player); // 공격력, 공격 가능 횟수(속도) 표시
-            ShowSpellPower(player); // 주문력 표시
-            ShowWisdom(player); // 지혜 표시
-            ShowArtifact(player); // 유물 표시
-            detailList.ResumeLayout();
+            currentShowingPlayer = player;
+            detailViewport.SuspendLayout();
+
+            ShowBasicInfo(player);
+            ShowHealth(player);
+            ShowStatusEffect(player);
+            ShowMovement(player);
+            ShowAttackRange(player);
+            ShowAttackValue(player);
+            ShowSpellPower(player);
+            ShowWisdom(player);
+            ShowArtifact(player);
+
+            detailViewport.ResumeLayout();
         }
 
         /*
@@ -118,25 +120,12 @@ namespace ScoreBoard.content
 
             for (int i = 0; i < slotPics.Length; i++)
             {
-                // 네 번째 슬롯(pbaAccessory2)만 예외 처리
-                if (i == 3 && player.ArtifactSlot.Count <= i)
-                {
-                    slotPics[i].Visible = false;  // 아예 안 보이게
-                    continue;
-                }
-                else
-                {
-                    slotPics[i].Visible = true;   // 그 외엔 항상 표시
-                }
+                bool hasArtifact = player.ArtifactSlot.Count > i && player.ArtifactSlot[i] != null;
 
-                if (player.ArtifactSlot.Count <= i || player.ArtifactSlot[i] == null)
-                {
-                    slotPics[i].BackgroundImage = (Image)Resources.ResourceManager.GetObject(emptySlotResourceNames[i])!;
-                }
-                else
-                {
-                    slotPics[i].BackgroundImage = DataReader.GetArtifactImage(player.ArtifactSlot[i].Id);
-                }
+                slotPics[i].Visible = !(i == 3 && player.ArtifactSlot.Count <= i);
+                slotPics[i].BackgroundImage = hasArtifact
+                    ? DataReader.GetArtifactImage(player.ArtifactSlot[i].Id)
+                    : (Image)Resources.ResourceManager.GetObject(emptySlotResourceNames[i])!;
             }
         }
 
@@ -147,13 +136,9 @@ namespace ScoreBoard.content
          */
         private void ShowWisdom(CorpsMember player)
         {
-            if (player.Stat.Wisdom == null)
-            {
-                fpnWisdom.Visible = false; // 지혜 패널 숨기기
-                return;
-            }
-            fpnWisdom.Visible = true; // 지혜 패널 보이기
-            lblWisdom.Text = $"{player.Stat.Wisdom.Value}"; // 지혜 표시
+            bool hasWisdom = player.Stat.Wisdom != null;
+            fpnWisdom.Visible = hasWisdom;
+            if (hasWisdom) lblWisdom.Text = player.Stat.Wisdom.Value.ToString();
         }
 
         /*
@@ -163,13 +148,9 @@ namespace ScoreBoard.content
          */
         private void ShowSpellPower(CorpsMember player)
         {
-            if (player.Stat.SpellPower == null)
-            {
-                fpnSpellPower.Visible = false; // 주문력 패널 숨기기
-                return;
-            }
-            fpnSpellPower.Visible = true; // 주문력 패널 보이기
-            lblSpellPower.Text = $"{player.Stat.SpellPower.Value}"; // 주문력 표시
+            bool hasSpellPower = player.Stat.SpellPower != null;
+            fpnSpellPower.Visible = hasSpellPower;
+            if (hasSpellPower) lblSpellPower.Text = player.Stat.SpellPower.Value.ToString();
         }
 
         /*
@@ -181,10 +162,10 @@ namespace ScoreBoard.content
         {
             if (player.Stat.CombatStats.Count == 0)
             {
-                fpnAttackValue.Visible = false; // 공격력 패널 숨기기
+                fpnAttackValue.Visible = false;
                 return;
             }
-            // 기존 컨트롤 invisible로 초기화
+
             pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
             lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
             lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
@@ -193,15 +174,15 @@ namespace ScoreBoard.content
             {
                 if (type == "melee")
                 {
-                    pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true; // 근접 공격 아이콘, 레이블 보이기
-                    lblMeleeAttack.Text = $"{combatStat.Value}"; // 근접 공격력 표시
-                    lblMeleeAttackCount.Text = "{" + combatStat.AttackCount + "}"; // 근접 공격 가능 횟수(속도) 표시
+                    pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true;
+                    lblMeleeAttack.Text = combatStat.Value.ToString();
+                    lblMeleeAttackCount.Text = $"{{{combatStat.AttackCount}}}";
                 }
                 else
                 {
-                    pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true; // 원거리 공격 아이콘, 레이블 보이기
-                    lblRangedAttack.Text = $"{combatStat.Value}"; // 원거리 공격력 표시
-                    lblRangedAttackCount.Text = "{" + combatStat.AttackCount + "}"; // 원거리 공격 가능 횟수(속도) 표시
+                    pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true;
+                    lblRangedAttack.Text = combatStat.Value.ToString();
+                    lblRangedAttackCount.Text = $"{{{combatStat.AttackCount}}}";
                 }
             }
         }
@@ -213,25 +194,20 @@ namespace ScoreBoard.content
          */
         private void ShowAttackRange(CorpsMember player)
         {
-            // 전부 invisible로 초기화
-            pbMelee.Visible = false;
-            pbRanged.Visible = false;
-            lblMeleeRange.Visible = false;
-            lblRangedRange.Visible = false;
+            pbMelee.Visible = pbRanged.Visible = false;
+            lblMeleeRange.Visible = lblRangedRange.Visible = false;
 
             foreach (var (type, combatStat) in player.Stat.CombatStats)
             {
                 if (type == "melee")
                 {
-                    pbMelee.Visible = true; // 근접 공격 아이콘 보이기
-                    lblMeleeRange.Visible = true; // 근접 공격 사거리 레이블 보이기
-                    lblMeleeRange.Text = $"{combatStat.Range}"; // 근접 공격 사거리 표시
+                    pbMelee.Visible = lblMeleeRange.Visible = true;
+                    lblMeleeRange.Text = combatStat.Range.ToString();
                 }
                 else
                 {
-                    pbRanged.Visible = true; // 원거리 공격 아이콘 보이기
-                    lblRangedRange.Visible = true; // 원거리 공격 사거리 레이블 보이기
-                    lblRangedRange.Text = $"{combatStat.Range}"; // 원거리 공격 사거리 표시
+                    pbRanged.Visible = lblRangedRange.Visible = true;
+                    lblRangedRange.Text = combatStat.Range.ToString();
                 }
             }
         }
@@ -243,8 +219,7 @@ namespace ScoreBoard.content
          */
         private void ShowMovement(CorpsMember player)
         {
-            // 이동 정보 표시 로직 구현
-            lblMovement.Text = $"{player.Stat.Movement}"; // 현재 이동력 표시
+            lblMovement.Text = player.Stat.Movement.ToString();
         }
 
         /*
@@ -256,12 +231,13 @@ namespace ScoreBoard.content
         {
             if (player.Stat.StatusEffects.Count == 0)
             {
-                fpnStatusDetail.Controls.Clear(); // 상태 이상이 없으면 컨트롤 비우기
-                fpnStatusDetail.Visible = false; // 상태 이상 패널 숨기기
+                fpnStatusDetail.Controls.Clear();
+                fpnStatusDetail.Visible = false;
                 return;
             }
-            fpnStatusDetail.Visible = true; // 상태 이상 패널 보이기
-            fpnStatusDetail.Controls.Clear(); // 기존 컨트롤 제거
+
+            fpnStatusDetail.Visible = true;
+            fpnStatusDetail.Controls.Clear();
             // TODO => 상태 이상 정보를 표시하는 로직 구현
         }
 
@@ -272,10 +248,10 @@ namespace ScoreBoard.content
          */
         private void ShowHealth(CorpsMember player)
         {
-            // 플레이어의 체력 정보를 표시하는 로직 구현
-            lblHealth.Text = $"{player.Stat.Hp}"; // 현재 체력 표시
-            lblHealth.Text += player.Stat.Shield > 0 ? $"(+{player.Stat.Shield})" : ""; // 보호막 표시
-            lblHealth.Text += $"/{player.Stat.MaxHp}"; // 최대 체력 표시
+            lblHealth.Text = player.Stat.Hp.ToString();
+            if (player.Stat.Shield > 0)
+                lblHealth.Text += $"(+{player.Stat.Shield})";
+            lblHealth.Text += $"/{player.Stat.MaxHp}";
         }
 
         /*
@@ -285,46 +261,61 @@ namespace ScoreBoard.content
          */
         private void ShowBasicInfo(CorpsMember player)
         {
-            // 플레이어의 기본 정보 표시 로직 구현
             lblName.Text = player.Name;
             if (player.RequiredDiceValues.Count > 0)
             {
-                foreach (var diceValue in player.RequiredDiceValues) // key: 주사위 값, value: 치명타 여부
+                foreach (var diceValue in player.RequiredDiceValues)
                 {
                     TransparentTextLabel label = new TransparentTextLabel
                     {
                         Text = diceValue.Key.ToString(),
-                        ForeColor = diceValue.Value ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke, // 치명타는 노란색
+                        ForeColor = diceValue.Value ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke,
                         AutoSize = true,
-                        Margin = new Padding(0, 0, MarginInPanel, 0), // 오른쪽 여백 적용
+                        Margin = new Padding(0, 0, MarginInPanel, 0),
                     };
                     fpnBasicStatus.Controls.Add(label);
                 }
             }
         }
 
-        private void pbDice_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void pbDice_Click(object sender, EventArgs e) { }
 
         private void pbSkill_Click(object sender, EventArgs e)
         {
             if (skillDescriptionPanel == null)
             {
-                // 스킬 설명 펼치기
                 skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
-                int insertIndex = detailList.Controls.GetChildIndex(customFlowLayoutPanel3) + 1;
-                detailList.Controls.Add(skillDescriptionPanel);
-                detailList.Controls.SetChildIndex(skillDescriptionPanel, insertIndex);
+                int insertIndex = detailViewport.Controls.GetChildIndex(customFlowLayoutPanel3) + 1;
+                detailViewport.Controls.Add(skillDescriptionPanel);
+                detailViewport.Controls.SetChildIndex(skillDescriptionPanel, insertIndex);
+
+                skillDescriptionPanel.PerformLayout();
+                skillDescriptionPanel.Height = skillDescriptionPanel.Controls.Cast<Control>().Max(c => c.Bottom) + 10;
             }
             else
             {
-                // 스킬 설명 접기
-                detailList.Controls.Remove(skillDescriptionPanel);
+                detailViewport.Controls.Remove(skillDescriptionPanel);
                 skillDescriptionPanel.Dispose();
                 skillDescriptionPanel = null;
             }
+
+            detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
+            ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
+        }
+
+        private void detailList_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (!detailScrollBar.Enabled) return;
+
+            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * detailScrollBar.SmallStep;
+            int newScrollValue = Math.Clamp(detailScrollBar.Value + delta, detailScrollBar.Minimum, detailScrollBar.Maximum);
+            detailScrollBar.Value = newScrollValue;
+            detailViewport.Top = detailList.Padding.Top - newScrollValue;
+        }
+
+        private void detailList_MouseEnter(object sender, EventArgs e)
+        {
+            detailViewport.Focus();
         }
     }
 }

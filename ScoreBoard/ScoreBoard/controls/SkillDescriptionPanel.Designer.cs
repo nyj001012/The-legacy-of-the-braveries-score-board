@@ -28,8 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            SuspendLayout();
+            // 
+            // SkillDescriptionPanel
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            BackColor = Color.Transparent;
+            Margin = new Padding(0);
+            MinimumSize = new Size(599, 0);
+            Name = "SkillDescriptionPanel";
+            Size = new Size(599, 500);
+            ResumeLayout(false);
         }
 
         #endregion
