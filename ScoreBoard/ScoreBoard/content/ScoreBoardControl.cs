@@ -35,10 +35,9 @@ namespace ScoreBoard.content
 
         private void ScoreBoardControl_Load(object sender, EventArgs e)
         {
-            BeginInvoke(() => InitPlayerList());
-            BeginInvoke(() => InitEnemyList());
-            BeginInvoke(() => ShowDetail(_characters.ElementAt(0).Value));
-            ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
+            InitPlayerList();
+            InitEnemyList();
+            ShowDetail(_characters.ElementAt(0).Value);
         }
 
         /*
@@ -59,6 +58,7 @@ namespace ScoreBoard.content
             }
 
             enemyList.ResumeLayout();
+            ScrollBarManager.SetScrollBar(enemyContainer, enemyList, enemyScrollBar);
         }
 
         /*
@@ -84,6 +84,7 @@ namespace ScoreBoard.content
             }
 
             playerList.ResumeLayout();
+            ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
         }
 
         /*
@@ -104,8 +105,9 @@ namespace ScoreBoard.content
             ShowSpellPower(player);
             ShowWisdom(player);
             ShowArtifact(player);
-
             detailViewport.ResumeLayout();
+
+            ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
         }
 
         /*

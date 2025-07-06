@@ -35,13 +35,13 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1920, 1080);
+            ClientSize = new Size(1904, 1041);
             Margin = new Padding(3, 4, 3, 4);
             MaximumSize = new Size(1920, 1080);
             MinimumSize = new Size(1920, 1080);
             Name = "MainForm";
             Text = "용사 이야기 점수판";
-            Load += MainForm_Load;
+            Shown += MainForm_Shown;
             ResumeLayout(false);
 
         }
