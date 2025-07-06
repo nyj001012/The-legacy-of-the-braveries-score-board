@@ -22,7 +22,6 @@ namespace ScoreBoard.content
         private SkillDescriptionPanel? skillDescriptionPanel = null; // 스킬 설명 패널
         private readonly Dictionary<string, CorpsMember> _characters;
         private readonly List<(string id, string name, ushort count)> _monsters;
-        private const int IconSize = 45; // 아이콘 크기 설정
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
         private CorpsMember? currentShowingPlayer = null; // 현재 표시 중인 플레이어
 
@@ -112,9 +111,11 @@ namespace ScoreBoard.content
                 skillDescriptionPanel = null;
                 DisplaySkillDescription();
             }
+            else
+            {
+                ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
+            }
             detailViewport.ResumeLayout();
-
-            ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
         }
 
         /*
@@ -304,10 +305,9 @@ namespace ScoreBoard.content
                 detailViewport.Top = 0;
                 detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
                 detailViewport.PerformLayout();
+                detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
+                ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
             }
-
-            detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
-            ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
         }
 
         /*
@@ -323,6 +323,8 @@ namespace ScoreBoard.content
 
             skillDescriptionPanel.PerformLayout();
             skillDescriptionPanel.Height = skillDescriptionPanel.Controls.Cast<Control>().Max(c => c.Bottom) + 10;
+            detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
+            ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
         }
 
         private void detailList_MouseWheel(object sender, MouseEventArgs e)

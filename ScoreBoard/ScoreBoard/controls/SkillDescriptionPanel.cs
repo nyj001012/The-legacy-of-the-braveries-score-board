@@ -20,7 +20,7 @@ namespace ScoreBoard.controls
 
         private const int PADDING_BOTTOM = 30;
         private const int FONT_SIZE = 22;
-        private const int MAX_WIDTH = 599;
+        private const int MAX_WIDTH = 600;
 
         // 패시브, 액티브 기술을 표시하는 패널
         private readonly CustomFlowLayoutPanel _flowLayoutPanel = new()

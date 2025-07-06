@@ -860,7 +860,7 @@
             doubleBufferedPanel2.Location = new Point(60, 60);
             doubleBufferedPanel2.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel2.Name = "doubleBufferedPanel2";
-            doubleBufferedPanel2.Size = new Size(599, 45);
+            doubleBufferedPanel2.Size = new Size(600, 45);
             doubleBufferedPanel2.TabIndex = 1;
             // 
             // lblHealth
@@ -897,7 +897,7 @@
             fpnStatusDetail.Margin = new Padding(0, 15, 0, 0);
             fpnStatusDetail.Name = "fpnStatusDetail";
             fpnStatusDetail.Padding = new Padding(0, 0, 10, 0);
-            fpnStatusDetail.Size = new Size(599, 45);
+            fpnStatusDetail.Size = new Size(600, 45);
             fpnStatusDetail.TabIndex = 2;
             // 
             // doubleBufferedPanel4
@@ -909,7 +909,7 @@
             doubleBufferedPanel4.Location = new Point(60, 180);
             doubleBufferedPanel4.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel4.Name = "doubleBufferedPanel4";
-            doubleBufferedPanel4.Size = new Size(599, 45);
+            doubleBufferedPanel4.Size = new Size(600, 45);
             doubleBufferedPanel4.TabIndex = 2;
             // 
             // transparentTextLabel6
@@ -950,7 +950,7 @@
             fpnRange.Location = new Point(60, 240);
             fpnRange.Margin = new Padding(0, 15, 0, 0);
             fpnRange.Name = "fpnRange";
-            fpnRange.Size = new Size(599, 45);
+            fpnRange.Size = new Size(600, 45);
             fpnRange.TabIndex = 3;
             // 
             // transparentTextLabel4
@@ -1031,7 +1031,7 @@
             fpnAttackValue.Location = new Point(60, 300);
             fpnAttackValue.Margin = new Padding(0, 15, 0, 0);
             fpnAttackValue.Name = "fpnAttackValue";
-            fpnAttackValue.Size = new Size(599, 45);
+            fpnAttackValue.Size = new Size(600, 45);
             fpnAttackValue.TabIndex = 7;
             // 
             // transparentTextLabel10
@@ -1134,7 +1134,7 @@
             fpnSpellPower.Location = new Point(60, 360);
             fpnSpellPower.Margin = new Padding(0, 15, 0, 0);
             fpnSpellPower.Name = "fpnSpellPower";
-            fpnSpellPower.Size = new Size(599, 45);
+            fpnSpellPower.Size = new Size(600, 45);
             fpnSpellPower.TabIndex = 9;
             // 
             // transparentTextLabel8
@@ -1172,7 +1172,7 @@
             fpnWisdom.Location = new Point(60, 420);
             fpnWisdom.Margin = new Padding(0, 15, 0, 0);
             fpnWisdom.Name = "fpnWisdom";
-            fpnWisdom.Size = new Size(599, 45);
+            fpnWisdom.Size = new Size(600, 45);
             fpnWisdom.TabIndex = 10;
             // 
             // transparentTextLabel2
@@ -1210,7 +1210,7 @@
             customFlowLayoutPanel3.Location = new Point(60, 480);
             customFlowLayoutPanel3.Margin = new Padding(0, 15, 0, 0);
             customFlowLayoutPanel3.Name = "customFlowLayoutPanel3";
-            customFlowLayoutPanel3.Size = new Size(599, 45);
+            customFlowLayoutPanel3.Size = new Size(600, 45);
             customFlowLayoutPanel3.TabIndex = 10;
             // 
             // transparentTextLabel15
@@ -1245,7 +1245,7 @@
             doubleBufferedPanel5.Location = new Point(60, 540);
             doubleBufferedPanel5.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel5.Name = "doubleBufferedPanel5";
-            doubleBufferedPanel5.Size = new Size(599, 45);
+            doubleBufferedPanel5.Size = new Size(600, 45);
             doubleBufferedPanel5.TabIndex = 11;
             // 
             // transparentTextLabel17
@@ -1272,7 +1272,7 @@
             customFlowLayoutPanel4.Location = new Point(60, 600);
             customFlowLayoutPanel4.Margin = new Padding(0, 15, 0, 0);
             customFlowLayoutPanel4.Name = "customFlowLayoutPanel4";
-            customFlowLayoutPanel4.Size = new Size(599, 134);
+            customFlowLayoutPanel4.Size = new Size(600, 134);
             customFlowLayoutPanel4.TabIndex = 12;
             // 
             // pbWeapon
@@ -1322,7 +1322,7 @@
             doubleBufferedPanel3.Location = new Point(60, 749);
             doubleBufferedPanel3.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel3.Name = "doubleBufferedPanel3";
-            doubleBufferedPanel3.Size = new Size(599, 45);
+            doubleBufferedPanel3.Size = new Size(600, 45);
             doubleBufferedPanel3.TabIndex = 12;
             // 
             // richTextBox1
