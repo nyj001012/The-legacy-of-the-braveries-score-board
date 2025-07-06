@@ -15,7 +15,8 @@ namespace ScoreBoard.controls
     {
         private readonly List<PassiveSkill> _passives;
         private readonly List<ActiveSkill> _actives;
-        private const int PADDING_BOTTOM = 10;
+        private const int PADDING_BOTTOM = 30;
+        private const int FONT_SIZE = 22;
         private CustomFlowLayoutPanel _passivePanel = new()
         {
             Width = 599,
@@ -44,7 +45,7 @@ namespace ScoreBoard.controls
                 AutoSize = true,
                 MaximumSize = new Size(579, 0),
                 Text = "[패시브]",
-                Font = new Font("Danjo-bold", 25),
+                Font = new Font("Danjo-bold", FONT_SIZE),
                 ForeColor = Color.WhiteSmoke,
             };
             _passivePanel.Controls.Add(label);
@@ -56,7 +57,7 @@ namespace ScoreBoard.controls
                     AutoSize = true,
                     MaximumSize = new Size(579, 0),
                     Text = "패시브 기술이 없습니다.",
-                    Font = new Font("Danjo-bold", 20),
+                    Font = new Font("Danjo-bold", FONT_SIZE),
                     ForeColor = Color.WhiteSmoke,
                 };
                 _passivePanel.Controls.Add(noPassivesLabel);
@@ -65,13 +66,14 @@ namespace ScoreBoard.controls
             {
                 foreach (var passive in _passives)
                 {
+                    Color foreColour = passive.isActivated ? Color.WhiteSmoke : Color.FromArgb(100, 245, 245, 245);
                     TransparentTextLabel passiveLabel = new()
                     {
                         AutoSize = true,
                         MaximumSize = new Size(579, 0),
                         Text = passive.Name,
-                        Font = new Font("Danjo-bold", 20),
-                        ForeColor = Color.WhiteSmoke,
+                        Font = new Font("Danjo-bold", FONT_SIZE),
+                        ForeColor = foreColour,
                     };
                     _passivePanel.Controls.Add(passiveLabel);
 
@@ -81,10 +83,17 @@ namespace ScoreBoard.controls
                         {
                             AutoSize = true,
                             MaximumSize = new Size(579, 0),
-                            Text = $"– {description}",
-                            Font = new Font("Danjo-bold", 15),
-                            ForeColor = Color.WhiteSmoke,
+                            Text = $"= {description}",
+                            Font = new Font("Danjo-bold", FONT_SIZE),
+                            ForeColor = foreColour,
                         };
+
+                        // 마지막 줄에만 패딩 추가
+                        if (description == passive.Description.Last())
+                        {
+                            descriptionLabel.Margin = new Padding(0, 0, 0, PADDING_BOTTOM);
+                        }
+
                         _passivePanel.Controls.Add(descriptionLabel);
                     }
                 }
