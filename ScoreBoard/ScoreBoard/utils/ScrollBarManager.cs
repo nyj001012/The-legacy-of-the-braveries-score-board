@@ -20,7 +20,9 @@ namespace ScoreBoard.utils
          */
         public static void SetScrollBar(System.Windows.Forms.Panel container, CustomFlowLayoutPanel content, CyberScrollBar scrollBar)
         {
-            int contentHeight = content.Controls.Cast<Control>().Max(c => c.Bottom);
+            int contentHeight = content.Controls.Cast<Control>()
+                                                .Where(c => c.Visible)  // Visible이 true인 컨트롤만 선택
+                                                .Sum(c => c.Height + c.Margin.Top + c.Margin.Bottom);
 
             if (contentHeight <= container.Height)
             {
