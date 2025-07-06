@@ -128,11 +128,11 @@ namespace ScoreBoard.content
 
                 if (player.ArtifactSlot.Count <= i || player.ArtifactSlot[i] == null)
                 {
-                    slotPics[i].Image = (Image)Resources.ResourceManager.GetObject(emptySlotResourceNames[i])!;
+                    slotPics[i].BackgroundImage = (Image)Resources.ResourceManager.GetObject(emptySlotResourceNames[i])!;
                 }
                 else
                 {
-                    slotPics[i].Image = DataReader.GetArtifactImage(player.ArtifactSlot[i].Id);
+                    slotPics[i].BackgroundImage = DataReader.GetArtifactImage(player.ArtifactSlot[i].Id);
                 }
             }
         }
