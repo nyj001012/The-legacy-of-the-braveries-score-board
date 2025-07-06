@@ -22,6 +22,7 @@ namespace ScoreBoard.controls
         private const int FONT_SIZE = 22;
         private const int MAX_WIDTH = 599;
 
+        // 패시브, 액티브 기술을 표시하는 패널
         private readonly CustomFlowLayoutPanel _flowLayoutPanel = new()
         {
             Width = MAX_WIDTH,
@@ -33,6 +34,7 @@ namespace ScoreBoard.controls
             Margin = new Padding(0, 0, 0, 0),
         };
 
+        // 패시브 기술을 표시하는 패널
         private readonly CustomFlowLayoutPanel _passivePanel = new()
         {
             Width = MAX_WIDTH,
@@ -44,6 +46,7 @@ namespace ScoreBoard.controls
             Margin = new Padding(0, 0, 0, PADDING_BOTTOM),
         };
 
+        // 액티브 기술을 표시하는 패널
         private readonly CustomFlowLayoutPanel _activePanel = new()
         {
             Width = MAX_WIDTH,
@@ -71,8 +74,8 @@ namespace ScoreBoard.controls
         }
 
         /*
-         * GetActiveDisplayName()
-         * - 액티브 기술의 이름을 레벨에 따라 다르게 표시하는 메서드입니다.
+         * ShowActives()
+         * - 액티브 기술을 표시하는 메서드입니다.
          */
         private void ShowActives()
         {
@@ -86,49 +89,74 @@ namespace ScoreBoard.controls
 
             foreach (var active in _actives)
             {
-                var foreColor = active.isOnCooldown
-                    ? Color.FromArgb(100, 245, 245, 245)
-                    : Color.WhiteSmoke;
-
-                // [스킬 이름 + 쿨타임]을 가로로 정렬할 컨테이너
-                var cooldownPanel = new CustomFlowLayoutPanel
-                {
-                    Width = MAX_WIDTH,
-                    MaximumSize = new Size(MAX_WIDTH, 0),
-                    FlowDirection = FlowDirection.LeftToRight,
-                    AutoSize = true,
-                    AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                    Margin = new Padding(0, 0, PADDING_BOTTOM, 0),
-                };
-
-                var skillName = GetSkillNameWithRequiredLevel(active);
-                var skillNameLabel = CreateLabel(skillName, foreColor);
-
-                var cooldownIcon = new PictureBox
-                {
-                    Size = new Size(32, 32),
-                    Image = Resources.ImgCooltime,
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                    Margin = new Padding(0, 0, 10, 0),
-                };
-
-                var cooldownLabel = CreateLabel($"{active.Cooldown}턴", foreColor);
-                _activePanel.Controls.Add(skillNameLabel);
-
-                cooldownPanel.Controls.Add(cooldownIcon);
-                cooldownPanel.Controls.Add(cooldownLabel);
-                _activePanel.Controls.Add(cooldownPanel);
-
-                // 설명 줄
-                foreach (var (desc, idx) in active.Description.Select((d, i) => (d, i)))
-                {
-                    var descriptionLabel = CreateLabel("= " + desc, foreColor);
-                    if (idx == active.Description.Length - 1)
-                        descriptionLabel.Margin = new Padding(0, 0, 0, PADDING_BOTTOM);
-                    _activePanel.Controls.Add(descriptionLabel);
-                }
+                AddActiveSkillToPanel(active);
             }
         }
+
+        /*
+         * AddActiveSkillToPanel(ActiveSkill active)
+         * - 단일 액티브 스킬 정보를 패널에 추가하는 메서드입니다.
+         */
+        private void AddActiveSkillToPanel(ActiveSkill active)
+        {
+            var foreColor = active.isOnCooldown
+                ? Color.FromArgb(100, 245, 245, 245)
+                : Color.WhiteSmoke;
+
+            AddSkillHeaderRow(active, foreColor);
+            AddSkillDescriptions(active, foreColor);
+        }
+
+        /*
+         * AddSkillHeaderRow(ActiveSkill active, Color foreColor)
+         * - 액티브 스킬 이름과 쿨타임을 가로로 정렬하여 표시하는 행을 추가합니다.
+         */
+        private void AddSkillHeaderRow(ActiveSkill active, Color foreColor)
+        {
+            var skillName = GetSkillNameWithRequiredLevel(active);
+
+            var cooldownPanel = new CustomFlowLayoutPanel
+            {
+                Width = MAX_WIDTH,
+                MaximumSize = new Size(MAX_WIDTH, 0),
+                FlowDirection = FlowDirection.LeftToRight,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Margin = new Padding(0, 0, PADDING_BOTTOM, 0),
+            };
+
+            var skillNameLabel = CreateLabel(skillName, foreColor);
+            var cooldownIcon = new PictureBox
+            {
+                Size = new Size(32, 32),
+                Image = Resources.ImgCooltime,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+            };
+            var cooldownLabel = CreateLabel($"{active.Cooldown}턴", foreColor);
+
+            cooldownPanel.Controls.Add(skillNameLabel);
+            cooldownPanel.Controls.Add(cooldownIcon);
+            cooldownPanel.Controls.Add(cooldownLabel);
+
+            _activePanel.Controls.Add(cooldownPanel);
+        }
+
+        /*
+         * AddSkillDescriptions(ActiveSkill active, Color foreColor)
+         * - 액티브 스킬 설명 라인을 추가합니다.
+         */
+        private void AddSkillDescriptions(ActiveSkill active, Color foreColor)
+        {
+            foreach (var (desc, idx) in active.Description.Select((d, i) => (d, i)))
+            {
+                var descriptionLabel = CreateLabel("= " + desc, foreColor);
+                if (idx == active.Description.Length - 1)
+                    descriptionLabel.Margin = new Padding(0, 0, 0, PADDING_BOTTOM);
+
+                _activePanel.Controls.Add(descriptionLabel);
+            }
+        }
+
 
 
         /*
@@ -153,12 +181,14 @@ namespace ScoreBoard.controls
         {
             _passivePanel.Controls.Add(CreateLabel("[패시브]", Color.WhiteSmoke));
 
+            // 패시브 기술이 없을 경우
             if (_passives.Count == 0)
             {
                 _passivePanel.Controls.Add(CreateLabel("패시브 기술이 없습니다.", Color.WhiteSmoke));
                 return;
             }
 
+            // 패시브 기술이 있을 경우, 스킬 이름과 설명을 표시합니다.
             foreach (var passive in _passives)
             {
                 Color foreColor = passive.isActivated ? Color.WhiteSmoke : Color.FromArgb(100, 245, 245, 245);
