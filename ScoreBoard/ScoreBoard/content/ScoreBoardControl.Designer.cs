@@ -105,7 +105,7 @@
             lblWisdom = new ScoreBoard.controls.TransparentTextLabel();
             customFlowLayoutPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel15 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox5 = new PictureBox();
+            pbSkill = new PictureBox();
             doubleBufferedPanel5 = new ScoreBoard.controls.DoubleBufferedPanel();
             transparentTextLabel17 = new ScoreBoard.controls.TransparentTextLabel();
             customFlowLayoutPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -160,7 +160,7 @@
             fpnSpellPower.SuspendLayout();
             fpnWisdom.SuspendLayout();
             customFlowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbSkill).BeginInit();
             doubleBufferedPanel5.SuspendLayout();
             customFlowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbWeapon).BeginInit();
@@ -1188,7 +1188,7 @@
             customFlowLayoutPanel3.BorderColor = Color.Transparent;
             customFlowLayoutPanel3.BorderThickness = 0;
             customFlowLayoutPanel3.Controls.Add(transparentTextLabel15);
-            customFlowLayoutPanel3.Controls.Add(pictureBox5);
+            customFlowLayoutPanel3.Controls.Add(pbSkill);
             customFlowLayoutPanel3.Location = new Point(60, 600);
             customFlowLayoutPanel3.Margin = new Padding(0, 15, 0, 0);
             customFlowLayoutPanel3.Name = "customFlowLayoutPanel3";
@@ -1209,16 +1209,17 @@
             transparentTextLabel15.Text = "스킬";
             transparentTextLabel15.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // pictureBox5
+            // pbSkill
             // 
-            pictureBox5.BackgroundImage = Properties.Resources.BtnMore;
-            pictureBox5.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox5.Location = new Point(86, 0);
-            pictureBox5.Margin = new Padding(0, 0, 10, 0);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(45, 45);
-            pictureBox5.TabIndex = 5;
-            pictureBox5.TabStop = false;
+            pbSkill.BackgroundImage = Properties.Resources.BtnMore;
+            pbSkill.BackgroundImageLayout = ImageLayout.Stretch;
+            pbSkill.Location = new Point(86, 0);
+            pbSkill.Margin = new Padding(0, 0, 10, 0);
+            pbSkill.Name = "pbSkill";
+            pbSkill.Size = new Size(45, 45);
+            pbSkill.TabIndex = 5;
+            pbSkill.TabStop = false;
+            pbSkill.Click += pbSkill_Click;
             // 
             // doubleBufferedPanel5
             // 
@@ -1568,7 +1569,7 @@
             fpnWisdom.PerformLayout();
             customFlowLayoutPanel3.ResumeLayout(false);
             customFlowLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbSkill).EndInit();
             doubleBufferedPanel5.ResumeLayout(false);
             doubleBufferedPanel5.PerformLayout();
             customFlowLayoutPanel4.ResumeLayout(false);
@@ -1661,7 +1662,7 @@
         private controls.TransparentTextLabel lblSpellPower;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel3;
         private controls.TransparentTextLabel transparentTextLabel15;
-        private PictureBox pictureBox5;
+        private PictureBox pbSkill;
         private controls.DoubleBufferedPanel doubleBufferedPanel5;
         private controls.TransparentTextLabel transparentTextLabel17;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel4;

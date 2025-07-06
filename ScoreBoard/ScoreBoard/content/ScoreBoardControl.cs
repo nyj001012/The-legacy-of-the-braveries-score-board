@@ -19,10 +19,12 @@ namespace ScoreBoard.content
 {
     public partial class ScoreBoardControl : UserControl
     {
+        private SkillDescriptionPanel? skillDescriptionPanel = null; // 스킬 설명 패널
         private readonly Dictionary<string, CorpsMember> _characters;
         private readonly List<(string id, string name, ushort count)> _monsters;
         private const int IconSize = 45; // 아이콘 크기 설정
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
+        private CorpsMember? currentShowingPlayer = null; // 현재 표시 중인 플레이어
 
         public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)
         {
@@ -89,6 +91,7 @@ namespace ScoreBoard.content
          */
         private void ShowDetail(CorpsMember player)
         {
+            currentShowingPlayer = player; // 현재 표시 중인 플레이어 저장
             detailList.SuspendLayout();
             // 플레이어 상세 정보 표시 로직 구현
             ShowBasicInfo(player); // 기본 정보 표시
@@ -303,6 +306,25 @@ namespace ScoreBoard.content
         private void pbDice_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pbSkill_Click(object sender, EventArgs e)
+        {
+            if (skillDescriptionPanel == null)
+            {
+                // 스킬 설명 펼치기
+                skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
+                int insertIndex = detailList.Controls.GetChildIndex(customFlowLayoutPanel3) + 1;
+                detailList.Controls.Add(skillDescriptionPanel);
+                detailList.Controls.SetChildIndex(skillDescriptionPanel, insertIndex);
+            }
+            else
+            {
+                // 스킬 설명 접기
+                detailList.Controls.Remove(skillDescriptionPanel);
+                skillDescriptionPanel.Dispose();
+                skillDescriptionPanel = null;
+            }
         }
     }
 }
