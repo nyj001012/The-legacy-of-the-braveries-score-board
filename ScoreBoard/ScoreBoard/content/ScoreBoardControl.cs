@@ -105,6 +105,13 @@ namespace ScoreBoard.content
             ShowSpellPower(player);
             ShowWisdom(player);
             ShowArtifact(player);
+
+            if (skillDescriptionPanel != null)
+            {
+                skillDescriptionPanel.Dispose();
+                skillDescriptionPanel = null;
+                DisplaySkillDescription();
+            }
             detailViewport.ResumeLayout();
 
             ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
@@ -286,13 +293,7 @@ namespace ScoreBoard.content
         {
             if (skillDescriptionPanel == null)
             {
-                skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
-                int insertIndex = detailViewport.Controls.GetChildIndex(customFlowLayoutPanel3) + 1;
-                detailViewport.Controls.Add(skillDescriptionPanel);
-                detailViewport.Controls.SetChildIndex(skillDescriptionPanel, insertIndex);
-
-                skillDescriptionPanel.PerformLayout();
-                skillDescriptionPanel.Height = skillDescriptionPanel.Controls.Cast<Control>().Max(c => c.Bottom) + 10;
+                DisplaySkillDescription();
             }
             else
             {
@@ -307,6 +308,21 @@ namespace ScoreBoard.content
 
             detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
             ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
+        }
+
+        /*
+         * DisplaySkillDescription()
+         * - 스킬 설명 패널을 표시하는 메서드
+         */
+        private void DisplaySkillDescription()
+        {
+            skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
+            int insertIndex = detailViewport.Controls.GetChildIndex(customFlowLayoutPanel3) + 1;
+            detailViewport.Controls.Add(skillDescriptionPanel);
+            detailViewport.Controls.SetChildIndex(skillDescriptionPanel, insertIndex);
+
+            skillDescriptionPanel.PerformLayout();
+            skillDescriptionPanel.Height = skillDescriptionPanel.Controls.Cast<Control>().Max(c => c.Bottom) + 10;
         }
 
         private void detailList_MouseWheel(object sender, MouseEventArgs e)
