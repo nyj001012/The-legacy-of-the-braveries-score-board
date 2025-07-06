@@ -34,12 +34,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.Transparent;
             Margin = new Padding(0);
             MinimumSize = new Size(599, 0);
             Name = "SkillDescriptionPanel";
-            Size = new Size(599, 500);
+            Size = new Size(599, 0);
             ResumeLayout(false);
         }
 
