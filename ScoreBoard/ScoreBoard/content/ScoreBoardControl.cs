@@ -24,6 +24,7 @@ namespace ScoreBoard.content
         private readonly List<(string id, string name, ushort count)> _monsters;
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
         private CorpsMember? currentShowingPlayer = null; // 현재 표시 중인 플레이어
+        private const int ICON_SIZE = 45; // 아이콘 크기 설정
 
         public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)
         {
@@ -248,7 +249,27 @@ namespace ScoreBoard.content
 
             fpnStatusDetail.Visible = true;
             fpnStatusDetail.Controls.Clear();
-            // TODO => 상태 이상 정보를 표시하는 로직 구현
+
+            foreach (var statusEffect in player.Stat.StatusEffects)
+            {
+                string duration = statusEffect.IsInfinite ? "∞" : statusEffect.Duration.ToString();
+                PictureBox pb = new()
+                {
+                    BackgroundImage = DataReader.GetStatusEffectImage(statusEffect.Type),
+                    Size = new Size(ICON_SIZE, ICON_SIZE),
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                };
+                TransparentTextLabel label = new()
+                {
+                    Text = duration,
+                    Font = new Font("Danjo-bold", 26),
+                    ForeColor = Color.WhiteSmoke,
+                    AutoSize = true,
+                    Margin = new Padding(0, 0, MarginInPanel, 0),
+                };
+                fpnStatusDetail.Controls.Add(pb);
+                fpnStatusDetail.Controls.Add(label);
+            }
         }
 
         /*
