@@ -1231,6 +1231,7 @@
             // 
             pbSkill.BackgroundImage = Properties.Resources.BtnMore;
             pbSkill.BackgroundImageLayout = ImageLayout.Stretch;
+            pbSkill.Cursor = Cursors.Hand;
             pbSkill.Location = new Point(86, 0);
             pbSkill.Margin = new Padding(0, 0, 10, 0);
             pbSkill.Name = "pbSkill";
