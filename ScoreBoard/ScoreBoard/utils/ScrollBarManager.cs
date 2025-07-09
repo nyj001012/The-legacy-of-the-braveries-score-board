@@ -10,6 +10,8 @@ namespace ScoreBoard.utils
 {
     public static class ScrollBarManager
     {
+        private static readonly Dictionary<CyberScrollBar, CustomFlowLayoutPanel> bindings = [];
+
         /*
          * ScrollBarManager.SetScrollBar(container, content, scrollBar)
          * - container: 스크롤바가 위치할 컨테이너 (Panel)
@@ -18,7 +20,11 @@ namespace ScoreBoard.utils
          */
         public static void SetScrollBar(System.Windows.Forms.Panel container, CustomFlowLayoutPanel content, CyberScrollBar scrollBar)
         {
-            int contentHeight = content.Controls.Cast<Control>().Max(c => c.Bottom); // 마지막 레이블의 Bottom 위치
+            var visibleControls = content.Controls.Cast<Control>().Where(c => c.Visible);
+            int contentHeight = visibleControls.Any()
+                                ? visibleControls.Max(c => c.Bottom)
+                                : 0;
+
             if (contentHeight <= container.Height)
             {
                 scrollBar.Enabled = false;
@@ -27,12 +33,22 @@ namespace ScoreBoard.utils
             {
                 scrollBar.Enabled = true;
                 scrollBar.Minimum = 0;
-                // Maximum = (컨텐츠 높이) - (컨테이너 높이)
                 scrollBar.Maximum = Math.Max(0, contentHeight - container.Height);
-                scrollBar.ValueChanged += (s, e) =>
-                {
-                    content.Top = -scrollBar.Value;
-                };
+
+                // 중복 방지: 기존 핸들러 제거
+                scrollBar.ValueChanged -= ScrollBar_ValueChanged;
+
+                // 새로 바인딩
+                bindings[scrollBar] = content;
+                scrollBar.ValueChanged += ScrollBar_ValueChanged;
+            }
+        }
+
+        private static void ScrollBar_ValueChanged(object? sender, EventArgs e)
+        {
+            if (sender is CyberScrollBar sb && bindings.TryGetValue(sb, out var content))
+            {
+                content.Top = -sb.Value;
             }
         }
     }

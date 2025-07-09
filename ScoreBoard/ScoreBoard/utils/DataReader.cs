@@ -1,6 +1,7 @@
 ﻿using ScoreBoard.data.artifact;
 using ScoreBoard.data.character;
 using ScoreBoard.data.monster;
+using ScoreBoard.data.statusEffect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -238,6 +239,26 @@ namespace ScoreBoard.utils
             {
                 throw new FileNotFoundException($"유물 이미지 파일을 찾을 수 없습니다: {imagePath}");
             }
+        }
+
+        internal static Image? GetStatusEffectImage(StatusEffectType type)
+        {
+            return type switch
+            {
+                StatusEffectType.Concentration => Image.FromFile(@"Resources/meta_data/status_effect/concentration.png"),
+                StatusEffectType.Plague => Image.FromFile(@"Resources/meta_data/status_effect/plague.png"),
+                StatusEffectType.BrokenSword => Image.FromFile(@"Resources/meta_data/status_effect/broken_sword.png"),
+                StatusEffectType.BrokenShield => Image.FromFile(@"Resources/meta_data/status_effect/broken_shield.png"),
+                StatusEffectType.Resurrection => Image.FromFile(@"Resources/meta_data/status_effect/resurrection.png"),
+                StatusEffectType.Immortality => Image.FromFile(@"Resources/meta_data/status_effect/immortality.png"),
+                StatusEffectType.Stasis => Image.FromFile(@"Resources/meta_data/status_effect/stasis.png"),
+                StatusEffectType.Exhaustion => Image.FromFile(@"Resources/meta_data/status_effect/exhaustion.png"),
+                StatusEffectType.Slience => Image.FromFile(@"Resources/meta_data/status_effect/slience.png"),
+                StatusEffectType.Blind => Image.FromFile(@"Resources/meta_data/status_effect/blind.png"),
+                StatusEffectType.HealingBlock => Image.FromFile(@"Resources/meta_data/status_effect/healing_block.png"),
+                StatusEffectType.Stun => Image.FromFile(@"Resources/meta_data/status_effect/stun.png"),
+                _ => null,
+            };
         }
     }
 }

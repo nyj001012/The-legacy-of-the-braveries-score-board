@@ -12,7 +12,7 @@ namespace ScoreBoard.data.statusEffect
         Plague, // 역병
         BrokenSword, // 검 파괴: 공격력 50% 감소
         BrokenShield, // 방패 파괴: 받는 피해 증가
-        Reserection, // 부활: 50% 체력으로 부활
+        Resurrection, // 부활: 50% 체력으로 부활
         Immortality, // 불사
         Stasis, // 정지: 행동 불가 및 피해를 받지 않음
         Exhaustion, // 탈진

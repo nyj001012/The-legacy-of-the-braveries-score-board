@@ -9,26 +9,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ScoreBoard.content;
+using ScoreBoard.controls;
 
 namespace ScoreBoard.forms
 {
     public partial class MainForm : Form
     {
-        // 더블 버퍼링 적용
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
-                return cp;
-            }
-        }
+        private readonly Panel _containerPanel;
 
         public MainForm()
         {
             InitializeComponent();
+            this.DoubleBuffered = true; // 더블 버퍼링 활성화
             this.ClientSize = new Size(1920, 1080);
+            _containerPanel = new DoubleBufferedPanel
+            {
+                Dock = DockStyle.Fill
+            };
+            Controls.Add(_containerPanel);
         }
 
         /*
@@ -38,9 +36,9 @@ namespace ScoreBoard.forms
          */
         private void ShowControl(UserControl control)
         {
-            this.Controls.Clear();
+            _containerPanel.Controls.Clear();
             control.Dock = DockStyle.Fill;
-            this.Controls.Add(control);
+            _containerPanel.Controls.Add(control);
         }
 
         /*
@@ -64,7 +62,7 @@ namespace ScoreBoard.forms
             ShowControl(mainControl);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void MainForm_Shown(object sender, EventArgs e)
         {
             ShowMainControl();
         }

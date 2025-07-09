@@ -72,7 +72,8 @@
             pbWeather = new PictureBox();
             lblTurn = new ScoreBoard.controls.GradientLabel();
             detailContainer = new ScoreBoard.controls.DoubleBufferedPanel();
-            detailList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            detailList = new ScoreBoard.controls.DoubleBufferedPanel();
+            detailViewport = new ScoreBoard.controls.CustomFlowLayoutPanel();
             fpnBasicStatus = new ScoreBoard.controls.CustomFlowLayoutPanel();
             lblName = new ScoreBoard.controls.TransparentTextLabel();
             pbDice = new PictureBox();
@@ -105,7 +106,7 @@
             lblWisdom = new ScoreBoard.controls.TransparentTextLabel();
             customFlowLayoutPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel15 = new ScoreBoard.controls.TransparentTextLabel();
-            pictureBox5 = new PictureBox();
+            pbSkill = new PictureBox();
             doubleBufferedPanel5 = new ScoreBoard.controls.DoubleBufferedPanel();
             transparentTextLabel17 = new ScoreBoard.controls.TransparentTextLabel();
             customFlowLayoutPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -147,6 +148,7 @@
             ((System.ComponentModel.ISupportInitialize)pbWeather).BeginInit();
             detailContainer.SuspendLayout();
             detailList.SuspendLayout();
+            detailViewport.SuspendLayout();
             fpnBasicStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbDice).BeginInit();
             doubleBufferedPanel2.SuspendLayout();
@@ -160,7 +162,7 @@
             fpnSpellPower.SuspendLayout();
             fpnWisdom.SuspendLayout();
             customFlowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbSkill).BeginInit();
             doubleBufferedPanel5.SuspendLayout();
             customFlowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbWeapon).BeginInit();
@@ -762,6 +764,8 @@
             // detailContainer
             // 
             detailContainer.BackColor = Color.Transparent;
+            detailContainer.BackgroundImage = Properties.Resources.ImgDetail;
+            detailContainer.BackgroundImageLayout = ImageLayout.Stretch;
             detailContainer.Controls.Add(detailList);
             detailContainer.Controls.Add(detailScrollBar);
             detailContainer.Location = new Point(603, 112);
@@ -772,28 +776,42 @@
             // 
             // detailList
             // 
-            detailList.BackgroundImage = Properties.Resources.ImgDetail;
-            detailList.BackgroundImageLayout = ImageLayout.Stretch;
-            detailList.BorderColor = Color.Transparent;
-            detailList.BorderThickness = 0;
-            detailList.Controls.Add(fpnBasicStatus);
-            detailList.Controls.Add(doubleBufferedPanel2);
-            detailList.Controls.Add(fpnStatusDetail);
-            detailList.Controls.Add(doubleBufferedPanel4);
-            detailList.Controls.Add(fpnRange);
-            detailList.Controls.Add(fpnAttackValue);
-            detailList.Controls.Add(fpnSpellPower);
-            detailList.Controls.Add(fpnWisdom);
-            detailList.Controls.Add(customFlowLayoutPanel3);
-            detailList.Controls.Add(doubleBufferedPanel5);
-            detailList.Controls.Add(customFlowLayoutPanel4);
-            detailList.Controls.Add(doubleBufferedPanel3);
-            detailList.Location = new Point(0, 0);
+            detailList.Controls.Add(detailViewport);
+            detailList.Location = new Point(0, 100);
             detailList.Margin = new Padding(0);
             detailList.Name = "detailList";
-            detailList.Padding = new Padding(60, 120, 60, 60);
-            detailList.Size = new Size(720, 930);
-            detailList.TabIndex = 1;
+            detailList.Padding = new Padding(60, 0, 60, 0);
+            detailList.Size = new Size(720, 790);
+            detailList.TabIndex = 2;
+            // 
+            // detailViewport
+            // 
+            detailViewport.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            detailViewport.BackgroundImageLayout = ImageLayout.Stretch;
+            detailViewport.BorderColor = Color.Transparent;
+            detailViewport.BorderThickness = 0;
+            detailViewport.Controls.Add(fpnBasicStatus);
+            detailViewport.Controls.Add(doubleBufferedPanel2);
+            detailViewport.Controls.Add(fpnStatusDetail);
+            detailViewport.Controls.Add(doubleBufferedPanel4);
+            detailViewport.Controls.Add(fpnRange);
+            detailViewport.Controls.Add(fpnAttackValue);
+            detailViewport.Controls.Add(fpnSpellPower);
+            detailViewport.Controls.Add(fpnWisdom);
+            detailViewport.Controls.Add(customFlowLayoutPanel3);
+            detailViewport.Controls.Add(doubleBufferedPanel5);
+            detailViewport.Controls.Add(customFlowLayoutPanel4);
+            detailViewport.Controls.Add(doubleBufferedPanel3);
+            detailViewport.FlowDirection = FlowDirection.TopDown;
+            detailViewport.Location = new Point(0, 0);
+            detailViewport.Margin = new Padding(0);
+            detailViewport.Name = "detailViewport";
+            detailViewport.Padding = new Padding(60, 0, 60, 0);
+            detailViewport.Size = new Size(720, 790);
+            detailViewport.TabIndex = 1;
+            detailViewport.WrapContents = false;
+            detailViewport.MouseEnter += detailList_MouseEnter;
+            detailViewport.MouseWheel += detailList_MouseWheel;
             // 
             // fpnBasicStatus
             // 
@@ -801,7 +819,7 @@
             fpnBasicStatus.BorderThickness = 0;
             fpnBasicStatus.Controls.Add(lblName);
             fpnBasicStatus.Controls.Add(pbDice);
-            fpnBasicStatus.Location = new Point(60, 120);
+            fpnBasicStatus.Location = new Point(60, 0);
             fpnBasicStatus.Margin = new Padding(0);
             fpnBasicStatus.Name = "fpnBasicStatus";
             fpnBasicStatus.Size = new Size(600, 45);
@@ -839,10 +857,10 @@
             // 
             doubleBufferedPanel2.Controls.Add(lblHealth);
             doubleBufferedPanel2.Controls.Add(transparentTextLabel1);
-            doubleBufferedPanel2.Location = new Point(60, 180);
+            doubleBufferedPanel2.Location = new Point(60, 60);
             doubleBufferedPanel2.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel2.Name = "doubleBufferedPanel2";
-            doubleBufferedPanel2.Size = new Size(599, 45);
+            doubleBufferedPanel2.Size = new Size(600, 45);
             doubleBufferedPanel2.TabIndex = 1;
             // 
             // lblHealth
@@ -875,11 +893,11 @@
             // 
             fpnStatusDetail.BorderColor = Color.Transparent;
             fpnStatusDetail.BorderThickness = 0;
-            fpnStatusDetail.Location = new Point(60, 240);
+            fpnStatusDetail.Location = new Point(60, 120);
             fpnStatusDetail.Margin = new Padding(0, 15, 0, 0);
             fpnStatusDetail.Name = "fpnStatusDetail";
             fpnStatusDetail.Padding = new Padding(0, 0, 10, 0);
-            fpnStatusDetail.Size = new Size(599, 45);
+            fpnStatusDetail.Size = new Size(600, 45);
             fpnStatusDetail.TabIndex = 2;
             // 
             // doubleBufferedPanel4
@@ -888,10 +906,10 @@
             doubleBufferedPanel4.BorderThickness = 0;
             doubleBufferedPanel4.Controls.Add(transparentTextLabel6);
             doubleBufferedPanel4.Controls.Add(lblMovement);
-            doubleBufferedPanel4.Location = new Point(60, 300);
+            doubleBufferedPanel4.Location = new Point(60, 180);
             doubleBufferedPanel4.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel4.Name = "doubleBufferedPanel4";
-            doubleBufferedPanel4.Size = new Size(599, 45);
+            doubleBufferedPanel4.Size = new Size(600, 45);
             doubleBufferedPanel4.TabIndex = 2;
             // 
             // transparentTextLabel6
@@ -929,10 +947,10 @@
             fpnRange.Controls.Add(lblMeleeRange);
             fpnRange.Controls.Add(pbRanged);
             fpnRange.Controls.Add(lblRangedRange);
-            fpnRange.Location = new Point(60, 360);
+            fpnRange.Location = new Point(60, 240);
             fpnRange.Margin = new Padding(0, 15, 0, 0);
             fpnRange.Name = "fpnRange";
-            fpnRange.Size = new Size(599, 45);
+            fpnRange.Size = new Size(600, 45);
             fpnRange.TabIndex = 3;
             // 
             // transparentTextLabel4
@@ -1010,10 +1028,10 @@
             fpnAttackValue.Controls.Add(pbRangedAttack);
             fpnAttackValue.Controls.Add(lblRangedAttack);
             fpnAttackValue.Controls.Add(lblRangedAttackCount);
-            fpnAttackValue.Location = new Point(60, 420);
+            fpnAttackValue.Location = new Point(60, 300);
             fpnAttackValue.Margin = new Padding(0, 15, 0, 0);
             fpnAttackValue.Name = "fpnAttackValue";
-            fpnAttackValue.Size = new Size(599, 45);
+            fpnAttackValue.Size = new Size(600, 45);
             fpnAttackValue.TabIndex = 7;
             // 
             // transparentTextLabel10
@@ -1113,10 +1131,10 @@
             fpnSpellPower.BorderThickness = 0;
             fpnSpellPower.Controls.Add(transparentTextLabel8);
             fpnSpellPower.Controls.Add(lblSpellPower);
-            fpnSpellPower.Location = new Point(60, 480);
+            fpnSpellPower.Location = new Point(60, 360);
             fpnSpellPower.Margin = new Padding(0, 15, 0, 0);
             fpnSpellPower.Name = "fpnSpellPower";
-            fpnSpellPower.Size = new Size(599, 45);
+            fpnSpellPower.Size = new Size(600, 45);
             fpnSpellPower.TabIndex = 9;
             // 
             // transparentTextLabel8
@@ -1151,10 +1169,10 @@
             fpnWisdom.BorderThickness = 0;
             fpnWisdom.Controls.Add(transparentTextLabel2);
             fpnWisdom.Controls.Add(lblWisdom);
-            fpnWisdom.Location = new Point(60, 540);
+            fpnWisdom.Location = new Point(60, 420);
             fpnWisdom.Margin = new Padding(0, 15, 0, 0);
             fpnWisdom.Name = "fpnWisdom";
-            fpnWisdom.Size = new Size(599, 45);
+            fpnWisdom.Size = new Size(600, 45);
             fpnWisdom.TabIndex = 10;
             // 
             // transparentTextLabel2
@@ -1188,11 +1206,11 @@
             customFlowLayoutPanel3.BorderColor = Color.Transparent;
             customFlowLayoutPanel3.BorderThickness = 0;
             customFlowLayoutPanel3.Controls.Add(transparentTextLabel15);
-            customFlowLayoutPanel3.Controls.Add(pictureBox5);
-            customFlowLayoutPanel3.Location = new Point(60, 600);
+            customFlowLayoutPanel3.Controls.Add(pbSkill);
+            customFlowLayoutPanel3.Location = new Point(60, 480);
             customFlowLayoutPanel3.Margin = new Padding(0, 15, 0, 0);
             customFlowLayoutPanel3.Name = "customFlowLayoutPanel3";
-            customFlowLayoutPanel3.Size = new Size(599, 45);
+            customFlowLayoutPanel3.Size = new Size(600, 45);
             customFlowLayoutPanel3.TabIndex = 10;
             // 
             // transparentTextLabel15
@@ -1209,24 +1227,26 @@
             transparentTextLabel15.Text = "스킬";
             transparentTextLabel15.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // pictureBox5
+            // pbSkill
             // 
-            pictureBox5.BackgroundImage = Properties.Resources.BtnMore;
-            pictureBox5.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox5.Location = new Point(86, 0);
-            pictureBox5.Margin = new Padding(0, 0, 10, 0);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(45, 45);
-            pictureBox5.TabIndex = 5;
-            pictureBox5.TabStop = false;
+            pbSkill.BackgroundImage = Properties.Resources.BtnMore;
+            pbSkill.BackgroundImageLayout = ImageLayout.Stretch;
+            pbSkill.Cursor = Cursors.Hand;
+            pbSkill.Location = new Point(86, 0);
+            pbSkill.Margin = new Padding(0, 0, 10, 0);
+            pbSkill.Name = "pbSkill";
+            pbSkill.Size = new Size(45, 45);
+            pbSkill.TabIndex = 5;
+            pbSkill.TabStop = false;
+            pbSkill.Click += pbSkill_Click;
             // 
             // doubleBufferedPanel5
             // 
             doubleBufferedPanel5.Controls.Add(transparentTextLabel17);
-            doubleBufferedPanel5.Location = new Point(60, 660);
+            doubleBufferedPanel5.Location = new Point(60, 540);
             doubleBufferedPanel5.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel5.Name = "doubleBufferedPanel5";
-            doubleBufferedPanel5.Size = new Size(599, 45);
+            doubleBufferedPanel5.Size = new Size(600, 45);
             doubleBufferedPanel5.TabIndex = 11;
             // 
             // transparentTextLabel17
@@ -1250,14 +1270,15 @@
             customFlowLayoutPanel4.Controls.Add(pbArmour);
             customFlowLayoutPanel4.Controls.Add(pbAccessory1);
             customFlowLayoutPanel4.Controls.Add(pbAccessory2);
-            customFlowLayoutPanel4.Location = new Point(60, 720);
+            customFlowLayoutPanel4.Location = new Point(60, 600);
             customFlowLayoutPanel4.Margin = new Padding(0, 15, 0, 0);
             customFlowLayoutPanel4.Name = "customFlowLayoutPanel4";
-            customFlowLayoutPanel4.Size = new Size(599, 134);
+            customFlowLayoutPanel4.Size = new Size(600, 134);
             customFlowLayoutPanel4.TabIndex = 12;
             // 
             // pbWeapon
             // 
+            pbWeapon.BackgroundImageLayout = ImageLayout.Stretch;
             pbWeapon.Location = new Point(0, 0);
             pbWeapon.Margin = new Padding(0, 0, 20, 0);
             pbWeapon.Name = "pbWeapon";
@@ -1267,6 +1288,7 @@
             // 
             // pbArmour
             // 
+            pbArmour.BackgroundImageLayout = ImageLayout.Stretch;
             pbArmour.Location = new Point(154, 0);
             pbArmour.Margin = new Padding(0, 0, 20, 0);
             pbArmour.Name = "pbArmour";
@@ -1276,6 +1298,7 @@
             // 
             // pbAccessory1
             // 
+            pbAccessory1.BackgroundImageLayout = ImageLayout.Stretch;
             pbAccessory1.Location = new Point(308, 0);
             pbAccessory1.Margin = new Padding(0, 0, 20, 0);
             pbAccessory1.Name = "pbAccessory1";
@@ -1285,6 +1308,7 @@
             // 
             // pbAccessory2
             // 
+            pbAccessory2.BackgroundImageLayout = ImageLayout.Stretch;
             pbAccessory2.Location = new Point(462, 0);
             pbAccessory2.Margin = new Padding(0);
             pbAccessory2.Name = "pbAccessory2";
@@ -1296,10 +1320,10 @@
             // 
             doubleBufferedPanel3.Controls.Add(richTextBox1);
             doubleBufferedPanel3.Controls.Add(transparentTextLabel3);
-            doubleBufferedPanel3.Location = new Point(60, 869);
+            doubleBufferedPanel3.Location = new Point(60, 749);
             doubleBufferedPanel3.Margin = new Padding(0, 15, 0, 0);
             doubleBufferedPanel3.Name = "doubleBufferedPanel3";
-            doubleBufferedPanel3.Size = new Size(599, 45);
+            doubleBufferedPanel3.Size = new Size(600, 45);
             doubleBufferedPanel3.TabIndex = 12;
             // 
             // richTextBox1
@@ -1349,7 +1373,7 @@
             detailScrollBar.LinearGradient_Background = false;
             detailScrollBar.LinearGradient_Value = false;
             detailScrollBar.LinearGradientPen = false;
-            detailScrollBar.Location = new Point(694, 0);
+            detailScrollBar.Location = new Point(694, 100);
             detailScrollBar.Margin = new Padding(0);
             detailScrollBar.Maximum = 100;
             detailScrollBar.Minimum = 0;
@@ -1359,7 +1383,8 @@
             detailScrollBar.RGB = false;
             detailScrollBar.Rounding = true;
             detailScrollBar.RoundingInt = 7;
-            detailScrollBar.Size = new Size(26, 930);
+            detailScrollBar.Size = new Size(26, 791);
+            detailScrollBar.SmallStep = 15;
             detailScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             detailScrollBar.TabIndex = 0;
             detailScrollBar.Tag = "Cyber";
@@ -1543,6 +1568,7 @@
             ((System.ComponentModel.ISupportInitialize)pbWeather).EndInit();
             detailContainer.ResumeLayout(false);
             detailList.ResumeLayout(false);
+            detailViewport.ResumeLayout(false);
             fpnBasicStatus.ResumeLayout(false);
             fpnBasicStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbDice).EndInit();
@@ -1564,7 +1590,7 @@
             fpnWisdom.PerformLayout();
             customFlowLayoutPanel3.ResumeLayout(false);
             customFlowLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbSkill).EndInit();
             doubleBufferedPanel5.ResumeLayout(false);
             doubleBufferedPanel5.PerformLayout();
             customFlowLayoutPanel4.ResumeLayout(false);
@@ -1628,7 +1654,7 @@
         private controls.GradientLabel lblWeather;
         private controls.DoubleBufferedPanel detailContainer;
         private ReaLTaiizor.Controls.CyberScrollBar detailScrollBar;
-        private controls.CustomFlowLayoutPanel detailList;
+        private controls.CustomFlowLayoutPanel detailViewport;
         private controls.CustomFlowLayoutPanel fpnBasicStatus;
         private controls.TransparentTextLabel lblName;
         private controls.DoubleBufferedPanel doubleBufferedPanel2;
@@ -1657,7 +1683,7 @@
         private controls.TransparentTextLabel lblSpellPower;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel3;
         private controls.TransparentTextLabel transparentTextLabel15;
-        private PictureBox pictureBox5;
+        private PictureBox pbSkill;
         private controls.DoubleBufferedPanel doubleBufferedPanel5;
         private controls.TransparentTextLabel transparentTextLabel17;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel4;
@@ -1680,5 +1706,6 @@
         private controls.DoubleBufferedPanel doubleBufferedPanel3;
         private controls.TransparentTextLabel transparentTextLabel3;
         private RichTextBox richTextBox1;
+        private controls.DoubleBufferedPanel detailList;
     }
 }
