@@ -143,7 +143,6 @@ namespace ScoreBoard.controls
                 }
             }
 
-
             Height = (int)Math.Ceiling(y);
         }
     }
