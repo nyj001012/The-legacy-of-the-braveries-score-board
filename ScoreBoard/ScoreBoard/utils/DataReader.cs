@@ -249,7 +249,7 @@ namespace ScoreBoard.utils
                 StatusEffectType.Plague => Image.FromFile(@"Resources/meta_data/status_effect/plague.png"),
                 StatusEffectType.BrokenSword => Image.FromFile(@"Resources/meta_data/status_effect/broken_sword.png"),
                 StatusEffectType.BrokenShield => Image.FromFile(@"Resources/meta_data/status_effect/broken_shield.png"),
-                StatusEffectType.Reserection => Image.FromFile(@"Resources/meta_data/status_effect/reserection.png"),
+                StatusEffectType.Resurrection => Image.FromFile(@"Resources/meta_data/status_effect/resurrection.png"),
                 StatusEffectType.Immortality => Image.FromFile(@"Resources/meta_data/status_effect/immortality.png"),
                 StatusEffectType.Stasis => Image.FromFile(@"Resources/meta_data/status_effect/stasis.png"),
                 StatusEffectType.Exhaustion => Image.FromFile(@"Resources/meta_data/status_effect/exhaustion.png"),
