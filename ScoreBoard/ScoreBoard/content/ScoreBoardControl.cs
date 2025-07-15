@@ -197,25 +197,7 @@ namespace ScoreBoard.content
                 return;
             }
 
-            pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
-            lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
-            lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
-
-            foreach (var (type, combatStat) in player.Stat.CombatStats)
-            {
-                if (type == "melee")
-                {
-                    pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true;
-                    lblMeleeAttack.Text = combatStat.Value.ToString();
-                    lblMeleeAttackCount.Text = $"{{{combatStat.AttackCount}}}";
-                }
-                else
-                {
-                    pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true;
-                    lblRangedAttack.Text = combatStat.Value.ToString();
-                    lblRangedAttackCount.Text = $"{{{combatStat.AttackCount}}}";
-                }
-            }
+            ChangeTextOfAttackValueLabels(player.Stat.CombatStats);
         }
 
         /*
@@ -407,26 +389,10 @@ namespace ScoreBoard.content
             }
 
             fpnAttackValue.Visible = true;
-            pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
-            lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
-            lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
 
-            foreach (var (type, combatStat) in monster.Stat.CombatStats)
-            {
-                if (type == "melee")
-                {
-                    pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true;
-                    lblMeleeAttack.Text = combatStat.Value.ToString();
-                    lblMeleeAttackCount.Text = $"{{{combatStat.AttackCount}}}";
-                }
-                else
-                {
-                    pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true;
-                    lblRangedAttack.Text = combatStat.Value.ToString();
-                    lblRangedAttackCount.Text = $"{{{combatStat.AttackCount}}}";
-                }
-            }
+            ChangeTextOfAttackValueLabels(monster.Stat.CombatStats);
         }
+
         private void ShowHealth(bool isReported, Monster monster)
         {
             lblHealth.Text = monster.Stat.Hp.ToString();
@@ -489,6 +455,28 @@ namespace ScoreBoard.content
             };
 
             return (pb, label);
+        }
+
+        private void ChangeTextOfAttackValueLabels(Dictionary<string, CombatStat> combatStats)
+        {
+            pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
+            lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
+            lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
+            foreach (var (type, combatStat) in combatStats)
+            {
+                if (type == "melee")
+                {
+                    pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true;
+                    lblMeleeAttack.Text = combatStat.Value.ToString();
+                    lblMeleeAttackCount.Text = $"{{{combatStat.AttackCount}}}";
+                }
+                else
+                {
+                    pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true;
+                    lblRangedAttack.Text = combatStat.Value.ToString();
+                    lblRangedAttackCount.Text = $"{{{combatStat.AttackCount}}}";
+                }
+            }
         }
     }
 }
