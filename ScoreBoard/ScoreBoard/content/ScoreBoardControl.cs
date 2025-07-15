@@ -409,18 +409,35 @@ namespace ScoreBoard.content
             detailViewport.ResumeLayout();
         }
 
-        private void ShowHealth(bool isReported, Monster monster)
+        private void ShowStatusEffect(bool isReported, Monster monster)
         {
-            lblHealth.Text = monster.Stat.Hp.ToString();
-            if (isReported)
+            if (monster.Stat.StatusEffects.Count == 0 || !isReported)
             {
-                if (monster.Stat.Shield > 0)
-                    lblHealth.Text += $"(+{monster.Stat.Shield})";
-                lblHealth.Text += $"/{monster.Stat.MaxHp}";
+                fpnStatusDetail.Controls.Clear();
+                fpnStatusDetail.Visible = false;
+                return;
             }
-            else
+            fpnStatusDetail.Visible = true;
+            fpnStatusDetail.Controls.Clear();
+            foreach (var statusEffect in monster.Stat.StatusEffects)
             {
-                lblHealth.Text = "?/?"; // 보고되지 않은 경우 체력은 ?/?로 표시
+                string duration = statusEffect.IsInfinite ? "∞" : statusEffect.Duration.ToString();
+                PictureBox pb = new()
+                {
+                    BackgroundImage = DataReader.GetStatusEffectImage(statusEffect.Type),
+                    Size = new Size(ICON_SIZE, ICON_SIZE),
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                };
+                TransparentTextLabel label = new()
+                {
+                    Text = duration,
+                    Font = new Font("Danjo-bold", 26),
+                    ForeColor = Color.WhiteSmoke,
+                    AutoSize = true,
+                    Margin = new Padding(0, 0, MarginInPanel, 0),
+                };
+                fpnStatusDetail.Controls.Add(pb);
+                fpnStatusDetail.Controls.Add(label);
             }
         }
 
@@ -450,6 +467,20 @@ namespace ScoreBoard.content
                     lblRangedAttack.Text = combatStat.Value.ToString();
                     lblRangedAttackCount.Text = $"{{{combatStat.AttackCount}}}";
                 }
+            }
+        }
+        private void ShowHealth(bool isReported, Monster monster)
+        {
+            lblHealth.Text = monster.Stat.Hp.ToString();
+            if (isReported)
+            {
+                if (monster.Stat.Shield > 0)
+                    lblHealth.Text += $"(+{monster.Stat.Shield})";
+                lblHealth.Text += $"/{monster.Stat.MaxHp}";
+            }
+            else
+            {
+                lblHealth.Text = "?/?"; // 보고되지 않은 경우 체력은 ?/?로 표시
             }
         }
 
