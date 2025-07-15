@@ -28,6 +28,8 @@ namespace ScoreBoard.utils
             if (contentHeight <= container.Height)
             {
                 scrollBar.Enabled = false;
+                scrollBar.Value = 0;
+                content.Top = 0;
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data.monster;
+﻿using ScoreBoard.content;
+using ScoreBoard.data.monster;
 using ScoreBoard.utils;
 using System;
 using System.Collections.Generic;
@@ -16,24 +17,22 @@ namespace ScoreBoard.controls
 {
     public partial class EnemyPanel : UserControl
     {
-        private Timer longPressTimer; // 타이머 변수
+        private readonly Timer longPressTimer; // 타이머 변수
         private bool isLongPressing = false; // 롱 프레스 상태 변수
         private const int LongPressThreshold = 1000; // 롱 프레스 시간 임계값 (ms)
+        private bool isReported = false; // 이미 보고된 상태인지 여부
+        public event EventHandler<(bool, Monster)>? DetailRequested; // 상세 정보 요청 이벤트
 
-        private readonly string _id;
-        private readonly string _name;
-        private readonly ushort _count;
+        private readonly Monster _monster;
 
-        public EnemyPanel(string id, string name, ushort count)
+        public EnemyPanel(Monster monster, ushort count)
         {
             // 생성자에서 id, name, count 초기화
-            _id = id;
-            _name = name;
-            _count = count;
+            _monster = monster ?? throw new ArgumentNullException(nameof(monster), "몬스터 정보가 null입니다.");
 
             // 컨트롤 초기화
             InitializeComponent();
-            lblName.Text = $"{name} ({count})";
+            lblName.Text = $"{_monster.Name} ({count})";
 
             // EnemyPanel 컨트롤의 마우스 이벤트 핸들러 등록
             RegisterMouseEvents(this);
@@ -60,6 +59,8 @@ namespace ScoreBoard.controls
             control.MouseUp += EnemyPanel_MouseUp;
             control.MouseLeave -= EnemyPanel_MouseLeave;
             control.MouseLeave += EnemyPanel_MouseLeave;
+            control.Click -= EnemyPanel_Click;
+            control.Click += EnemyPanel_Click;
 
             foreach (Control child in control.Controls)
             {
@@ -73,16 +74,10 @@ namespace ScoreBoard.controls
          */
         private void ShowEnemyStatus()
         {
-            // 적의 id를 바탕으로 Monster 데이터 불러오기
-            Monster monster = _id switch
-            {
-                "2_01_white_soldier" => new BlackKnight(_id, 0),// 스폰 턴은 0으로 설정
-                "2_02_black_knight" => new WhiteSoldier(_id, 0),
-                _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {_id}"),
-            };
             // Monster의 Stat을 바탕으로 체력바 세팅
-            hbEnemy.SetValues(monster.Stat.Hp, 0, monster.Stat.MaxHp);
+            hbEnemy.SetValues(_monster.Stat.Hp, 0, _monster.Stat.MaxHp);
             hbEnemy.HealthColor = Color.FromArgb(119, 185, 69);
+            isReported = true; // 상태가 보고되었음을 표시
         }
 
         private void LongPressTimer_Tick(object? sender, EventArgs e)
@@ -116,6 +111,11 @@ namespace ScoreBoard.controls
         private void EnemyPanel_MouseUp(object? sender, MouseEventArgs e)
         {
             ResetLongPress(); // 마우스 버튼을 놓을 때 롱 프레스 상태를 초기화
+        }
+
+        private void EnemyPanel_Click(object? sender, EventArgs e)
+        {
+            DetailRequested?.Invoke(this, (isReported, _monster)); // 상세 정보 요청 이벤트 발생
         }
     }
 }

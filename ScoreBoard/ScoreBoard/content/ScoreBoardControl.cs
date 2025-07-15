@@ -1,7 +1,9 @@
 ﻿using ScoreBoard.controls;
 using ScoreBoard.data;
 using ScoreBoard.data.character;
+using ScoreBoard.data.monster;
 using ScoreBoard.data.stat;
+using ScoreBoard.data.statusEffect;
 using ScoreBoard.Properties;
 using ScoreBoard.utils;
 using System;
@@ -11,6 +13,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +29,7 @@ namespace ScoreBoard.content
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
         private CorpsMember? currentShowingPlayer = null; // 현재 표시 중인 플레이어
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
+        private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
 
         public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)
         {
@@ -50,10 +55,22 @@ namespace ScoreBoard.content
 
             foreach (var (id, name, count) in _monsters)
             {
-                EnemyPanel enemyControl = new EnemyPanel(id, name, count)
+                Monster monster = id switch
+                {
+                    "2_01_white_soldier" => new WhiteSoldier(id, 0),// 스폰 턴은 0으로 설정
+                    "2_02_black_knight" => new BlackKnight(id, 0),
+                    _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
+                };
+                EnemyPanel enemyControl = new(monster, count)
                 {
                     Name = $"pn{id}"
                 };
+                // 현재 턴보다 스폰 턴이 큰 몬스터는 표시하지 않음
+                if (monster.SpawnTurn > currentTurn)
+                {
+                    enemyControl.Visible = false; // 스폰 턴이 0이 아닌 적은 숨김 처리
+                }
+                enemyControl.DetailRequested += (s, e) => ShowDetail(e.Item1, e.Item2); // 상세 정보 요청 이벤트 핸들러 등록
                 enemyList.Controls.Add(enemyControl);
             }
 
@@ -95,7 +112,10 @@ namespace ScoreBoard.content
         {
             currentShowingPlayer = player;
             detailViewport.SuspendLayout();
-
+            foreach (Control control in detailViewport.Controls)
+            {
+                control.Visible = true;
+            }
             ShowBasicInfo(player);
             ShowHealth(player);
             ShowStatusEffect(player);
@@ -177,25 +197,7 @@ namespace ScoreBoard.content
                 return;
             }
 
-            pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
-            lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
-            lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
-
-            foreach (var (type, combatStat) in player.Stat.CombatStats)
-            {
-                if (type == "melee")
-                {
-                    pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true;
-                    lblMeleeAttack.Text = combatStat.Value.ToString();
-                    lblMeleeAttackCount.Text = $"{{{combatStat.AttackCount}}}";
-                }
-                else
-                {
-                    pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true;
-                    lblRangedAttack.Text = combatStat.Value.ToString();
-                    lblRangedAttackCount.Text = $"{{{combatStat.AttackCount}}}";
-                }
-            }
+            ChangeTextOfAttackValueLabels(player.Stat.CombatStats);
         }
 
         /*
@@ -252,21 +254,7 @@ namespace ScoreBoard.content
 
             foreach (var statusEffect in player.Stat.StatusEffects)
             {
-                string duration = statusEffect.IsInfinite ? "∞" : statusEffect.Duration.ToString();
-                PictureBox pb = new()
-                {
-                    BackgroundImage = DataReader.GetStatusEffectImage(statusEffect.Type),
-                    Size = new Size(ICON_SIZE, ICON_SIZE),
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                };
-                TransparentTextLabel label = new()
-                {
-                    Text = duration,
-                    Font = new Font("Danjo-bold", 26),
-                    ForeColor = Color.WhiteSmoke,
-                    AutoSize = true,
-                    Margin = new Padding(0, 0, MarginInPanel, 0),
-                };
+                var (pb, label) = CreateStatusEffectControl(statusEffect);
                 fpnStatusDetail.Controls.Add(pb);
                 fpnStatusDetail.Controls.Add(label);
             }
@@ -293,18 +281,13 @@ namespace ScoreBoard.content
         private void ShowBasicInfo(CorpsMember player)
         {
             lblName.Text = player.Name;
+            fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (player.RequiredDiceValues.Count > 0)
             {
                 foreach (var diceValue in player.RequiredDiceValues)
                 {
-                    TransparentTextLabel label = new TransparentTextLabel
-                    {
-                        Text = diceValue.Key.ToString(),
-                        ForeColor = diceValue.Value ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke,
-                        AutoSize = true,
-                        Margin = new Padding(0, 0, MarginInPanel, 0),
-                    };
-                    fpnBasicStatus.Controls.Add(label);
+                    var label = CreateDiceLabel(diceValue.Key, diceValue.Value);
+                    fpnDice.Controls.Add(label);
                 }
             }
         }
@@ -361,6 +344,187 @@ namespace ScoreBoard.content
         private void detailList_MouseEnter(object sender, EventArgs e)
         {
             detailViewport.Focus();
+        }
+
+        /*
+         * ShowDetail(bool isReported, Monster monster)
+         * - 몬스터의 상세 정보를 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
+        private void ShowDetail(bool isReported, Monster monster)
+        {
+            detailViewport.SuspendLayout();
+            foreach (Control control in detailViewport.Controls)
+            {
+                control.Visible = false;
+            }
+            ShowBasicInfo(isReported, monster);
+            ShowHealth(isReported, monster);
+            ShowAttackValue(isReported, monster);
+            ShowStatusEffect(isReported, monster);
+            detailViewport.ResumeLayout();
+
+            ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
+        }
+
+        /*
+         * ShowStatusEffect(bool isReported, Monster monster)
+         * - 몬스터의 상태 이상을 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
+        private void ShowStatusEffect(bool isReported, Monster monster)
+        {
+            if (monster.Stat.StatusEffects.Count == 0 || !isReported)
+            {
+                fpnStatusDetail.Controls.Clear();
+                fpnStatusDetail.Visible = false;
+                return;
+            }
+
+            fpnStatusDetail.Visible = true;
+            fpnStatusDetail.Controls.Clear();
+
+            foreach (var statusEffect in monster.Stat.StatusEffects)
+            {
+                var (pb, label) = CreateStatusEffectControl(statusEffect);
+                fpnStatusDetail.Controls.Add(pb);
+                fpnStatusDetail.Controls.Add(label);
+            }
+        }
+
+        /*
+         * ShowAttackValue(bool isReported, Monster monster)
+         * - 몬스터의 공격력과 공격 횟수를 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
+        private void ShowAttackValue(bool isReported, Monster monster)
+        {
+            if (!isReported || monster.Stat.CombatStats.Count == 0)
+            {
+                fpnAttackValue.Visible = false;
+                return;
+            }
+
+            fpnAttackValue.Visible = true;
+
+            ChangeTextOfAttackValueLabels(monster.Stat.CombatStats);
+        }
+
+        /*
+         * ShowHealth(bool isReported, Monster monster)
+         * - 몬스터의 체력을 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
+        private void ShowHealth(bool isReported, Monster monster)
+        {
+            lblHealth.Text = monster.Stat.Hp.ToString();
+            if (isReported)
+            {
+                pnHealth.Visible = true;
+                if (monster.Stat.Shield > 0)
+                    lblHealth.Text += $"(+{monster.Stat.Shield})";
+                lblHealth.Text += $"/{monster.Stat.MaxHp}";
+            }
+        }
+
+        /*
+         * ShowBasicInfo(bool isReported, Monster monster)
+         * - 몬스터의 기본 정보를 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
+        private void ShowBasicInfo(bool isReported, Monster monster)
+        {
+            fpnBasicStatus.Visible = true;
+            lblName.Text = monster.Name;
+            fpnDice.Controls.Clear(); // 기존 다이스 값 제거
+            if (isReported && monster.RequiredDiceValues.Length > 0)
+            {
+                foreach (var diceValue in monster.RequiredDiceValues)
+                {
+                    var label = CreateDiceLabel(diceValue, monster.RequiredDiceValues.Last() == diceValue);
+                    fpnDice.Controls.Add(label);
+                }
+            }
+        }
+
+        /*
+         * CreateDiceLabel(ushort value, bool isCritical)
+         * - 주사위 값을 표시하는 레이블을 생성하는 메서드
+         * - value: 주사위 값
+         * - isCritical: 크리티컬 여부
+         */
+        private TransparentTextLabel CreateDiceLabel(ushort value, bool isCritical)
+        {
+            TransparentTextLabel label = new()
+            {
+                Text = value.ToString(),
+                Font = new Font("Danjo-bold", 26),
+                ForeColor = isCritical ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke,
+                Margin = new Padding(0, 0, MarginInPanel / 2, 0),
+                AutoSize = true,
+                TextAlign = ContentAlignment.BottomCenter
+            };
+            return label;
+        }
+
+        /*
+         * CreateStatusEffectControl(StatusEffect statusEffect)
+         * - 상태 이상을 표시하는 컨트롤을 생성하는 메서드
+         * - statusEffect: 상태 이상 객체
+         */
+        private (PictureBox, TransparentTextLabel) CreateStatusEffectControl(StatusEffect statusEffect)
+        {
+            string duration = statusEffect.IsInfinite ? "∞" : statusEffect.Duration.ToString();
+
+            PictureBox pb = new()
+            {
+                BackgroundImage = DataReader.GetStatusEffectImage(statusEffect.Type),
+                Size = new Size(ICON_SIZE, ICON_SIZE),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+            };
+
+            TransparentTextLabel label = new()
+            {
+                Text = duration,
+                Font = new Font("Danjo-bold", 26),
+                ForeColor = Color.WhiteSmoke,
+                AutoSize = true,
+                Margin = new Padding(0, 0, MarginInPanel, 0),
+            };
+
+            return (pb, label);
+        }
+
+        /*
+         * ChangeTextOfAttackValueLabels(Dictionary<string, CombatStat> combatStats)
+         * - 플레이어의 공격력 레이블을 변경하는 메서드
+         * - combatStats: 공격력 정보를 담고 있는 딕셔너리
+         */
+        private void ChangeTextOfAttackValueLabels(Dictionary<string, CombatStat> combatStats)
+        {
+            pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
+            lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
+            lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
+            foreach (var (type, combatStat) in combatStats)
+            {
+                if (type == "melee")
+                {
+                    pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true;
+                    lblMeleeAttack.Text = combatStat.Value.ToString();
+                    lblMeleeAttackCount.Text = $"{{{combatStat.AttackCount}}}";
+                }
+                else
+                {
+                    pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true;
+                    lblRangedAttack.Text = combatStat.Value.ToString();
+                    lblRangedAttackCount.Text = $"{{{combatStat.AttackCount}}}";
+                }
+            }
         }
     }
 }
