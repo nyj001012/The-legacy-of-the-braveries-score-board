@@ -3,6 +3,7 @@ using ScoreBoard.data;
 using ScoreBoard.data.character;
 using ScoreBoard.data.monster;
 using ScoreBoard.data.stat;
+using ScoreBoard.data.statusEffect;
 using ScoreBoard.Properties;
 using ScoreBoard.utils;
 using System;
@@ -271,21 +272,7 @@ namespace ScoreBoard.content
 
             foreach (var statusEffect in player.Stat.StatusEffects)
             {
-                string duration = statusEffect.IsInfinite ? "∞" : statusEffect.Duration.ToString();
-                PictureBox pb = new()
-                {
-                    BackgroundImage = DataReader.GetStatusEffectImage(statusEffect.Type),
-                    Size = new Size(ICON_SIZE, ICON_SIZE),
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                };
-                TransparentTextLabel label = new()
-                {
-                    Text = duration,
-                    Font = new Font("Danjo-bold", 26),
-                    ForeColor = Color.WhiteSmoke,
-                    AutoSize = true,
-                    Margin = new Padding(0, 0, MarginInPanel, 0),
-                };
+                var (pb, label) = CreateStatusEffectControl(statusEffect);
                 fpnStatusDetail.Controls.Add(pb);
                 fpnStatusDetail.Controls.Add(label);
             }
@@ -405,21 +392,7 @@ namespace ScoreBoard.content
 
             foreach (var statusEffect in monster.Stat.StatusEffects)
             {
-                string duration = statusEffect.IsInfinite ? "∞" : statusEffect.Duration.ToString();
-                PictureBox pb = new()
-                {
-                    BackgroundImage = DataReader.GetStatusEffectImage(statusEffect.Type),
-                    Size = new Size(ICON_SIZE, ICON_SIZE),
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                };
-                TransparentTextLabel label = new()
-                {
-                    Text = duration,
-                    Font = new Font("Danjo-bold", 26),
-                    ForeColor = Color.WhiteSmoke,
-                    AutoSize = true,
-                    Margin = new Padding(0, 0, MarginInPanel, 0),
-                };
+                var (pb, label) = CreateStatusEffectControl(statusEffect);
                 fpnStatusDetail.Controls.Add(pb);
                 fpnStatusDetail.Controls.Add(label);
             }
@@ -493,6 +466,29 @@ namespace ScoreBoard.content
                 TextAlign = ContentAlignment.BottomCenter
             };
             return label;
+        }
+
+        private (PictureBox, TransparentTextLabel) CreateStatusEffectControl(StatusEffect statusEffect)
+        {
+            string duration = statusEffect.IsInfinite ? "∞" : statusEffect.Duration.ToString();
+
+            PictureBox pb = new()
+            {
+                BackgroundImage = DataReader.GetStatusEffectImage(statusEffect.Type),
+                Size = new Size(ICON_SIZE, ICON_SIZE),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+            };
+
+            TransparentTextLabel label = new()
+            {
+                Text = duration,
+                Font = new Font("Danjo-bold", 26),
+                ForeColor = Color.WhiteSmoke,
+                AutoSize = true,
+                Margin = new Padding(0, 0, MarginInPanel, 0),
+            };
+
+            return (pb, label);
         }
     }
 }
