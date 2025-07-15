@@ -424,6 +424,35 @@ namespace ScoreBoard.content
             }
         }
 
+        private void ShowAttackValue(bool isReported, Monster monster)
+        {
+            if (!isReported || monster.Stat.CombatStats.Count == 0)
+            {
+                fpnAttackValue.Visible = false;
+                return;
+            }
+
+            pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
+            lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
+            lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
+
+            foreach (var (type, combatStat) in monster.Stat.CombatStats)
+            {
+                if (type == "melee")
+                {
+                    pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true;
+                    lblMeleeAttack.Text = combatStat.Value.ToString();
+                    lblMeleeAttackCount.Text = $"{{{combatStat.AttackCount}}}";
+                }
+                else
+                {
+                    pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true;
+                    lblRangedAttack.Text = combatStat.Value.ToString();
+                    lblRangedAttackCount.Text = $"{{{combatStat.AttackCount}}}";
+                }
+            }
+        }
+
         private void ShowBasicInfo(bool isReported, Monster monster)
         {
             lblName.Text = monster.Name;
