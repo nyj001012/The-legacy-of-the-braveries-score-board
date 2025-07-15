@@ -14,5 +14,5 @@
       }
     }
   },
-  "attackDiceValue": [ 1, 2 ]
+  "requiredDiceValues": [ 1, 2 ]
 }
