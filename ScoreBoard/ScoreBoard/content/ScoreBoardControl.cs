@@ -1,6 +1,7 @@
 ﻿using ScoreBoard.controls;
 using ScoreBoard.data;
 using ScoreBoard.data.character;
+using ScoreBoard.data.monster;
 using ScoreBoard.data.stat;
 using ScoreBoard.Properties;
 using ScoreBoard.utils;
@@ -11,6 +12,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +27,7 @@ namespace ScoreBoard.content
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
         private CorpsMember? currentShowingPlayer = null; // 현재 표시 중인 플레이어
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
+        private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
 
         public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)
         {
@@ -50,10 +53,21 @@ namespace ScoreBoard.content
 
             foreach (var (id, name, count) in _monsters)
             {
-                EnemyPanel enemyControl = new EnemyPanel(id, name, count)
+                Monster monster = id switch
+                {
+                    "2_01_white_soldier" => new BlackKnight(id, 0),// 스폰 턴은 0으로 설정
+                    "2_02_black_knight" => new WhiteSoldier(id, 0),
+                    _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
+                };
+                EnemyPanel enemyControl = new(monster, count)
                 {
                     Name = $"pn{id}"
                 };
+                // 현재 턴보다 스폰 턴이 큰 몬스터는 표시하지 않음
+                if (monster.SpawnTurn > currentTurn)
+                {
+                    enemyControl.Visible = false; // 스폰 턴이 0이 아닌 적은 숨김 처리
+                }
                 enemyList.Controls.Add(enemyControl);
             }
 

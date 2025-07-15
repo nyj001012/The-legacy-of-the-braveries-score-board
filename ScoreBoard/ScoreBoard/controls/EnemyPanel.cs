@@ -20,20 +20,16 @@ namespace ScoreBoard.controls
         private bool isLongPressing = false; // 롱 프레스 상태 변수
         private const int LongPressThreshold = 1000; // 롱 프레스 시간 임계값 (ms)
 
-        private readonly string _id;
-        private readonly string _name;
-        private readonly ushort _count;
+        private readonly Monster _monster;
 
-        public EnemyPanel(string id, string name, ushort count)
+        public EnemyPanel(Monster monster, ushort count)
         {
             // 생성자에서 id, name, count 초기화
-            _id = id;
-            _name = name;
-            _count = count;
+            _monster = monster ?? throw new ArgumentNullException(nameof(monster), "몬스터 정보가 null입니다.");
 
             // 컨트롤 초기화
             InitializeComponent();
-            lblName.Text = $"{name} ({count})";
+            lblName.Text = $"{_monster.Name} ({count})";
 
             // EnemyPanel 컨트롤의 마우스 이벤트 핸들러 등록
             RegisterMouseEvents(this);
@@ -73,15 +69,8 @@ namespace ScoreBoard.controls
          */
         private void ShowEnemyStatus()
         {
-            // 적의 id를 바탕으로 Monster 데이터 불러오기
-            Monster monster = _id switch
-            {
-                "2_01_white_soldier" => new BlackKnight(_id, 0),// 스폰 턴은 0으로 설정
-                "2_02_black_knight" => new WhiteSoldier(_id, 0),
-                _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {_id}"),
-            };
             // Monster의 Stat을 바탕으로 체력바 세팅
-            hbEnemy.SetValues(monster.Stat.Hp, 0, monster.Stat.MaxHp);
+            hbEnemy.SetValues(_monster.Stat.Hp, 0, _monster.Stat.MaxHp);
             hbEnemy.HealthColor = Color.FromArgb(119, 185, 69);
         }
 

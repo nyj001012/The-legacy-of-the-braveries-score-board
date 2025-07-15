@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data.monster
 {
-    internal class Monster
+    public class Monster
     {
         public ushort Grade { get; set; } // 몬스터 등급 (예: 0 보스, 1 엘리트, 2 일반).
         public string Id { get; set; } = string.Empty!; // Id
