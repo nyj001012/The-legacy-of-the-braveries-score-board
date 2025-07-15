@@ -317,15 +317,7 @@ namespace ScoreBoard.content
             {
                 foreach (var diceValue in player.RequiredDiceValues)
                 {
-                    TransparentTextLabel label = new()
-                    {
-                        Text = diceValue.Key.ToString(),
-                        Font = new Font("Danjo-bold", 26),
-                        ForeColor = diceValue.Value ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke,
-                        AutoSize = true,
-                        Margin = new Padding(0, 0, MarginInPanel / 2, 0),
-                        TextAlign = ContentAlignment.BottomCenter
-                    };
+                    var label = CreateDiceLabel(diceValue.Key, diceValue.Value);
                     fpnDice.Controls.Add(label);
                 }
             }
@@ -483,18 +475,24 @@ namespace ScoreBoard.content
             {
                 foreach (var diceValue in monster.RequiredDiceValues)
                 {
-                    TransparentTextLabel label = new()
-                    {
-                        Text = diceValue.ToString(),
-                        Font = new Font("Danjo-bold", 26),
-                        ForeColor = diceValue == monster.RequiredDiceValues.Last() ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke,
-                        Margin = new Padding(0, 0, MarginInPanel / 2, 0),
-                        AutoSize = true,
-                        TextAlign = ContentAlignment.BottomCenter
-                    };
+                    var label = CreateDiceLabel(diceValue, monster.RequiredDiceValues.Last() == diceValue);
                     fpnDice.Controls.Add(label);
                 }
             }
+        }
+
+        private TransparentTextLabel CreateDiceLabel(ushort value, bool isCritical)
+        {
+            TransparentTextLabel label = new()
+            {
+                Text = value.ToString(),
+                Font = new Font("Danjo-bold", 26),
+                ForeColor = isCritical ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke,
+                Margin = new Padding(0, 0, MarginInPanel / 2, 0),
+                AutoSize = true,
+                TextAlign = ContentAlignment.BottomCenter
+            };
+            return label;
         }
     }
 }
