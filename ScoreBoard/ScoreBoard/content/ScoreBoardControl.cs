@@ -364,6 +364,8 @@ namespace ScoreBoard.content
             ShowAttackValue(isReported, monster);
             ShowStatusEffect(isReported, monster);
             detailViewport.ResumeLayout();
+
+            ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
         }
 
         /*
