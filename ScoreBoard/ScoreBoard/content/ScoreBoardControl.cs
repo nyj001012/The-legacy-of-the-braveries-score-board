@@ -403,7 +403,25 @@ namespace ScoreBoard.content
                 }
             }
             ShowBasicInfo(isReported, monster);
+            ShowHealth(isReported, monster);
+            ShowAttackValue(isReported, monster);
+            ShowStatusEffect(isReported, monster);
             detailViewport.ResumeLayout();
+        }
+
+        private void ShowHealth(bool isReported, Monster monster)
+        {
+            lblHealth.Text = monster.Stat.Hp.ToString();
+            if (isReported)
+            {
+                if (monster.Stat.Shield > 0)
+                    lblHealth.Text += $"(+{monster.Stat.Shield})";
+                lblHealth.Text += $"/{monster.Stat.MaxHp}";
+            }
+            else
+            {
+                lblHealth.Text = "?/?"; // 보고되지 않은 경우 체력은 ?/?로 표시
+            }
         }
 
         private void ShowBasicInfo(bool isReported, Monster monster)
