@@ -12,6 +12,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,8 +56,8 @@ namespace ScoreBoard.content
             {
                 Monster monster = id switch
                 {
-                    "2_01_white_soldier" => new BlackKnight(id, 0),// 스폰 턴은 0으로 설정
-                    "2_02_black_knight" => new WhiteSoldier(id, 0),
+                    "2_01_white_soldier" => new WhiteSoldier(id, 0),// 스폰 턴은 0으로 설정
+                    "2_02_black_knight" => new BlackKnight(id, 0),
                     _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
                 };
                 EnemyPanel enemyControl = new(monster, count)
@@ -110,7 +111,10 @@ namespace ScoreBoard.content
         {
             currentShowingPlayer = player;
             detailViewport.SuspendLayout();
-
+            foreach (Control control in detailViewport.Controls)
+            {
+                control.Visible = true;
+            }
             ShowBasicInfo(player);
             ShowHealth(player);
             ShowStatusEffect(player);
@@ -378,9 +382,46 @@ namespace ScoreBoard.content
             detailViewport.Focus();
         }
 
-        public void ShowDetail(bool isReported, Monster monster)
+        private void ShowDetail(bool isReported, Monster monster)
         {
+            detailViewport.SuspendLayout();
+            foreach (Control control in detailViewport.Controls)
+            {
+                if (control == fpnBasicStatus
+                    || control == pnHealth
+                    || control == fpnAttackValue
+                    || control == fpnStatusDetail)
+                {
+                    control.Visible = true; // 기본 정보, 체력, 공격력, 상태 이상은 항상 표시
+                }
+                else
+                {
+                    control.Visible = false; // 나머지 컨트롤은 숨김 처리
+                }
+            }
+            ShowBasicInfo(isReported, monster);
+            detailViewport.ResumeLayout();
+        }
 
+        private void ShowBasicInfo(bool isReported, Monster monster)
+        {
+            lblName.Text = monster.Name;
+            if (isReported && monster.RequiredDiceValues.Length > 0)
+            {
+                fpnDice.Controls.Clear(); // 기존 다이스 값 제거
+                foreach (var diceValue in monster.RequiredDiceValues)
+                {
+                    TransparentTextLabel label = new()
+                    {
+                        Text = diceValue.ToString(),
+                        Font = new Font("Danjo-bold", 26),
+                        ForeColor = diceValue == monster.RequiredDiceValues.Last() ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke,
+                        Margin = new Padding(0, 0, MarginInPanel / 2, 0),
+                        TextAlign = ContentAlignment.BottomCenter
+                    };
+                    fpnDice.Controls.Add(label);
+                }
+            }
         }
     }
 }

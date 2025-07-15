@@ -77,7 +77,8 @@
             fpnBasicStatus = new ScoreBoard.controls.CustomFlowLayoutPanel();
             lblName = new ScoreBoard.controls.TransparentTextLabel();
             pbDice = new PictureBox();
-            doubleBufferedPanel2 = new ScoreBoard.controls.DoubleBufferedPanel();
+            fpnDice = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            pnHealth = new ScoreBoard.controls.DoubleBufferedPanel();
             lblHealth = new ScoreBoard.controls.TransparentTextLabel();
             transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
             fpnStatusDetail = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -151,7 +152,7 @@
             detailViewport.SuspendLayout();
             fpnBasicStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbDice).BeginInit();
-            doubleBufferedPanel2.SuspendLayout();
+            pnHealth.SuspendLayout();
             doubleBufferedPanel4.SuspendLayout();
             fpnRange.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMelee).BeginInit();
@@ -791,7 +792,7 @@
             detailViewport.BorderColor = Color.Transparent;
             detailViewport.BorderThickness = 0;
             detailViewport.Controls.Add(fpnBasicStatus);
-            detailViewport.Controls.Add(doubleBufferedPanel2);
+            detailViewport.Controls.Add(pnHealth);
             detailViewport.Controls.Add(fpnStatusDetail);
             detailViewport.Controls.Add(doubleBufferedPanel4);
             detailViewport.Controls.Add(fpnRange);
@@ -819,6 +820,7 @@
             fpnBasicStatus.BorderThickness = 0;
             fpnBasicStatus.Controls.Add(lblName);
             fpnBasicStatus.Controls.Add(pbDice);
+            fpnBasicStatus.Controls.Add(fpnDice);
             fpnBasicStatus.Location = new Point(60, 0);
             fpnBasicStatus.Margin = new Padding(0);
             fpnBasicStatus.Name = "fpnBasicStatus";
@@ -846,22 +848,33 @@
             pbDice.Cursor = Cursors.Hand;
             pbDice.Image = Properties.Resources.BtnDice;
             pbDice.Location = new Point(290, 0);
-            pbDice.Margin = new Padding(0);
+            pbDice.Margin = new Padding(0, 0, 10, 0);
             pbDice.Name = "pbDice";
             pbDice.Size = new Size(45, 45);
             pbDice.TabIndex = 3;
             pbDice.TabStop = false;
             pbDice.Click += pbDice_Click;
             // 
-            // doubleBufferedPanel2
+            // fpnDice
             // 
-            doubleBufferedPanel2.Controls.Add(lblHealth);
-            doubleBufferedPanel2.Controls.Add(transparentTextLabel1);
-            doubleBufferedPanel2.Location = new Point(60, 60);
-            doubleBufferedPanel2.Margin = new Padding(0, 15, 0, 0);
-            doubleBufferedPanel2.Name = "doubleBufferedPanel2";
-            doubleBufferedPanel2.Size = new Size(600, 45);
-            doubleBufferedPanel2.TabIndex = 1;
+            fpnDice.AutoSize = true;
+            fpnDice.BorderColor = Color.Transparent;
+            fpnDice.BorderThickness = 0;
+            fpnDice.Location = new Point(345, 0);
+            fpnDice.Margin = new Padding(0);
+            fpnDice.Name = "fpnDice";
+            fpnDice.Size = new Size(0, 0);
+            fpnDice.TabIndex = 4;
+            // 
+            // pnHealth
+            // 
+            pnHealth.Controls.Add(lblHealth);
+            pnHealth.Controls.Add(transparentTextLabel1);
+            pnHealth.Location = new Point(60, 60);
+            pnHealth.Margin = new Padding(0, 15, 0, 0);
+            pnHealth.Name = "pnHealth";
+            pnHealth.Size = new Size(600, 45);
+            pnHealth.TabIndex = 1;
             // 
             // lblHealth
             // 
@@ -1572,8 +1585,8 @@
             fpnBasicStatus.ResumeLayout(false);
             fpnBasicStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbDice).EndInit();
-            doubleBufferedPanel2.ResumeLayout(false);
-            doubleBufferedPanel2.PerformLayout();
+            pnHealth.ResumeLayout(false);
+            pnHealth.PerformLayout();
             doubleBufferedPanel4.ResumeLayout(false);
             doubleBufferedPanel4.PerformLayout();
             fpnRange.ResumeLayout(false);
@@ -1657,7 +1670,7 @@
         private controls.CustomFlowLayoutPanel detailViewport;
         private controls.CustomFlowLayoutPanel fpnBasicStatus;
         private controls.TransparentTextLabel lblName;
-        private controls.DoubleBufferedPanel doubleBufferedPanel2;
+        private controls.DoubleBufferedPanel pnHealth;
         private controls.TransparentTextLabel transparentTextLabel1;
         private controls.TransparentTextLabel lblHealth;
         private controls.CustomFlowLayoutPanel fpnStatusDetail;
@@ -1707,5 +1720,6 @@
         private controls.TransparentTextLabel transparentTextLabel3;
         private RichTextBox richTextBox1;
         private controls.DoubleBufferedPanel detailList;
+        private controls.CustomFlowLayoutPanel fpnDice;
     }
 }
