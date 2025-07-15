@@ -346,6 +346,12 @@ namespace ScoreBoard.content
             detailViewport.Focus();
         }
 
+        /*
+         * ShowDetail(bool isReported, Monster monster)
+         * - 몬스터의 상세 정보를 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
         private void ShowDetail(bool isReported, Monster monster)
         {
             detailViewport.SuspendLayout();
@@ -360,6 +366,12 @@ namespace ScoreBoard.content
             detailViewport.ResumeLayout();
         }
 
+        /*
+         * ShowStatusEffect(bool isReported, Monster monster)
+         * - 몬스터의 상태 이상을 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
         private void ShowStatusEffect(bool isReported, Monster monster)
         {
             if (monster.Stat.StatusEffects.Count == 0 || !isReported)
@@ -380,6 +392,12 @@ namespace ScoreBoard.content
             }
         }
 
+        /*
+         * ShowAttackValue(bool isReported, Monster monster)
+         * - 몬스터의 공격력과 공격 횟수를 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
         private void ShowAttackValue(bool isReported, Monster monster)
         {
             if (!isReported || monster.Stat.CombatStats.Count == 0)
@@ -393,6 +411,12 @@ namespace ScoreBoard.content
             ChangeTextOfAttackValueLabels(monster.Stat.CombatStats);
         }
 
+        /*
+         * ShowHealth(bool isReported, Monster monster)
+         * - 몬스터의 체력을 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
         private void ShowHealth(bool isReported, Monster monster)
         {
             lblHealth.Text = monster.Stat.Hp.ToString();
@@ -405,6 +429,12 @@ namespace ScoreBoard.content
             }
         }
 
+        /*
+         * ShowBasicInfo(bool isReported, Monster monster)
+         * - 몬스터의 기본 정보를 표시하는 메서드
+         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - monster: Monster 객체
+         */
         private void ShowBasicInfo(bool isReported, Monster monster)
         {
             fpnBasicStatus.Visible = true;
@@ -420,6 +450,12 @@ namespace ScoreBoard.content
             }
         }
 
+        /*
+         * CreateDiceLabel(ushort value, bool isCritical)
+         * - 주사위 값을 표시하는 레이블을 생성하는 메서드
+         * - value: 주사위 값
+         * - isCritical: 크리티컬 여부
+         */
         private TransparentTextLabel CreateDiceLabel(ushort value, bool isCritical)
         {
             TransparentTextLabel label = new()
@@ -434,6 +470,11 @@ namespace ScoreBoard.content
             return label;
         }
 
+        /*
+         * CreateStatusEffectControl(StatusEffect statusEffect)
+         * - 상태 이상을 표시하는 컨트롤을 생성하는 메서드
+         * - statusEffect: 상태 이상 객체
+         */
         private (PictureBox, TransparentTextLabel) CreateStatusEffectControl(StatusEffect statusEffect)
         {
             string duration = statusEffect.IsInfinite ? "∞" : statusEffect.Duration.ToString();
@@ -457,6 +498,11 @@ namespace ScoreBoard.content
             return (pb, label);
         }
 
+        /*
+         * ChangeTextOfAttackValueLabels(Dictionary<string, CombatStat> combatStats)
+         * - 플레이어의 공격력 레이블을 변경하는 메서드
+         * - combatStats: 공격력 정보를 담고 있는 딕셔너리
+         */
         private void ChangeTextOfAttackValueLabels(Dictionary<string, CombatStat> combatStats)
         {
             pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
