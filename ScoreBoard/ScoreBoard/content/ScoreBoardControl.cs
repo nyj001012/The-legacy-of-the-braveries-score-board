@@ -312,18 +312,21 @@ namespace ScoreBoard.content
         private void ShowBasicInfo(CorpsMember player)
         {
             lblName.Text = player.Name;
+            fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (player.RequiredDiceValues.Count > 0)
             {
                 foreach (var diceValue in player.RequiredDiceValues)
                 {
-                    TransparentTextLabel label = new TransparentTextLabel
+                    TransparentTextLabel label = new()
                     {
                         Text = diceValue.Key.ToString(),
+                        Font = new Font("Danjo-bold", 26),
                         ForeColor = diceValue.Value ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke,
                         AutoSize = true,
-                        Margin = new Padding(0, 0, MarginInPanel, 0),
+                        Margin = new Padding(0, 0, MarginInPanel / 2, 0),
+                        TextAlign = ContentAlignment.BottomCenter
                     };
-                    fpnBasicStatus.Controls.Add(label);
+                    fpnDice.Controls.Add(label);
                 }
             }
         }
@@ -406,9 +409,9 @@ namespace ScoreBoard.content
         private void ShowBasicInfo(bool isReported, Monster monster)
         {
             lblName.Text = monster.Name;
+            fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (isReported && monster.RequiredDiceValues.Length > 0)
             {
-                fpnDice.Controls.Clear(); // 기존 다이스 값 제거
                 foreach (var diceValue in monster.RequiredDiceValues)
                 {
                     TransparentTextLabel label = new()
@@ -417,6 +420,7 @@ namespace ScoreBoard.content
                         Font = new Font("Danjo-bold", 26),
                         ForeColor = diceValue == monster.RequiredDiceValues.Last() ? Color.FromArgb(255, 217, 0) : Color.WhiteSmoke,
                         Margin = new Padding(0, 0, MarginInPanel / 2, 0),
+                        AutoSize = true,
                         TextAlign = ContentAlignment.BottomCenter
                     };
                     fpnDice.Controls.Add(label);
