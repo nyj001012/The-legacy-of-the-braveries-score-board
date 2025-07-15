@@ -102,6 +102,7 @@
             Margin = new Padding(0, 25, 0, 25);
             Name = "EnemyPanel";
             Size = new Size(526, 172);
+            Click += EnemyPanel_Click;
             pnEnemy.ResumeLayout(false);
             ResumeLayout(false);
         }

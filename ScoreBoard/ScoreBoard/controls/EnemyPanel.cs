@@ -16,9 +16,10 @@ namespace ScoreBoard.controls
 {
     public partial class EnemyPanel : UserControl
     {
-        private Timer longPressTimer; // 타이머 변수
+        private readonly Timer longPressTimer; // 타이머 변수
         private bool isLongPressing = false; // 롱 프레스 상태 변수
         private const int LongPressThreshold = 1000; // 롱 프레스 시간 임계값 (ms)
+        private bool isExposed = false; // 상태가 노출되었는지 여부
 
         private readonly Monster _monster;
 
@@ -56,6 +57,8 @@ namespace ScoreBoard.controls
             control.MouseUp += EnemyPanel_MouseUp;
             control.MouseLeave -= EnemyPanel_MouseLeave;
             control.MouseLeave += EnemyPanel_MouseLeave;
+            control.Click -= EnemyPanel_Click;
+            control.Click += EnemyPanel_Click;
 
             foreach (Control child in control.Controls)
             {
@@ -72,6 +75,7 @@ namespace ScoreBoard.controls
             // Monster의 Stat을 바탕으로 체력바 세팅
             hbEnemy.SetValues(_monster.Stat.Hp, 0, _monster.Stat.MaxHp);
             hbEnemy.HealthColor = Color.FromArgb(119, 185, 69);
+            isExposed = true; // 상태가 노출되었음을 표시
         }
 
         private void LongPressTimer_Tick(object? sender, EventArgs e)
@@ -105,6 +109,16 @@ namespace ScoreBoard.controls
         private void EnemyPanel_MouseUp(object? sender, MouseEventArgs e)
         {
             ResetLongPress(); // 마우스 버튼을 놓을 때 롱 프레스 상태를 초기화
+        }
+
+        private void EnemyPanel_Click(object? sender, EventArgs e)
+        {
+            // 상태가 노출되어야 상세 정보 노출
+            if (isExposed)
+            {
+
+            }
+            return;
         }
     }
 }
