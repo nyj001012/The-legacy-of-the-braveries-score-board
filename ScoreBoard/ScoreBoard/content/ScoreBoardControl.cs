@@ -390,17 +390,7 @@ namespace ScoreBoard.content
             detailViewport.SuspendLayout();
             foreach (Control control in detailViewport.Controls)
             {
-                if (control == fpnBasicStatus
-                    || control == pnHealth
-                    || control == fpnAttackValue
-                    || control == fpnStatusDetail)
-                {
-                    control.Visible = true; // 기본 정보, 체력, 공격력, 상태 이상은 항상 표시
-                }
-                else
-                {
-                    control.Visible = false; // 나머지 컨트롤은 숨김 처리
-                }
+                control.Visible = false;
             }
             ShowBasicInfo(isReported, monster);
             ShowHealth(isReported, monster);
@@ -417,8 +407,10 @@ namespace ScoreBoard.content
                 fpnStatusDetail.Visible = false;
                 return;
             }
+
             fpnStatusDetail.Visible = true;
             fpnStatusDetail.Controls.Clear();
+
             foreach (var statusEffect in monster.Stat.StatusEffects)
             {
                 string duration = statusEffect.IsInfinite ? "∞" : statusEffect.Duration.ToString();
@@ -449,6 +441,7 @@ namespace ScoreBoard.content
                 return;
             }
 
+            fpnAttackValue.Visible = true;
             pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
             lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
             lblMeleeAttackCount.Visible = lblRangedAttackCount.Visible = false;
@@ -474,18 +467,16 @@ namespace ScoreBoard.content
             lblHealth.Text = monster.Stat.Hp.ToString();
             if (isReported)
             {
+                pnHealth.Visible = true;
                 if (monster.Stat.Shield > 0)
                     lblHealth.Text += $"(+{monster.Stat.Shield})";
                 lblHealth.Text += $"/{monster.Stat.MaxHp}";
-            }
-            else
-            {
-                lblHealth.Text = "?/?"; // 보고되지 않은 경우 체력은 ?/?로 표시
             }
         }
 
         private void ShowBasicInfo(bool isReported, Monster monster)
         {
+            fpnBasicStatus.Visible = true;
             lblName.Text = monster.Name;
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (isReported && monster.RequiredDiceValues.Length > 0)
