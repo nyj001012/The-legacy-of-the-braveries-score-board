@@ -8,8 +8,8 @@
             corpsScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             corpsListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             MembersListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
-            membersScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             membersList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            membersScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             characterImage = new PictureBox();
             statContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             statList = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -30,8 +30,9 @@
             corpsList.BorderThickness = 0;
             corpsList.FlowDirection = FlowDirection.TopDown;
             corpsList.Location = new Point(0, 0);
+            corpsList.Margin = new Padding(0);
             corpsList.Name = "corpsList";
-            corpsList.Size = new Size(194, 714);
+            corpsList.Size = new Size(194, 720);
             corpsList.TabIndex = 0;
             corpsList.MouseEnter += corpsList_MouseEnter;
             corpsList.MouseWheel += corpsList_MouseWheel;
@@ -96,11 +97,27 @@
             // 
             MembersListContainer.BackColor = Color.Transparent;
             MembersListContainer.BackgroundImageLayout = ImageLayout.Stretch;
+            MembersListContainer.Controls.Add(membersList);
             MembersListContainer.Controls.Add(membersScrollBar);
             MembersListContainer.Location = new Point(301, 68);
+            MembersListContainer.Margin = new Padding(0);
             MembersListContainer.Name = "MembersListContainer";
             MembersListContainer.Size = new Size(194, 720);
             MembersListContainer.TabIndex = 6;
+            // 
+            // membersList
+            // 
+            membersList.BackColor = Color.Transparent;
+            membersList.BorderColor = Color.Transparent;
+            membersList.BorderThickness = 0;
+            membersList.FlowDirection = FlowDirection.TopDown;
+            membersList.Location = new Point(0, 0);
+            membersList.Margin = new Padding(0);
+            membersList.Name = "membersList";
+            membersList.Size = new Size(194, 720);
+            membersList.TabIndex = 0;
+            membersList.MouseEnter += membersList_MouseEnter;
+            membersList.MouseWheel += memberList_MouseWheel;
             // 
             // membersScrollBar
             // 
@@ -126,7 +143,8 @@
             membersScrollBar.LinearGradient_Background = false;
             membersScrollBar.LinearGradient_Value = false;
             membersScrollBar.LinearGradientPen = false;
-            membersScrollBar.Location = new Point(193, 3);
+            membersScrollBar.Location = new Point(184, 3);
+            membersScrollBar.Margin = new Padding(0);
             membersScrollBar.Maximum = 100;
             membersScrollBar.Minimum = 0;
             membersScrollBar.Name = "membersScrollBar";
@@ -135,7 +153,7 @@
             membersScrollBar.RGB = false;
             membersScrollBar.Rounding = false;
             membersScrollBar.RoundingInt = 7;
-            membersScrollBar.Size = new Size(10, 720);
+            membersScrollBar.Size = new Size(10, 717);
             membersScrollBar.SmallStep = 10;
             membersScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             membersScrollBar.TabIndex = 5;
@@ -145,19 +163,6 @@
             membersScrollBar.Timer_RGB = 300;
             membersScrollBar.Value = 0;
             membersScrollBar.Visible = false;
-            // 
-            // membersList
-            // 
-            membersList.BackColor = Color.Transparent;
-            membersList.BorderColor = Color.Transparent;
-            membersList.BorderThickness = 0;
-            membersList.FlowDirection = FlowDirection.TopDown;
-            membersList.Location = new Point(301, 68);
-            membersList.Name = "membersList";
-            membersList.Size = new Size(194, 714);
-            membersList.TabIndex = 0;
-            membersList.MouseEnter += membersList_MouseEnter;
-            membersList.MouseWheel += memberList_MouseWheel;
             // 
             // characterImage
             // 
@@ -268,7 +273,6 @@
             ClientSize = new Size(1452, 860);
             Controls.Add(statContainer);
             Controls.Add(characterImage);
-            Controls.Add(membersList);
             Controls.Add(MembersListContainer);
             Controls.Add(corpsListContainer);
             Controls.Add(panel1);

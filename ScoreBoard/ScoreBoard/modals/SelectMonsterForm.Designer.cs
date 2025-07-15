@@ -29,8 +29,9 @@
             gradeList.BorderThickness = 0;
             gradeList.FlowDirection = FlowDirection.TopDown;
             gradeList.Location = new Point(0, 0);
+            gradeList.Margin = new Padding(0);
             gradeList.Name = "gradeList";
-            gradeList.Size = new Size(194, 714);
+            gradeList.Size = new Size(194, 720);
             gradeList.TabIndex = 0;
             gradeList.MouseEnter += GradeList_MouseEnter;
             gradeList.MouseWheel += GradeList_MouseWheel;
@@ -87,6 +88,7 @@
             gradeListContainer.Controls.Add(gradeList);
             gradeListContainer.Controls.Add(gradeScrollBar);
             gradeListContainer.Location = new Point(92, 68);
+            gradeListContainer.Margin = new Padding(0);
             gradeListContainer.Name = "gradeListContainer";
             gradeListContainer.Size = new Size(194, 720);
             gradeListContainer.TabIndex = 5;
@@ -95,8 +97,10 @@
             // 
             monsterListContainer.BackColor = Color.Transparent;
             monsterListContainer.BackgroundImageLayout = ImageLayout.Stretch;
+            monsterListContainer.Controls.Add(monsterList);
             monsterListContainer.Controls.Add(monsterScrollBar);
             monsterListContainer.Location = new Point(301, 68);
+            monsterListContainer.Margin = new Padding(0);
             monsterListContainer.Name = "monsterListContainer";
             monsterListContainer.Size = new Size(506, 720);
             monsterListContainer.TabIndex = 6;
@@ -151,9 +155,10 @@
             monsterList.BorderColor = Color.Transparent;
             monsterList.BorderThickness = 0;
             monsterList.FlowDirection = FlowDirection.TopDown;
-            monsterList.Location = new Point(301, 68);
+            monsterList.Location = new Point(0, 0);
+            monsterList.Margin = new Padding(0);
             monsterList.Name = "monsterList";
-            monsterList.Size = new Size(506, 714);
+            monsterList.Size = new Size(506, 720);
             monsterList.TabIndex = 0;
             // 
             // transparentTextLabel1
@@ -275,7 +280,6 @@
             ClientSize = new Size(1452, 860);
             Controls.Add(panel1);
             Controls.Add(transparentTextLabel1);
-            Controls.Add(monsterList);
             Controls.Add(monsterListContainer);
             Controls.Add(gradeListContainer);
             DoubleBuffered = true;
