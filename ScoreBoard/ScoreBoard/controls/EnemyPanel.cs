@@ -20,7 +20,8 @@ namespace ScoreBoard.controls
         private readonly Timer longPressTimer; // 타이머 변수
         private bool isLongPressing = false; // 롱 프레스 상태 변수
         private const int LongPressThreshold = 1000; // 롱 프레스 시간 임계값 (ms)
-        public event EventHandler<Monster>? DetailRequested; // 상세 정보 요청 이벤트
+        private bool isReported = false; // 이미 보고된 상태인지 여부
+        public event EventHandler<(bool, Monster)>? DetailRequested; // 상세 정보 요청 이벤트
 
         private readonly Monster _monster;
 
@@ -76,6 +77,7 @@ namespace ScoreBoard.controls
             // Monster의 Stat을 바탕으로 체력바 세팅
             hbEnemy.SetValues(_monster.Stat.Hp, 0, _monster.Stat.MaxHp);
             hbEnemy.HealthColor = Color.FromArgb(119, 185, 69);
+            isReported = true; // 상태가 보고되었음을 표시
         }
 
         private void LongPressTimer_Tick(object? sender, EventArgs e)
@@ -113,7 +115,7 @@ namespace ScoreBoard.controls
 
         private void EnemyPanel_Click(object? sender, EventArgs e)
         {
-            DetailRequested?.Invoke(this, _monster); // 상세 정보 요청 이벤트 발생
+            DetailRequested?.Invoke(this, (isReported, _monster)); // 상세 정보 요청 이벤트 발생
         }
     }
 }

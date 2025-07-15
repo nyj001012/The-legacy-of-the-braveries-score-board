@@ -68,7 +68,7 @@ namespace ScoreBoard.content
                 {
                     enemyControl.Visible = false; // 스폰 턴이 0이 아닌 적은 숨김 처리
                 }
-                enemyControl.DetailRequested += (s, e) => ShowDetail(e); // 상세 정보 요청 이벤트 핸들러 등록
+                enemyControl.DetailRequested += (s, e) => ShowDetail(e.Item1, e.Item2); // 상세 정보 요청 이벤트 핸들러 등록
                 enemyList.Controls.Add(enemyControl);
             }
 
@@ -378,7 +378,7 @@ namespace ScoreBoard.content
             detailViewport.Focus();
         }
 
-        public void ShowDetail(Monster monster)
+        public void ShowDetail(bool isReported, Monster monster)
         {
 
         }
