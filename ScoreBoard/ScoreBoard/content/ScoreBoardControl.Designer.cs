@@ -942,6 +942,7 @@
             // 
             lblMovement.AutoSize = true;
             lblMovement.BackColor = Color.Transparent;
+            lblMovement.Cursor = Cursors.Hand;
             lblMovement.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblMovement.ForeColor = Color.WhiteSmoke;
             lblMovement.Location = new Point(167, 0);
@@ -950,6 +951,7 @@
             lblMovement.Size = new Size(40, 42);
             lblMovement.TabIndex = 1;
             lblMovement.Text = "2";
+            lblMovement.Click += StatLabel_Click;
             // 
             // fpnRange
             // 
@@ -995,6 +997,7 @@
             // 
             lblMeleeRange.AutoSize = true;
             lblMeleeRange.BackColor = Color.Transparent;
+            lblMeleeRange.Cursor = Cursors.Hand;
             lblMeleeRange.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblMeleeRange.ForeColor = Color.WhiteSmoke;
             lblMeleeRange.Location = new Point(253, 0);
@@ -1004,6 +1007,7 @@
             lblMeleeRange.TabIndex = 3;
             lblMeleeRange.Text = "2";
             lblMeleeRange.TextAlign = ContentAlignment.MiddleCenter;
+            lblMeleeRange.Click += StatLabel_Click;
             // 
             // pbRanged
             // 
@@ -1020,6 +1024,7 @@
             // 
             lblRangedRange.AutoSize = true;
             lblRangedRange.BackColor = Color.Transparent;
+            lblRangedRange.Cursor = Cursors.Hand;
             lblRangedRange.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblRangedRange.ForeColor = Color.WhiteSmoke;
             lblRangedRange.Location = new Point(358, 0);
@@ -1029,6 +1034,7 @@
             lblRangedRange.TabIndex = 1;
             lblRangedRange.Text = "2";
             lblRangedRange.TextAlign = ContentAlignment.MiddleCenter;
+            lblRangedRange.Click += StatLabel_Click;
             // 
             // fpnAttackValue
             // 
@@ -1076,6 +1082,7 @@
             // 
             lblMeleeAttack.AutoSize = true;
             lblMeleeAttack.BackColor = Color.Transparent;
+            lblMeleeAttack.Cursor = Cursors.Hand;
             lblMeleeAttack.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblMeleeAttack.ForeColor = Color.WhiteSmoke;
             lblMeleeAttack.Location = new Point(178, 0);
@@ -1085,11 +1092,13 @@
             lblMeleeAttack.TabIndex = 3;
             lblMeleeAttack.Text = "2";
             lblMeleeAttack.TextAlign = ContentAlignment.MiddleCenter;
+            lblMeleeAttack.Click += StatLabel_Click;
             // 
             // lblMeleeAttackCount
             // 
             lblMeleeAttackCount.AutoSize = true;
             lblMeleeAttackCount.BackColor = Color.Transparent;
+            lblMeleeAttackCount.Cursor = Cursors.Hand;
             lblMeleeAttackCount.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblMeleeAttackCount.ForeColor = Color.WhiteSmoke;
             lblMeleeAttackCount.Location = new Point(218, 0);
@@ -1099,6 +1108,7 @@
             lblMeleeAttackCount.TabIndex = 6;
             lblMeleeAttackCount.Text = "{2}";
             lblMeleeAttackCount.TextAlign = ContentAlignment.MiddleCenter;
+            lblMeleeAttackCount.Click += StatLabel_Click;
             // 
             // pbRangedAttack
             // 
@@ -1115,6 +1125,7 @@
             // 
             lblRangedAttack.AutoSize = true;
             lblRangedAttack.BackColor = Color.Transparent;
+            lblRangedAttack.Cursor = Cursors.Hand;
             lblRangedAttack.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblRangedAttack.ForeColor = Color.WhiteSmoke;
             lblRangedAttack.Location = new Point(359, 0);
@@ -1124,11 +1135,13 @@
             lblRangedAttack.TabIndex = 1;
             lblRangedAttack.Text = "2";
             lblRangedAttack.TextAlign = ContentAlignment.MiddleCenter;
+            lblRangedAttack.Click += StatLabel_Click;
             // 
             // lblRangedAttackCount
             // 
             lblRangedAttackCount.AutoSize = true;
             lblRangedAttackCount.BackColor = Color.Transparent;
+            lblRangedAttackCount.Cursor = Cursors.Hand;
             lblRangedAttackCount.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblRangedAttackCount.ForeColor = Color.WhiteSmoke;
             lblRangedAttackCount.Location = new Point(399, 0);
@@ -1137,6 +1150,7 @@
             lblRangedAttackCount.Size = new Size(76, 42);
             lblRangedAttackCount.TabIndex = 5;
             lblRangedAttackCount.Text = "{2}";
+            lblRangedAttackCount.Click += StatLabel_Click;
             // 
             // fpnSpellPower
             // 
@@ -1167,6 +1181,7 @@
             // 
             lblSpellPower.AutoSize = true;
             lblSpellPower.BackColor = Color.Transparent;
+            lblSpellPower.Cursor = Cursors.Hand;
             lblSpellPower.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSpellPower.ForeColor = Color.WhiteSmoke;
             lblSpellPower.Location = new Point(133, 0);
@@ -1175,6 +1190,7 @@
             lblSpellPower.Size = new Size(40, 42);
             lblSpellPower.TabIndex = 1;
             lblSpellPower.Text = "2";
+            lblSpellPower.Click += StatLabel_Click;
             // 
             // fpnWisdom
             // 
@@ -1205,6 +1221,7 @@
             // 
             lblWisdom.AutoSize = true;
             lblWisdom.BackColor = Color.Transparent;
+            lblWisdom.Cursor = Cursors.Hand;
             lblWisdom.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblWisdom.ForeColor = Color.WhiteSmoke;
             lblWisdom.Location = new Point(99, 0);
@@ -1213,6 +1230,7 @@
             lblWisdom.Size = new Size(40, 42);
             lblWisdom.TabIndex = 1;
             lblWisdom.Text = "2";
+            lblWisdom.Click += StatLabel_Click;
             // 
             // customFlowLayoutPanel3
             // 

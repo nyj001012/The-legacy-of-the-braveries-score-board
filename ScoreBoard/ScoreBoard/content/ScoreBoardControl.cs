@@ -639,5 +639,30 @@ namespace ScoreBoard.content
                 }
             }
         }
+
+        private void StatLabel_Click(object sender, EventArgs e)
+        {
+            TransparentTextLabel? label = sender as TransparentTextLabel;
+            if (label == null || currentShowingPlayer == null)
+                return;
+            DetailEditModal modal = new DetailEditModal(label.Text)
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = GetPopupPositionRelativeTo(label)
+            };
+
+            if (modal.ShowDialog() == DialogResult.OK)
+            {
+                if (ushort.TryParse(modal.InputText, out ushort value) && value >= 0)
+                {
+                    currentShowingPlayer!.Stat.Movement = value;
+                    label.Text = value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("유효한 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }
