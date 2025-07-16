@@ -300,11 +300,14 @@ namespace ScoreBoard.content
          */
         private void pbDice_Click(object sender, EventArgs e)
         {
-            if (currentShowingPlayer == null || currentShowingPlayer.RequiredDiceValues.Count == 0)
+            if (currentShowingPlayer == null)
                 return;
-
-            string diceValues = string.Join(", ", currentShowingPlayer.RequiredDiceValues
+            string diceValues = ""; // 초기화
+            if (currentShowingPlayer.RequiredDiceValues.Count > 0)
+            {
+                diceValues = string.Join(", ", currentShowingPlayer.RequiredDiceValues
                 .Select(dv => (dv.Value ? "*" : "") + dv.Key));
+            }
 
             var editModal = new DetailEditModal(diceValues)
             {
@@ -312,7 +315,7 @@ namespace ScoreBoard.content
                 Location = GetPopupPositionRelativeTo(pbDice)
             };
 
-            if (editModal.ShowDialog(this) == DialogResult.OK)
+            if (editModal.ShowDialog() == DialogResult.OK)
             {
                 HandleDiceInput(editModal.InputText);
             }
