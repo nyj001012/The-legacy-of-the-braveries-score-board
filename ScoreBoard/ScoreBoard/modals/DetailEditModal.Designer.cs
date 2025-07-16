@@ -28,50 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tbInput = new ReaLTaiizor.Controls.DungeonTextBox();
+            textBox1 = new TextBox();
             SuspendLayout();
             // 
-            // tbInput
+            // textBox1
             // 
-            tbInput.BackColor = Color.Transparent;
-            tbInput.BorderColor = Color.Goldenrod;
-            tbInput.EdgeColor = Color.Gold;
-            tbInput.Font = new Font("Danjo-bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tbInput.ForeColor = Color.WhiteSmoke;
-            tbInput.Location = new Point(0, 0);
-            tbInput.Margin = new Padding(0);
-            tbInput.MaxLength = 32767;
-            tbInput.Multiline = false;
-            tbInput.Name = "tbInput";
-            tbInput.ReadOnly = false;
-            tbInput.Size = new Size(220, 45);
-            tbInput.TabIndex = 0;
-            tbInput.Text = "123456(+234)";
-            tbInput.TextAlignment = HorizontalAlignment.Left;
-            tbInput.UseSystemPasswordChar = false;
+            textBox1.BackColor = Color.FromArgb(229, 176, 0);
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Font = new Font("Danjo-bold", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.ForeColor = Color.WhiteSmoke;
+            textBox1.Location = new Point(3, 3);
+            textBox1.Margin = new Padding(0);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(214, 39);
+            textBox1.TabIndex = 0;
+            textBox1.Text = "asdf";
             // 
             // DetailEditModal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Red;
+            BackColor = Color.FromArgb(254, 235, 22);
             ClientSize = new Size(220, 45);
-            Controls.Add(tbInput);
+            Controls.Add(textBox1);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "DetailEditModal";
+            Opacity = 0.8D;
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "DetailEditModal";
             TopMost = true;
-            TransparencyKey = Color.Red;
-            KeyPress += DetailEditModal_KeyPress;
+            KeyDown += DetailEditModal_KeyDown;
             ResumeLayout(false);
+            PerformLayout();
         }
-
         #endregion
 
-        private ReaLTaiizor.Controls.DungeonTextBox tbInput;
+        private TextBox textBox1;
     }
 }

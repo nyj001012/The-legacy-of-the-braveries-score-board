@@ -15,17 +15,24 @@ namespace ScoreBoard.modals
         public DetailEditModal()
         {
             InitializeComponent();
+            this.KeyPreview = true; // 폼에서 키 이벤트를 받을 수 있도록 설정
         }
 
-        private void DetailEditModal_KeyPress(object sender, KeyPressEventArgs e)
+        private void tbInput_TextChanged(object sender, EventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+
+        }
+
+        private void DetailEditModal_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
             }
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 // TODO => SaveDetails(); 구현. 호출한 부모 폼에 값을 전달
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
