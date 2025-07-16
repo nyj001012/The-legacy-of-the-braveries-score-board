@@ -25,6 +25,8 @@ namespace ScoreBoard.controls
         {
             InitializeComponent();
 
+            this.hbPlayer.Name = $"hb{player.Id}";
+
             base.LblName = this.lblName;
             base.LblOrder = this.lblOrder;
             base.PbLv = this.pbLv;

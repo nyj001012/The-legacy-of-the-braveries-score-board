@@ -95,7 +95,7 @@
             hbPlayer.MaxValue = 100;
             hbPlayer.Name = "hbPlayer";
             hbPlayer.Shield = 30;
-            hbPlayer.ShieldColor = Color.FromArgb(245, 245, 245);
+            hbPlayer.ShieldColor = Color.FromArgb(225, 225, 225);
             hbPlayer.Size = new Size(466, 32);
             hbPlayer.TabIndex = 4;
             hbPlayer.Text = "healthBar2";
