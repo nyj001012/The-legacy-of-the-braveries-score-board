@@ -951,7 +951,7 @@
             lblMovement.Size = new Size(40, 42);
             lblMovement.TabIndex = 1;
             lblMovement.Text = "2";
-            lblMovement.Click += StatLabel_Click;
+            lblMovement.Click += SimpleStatLabel_Click;
             // 
             // fpnRange
             // 
@@ -1007,7 +1007,7 @@
             lblMeleeRange.TabIndex = 3;
             lblMeleeRange.Text = "2";
             lblMeleeRange.TextAlign = ContentAlignment.MiddleCenter;
-            lblMeleeRange.Click += StatLabel_Click;
+            lblMeleeRange.Click += SimpleStatLabel_Click;
             // 
             // pbRanged
             // 
@@ -1034,7 +1034,7 @@
             lblRangedRange.TabIndex = 1;
             lblRangedRange.Text = "2";
             lblRangedRange.TextAlign = ContentAlignment.MiddleCenter;
-            lblRangedRange.Click += StatLabel_Click;
+            lblRangedRange.Click += SimpleStatLabel_Click;
             // 
             // fpnAttackValue
             // 
@@ -1092,7 +1092,7 @@
             lblMeleeAttack.TabIndex = 3;
             lblMeleeAttack.Text = "2";
             lblMeleeAttack.TextAlign = ContentAlignment.MiddleCenter;
-            lblMeleeAttack.Click += StatLabel_Click;
+            lblMeleeAttack.Click += SimpleStatLabel_Click;
             // 
             // lblMeleeAttackCount
             // 
@@ -1108,7 +1108,7 @@
             lblMeleeAttackCount.TabIndex = 6;
             lblMeleeAttackCount.Text = "{2}";
             lblMeleeAttackCount.TextAlign = ContentAlignment.MiddleCenter;
-            lblMeleeAttackCount.Click += StatLabel_Click;
+            lblMeleeAttackCount.Click += SimpleStatLabel_Click;
             // 
             // pbRangedAttack
             // 
@@ -1135,7 +1135,7 @@
             lblRangedAttack.TabIndex = 1;
             lblRangedAttack.Text = "2";
             lblRangedAttack.TextAlign = ContentAlignment.MiddleCenter;
-            lblRangedAttack.Click += StatLabel_Click;
+            lblRangedAttack.Click += SimpleStatLabel_Click;
             // 
             // lblRangedAttackCount
             // 
@@ -1150,7 +1150,7 @@
             lblRangedAttackCount.Size = new Size(76, 42);
             lblRangedAttackCount.TabIndex = 5;
             lblRangedAttackCount.Text = "{2}";
-            lblRangedAttackCount.Click += StatLabel_Click;
+            lblRangedAttackCount.Click += SimpleStatLabel_Click;
             // 
             // fpnSpellPower
             // 
@@ -1190,7 +1190,7 @@
             lblSpellPower.Size = new Size(40, 42);
             lblSpellPower.TabIndex = 1;
             lblSpellPower.Text = "2";
-            lblSpellPower.Click += StatLabel_Click;
+            lblSpellPower.Click += SimpleStatLabel_Click;
             // 
             // fpnWisdom
             // 
@@ -1230,7 +1230,7 @@
             lblWisdom.Size = new Size(40, 42);
             lblWisdom.TabIndex = 1;
             lblWisdom.Text = "2";
-            lblWisdom.Click += StatLabel_Click;
+            lblWisdom.Click += SimpleStatLabel_Click;
             // 
             // customFlowLayoutPanel3
             // 

@@ -640,12 +640,17 @@ namespace ScoreBoard.content
             }
         }
 
-        private void StatLabel_Click(object sender, EventArgs e)
+        /*
+         * SimpleStatLabel_Click(object sender, EventArgs e)
+         * - 플레이어의 간단한 스탯 레이블 클릭 이벤트 핸들러
+         * - 레이블을 클릭하면 해당 스탯 값을 편집할 수 있는 모달을 표시
+         */
+        private void SimpleStatLabel_Click(object sender, EventArgs e)
         {
             TransparentTextLabel? label = sender as TransparentTextLabel;
             if (label == null || currentShowingPlayer == null)
                 return;
-            DetailEditModal modal = new DetailEditModal(label.Text)
+            DetailEditModal modal = new(label.Text)
             {
                 StartPosition = FormStartPosition.Manual,
                 Location = GetPopupPositionRelativeTo(label)
@@ -655,8 +660,63 @@ namespace ScoreBoard.content
             {
                 if (ushort.TryParse(modal.InputText, out ushort value) && value >= 0)
                 {
-                    currentShowingPlayer!.Stat.Movement = value;
-                    label.Text = value.ToString();
+                    var labelSetters = new Dictionary<string, Action>
+                    {
+                        ["lblMovement"] = () =>
+                        {
+                            currentShowingPlayer.Stat.Movement = value;
+                            lblMovement.Text = value.ToString();
+                        },
+                        ["lblMeleeRange"] = () =>
+                        {
+                            currentShowingPlayer.Stat.CombatStats["melee"].Range = value;
+                            lblMeleeRange.Text = value.ToString();
+                        },
+                        ["lblRangedRange"] = () =>
+                        {
+                            currentShowingPlayer.Stat.CombatStats["ranged"].Range = value;
+                            lblRangedRange.Text = value.ToString();
+                        },
+                        ["lblMeleeAttack"] = () =>
+                        {
+                            currentShowingPlayer.Stat.CombatStats["melee"].Value = value;
+                            lblMeleeAttack.Text = value.ToString();
+                        },
+                        ["lblRangedAttack"] = () =>
+                        {
+                            currentShowingPlayer.Stat.CombatStats["ranged"].Value = value;
+                            lblRangedAttack.Text = value.ToString();
+                        },
+                        ["lblMeleeAttackCount"] = () =>
+                        {
+                            currentShowingPlayer.Stat.CombatStats["melee"].AttackCount = value;
+                            lblMeleeAttackCount.Text = $"{{{value}}}";
+                        },
+                        ["lblRangedAttackCount"] = () =>
+                        {
+                            currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount = value;
+                            lblRangedAttackCount.Text = $"{{{value}}}";
+                        },
+                        ["lblSpellPower"] = () =>
+                        {
+                            currentShowingPlayer.Stat.SpellPower = value;
+                            lblSpellPower.Text = value.ToString();
+                        },
+                        ["lblWisdom"] = () =>
+                        {
+                            currentShowingPlayer.Stat.Wisdom = value;
+                            lblWisdom.Text = value.ToString();
+                        },
+                    };
+
+                    if (labelSetters.TryGetValue(label.Name, out var setter))
+                    {
+                        setter();
+                    }
+                    else
+                    {
+                        MessageBox.Show("알 수 없는 항목입니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
                 else
                 {
