@@ -30,9 +30,7 @@ namespace ScoreBoard.modals
             }
             if (e.KeyCode == Keys.Enter)
             {
-                // TODO => SaveDetails(); 구현. 호출한 부모 폼에 값을 전달
                 this.DialogResult = DialogResult.OK;
-
                 this.Close();
             }
         }
