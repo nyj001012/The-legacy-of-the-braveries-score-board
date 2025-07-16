@@ -4,6 +4,7 @@ using ScoreBoard.data.character;
 using ScoreBoard.data.monster;
 using ScoreBoard.data.stat;
 using ScoreBoard.data.statusEffect;
+using ScoreBoard.modals;
 using ScoreBoard.Properties;
 using ScoreBoard.utils;
 using System;
@@ -292,7 +293,19 @@ namespace ScoreBoard.content
             }
         }
 
-        private void pbDice_Click(object sender, EventArgs e) { }
+        private void pbDice_Click(object sender, EventArgs e) 
+        {
+            var editModal = new DetailEditModal();
+            editModal.StartPosition = FormStartPosition.Manual;
+            Point diceScreenPos = pbDice.PointToScreen(Point.Empty); // pbDice 왼쪽 위 모서리
+            int x = diceScreenPos.X + pbDice.Width + pbDice.Margin.Right;
+            int y = diceScreenPos.Y;
+            editModal.Location = new Point(x, y);
+            if (editModal.ShowDialog(this) == DialogResult.OK)
+            {
+                
+            }
+        }
 
         private void pbSkill_Click(object sender, EventArgs e)
         {
