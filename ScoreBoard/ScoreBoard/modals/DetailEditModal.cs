@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScoreBoard.content;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,15 +13,13 @@ namespace ScoreBoard.modals
 {
     public partial class DetailEditModal : Form
     {
-        public DetailEditModal()
+        public string InputText => tbInput.Text; // 입력된 텍스트를 반환하는 프로퍼티
+
+        public DetailEditModal(string initialText)
         {
             InitializeComponent();
             this.KeyPreview = true; // 폼에서 키 이벤트를 받을 수 있도록 설정
-        }
-
-        private void tbInput_TextChanged(object sender, EventArgs e)
-        {
-
+            tbInput.Text = initialText; // 초기 텍스트 설정
         }
 
         private void DetailEditModal_KeyDown(object sender, KeyEventArgs e)
@@ -33,6 +32,7 @@ namespace ScoreBoard.modals
             {
                 // TODO => SaveDetails(); 구현. 호출한 부모 폼에 값을 전달
                 this.DialogResult = DialogResult.OK;
+
                 this.Close();
             }
         }

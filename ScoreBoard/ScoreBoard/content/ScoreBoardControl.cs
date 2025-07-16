@@ -293,18 +293,115 @@ namespace ScoreBoard.content
             }
         }
 
-        private void pbDice_Click(object sender, EventArgs e) 
+        /*
+         * pbDice_Click(object sender, EventArgs e)
+         * - 주사위 아이콘 클릭 이벤트 핸들러
+         * - 주사위 값을 편집할 수 있는 모달을 표시
+         */
+        private void pbDice_Click(object sender, EventArgs e)
         {
-            var editModal = new DetailEditModal();
-            editModal.StartPosition = FormStartPosition.Manual;
-            Point diceScreenPos = pbDice.PointToScreen(Point.Empty); // pbDice 왼쪽 위 모서리
-            int x = diceScreenPos.X + pbDice.Width + pbDice.Margin.Right;
-            int y = diceScreenPos.Y;
-            editModal.Location = new Point(x, y);
+            if (currentShowingPlayer == null || currentShowingPlayer.RequiredDiceValues.Count == 0)
+                return;
+
+            string diceValues = string.Join(", ", currentShowingPlayer.RequiredDiceValues
+                .Select(dv => (dv.Value ? "*" : "") + dv.Key));
+
+            var editModal = new DetailEditModal(diceValues)
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = GetPopupPositionRelativeTo(pbDice)
+            };
+
             if (editModal.ShowDialog(this) == DialogResult.OK)
             {
-                
+                HandleDiceInput(editModal.InputText);
             }
+        }
+
+        /*
+         * GetPopupPositionRelativeTo(Control anchor)
+         * - 모달의 위치를 앵커 컨트롤에 상대적으로 설정하는 메서드
+         * - anchor: 앵커 컨트롤
+         * - 반환값: 모달의 위치
+         */
+        private static Point GetPopupPositionRelativeTo(Control anchor)
+        {
+            var screenPos = anchor.PointToScreen(Point.Empty);
+            return new Point(
+                screenPos.X + anchor.Width + anchor.Margin.Right,
+                screenPos.Y
+            );
+        }
+
+        /*
+         * HandleDiceInput(string inputText)
+         * - 주사위 값을 입력받아 처리하는 메서드
+         * - inputText: 입력된 주사위 값 문자열
+         */
+        private void HandleDiceInput(string inputText)
+        {
+            Dictionary<ushort, bool> newDiceDict = ParseDiceString(inputText);
+
+            if (newDiceDict.Count == 0)
+            {
+                MessageBox.Show("유효한 주사위 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            currentShowingPlayer!.RequiredDiceValues = newDiceDict;
+            UpdateDiceUI(newDiceDict);
+        }
+
+        /*
+         * UpdateDiceUI(Dictionary<ushort, bool> diceDict)
+         * - 주사위 값을 UI에 업데이트하는 메서드
+         * - diceDict: 주사위 값과 크리티컬 여부를 담은 딕셔너리
+         */
+        private void UpdateDiceUI(Dictionary<ushort, bool> diceDict)
+        {
+            fpnDice.Controls.Clear();
+
+            foreach (var diceValue in diceDict)
+            {
+                var label = CreateDiceLabel(diceValue.Key, diceValue.Value);
+                fpnDice.Controls.Add(label);
+            }
+        }
+
+        /*
+         * ParseDiceString(string input)
+         * - 입력 문자열을 파싱하여 주사위 값을 딕셔너리로 변환하는 메서드
+         * - input: 주사위 값 문자열 (예: "1, 2, *3, 4"). *이 붙은 값은 크리티컬로 간주
+         * - 반환값: 주사위 값과 크리티컬 여부를 담은 딕셔너리
+         */
+        private Dictionary<ushort, bool> ParseDiceString(string input)
+        {
+            Dictionary<ushort, bool> diceValues = [];
+
+            // 입력 문자열을 쉼표로 분리하여 각 주사위 값을 처리
+            string[] parts = input.Split([','], StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string part in parts)
+            {
+                string trimmedPart = part.Trim();
+                if (trimmedPart.Length == 0) continue; // 빈 문자열은 무시
+                bool isCritical = trimmedPart.StartsWith('*'); // 단일 문자 '*'로 확인
+                ushort value;
+                if (isCritical)
+                {
+                    trimmedPart = trimmedPart.Substring(1).Trim(); // 크리티컬 표시 제거
+                }
+                // 주사위 값이 1~6의 숫자인지 확인
+                if (ushort.TryParse(trimmedPart, out value) && 1 <= value && value <= 6)
+                {
+                    diceValues[value] = isCritical; // 주사위 값과 크리티컬 여부 저장
+                }
+                else
+                {
+                    return []; // 잘못된 입력은 빈 딕셔너리 반환
+                }
+            }
+            return diceValues;
         }
 
         private void pbSkill_Click(object sender, EventArgs e)
