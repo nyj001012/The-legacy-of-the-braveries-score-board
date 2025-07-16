@@ -96,6 +96,7 @@ namespace ScoreBoard.content
 
                 panel.Name = $"pn{character.Id}";
                 panel.Click += (s, e) => ShowDetail(character);
+                panel.Tag = index; // 패널에 인덱스 저장
 
                 playerList.Controls.Add(panel);
                 index++;
@@ -268,10 +269,12 @@ namespace ScoreBoard.content
          */
         private void ShowHealth(CorpsMember player)
         {
-            lblHealth.Text = player.Stat.Hp.ToString();
+            lblCurrentHealth.Text = player.Stat.Hp.ToString();
             if (player.Stat.Shield > 0)
-                lblHealth.Text += $"(+{player.Stat.Shield})";
-            lblHealth.Text += $"/{player.Stat.MaxHp}";
+            {
+                lblCurrentHealth.Text += $"(+{player.Stat.Shield})";
+            }
+            lblMaxHealth.Text = $"{player.Stat.MaxHp}";
         }
 
         /*
@@ -309,31 +312,19 @@ namespace ScoreBoard.content
                 .Select(dv => (dv.Value ? "*" : "") + dv.Key));
             }
 
+            Point point = pbDice.PointToScreen(Point.Empty);
+            point.X += pbDice.Width + pbDice.Margin.Right; // 오른쪽으로 위치 조정
+
             var editModal = new DetailEditModal(diceValues)
             {
                 StartPosition = FormStartPosition.Manual,
-                Location = GetPopupPositionRelativeTo(pbDice)
+                Location = point,
             };
 
             if (editModal.ShowDialog() == DialogResult.OK)
             {
                 HandleDiceInput(editModal.InputText);
             }
-        }
-
-        /*
-         * GetPopupPositionRelativeTo(Control anchor)
-         * - 모달의 위치를 앵커 컨트롤에 상대적으로 설정하는 메서드
-         * - anchor: 앵커 컨트롤
-         * - 반환값: 모달의 위치
-         */
-        private static Point GetPopupPositionRelativeTo(Control anchor)
-        {
-            var screenPos = anchor.PointToScreen(Point.Empty);
-            return new Point(
-                screenPos.X + anchor.Width + anchor.Margin.Right,
-                screenPos.Y
-            );
         }
 
         /*
@@ -534,13 +525,13 @@ namespace ScoreBoard.content
          */
         private void ShowHealth(bool isReported, Monster monster)
         {
-            lblHealth.Text = monster.Stat.Hp.ToString();
+            lblCurrentHealth.Text = monster.Stat.Hp.ToString();
             if (isReported)
             {
                 pnHealth.Visible = true;
                 if (monster.Stat.Shield > 0)
-                    lblHealth.Text += $"(+{monster.Stat.Shield})";
-                lblHealth.Text += $"/{monster.Stat.MaxHp}";
+                    lblCurrentHealth.Text += $"(+{monster.Stat.Shield})";
+                lblCurrentHealth.Text += $"/{monster.Stat.MaxHp}";
             }
         }
 
@@ -653,15 +644,21 @@ namespace ScoreBoard.content
             DetailEditModal modal = new(label.Text)
             {
                 StartPosition = FormStartPosition.Manual,
-                Location = GetPopupPositionRelativeTo(label)
+                Location = label.PointToScreen(Point.Empty),
             };
 
-            if (modal.ShowDialog() == DialogResult.OK)
+            if (modal.ShowDialog(this) == DialogResult.OK)
             {
                 if (ushort.TryParse(modal.InputText, out ushort value) && value >= 0)
                 {
                     var labelSetters = new Dictionary<string, Action>
                     {
+                        ["lblMaxHealth"] = () =>
+                        {
+                            currentShowingPlayer.Stat.MaxHp = value;
+                            lblMaxHealth.Text = value.ToString();
+                            UpdateHealthBar(); // 체력 바 업데이트
+                        },
                         ["lblMovement"] = () =>
                         {
                             currentShowingPlayer.Stat.Movement = value;
@@ -723,6 +720,80 @@ namespace ScoreBoard.content
                     MessageBox.Show("유효한 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        /*
+         * lblHealth_Click(object sender, EventArgs e)
+         * - 플레이어의 체력 레이블 클릭 이벤트 핸들러
+         * - 레이블을 클릭하면 체력을 편집할 수 있는 모달을 표시
+         */
+        private void lblCurrentHealth_Click(object sender, EventArgs e)
+        {
+            DetailEditModal modal = new(lblCurrentHealth.Text)
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = lblCurrentHealth.PointToScreen(Point.Empty)
+            };
+
+            if (modal.ShowDialog(this) == DialogResult.OK)
+            {
+                var (hp, shield) = ParseHealthString(modal.InputText);
+                if (hp == null)
+                {
+                    MessageBox.Show("유효한 체력 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                currentShowingPlayer!.Stat.Hp = (ushort)hp;
+                currentShowingPlayer.Stat.Shield = shield ?? 0;
+                lblCurrentHealth.Text = $"{hp}{(shield.HasValue ? $"(+{shield})" : "")}";
+                UpdateHealthBar();
+            }
+        }
+
+        /*
+         * UpdateHealthBar()
+         * - 현재 디테일 뷰포트에 표시된 플레이어의 체력 바를 업데이트하는 메서드
+         */
+        private void UpdateHealthBar()
+        {
+            // 현재 디테일 뷰포트에 표시된 플레이어의 체력 바를 업데이트
+            // pn1P~4P까지 Name이 pn{currentShowingPlayer.Id}인 패널을 찾아서 HealthBar를 업데이트
+            // 현재 플레이어가 1P~4P 중 어느 것인지 확인
+            var healthBar = this.Controls.Find($"hb{currentShowingPlayer!.Id}", true).FirstOrDefault() as HealthBar;
+            playerList.SuspendLayout();
+            // HealthBar 컨트롤을 찾아서 업데이트
+            healthBar?.SetValues(currentShowingPlayer.Stat.Hp,
+                                currentShowingPlayer.Stat.Shield,
+                                currentShowingPlayer.Stat.MaxHp);
+            playerList.ResumeLayout();
+        }
+
+        /*
+         * ParseHealthString(string input)
+         * - 체력 문자열을 파싱하여 플레이어의 체력을 업데이트하는 메서드
+         * - input: 체력 문자열 (예: "100(+20)")
+         */
+        private static (ushort?, ushort?) ParseHealthString(string input)
+        {
+            ushort? hp;
+            ushort? shield = null;
+
+            // 정규 표현식을 사용하여 체력과 보호막을 추출
+            var match = System.Text.RegularExpressions.Regex.Match(input, @"^(\d+)(?:\s*\(\+(\d+)\))?$");
+
+            if (match.Success)
+            {
+                hp = ushort.Parse(match.Groups[1].Value);
+                if (match.Groups[2].Success)
+                {
+                    shield = ushort.Parse(match.Groups[2].Value);
+                }
+            }
+            else
+            {
+                return (null, null);
+            }
+            return (hp, shield);
         }
     }
 }

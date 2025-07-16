@@ -78,9 +78,11 @@
             lblName = new ScoreBoard.controls.TransparentTextLabel();
             pbDice = new PictureBox();
             fpnDice = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            pnHealth = new ScoreBoard.controls.DoubleBufferedPanel();
-            lblHealth = new ScoreBoard.controls.TransparentTextLabel();
+            pnHealth = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            lblHealthLabel = new ScoreBoard.controls.TransparentTextLabel();
+            lblCurrentHealth = new ScoreBoard.controls.TransparentTextLabel();
             transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
+            lblMaxHealth = new ScoreBoard.controls.TransparentTextLabel();
             fpnStatusDetail = new ScoreBoard.controls.CustomFlowLayoutPanel();
             doubleBufferedPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel6 = new ScoreBoard.controls.TransparentTextLabel();
@@ -868,26 +870,46 @@
             // 
             // pnHealth
             // 
-            pnHealth.Controls.Add(lblHealth);
+            pnHealth.BorderColor = Color.Transparent;
+            pnHealth.BorderThickness = 0;
+            pnHealth.Controls.Add(lblHealthLabel);
+            pnHealth.Controls.Add(lblCurrentHealth);
             pnHealth.Controls.Add(transparentTextLabel1);
+            pnHealth.Controls.Add(lblMaxHealth);
             pnHealth.Location = new Point(60, 60);
             pnHealth.Margin = new Padding(0, 15, 0, 0);
             pnHealth.Name = "pnHealth";
             pnHealth.Size = new Size(600, 45);
             pnHealth.TabIndex = 1;
             // 
-            // lblHealth
+            // lblHealthLabel
             // 
-            lblHealth.AutoSize = true;
-            lblHealth.BackColor = Color.Transparent;
-            lblHealth.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHealth.ForeColor = Color.WhiteSmoke;
-            lblHealth.Location = new Point(103, 2);
-            lblHealth.Margin = new Padding(0);
-            lblHealth.Name = "lblHealth";
-            lblHealth.Size = new Size(366, 42);
-            lblHealth.TabIndex = 1;
-            lblHealth.Text = "1000(+2000)/2000";
+            lblHealthLabel.AutoSize = true;
+            lblHealthLabel.BackColor = Color.Transparent;
+            lblHealthLabel.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHealthLabel.ForeColor = Color.WhiteSmoke;
+            lblHealthLabel.Location = new Point(0, 0);
+            lblHealthLabel.Margin = new Padding(0);
+            lblHealthLabel.Name = "lblHealthLabel";
+            lblHealthLabel.Size = new Size(99, 42);
+            lblHealthLabel.TabIndex = 0;
+            lblHealthLabel.Text = "체력:";
+            // 
+            // lblCurrentHealth
+            // 
+            lblCurrentHealth.AutoSize = true;
+            lblCurrentHealth.BackColor = Color.Transparent;
+            lblCurrentHealth.Cursor = Cursors.Hand;
+            lblCurrentHealth.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCurrentHealth.ForeColor = Color.WhiteSmoke;
+            lblCurrentHealth.Location = new Point(99, 0);
+            lblCurrentHealth.Margin = new Padding(0);
+            lblCurrentHealth.Name = "lblCurrentHealth";
+            lblCurrentHealth.RightToLeft = RightToLeft.No;
+            lblCurrentHealth.Size = new Size(222, 42);
+            lblCurrentHealth.TabIndex = 1;
+            lblCurrentHealth.Text = "1000(+100)";
+            lblCurrentHealth.Click += lblCurrentHealth_Click;
             // 
             // transparentTextLabel1
             // 
@@ -895,12 +917,27 @@
             transparentTextLabel1.BackColor = Color.Transparent;
             transparentTextLabel1.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             transparentTextLabel1.ForeColor = Color.WhiteSmoke;
-            transparentTextLabel1.Location = new Point(0, 2);
+            transparentTextLabel1.Location = new Point(321, 0);
             transparentTextLabel1.Margin = new Padding(0);
             transparentTextLabel1.Name = "transparentTextLabel1";
-            transparentTextLabel1.Size = new Size(99, 42);
-            transparentTextLabel1.TabIndex = 0;
-            transparentTextLabel1.Text = "체력:";
+            transparentTextLabel1.Size = new Size(36, 42);
+            transparentTextLabel1.TabIndex = 3;
+            transparentTextLabel1.Text = "/";
+            // 
+            // lblMaxHealth
+            // 
+            lblMaxHealth.AutoSize = true;
+            lblMaxHealth.BackColor = Color.Transparent;
+            lblMaxHealth.Cursor = Cursors.Hand;
+            lblMaxHealth.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMaxHealth.ForeColor = Color.WhiteSmoke;
+            lblMaxHealth.Location = new Point(357, 0);
+            lblMaxHealth.Margin = new Padding(0);
+            lblMaxHealth.Name = "lblMaxHealth";
+            lblMaxHealth.Size = new Size(137, 42);
+            lblMaxHealth.TabIndex = 4;
+            lblMaxHealth.Text = "30000";
+            lblMaxHealth.Click += SimpleStatLabel_Click;
             // 
             // fpnStatusDetail
             // 
@@ -1688,9 +1725,9 @@
         private controls.CustomFlowLayoutPanel detailViewport;
         private controls.CustomFlowLayoutPanel fpnBasicStatus;
         private controls.TransparentTextLabel lblName;
-        private controls.DoubleBufferedPanel pnHealth;
-        private controls.TransparentTextLabel transparentTextLabel1;
-        private controls.TransparentTextLabel lblHealth;
+        private controls.CustomFlowLayoutPanel pnHealth;
+        private controls.TransparentTextLabel lblHealthLabel;
+        private controls.TransparentTextLabel lblCurrentHealth;
         private controls.CustomFlowLayoutPanel fpnStatusDetail;
         private controls.CustomFlowLayoutPanel doubleBufferedPanel4;
         private controls.TransparentTextLabel lblMovement;
@@ -1739,5 +1776,7 @@
         private RichTextBox richTextBox1;
         private controls.DoubleBufferedPanel detailList;
         private controls.CustomFlowLayoutPanel fpnDice;
+        private controls.TransparentTextLabel transparentTextLabel1;
+        private controls.TransparentTextLabel lblMaxHealth;
     }
 }
