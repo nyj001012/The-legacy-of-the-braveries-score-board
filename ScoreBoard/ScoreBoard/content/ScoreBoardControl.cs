@@ -822,14 +822,15 @@ namespace ScoreBoard.content
          */
         private void EditStatusEffect()
         {
-            if (currentShowingPlayer == null || currentShowingPlayer.Stat.StatusEffects.Count == 0)
+            if (currentShowingPlayer == null)
                 return;
+            Point modalStartPos = new(fpnStatusEffect.PointToScreen(Point.Empty).X, fpnStatusEffect.PointToScreen(Point.Empty).Y + 45);
             var editModal = new StatusEffectEditModal()
             {
                 StartPosition = FormStartPosition.Manual,
-                Location = fpnStatusEffect.PointToScreen(Point.Empty),
+                Location = modalStartPos,
             };
-            if (editModal.ShowDialog() == DialogResult.OK)
+            if (editModal.ShowDialog(this) == DialogResult.OK)
             {
                 // 상태 이상 업데이트
                 UpdatedStatusEffects(editModal.newStatusEffects);
