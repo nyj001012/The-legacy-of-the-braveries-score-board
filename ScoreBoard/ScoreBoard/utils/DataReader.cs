@@ -253,7 +253,7 @@ namespace ScoreBoard.utils
                 StatusEffectType.Immortality => Image.FromFile(@"Resources/meta_data/status_effect/immortality.png"),
                 StatusEffectType.Stasis => Image.FromFile(@"Resources/meta_data/status_effect/stasis.png"),
                 StatusEffectType.Exhaustion => Image.FromFile(@"Resources/meta_data/status_effect/exhaustion.png"),
-                StatusEffectType.Slience => Image.FromFile(@"Resources/meta_data/status_effect/slience.png"),
+                StatusEffectType.Slience => Image.FromFile(@"Resources/meta_data/status_effect/silence.png"),
                 StatusEffectType.Blind => Image.FromFile(@"Resources/meta_data/status_effect/blind.png"),
                 StatusEffectType.HealingBlock => Image.FromFile(@"Resources/meta_data/status_effect/healing_block.png"),
                 StatusEffectType.Stun => Image.FromFile(@"Resources/meta_data/status_effect/stun.png"),
