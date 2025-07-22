@@ -118,6 +118,7 @@
             customFlowLayoutPanel2.Controls.Add(lblEffectName);
             customFlowLayoutPanel2.Controls.Add(lblEffectDescription);
             customFlowLayoutPanel2.Controls.Add(customFlowLayoutPanel1);
+            customFlowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
             customFlowLayoutPanel2.Location = new Point(256, 3);
             customFlowLayoutPanel2.Margin = new Padding(0);
             customFlowLayoutPanel2.Name = "customFlowLayoutPanel2";
@@ -179,12 +180,12 @@
             // 
             tbDuration.BackColor = Color.FromArgb(180, 138, 0);
             tbDuration.BorderStyle = BorderStyle.None;
-            tbDuration.Font = new Font("Danjo-bold", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbDuration.Font = new Font("Danjo-bold", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbDuration.ForeColor = Color.WhiteSmoke;
-            tbDuration.Location = new Point(125, 0);
-            tbDuration.Margin = new Padding(0);
+            tbDuration.Location = new Point(125, 3);
+            tbDuration.Margin = new Padding(0, 3, 0, 0);
             tbDuration.Name = "tbDuration";
-            tbDuration.Size = new Size(110, 39);
+            tbDuration.Size = new Size(110, 35);
             tbDuration.TabIndex = 0;
             tbDuration.Text = "0";
             // 

@@ -72,6 +72,7 @@ namespace ScoreBoard.modals
                     Margin = new Padding(5),
                     Cursor = Cursors.Hand // 마우스 커서를 손 모양으로 변경
                 };
+                pb.Click += (s, e) => ShowEffectDetails(type); // 클릭 시 상태이상 효과 세부 정보 표시
                 effectList.Controls.Add(pb);
             }
             effectList.Height = effectList.Controls.Cast<Control>().Where(c => c.Visible).Max(c => c.Bottom); ;
@@ -83,7 +84,7 @@ namespace ScoreBoard.modals
             effectList.Focus(); // 마우스가 effectList에 들어오면 포커스를 줌
         }
 
-        private void effectList_MouseWheel(object sender, MouseEventArgs e)
+        private void effectList_MouseWheel(object? sender, MouseEventArgs e)
         {
             // 마우스 휠 이벤트를 처리하여 스크롤바를 조정
             if (e.Delta > 0) // 위로 스크롤
@@ -94,6 +95,17 @@ namespace ScoreBoard.modals
             {
                 sbEffect.Value = Math.Min(sbEffect.Maximum, sbEffect.Value + sbEffect.SmallStep);
             }
+        }
+
+        /*
+         * ShowEffectDetails(StatusEffectType type)
+         * - 선택한 상태이상 효과의 이름, 설명, 지속시간을 표시하는 메소드
+         */
+        private void ShowEffectDetails(StatusEffectType type)
+        {
+            lblEffectName.Text = EnumHelper.GetEnumName(type);
+            lblEffectDescription.Text = EnumHelper.GetEnumDescription(type);
+            tbDuration.Text = "0"; // TODO => 이미 적용된 상태이상 효과라면 지속시간을 가져와서 표시
         }
     }
 }
