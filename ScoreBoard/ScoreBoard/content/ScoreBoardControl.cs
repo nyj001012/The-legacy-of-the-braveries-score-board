@@ -808,9 +808,38 @@ namespace ScoreBoard.content
             EditStatusEffect();
         }
 
+        /*
+         * EditStatusEffect()
+         * - 현재 플레이어의 상태 이상을 편집하는 메서드
+         * - 상태 이상이 없거나 현재 플레이어가 선택되지 않은 경우 아무 작업도 하지 않음
+         * - 상태 이상 편집 모달을 표시하고, 사용자가 상태 이상을 수정하면 업데이트
+         */
         private void EditStatusEffect()
         {
-            MessageBox.Show("상태 이상 편집 기능은 아직 구현되지 않았습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (currentShowingPlayer == null || currentShowingPlayer.Stat.StatusEffects.Count == 0)
+                return;
+            var editModal = new StatusEffectEditModal()
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = fpnStatusEffect.PointToScreen(Point.Empty),
+            };
+            if (editModal.ShowDialog() == DialogResult.OK)
+            {
+                // 상태 이상 업데이트
+                UpdatedStatusEffects(editModal.newStatusEffects);
+                ShowStatusEffect(currentShowingPlayer);
+            }
+        }
+
+        /*
+         * UpdatedStatusEffects(List<StatusEffect> effects)
+         * - 현재 플레이어의 상태 이상을 업데이트하는 메서드
+         * - effects: 새로 설정할 상태 이상 목록
+         */
+        private void UpdatedStatusEffects(List<StatusEffect> effects)
+        {
+            // TODO => 현재 플레이어의 상태 이상을 새로 설정
+            // TODO => 이미 있는 상태이상이라면 업데이트, 없는 상태이상이라면 추가
         }
     }
 }
