@@ -255,6 +255,7 @@ namespace ScoreBoard.content
          */
         private void ShowStatusEffect(CorpsMember player)
         {
+            fpnStatusDetail.Visible = true;
             fpnStatusEffect.Controls.Clear();
             if (player.Stat.StatusEffects.Count == 0)
             {
@@ -490,13 +491,18 @@ namespace ScoreBoard.content
         {
             if (monster.Stat.StatusEffects.Count == 0 || !isReported)
             {
-                fpnStatusDetail.Controls.Clear();
                 fpnStatusDetail.Visible = false;
                 return;
             }
 
             fpnStatusDetail.Visible = true;
-            fpnStatusDetail.Controls.Clear();
+            fpnStatusEffect.Controls.Clear();
+
+            if (monster.Stat.StatusEffects.Count == 0)
+            {
+                fpnStatusDetail.Controls.Add(cachedStatusEffectDefault);
+                return;
+            }
 
             foreach (var statusEffect in monster.Stat.StatusEffects)
             {
