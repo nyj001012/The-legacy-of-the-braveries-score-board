@@ -58,6 +58,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "DetailEditModal";
+            Opacity = 0.95D;
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "DetailEditModal";

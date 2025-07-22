@@ -198,6 +198,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "StatusEffectEditModal";
+            Opacity = 0.95D;
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "DetailEditModal";
