@@ -55,6 +55,7 @@
             // 
             // effectList
             // 
+            effectList.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             effectList.BackColor = Color.Transparent;
             effectList.BorderColor = Color.Transparent;
             effectList.BorderThickness = 0;
@@ -63,6 +64,7 @@
             effectList.Name = "effectList";
             effectList.Size = new Size(250, 144);
             effectList.TabIndex = 1;
+            effectList.MouseEnter += effectList_MouseEnter;
             // 
             // sbEffect
             // 
@@ -99,6 +101,7 @@
             sbEffect.Rounding = true;
             sbEffect.RoundingInt = 7;
             sbEffect.Size = new Size(16, 144);
+            sbEffect.SmallStep = 10;
             sbEffect.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             sbEffect.TabIndex = 0;
             sbEffect.Tag = "Cyber";
@@ -204,6 +207,7 @@
             Text = "DetailEditModal";
             TopMost = true;
             TransparencyKey = Color.Black;
+            Load += StatusEffectEditModal_Load;
             KeyDown += StatusEffectEditModal_KeyDown;
             pnEffectContainer.ResumeLayout(false);
             customFlowLayoutPanel2.ResumeLayout(false);
