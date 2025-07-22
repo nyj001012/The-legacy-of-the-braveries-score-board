@@ -84,6 +84,8 @@
             transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
             lblMaxHealth = new ScoreBoard.controls.TransparentTextLabel();
             fpnStatusDetail = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            transparentTextLabel5 = new ScoreBoard.controls.TransparentTextLabel();
+            fpnStatusEffect = new ScoreBoard.controls.CustomFlowLayoutPanel();
             doubleBufferedPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel6 = new ScoreBoard.controls.TransparentTextLabel();
             lblMovement = new ScoreBoard.controls.TransparentTextLabel();
@@ -155,6 +157,7 @@
             fpnBasicStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbDice).BeginInit();
             pnHealth.SuspendLayout();
+            fpnStatusDetail.SuspendLayout();
             doubleBufferedPanel4.SuspendLayout();
             fpnRange.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMelee).BeginInit();
@@ -943,12 +946,38 @@
             // 
             fpnStatusDetail.BorderColor = Color.Transparent;
             fpnStatusDetail.BorderThickness = 0;
+            fpnStatusDetail.Controls.Add(transparentTextLabel5);
+            fpnStatusDetail.Controls.Add(fpnStatusEffect);
             fpnStatusDetail.Location = new Point(60, 120);
             fpnStatusDetail.Margin = new Padding(0, 15, 0, 0);
             fpnStatusDetail.Name = "fpnStatusDetail";
-            fpnStatusDetail.Padding = new Padding(0, 0, 10, 0);
             fpnStatusDetail.Size = new Size(600, 45);
             fpnStatusDetail.TabIndex = 2;
+            // 
+            // transparentTextLabel5
+            // 
+            transparentTextLabel5.AutoSize = true;
+            transparentTextLabel5.BackColor = Color.Transparent;
+            transparentTextLabel5.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel5.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel5.Location = new Point(0, 0);
+            transparentTextLabel5.Margin = new Padding(0);
+            transparentTextLabel5.Name = "transparentTextLabel5";
+            transparentTextLabel5.Size = new Size(99, 42);
+            transparentTextLabel5.TabIndex = 0;
+            transparentTextLabel5.Text = "상태:";
+            // 
+            // fpnStatusEffect
+            // 
+            fpnStatusEffect.BorderColor = Color.Transparent;
+            fpnStatusEffect.BorderThickness = 0;
+            fpnStatusEffect.Cursor = Cursors.Hand;
+            fpnStatusEffect.Location = new Point(99, 0);
+            fpnStatusEffect.Margin = new Padding(0);
+            fpnStatusEffect.Name = "fpnStatusEffect";
+            fpnStatusEffect.Size = new Size(500, 45);
+            fpnStatusEffect.TabIndex = 1;
+            fpnStatusEffect.Click += fpnStatusEffect_Click;
             // 
             // doubleBufferedPanel4
             // 
@@ -1642,6 +1671,8 @@
             ((System.ComponentModel.ISupportInitialize)pbDice).EndInit();
             pnHealth.ResumeLayout(false);
             pnHealth.PerformLayout();
+            fpnStatusDetail.ResumeLayout(false);
+            fpnStatusDetail.PerformLayout();
             doubleBufferedPanel4.ResumeLayout(false);
             doubleBufferedPanel4.PerformLayout();
             fpnRange.ResumeLayout(false);
@@ -1778,5 +1809,7 @@
         private controls.CustomFlowLayoutPanel fpnDice;
         private controls.TransparentTextLabel transparentTextLabel1;
         private controls.TransparentTextLabel lblMaxHealth;
+        private controls.TransparentTextLabel transparentTextLabel5;
+        private controls.CustomFlowLayoutPanel fpnStatusEffect;
     }
 }

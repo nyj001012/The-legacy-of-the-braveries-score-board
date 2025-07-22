@@ -31,12 +31,23 @@ namespace ScoreBoard.content
         private CorpsMember? currentShowingPlayer = null; // 현재 표시 중인 플레이어
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
+        private readonly TransparentTextLabel cachedStatusEffectDefault = new()
+        {
+            Text = "양호",
+            Font = new Font("Danjo-bold", 26),
+            ForeColor = Color.WhiteSmoke,
+            AutoSize = true,
+            Margin = new Padding(0, 0, 0, 0),
+            Cursor = Cursors.Hand
+        };
 
         public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)
         {
             _characters = characters ?? throw new ArgumentNullException(nameof(characters), "캐릭터는 비어있을 수 없습니다.");
             _monsters = monsters ?? throw new ArgumentNullException(nameof(monsters), "몬스터를 선택해야 합니다.");
             InitializeComponent();
+
+            cachedStatusEffectDefault.Click += (s, e) => EditStatusEffect(); // 상태 이상 편집 이벤트 핸들러 등록
         }
 
         private void ScoreBoardControl_Load(object sender, EventArgs e)
@@ -244,21 +255,18 @@ namespace ScoreBoard.content
          */
         private void ShowStatusEffect(CorpsMember player)
         {
+            fpnStatusEffect.Controls.Clear();
             if (player.Stat.StatusEffects.Count == 0)
             {
-                fpnStatusDetail.Controls.Clear();
-                fpnStatusDetail.Visible = false;
+                fpnStatusEffect.Controls.Add(cachedStatusEffectDefault);
                 return;
             }
-
-            fpnStatusDetail.Visible = true;
-            fpnStatusDetail.Controls.Clear();
 
             foreach (var statusEffect in player.Stat.StatusEffects)
             {
                 var (pb, label) = CreateStatusEffectControl(statusEffect);
-                fpnStatusDetail.Controls.Add(pb);
-                fpnStatusDetail.Controls.Add(label);
+                fpnStatusEffect.Controls.Add(pb);
+                fpnStatusEffect.Controls.Add(label);
             }
         }
 
@@ -638,8 +646,7 @@ namespace ScoreBoard.content
          */
         private void SimpleStatLabel_Click(object sender, EventArgs e)
         {
-            TransparentTextLabel? label = sender as TransparentTextLabel;
-            if (label == null || currentShowingPlayer == null)
+            if (sender is not TransparentTextLabel label || currentShowingPlayer == null)
                 return;
             DetailEditModal modal = new(label.Text)
             {
@@ -794,6 +801,16 @@ namespace ScoreBoard.content
                 return (null, null);
             }
             return (hp, shield);
+        }
+
+        private void fpnStatusEffect_Click(object sender, EventArgs e)
+        {
+            EditStatusEffect();
+        }
+
+        private void EditStatusEffect()
+        {
+            MessageBox.Show("상태 이상 편집 기능은 아직 구현되지 않았습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
