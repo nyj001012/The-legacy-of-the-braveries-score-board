@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tbInput = new TextBox();
             pnEffectContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             effectList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             sbEffect = new ReaLTaiizor.Controls.CyberScrollBar();
@@ -43,21 +42,9 @@
             customFlowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
-            // tbInput
-            // 
-            tbInput.BackColor = Color.FromArgb(229, 176, 0);
-            tbInput.BorderStyle = BorderStyle.None;
-            tbInput.Font = new Font("Danjo-bold", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tbInput.ForeColor = Color.WhiteSmoke;
-            tbInput.Location = new Point(3, 3);
-            tbInput.Margin = new Padding(0);
-            tbInput.Name = "tbInput";
-            tbInput.Size = new Size(0, 39);
-            tbInput.TabIndex = 0;
-            // 
             // pnEffectContainer
             // 
-            pnEffectContainer.BackColor = Color.FromArgb(229, 176, 0);
+            pnEffectContainer.BackColor = Color.Transparent;
             pnEffectContainer.Controls.Add(effectList);
             pnEffectContainer.Controls.Add(sbEffect);
             pnEffectContainer.Location = new Point(3, 3);
@@ -68,6 +55,7 @@
             // 
             // effectList
             // 
+            effectList.BackColor = Color.Transparent;
             effectList.BorderColor = Color.Transparent;
             effectList.BorderThickness = 0;
             effectList.Location = new Point(0, 0);
@@ -100,7 +88,7 @@
             sbEffect.LinearGradient_Background = false;
             sbEffect.LinearGradient_Value = false;
             sbEffect.LinearGradientPen = false;
-            sbEffect.Location = new Point(211, 0);
+            sbEffect.Location = new Point(221, 0);
             sbEffect.Margin = new Padding(0);
             sbEffect.Maximum = 100;
             sbEffect.Minimum = 0;
@@ -110,7 +98,7 @@
             sbEffect.RGB = false;
             sbEffect.Rounding = true;
             sbEffect.RoundingInt = 7;
-            sbEffect.Size = new Size(26, 144);
+            sbEffect.Size = new Size(16, 144);
             sbEffect.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             sbEffect.TabIndex = 0;
             sbEffect.Tag = "Cyber";
@@ -121,7 +109,7 @@
             // 
             // customFlowLayoutPanel2
             // 
-            customFlowLayoutPanel2.BackColor = Color.FromArgb(229, 176, 0);
+            customFlowLayoutPanel2.BackColor = Color.Transparent;
             customFlowLayoutPanel2.BorderColor = Color.Transparent;
             customFlowLayoutPanel2.BorderThickness = 0;
             customFlowLayoutPanel2.Controls.Add(lblEffectName);
@@ -186,7 +174,7 @@
             // 
             // tbDuration
             // 
-            tbDuration.BackColor = Color.FromArgb(229, 176, 0);
+            tbDuration.BackColor = Color.FromArgb(180, 138, 0);
             tbDuration.BorderStyle = BorderStyle.None;
             tbDuration.Font = new Font("Danjo-bold", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbDuration.ForeColor = Color.WhiteSmoke;
@@ -201,11 +189,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(254, 235, 22);
+            BackColor = Color.Black;
+            BackgroundImage = Properties.Resources.ImgStatusEffectEditModal;
             ClientSize = new Size(500, 150);
             Controls.Add(customFlowLayoutPanel2);
             Controls.Add(pnEffectContainer);
-            Controls.Add(tbInput);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -214,6 +202,7 @@
             ShowInTaskbar = false;
             Text = "DetailEditModal";
             TopMost = true;
+            TransparencyKey = Color.Black;
             KeyDown += StatusEffectEditModal_KeyDown;
             pnEffectContainer.ResumeLayout(false);
             customFlowLayoutPanel2.ResumeLayout(false);
@@ -221,11 +210,9 @@
             customFlowLayoutPanel1.ResumeLayout(false);
             customFlowLayoutPanel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
-        #endregion
 
-        private TextBox tbInput;
+        #endregion
         private controls.DoubleBufferedPanel pnEffectContainer;
         private ReaLTaiizor.Controls.CyberScrollBar sbEffect;
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel2;

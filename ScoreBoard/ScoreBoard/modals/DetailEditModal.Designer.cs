@@ -33,7 +33,7 @@
             // 
             // tbInput
             // 
-            tbInput.BackColor = Color.FromArgb(229, 176, 0);
+            tbInput.BackColor = Color.FromArgb(180, 138, 0);
             tbInput.BorderStyle = BorderStyle.None;
             tbInput.Font = new Font("Danjo-bold", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbInput.ForeColor = Color.WhiteSmoke;
@@ -47,9 +47,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(254, 235, 22);
+            BackColor = Color.Black;
+            BackgroundImage = Properties.Resources.ImgSimpleEditModal;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(220, 45);
             Controls.Add(tbInput);
+            Cursor = Cursors.No;
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -58,6 +62,7 @@
             ShowInTaskbar = false;
             Text = "DetailEditModal";
             TopMost = true;
+            TransparencyKey = Color.Black;
             KeyDown += DetailEditModal_KeyDown;
             ResumeLayout(false);
             PerformLayout();
