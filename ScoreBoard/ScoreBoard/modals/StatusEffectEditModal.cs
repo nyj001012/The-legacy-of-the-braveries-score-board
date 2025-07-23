@@ -22,7 +22,8 @@ namespace ScoreBoard.modals
         {
             InitializeComponent();
             this.KeyPreview = true; // 폼에서 키 이벤트를 받을 수 있도록 설정
-            NewStatusEffects = statusEffects ?? new List<StatusEffect>();
+            NewStatusEffects = statusEffects ?? [];
+            lblEffectName.Visible = lblEffectDescription.Visible = tbDuration.Visible = false; // 초기에는 상태이상 효과 정보 숨김
         }
 
         private void StatusEffectEditModal_KeyDown(object sender, KeyEventArgs e)
@@ -101,6 +102,8 @@ namespace ScoreBoard.modals
          */
         private void ShowEffectDetails(StatusEffectType type)
         {
+            lblEffectName.Visible = lblEffectDescription.Visible = tbDuration.Visible = true; // 상태이상 효과 정보 표시
+            tbDuration.Focus(); // 지속시간 입력 필드에 포커스 설정
             _currentType = type; // 현재 선택된 상태이상 효과 타입 저장
             lblEffectName.Text = EnumHelper.GetEnumName(type);
             lblEffectDescription.Text = EnumHelper.GetEnumDescription(type);
