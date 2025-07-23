@@ -15,7 +15,8 @@ namespace ScoreBoard.modals
 {
     public partial class StatusEffectEditModal : Form
     {
-        public List<StatusEffect> newStatusEffects = [];
+        public Dictionary<StatusEffectType, int> NewStatusEffects = [];
+        private StatusEffectType _currentType;
 
         public StatusEffectEditModal()
         {
@@ -38,12 +39,8 @@ namespace ScoreBoard.modals
 
         private void StatusEffectEditModal_Load(object sender, EventArgs e)
         {
-            // TODO => 상태이상 효과 아이콘 및 이름을 불러와서 effectList에 추가
             ShowEffectIcons();
             effectList.MouseWheel += effectList_MouseWheel;
-
-            // TODO => 이미지를 picturebox로, 태그에 상태이상 id 저장
-            // TODO => picturebox 클릭 시, 오른편에 상태이상 이름, 설명, 지속시간 표시
         }
 
         /*
@@ -103,9 +100,31 @@ namespace ScoreBoard.modals
          */
         private void ShowEffectDetails(StatusEffectType type)
         {
+            _currentType = type; // 현재 선택된 상태이상 효과 타입 저장
             lblEffectName.Text = EnumHelper.GetEnumName(type);
             lblEffectDescription.Text = EnumHelper.GetEnumDescription(type);
             tbDuration.Text = "0"; // TODO => 이미 적용된 상태이상 효과라면 지속시간을 가져와서 표시
+        }
+
+        private void tbDuration_TextChanged(object sender, EventArgs e)
+        {
+            tbDuration.Text = tbDuration.Text.Trim(); // 입력값의 앞뒤 공백 제거
+            if (int.TryParse(tbDuration.Text, out int duration))
+            {
+                // 유효한 숫자 입력 시 상태이상 효과 딕셔너리에 추가
+                if (duration == 0) // 지속시간이 0인 경우는 상태이상 효과를 제거하는 의미로 처리
+                {
+                    NewStatusEffects.Remove(_currentType);
+                }
+                else
+                {
+                    NewStatusEffects[_currentType] = duration;
+                }
+            }
+            else
+            {
+                MessageBox.Show("지속시간으로 유효한 숫자를 입력해주세요.", "입력 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
