@@ -188,7 +188,7 @@
             tbDuration.Size = new Size(110, 35);
             tbDuration.TabIndex = 0;
             tbDuration.Text = "0";
-            tbDuration.TextChanged += tbDuration_TextChanged;
+            tbDuration.KeyDown += tbDuration_KeyDown;
             tbDuration.Leave += tbDuration_Leave;
             // 
             // StatusEffectEditModal

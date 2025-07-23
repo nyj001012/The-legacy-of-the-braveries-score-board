@@ -104,15 +104,44 @@ namespace ScoreBoard.modals
             _currentType = type; // 현재 선택된 상태이상 효과 타입 저장
             lblEffectName.Text = EnumHelper.GetEnumName(type);
             lblEffectDescription.Text = EnumHelper.GetEnumDescription(type);
-            tbDuration.Text = "0"; // TODO => 이미 적용된 상태이상 효과라면 지속시간을 가져와서 표시
-        }
-
-        private void tbDuration_TextChanged(object sender, EventArgs e)
-        {
-
+            if (NewStatusEffects.Any(e => e.Type == type))
+            {
+                // 이미 추가된 상태이상 효과가 있다면 지속시간을 가져옴
+                var existingEffect = NewStatusEffects.First(e => e.Type == type);
+                tbDuration.Text = existingEffect.IsInfinite ? "-1" : existingEffect.Duration.ToString();
+            }
+            else
+            {
+                tbDuration.Text = "0"; // 새로 추가하는 상태이상 효과는 기본적으로 0으로 설정
+            }
         }
 
         private void tbDuration_Leave(object sender, EventArgs e)
+        {
+            UpdateStatusEffect(); // 지속시간 입력 필드에서 포커스를 잃을 때 상태이상 효과 업데이트
+        }
+
+        private void tbDuration_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Enter 키 입력을 무시
+                UpdateStatusEffect(); // Enter 키를 누르면 상태이상 효과 업데이트
+                this.DialogResult = DialogResult.OK; // 대화상자 닫기
+                this.Close();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                e.SuppressKeyPress = true; // Escape 키 입력을 무시
+                this.Close(); // 대화상자 닫기
+            }
+        }
+
+        /*
+         * UpateStatusEffect()
+         * - 상태이상 효과의 지속시간을 업데이트하는 메소드
+         */
+        private void UpdateStatusEffect()
         {
             tbDuration.Text = tbDuration.Text.Trim(); // 입력값의 앞뒤 공백 제거
             if (int.TryParse(tbDuration.Text, out int duration))
@@ -120,8 +149,8 @@ namespace ScoreBoard.modals
                 // 상태이상 효과를 새로 생성하거나 업데이트
                 StatusEffect newEffect = new(_currentType, duration);
                 NewStatusEffects.RemoveAll(e => e.Type == _currentType); // 기존 효과 제거
-                NewStatusEffects.Add(newEffect); // 새 효과 추가
-                this.DialogResult = DialogResult.OK; // 변경 사항 저장
+                if (duration != 0)
+                    NewStatusEffects.Add(newEffect); // 새 효과 추가
             }
             else
             {

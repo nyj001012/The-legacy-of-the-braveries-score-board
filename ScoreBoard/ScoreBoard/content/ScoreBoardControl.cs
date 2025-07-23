@@ -601,10 +601,12 @@ namespace ScoreBoard.content
 
             PictureBox pb = new()
             {
-                BackgroundImage = DataReader.GetStatusEffectImage(statusEffect.Type),
+                Image = DataReader.GetStatusEffectImage(statusEffect.Type),
                 Size = new Size(ICON_SIZE, ICON_SIZE),
                 SizeMode = PictureBoxSizeMode.StretchImage,
+                Margin = new Padding(0, 0, MarginInPanel / 2, 0)
             };
+            pb.Click += (s, e) => EditStatusEffect();
 
             TransparentTextLabel label = new()
             {
@@ -612,10 +614,16 @@ namespace ScoreBoard.content
                 Font = new Font("Danjo-bold", 26),
                 ForeColor = Color.WhiteSmoke,
                 AutoSize = true,
-                Margin = new Padding(0, 0, MarginInPanel, 0),
+                Margin = new Padding(0, 0, MarginInPanel / 2, 0),
             };
+            label.Click += (s, e) => EditStatusEffect();
 
             return (pb, label);
+        }
+
+        private void Pb_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /*
@@ -825,11 +833,13 @@ namespace ScoreBoard.content
             if (currentShowingPlayer == null)
                 return;
             Point modalStartPos = new(fpnStatusEffect.PointToScreen(Point.Empty).X, fpnStatusEffect.PointToScreen(Point.Empty).Y + 45);
+
             var editModal = new StatusEffectEditModal(currentShowingPlayer.Stat.StatusEffects)
             {
                 StartPosition = FormStartPosition.Manual,
                 Location = modalStartPos,
             };
+
             if (editModal.ShowDialog(this) == DialogResult.OK)
             {
                 // 상태 이상 업데이트
