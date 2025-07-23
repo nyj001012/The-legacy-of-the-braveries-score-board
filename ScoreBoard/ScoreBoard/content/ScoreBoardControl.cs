@@ -101,7 +101,7 @@ namespace ScoreBoard.content
             int index = 1;
             foreach (var character in _characters.Values)
             {
-                UserControl panel = (index == 1)
+                UserControl panel = (index == currentTurn % 4)
                     ? new CurrentPlayerPanel(character, index)
                     : new PlayerPanel(character, index);
 
@@ -845,7 +845,18 @@ namespace ScoreBoard.content
                 // 상태 이상 업데이트
                 currentShowingPlayer.Stat.StatusEffects = editModal.NewStatusEffects;
                 ShowStatusEffect(currentShowingPlayer);
+                UpdateStatusInPanel(); // 상태 이상 패널 업데이트
             }
+        }
+
+        /*
+         * UpdateStatusInPanel()
+         * - 현재 플레이어의 상태 이상 패널을 업데이트하는 메서드
+         * - 현재 플레이어가 선택되지 않은 경우 아무 작업도 하지 않음
+         */
+        private void UpdateStatusInPanel()
+        {
+            InitPlayerList();
         }
     }
 }
