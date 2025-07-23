@@ -149,6 +149,12 @@ namespace ScoreBoard.modals
             tbDuration.Text = tbDuration.Text.Trim(); // 입력값의 앞뒤 공백 제거
             if (int.TryParse(tbDuration.Text, out int duration))
             {
+                if (duration > 4)
+                {
+                    MessageBox.Show("지속시간은 4 이하의 숫자만 입력할 수 있습니다.", "입력 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // 상태이상 효과를 새로 생성하거나 업데이트
                 StatusEffect newEffect = new(_currentType, duration);
                 NewStatusEffects.RemoveAll(e => e.Type == _currentType); // 기존 효과 제거
