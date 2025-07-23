@@ -825,7 +825,7 @@ namespace ScoreBoard.content
             if (currentShowingPlayer == null)
                 return;
             Point modalStartPos = new(fpnStatusEffect.PointToScreen(Point.Empty).X, fpnStatusEffect.PointToScreen(Point.Empty).Y + 45);
-            var editModal = new StatusEffectEditModal()
+            var editModal = new StatusEffectEditModal(currentShowingPlayer.Stat.StatusEffects)
             {
                 StartPosition = FormStartPosition.Manual,
                 Location = modalStartPos,
@@ -833,39 +833,8 @@ namespace ScoreBoard.content
             if (editModal.ShowDialog(this) == DialogResult.OK)
             {
                 // 상태 이상 업데이트
-                UpdatedStatusEffects(editModal.NewStatusEffects);
+                currentShowingPlayer.Stat.StatusEffects = editModal.NewStatusEffects;
                 ShowStatusEffect(currentShowingPlayer);
-            }
-        }
-
-        /*
-         * UpdatedStatusEffects(Dictionary<StatusEffectType, int> newEffects)
-         * - 현재 플레이어의 상태 이상을 새로 설정하는 메서드
-         * - newEffects: 새로 설정할 상태 이상 딕셔너리
-         */
-        private void UpdatedStatusEffects(Dictionary<StatusEffectType, int> newEffects)
-        {
-            List<StatusEffect> currentEffects = currentShowingPlayer!.Stat.StatusEffects;
-            foreach (var newEffect in newEffects)
-            {
-                // 기존 상태 이상이 있는지 확인
-                var existingEffect = currentEffects.FirstOrDefault(e => e.Type == newEffect.Key);
-                if (existingEffect != null)
-                {
-                    if (newEffect.Value <= 0) // 새로 설정된 값이 0 이하이면 기존 상태 이상 제거
-                    {
-                        currentEffects.Remove(existingEffect);
-                        continue;
-                    }
-                    // 기존 상태 이상이 있으면 업데이트
-                    existingEffect.Duration = newEffect.Value;
-                    continue;
-                }
-                else // 기존 상태 이상이 없으면 새로 추가
-                {
-                    // 새로운 상태 이상 추가
-                    currentEffects.Add(new StatusEffect(newEffect.Key, newEffect.Value));
-                }
             }
         }
     }

@@ -189,6 +189,7 @@
             tbDuration.TabIndex = 0;
             tbDuration.Text = "0";
             tbDuration.TextChanged += tbDuration_TextChanged;
+            tbDuration.Leave += tbDuration_Leave;
             // 
             // StatusEffectEditModal
             // 

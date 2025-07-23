@@ -15,13 +15,14 @@ namespace ScoreBoard.modals
 {
     public partial class StatusEffectEditModal : Form
     {
-        public Dictionary<StatusEffectType, int> NewStatusEffects = [];
+        public List<StatusEffect> NewStatusEffects = [];
         private StatusEffectType _currentType;
 
-        public StatusEffectEditModal()
+        public StatusEffectEditModal(List<StatusEffect> statusEffects)
         {
             InitializeComponent();
             this.KeyPreview = true; // 폼에서 키 이벤트를 받을 수 있도록 설정
+            NewStatusEffects = statusEffects ?? new List<StatusEffect>();
         }
 
         private void StatusEffectEditModal_KeyDown(object sender, KeyEventArgs e)
@@ -108,18 +109,19 @@ namespace ScoreBoard.modals
 
         private void tbDuration_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void tbDuration_Leave(object sender, EventArgs e)
+        {
             tbDuration.Text = tbDuration.Text.Trim(); // 입력값의 앞뒤 공백 제거
             if (int.TryParse(tbDuration.Text, out int duration))
             {
-                // 유효한 숫자 입력 시 상태이상 효과 딕셔너리에 추가
-                if (duration == 0) // 지속시간이 0인 경우는 상태이상 효과를 제거하는 의미로 처리
-                {
-                    NewStatusEffects.Remove(_currentType);
-                }
-                else
-                {
-                    NewStatusEffects[_currentType] = duration;
-                }
+                // 상태이상 효과를 새로 생성하거나 업데이트
+                StatusEffect newEffect = new(_currentType, duration);
+                NewStatusEffects.RemoveAll(e => e.Type == _currentType); // 기존 효과 제거
+                NewStatusEffects.Add(newEffect); // 새 효과 추가
+                this.DialogResult = DialogResult.OK; // 변경 사항 저장
             }
             else
             {
