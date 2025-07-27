@@ -125,10 +125,20 @@ namespace ScoreBoard.content
         {
             currentShowingPlayer = player;
             detailViewport.SuspendLayout();
+
             foreach (Control control in detailViewport.Controls)
             {
                 control.Visible = true;
             }
+
+            if (skillDescriptionPanel != null)
+            {
+                detailViewport.Controls.Remove(skillDescriptionPanel);
+                skillDescriptionPanel.Dispose();
+                skillDescriptionPanel = null;
+                DisplaySkillDescription();
+            }
+
             ShowBasicInfo(player);
             ShowHealth(player);
             ShowStatusEffect(player);
@@ -139,17 +149,15 @@ namespace ScoreBoard.content
             ShowWisdom(player);
             ShowArtifact(player);
 
-            if (skillDescriptionPanel != null)
-            {
-                skillDescriptionPanel.Dispose();
-                skillDescriptionPanel = null;
-                DisplaySkillDescription();
-            }
-            else
-            {
-                ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
-            }
             detailViewport.ResumeLayout();
+            detailViewport.PerformLayout();
+            detailViewport.Height = detailViewport.Controls
+                .Cast<Control>()
+                .Select(c => c.Bounds.Bottom)
+                .DefaultIfEmpty(0)
+                .Max() + detailViewport.Padding.Bottom;
+
+            ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
         }
 
         /*
@@ -418,11 +426,20 @@ namespace ScoreBoard.content
                 detailViewport.Controls.Remove(skillDescriptionPanel);
                 skillDescriptionPanel.Dispose();
                 skillDescriptionPanel = null;
+
                 // 스크롤 위치 초기화
                 detailViewport.Top = 0;
-                detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
+                detailViewport.SuspendLayout();
                 detailViewport.PerformLayout();
-                detailViewport.Height = detailViewport.Controls.Cast<Control>().Max(c => c.Bottom) + detailViewport.Padding.Bottom;
+
+                detailViewport.Height = detailViewport.Controls
+                    .Cast<Control>()
+                    .Select(c => c.Bounds.Bottom)
+                    .DefaultIfEmpty(0)
+                    .Max() + detailViewport.Padding.Bottom;
+
+                detailViewport.ResumeLayout();
+
                 ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
             }
         }
