@@ -114,7 +114,7 @@ namespace ScoreBoard.controls
          */
         private void AddSkillHeaderRow(ActiveSkill active, Color foreColor)
         {
-            var skillName = GetSkillNameWithRequiredLevel(active);
+            var skillName = GetSkillNameWithRequiredLevel(active); // 스킬 이름과 레벨을 조합
 
             var cooldownPanel = new CustomFlowLayoutPanel
             {
@@ -127,13 +127,16 @@ namespace ScoreBoard.controls
             };
 
             var skillNameLabel = CreateLabel(skillName, foreColor);
+            skillNameLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
             var cooldownIcon = new PictureBox
             {
+                Tag = active.Name, // 스킬 이름을 태그로 저장
                 Size = new Size(32, 32),
                 Image = Resources.ImgCooltime,
                 SizeMode = PictureBoxSizeMode.StretchImage,
             };
             var cooldownLabel = CreateLabel($"{active.Cooldown}턴", foreColor);
+            cooldownLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
             cooldownLabel.Cursor = Cursors.Hand;
             cooldownLabel.Click += (s, e) => UseAndEditCooldown(active, cooldownLabel);
 
@@ -165,12 +168,50 @@ namespace ScoreBoard.controls
                     skill.CurrentCooldown = (ushort)newCooldown > skill.Cooldown
                                             ? skill.Cooldown : (ushort)newCooldown;
                     skill.isOnCooldown = newCooldown > 0;
+                    // 쿨다운 레이블 업데이트
+                    MakeSkillUnavailable(skill);
                 }
                 else
                 {
-                    MessageBox.Show($"유효한 쿨다운 값(0 ~ {skill.Cooldown})을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"유효한 쿨다운 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        /*
+         * MakeSkillUnavailable(ActiveSkill skill)
+         * - 액티브 스킬이 사용 불가능 상태일 때, 패널을 업데이트합니다.
+         */
+        private void MakeSkillUnavailable(ActiveSkill skill)
+        {
+            void ApplyToMatchingControls(Control parent)
+            {
+                foreach (Control control in parent.Controls)
+                {
+                    if (control.Tag?.ToString() == skill.Name)
+                    {
+                        bool onCooldown = skill.isOnCooldown;
+
+                        if (control is TransparentTextLabel label)
+                        {
+                            label.ForeColor = onCooldown
+                                ? Color.FromArgb(100, 245, 245, 245)
+                                : Color.WhiteSmoke;
+                        }
+                        else if (control is PictureBox pictureBox)
+                        {
+                            pictureBox.Image = onCooldown
+                                ? Resources.ImgCooltimeDisabled
+                                : Resources.ImgCooltime;
+                        }
+                    }
+
+                    if (control.HasChildren)
+                        ApplyToMatchingControls(control);
+                }
+            }
+
+            ApplyToMatchingControls(_activePanel);
         }
 
         /*
@@ -182,6 +223,7 @@ namespace ScoreBoard.controls
             foreach (var (desc, idx) in active.Description.Select((d, i) => (d, i)))
             {
                 var descriptionLabel = CreateLabel("= " + desc, foreColor);
+                descriptionLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
                 if (idx == active.Description.Length - 1)
                     descriptionLabel.Margin = new Padding(0, 0, 0, PADDING_BOTTOM);
 
