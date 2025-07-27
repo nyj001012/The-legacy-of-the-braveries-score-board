@@ -1,5 +1,6 @@
 ﻿using ReaLTaiizor.Controls;
 using ScoreBoard.data.skill;
+using ScoreBoard.modals;
 using ScoreBoard.Properties;
 using System;
 using System.Collections.Generic;
@@ -133,12 +134,43 @@ namespace ScoreBoard.controls
                 SizeMode = PictureBoxSizeMode.StretchImage,
             };
             var cooldownLabel = CreateLabel($"{active.Cooldown}턴", foreColor);
+            cooldownLabel.Cursor = Cursors.Hand;
+            cooldownLabel.Click += (s, e) => UseAndEditCooldown(active, cooldownLabel);
 
             cooldownPanel.Controls.Add(skillNameLabel);
             cooldownPanel.Controls.Add(cooldownIcon);
             cooldownPanel.Controls.Add(cooldownLabel);
 
             _activePanel.Controls.Add(cooldownPanel);
+        }
+
+        /*
+         * UseAndEditCooldown(ActiveSkill skill)
+         * - 액티브 스킬을 사용하고 쿨타임을 수정하는 메서드입니다.
+         */
+        private void UseAndEditCooldown(ActiveSkill skill, TransparentTextLabel skillLabel)
+        {
+            // 스킬 쿨다운을 수정하는 폼을 표시
+            DetailEditModal modal = new(skill.CurrentCooldown.ToString())
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = skillLabel.PointToScreen(Point.Empty),
+            };
+
+            if (modal.ShowDialog(this) == DialogResult.OK)
+            {
+                // 사용자가 입력한 쿨다운 값을 적용
+                if (int.TryParse(modal.InputText, out int newCooldown) && newCooldown >= 0)
+                {
+                    skill.CurrentCooldown = (ushort)newCooldown > skill.Cooldown
+                                            ? skill.Cooldown : (ushort)newCooldown;
+                    skill.isOnCooldown = newCooldown > 0;
+                }
+                else
+                {
+                    MessageBox.Show($"유효한 쿨다운 값(0 ~ {skill.Cooldown})을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         /*
