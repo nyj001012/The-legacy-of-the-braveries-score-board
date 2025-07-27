@@ -124,13 +124,33 @@ namespace ScoreBoard.content
         private void ShowDetail(CorpsMember player)
         {
             currentShowingPlayer = player;
+
+            PrepareViewport();
+            ReplaceSkillDescriptionPanel();
+            DisplayPlayerStats(player);
+            FinalizeViewportLayout();
+        }
+
+        /*
+         * PrepareViewport()
+         * - 상세 정보 뷰포트 초기화
+         */
+        private void PrepareViewport()
+        {
             detailViewport.SuspendLayout();
 
             foreach (Control control in detailViewport.Controls)
             {
                 control.Visible = true;
             }
+        }
 
+        /*
+         * ReplaceSkillDescriptionPanel()
+         * - 기존 스킬 설명 패널을 제거하고 새로 표시
+         */
+        private void ReplaceSkillDescriptionPanel()
+        {
             if (skillDescriptionPanel != null)
             {
                 detailViewport.Controls.Remove(skillDescriptionPanel);
@@ -138,7 +158,14 @@ namespace ScoreBoard.content
                 skillDescriptionPanel = null;
                 DisplaySkillDescription();
             }
+        }
 
+        /*
+         * DisplayPlayerStats(CorpsMember player)
+         * - 플레이어의 상세 정보를 표시하는 메서드
+         */
+        private void DisplayPlayerStats(CorpsMember player)
+        {
             ShowBasicInfo(player);
             ShowHealth(player);
             ShowStatusEffect(player);
@@ -148,9 +175,17 @@ namespace ScoreBoard.content
             ShowSpellPower(player);
             ShowWisdom(player);
             ShowArtifact(player);
+        }
 
+        /*
+         * FinalizeViewportLayout()
+         * - 상세 정보 뷰포트 레이아웃을 최종적으로 설정
+         */
+        private void FinalizeViewportLayout()
+        {
             detailViewport.ResumeLayout();
             detailViewport.PerformLayout();
+
             detailViewport.Height = detailViewport.Controls
                 .Cast<Control>()
                 .Select(c => c.Bounds.Bottom)
