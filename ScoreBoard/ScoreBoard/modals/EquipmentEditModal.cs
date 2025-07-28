@@ -16,6 +16,8 @@ namespace ScoreBoard.modals
     public partial class EquipmentEditModal : Form
     {
         private readonly ArtifactType _type = ArtifactType.Weapon; // 기본값은 Weapon으로 설정
+        private const int ICON_SIZE = 80; // 아이콘 크기 설정
+        public Artifact? SelectedArtifact { get; private set; } = null; // 선택된 유물
 
         public EquipmentEditModal(ArtifactType type)
         {
@@ -43,10 +45,28 @@ namespace ScoreBoard.modals
             equipList.MouseWheel += equipList_MouseWheel;
         }
 
+        /*
+         * ShowEquipmentIcons(ArtifactType type)
+         * - 유물 아이콘과 착용 해제 아이콘을 리스트에 추가하는 메서드
+         */
         private void ShowEquipmentIcons(ArtifactType type)
         {
-            equipList.SuspendLayout();
-            // 장비 아이콘을 불러와서 equipList에 추가하는 로직 구현
+            // 착용 해제하는 아이콘 추가
+            ShowUnequipIcon();
+
+            // 장비 아이콘을 불러와서 equipList에 추가
+            ShowArtifactIcons(type);
+
+            equipList.Height = Math.Max(equipContainer.Height, equipList.Controls.Cast<Control>().Where(c => c.Visible).Max(c => c.Bottom));
+            ScrollBarManager.SetScrollBar(equipContainer, equipList, equipScrollbar);
+        }
+
+        /*
+         * ShowArtifactIcons(ArtifactType type)
+         * - 주어진 ArtifactType에 해당하는 유물 아이콘을 불러와서 equipList에 추가하는 메서드
+         */
+        private void ShowArtifactIcons(ArtifactType type)
+        {
             var items = DataReader.GetEquipments(type);
             if (items == null)
             {
@@ -61,22 +81,42 @@ namespace ScoreBoard.modals
                 {
                     Image = icon,
                     SizeMode = PictureBoxSizeMode.Zoom,
-                    Width = 100,
-                    Height = 100,
+                    Width = ICON_SIZE,
+                    Height = ICON_SIZE,
                     Margin = new Padding(10),
                     Cursor = Cursors.Hand,
                 };
                 pictureBox.Click += (s, e) => ShowArtifactDetails(artifact);
                 equipList.Controls.Add(pictureBox);
             }
-            equipList.PerformLayout();
-            equipList.Height = Math.Max(equipContainer.Height, equipList.Controls.Cast<Control>().Where(c => c.Visible).Max(c => c.Bottom));
-            ScrollBarManager.SetScrollBar(equipContainer, equipList, equipScrollbar);
-            equipList.ResumeLayout();
         }
 
+        /*
+         * ShowUnequipIcon()
+         * - 착용 해제 아이콘을 equipList에 추가하는 메서드
+         */
+        private void ShowUnequipIcon()
+        {
+            var unequipIcon = new PictureBox
+            {
+                Image = Properties.Resources.BtnCross, // 착용 해제 아이콘 이미지
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Width = ICON_SIZE,
+                Height = ICON_SIZE,
+                Margin = new Padding(10),
+                Cursor = Cursors.Hand,
+            };
+            unequipIcon.Click += (s, e) => SelectedArtifact = null;
+            equipList.Controls.Add(unequipIcon);
+        }
+
+        /*
+         * ShowArtifactDetails(Artifact artifact)
+         * - 선택된 유물의 세부 정보를 표시하는 메서드
+         */
         private void ShowArtifactDetails(Artifact artifact)
         {
+            SelectedArtifact = artifact; // 선택된 유물 설정
             fpnDetails.SuspendLayout();
             lblName.Text = artifact.Name;
             fpnDescription.Controls.Clear(); // 기존 설명 제거
@@ -95,16 +135,20 @@ namespace ScoreBoard.modals
             fpnDetails.ResumeLayout();
         }
 
+        /*
+         * equipList_MouseWheel(object? sender, MouseEventArgs e)
+         * - 장비 리스트에서 마우스 휠 스크롤 이벤트를 처리하는 메서드
+         */
         private void equipList_MouseWheel(object? sender, MouseEventArgs e)
         {
             // 스크롤 이벤트 처리
-            if (e.Delta > 0)
+            if (e.Delta > 0) // 위로 스크롤
             {
-                equipScrollbar.Value = Math.Max(equipScrollbar.Value - 1, equipScrollbar.Minimum);
+                equipScrollbar.Value = Math.Max(equipScrollbar.Minimum, equipScrollbar.Value - equipScrollbar.SmallStep);
             }
-            else if (e.Delta < 0)
+            else if (e.Delta < 0) // 아래로 스크롤
             {
-                equipScrollbar.Value = Math.Min(equipScrollbar.Value + 1, equipScrollbar.Maximum);
+                equipScrollbar.Value = Math.Min(equipScrollbar.Maximum, equipScrollbar.Value + equipScrollbar.SmallStep);
             }
         }
     }

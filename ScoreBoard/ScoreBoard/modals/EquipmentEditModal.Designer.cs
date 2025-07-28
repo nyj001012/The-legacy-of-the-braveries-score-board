@@ -96,6 +96,7 @@
             equipScrollbar.Rounding = true;
             equipScrollbar.RoundingInt = 7;
             equipScrollbar.Size = new Size(26, 244);
+            equipScrollbar.SmallStep = 10;
             equipScrollbar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             equipScrollbar.TabIndex = 2;
             equipScrollbar.Tag = "Cyber";
