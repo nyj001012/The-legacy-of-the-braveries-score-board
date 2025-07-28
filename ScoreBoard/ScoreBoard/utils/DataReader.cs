@@ -17,7 +17,8 @@ namespace ScoreBoard.utils
         // 캐싱된 JsonSerializerOptions 인스턴스
         private static readonly JsonSerializerOptions CachedJsonSerializerOptions = new JsonSerializerOptions
         {
-            PropertyNameCaseInsensitive = true // 대소문자 구분 없이 속성 이름을 매칭
+            PropertyNameCaseInsensitive = true, // 대소문자 구분 없이 속성 이름을 매칭
+            Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
         };
 
         /*
@@ -219,7 +220,6 @@ namespace ScoreBoard.utils
                 return null;
             }
             string json = File.ReadAllText(jsonPath);
-            CachedJsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             return JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions);
         }
 
@@ -230,7 +230,7 @@ namespace ScoreBoard.utils
          */
         internal static Image GetArtifactImage(string id)
         {
-            string imagePath = $@"Resources/meta_data/artifact/{id}.png";
+            string imagePath = $@"Resources/image/artifact/{id}.png";
             if (File.Exists(imagePath))
             {
                 return Image.FromFile(imagePath);
@@ -264,6 +264,32 @@ namespace ScoreBoard.utils
                 StatusEffectType.Stun => Image.FromFile(@"Resources/meta_data/status_effect/stun.png"),
                 _ => null,
             };
+        }
+
+        /*
+         * GetEquipments(type)
+         * - type: 유물 타입 (예: Weapon, Armor, Accessory)
+         * - return: 해당 타입의 유물과 이미지 목록 반환
+         */
+        internal static Dictionary<string, (Artifact, Image)> GetEquipments(ArtifactType type)
+        {
+            Dictionary<string, (Artifact, Image)> equipments = [];
+            string[] filenames = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "artifact"), $"{(int)type}_*.json");
+            foreach (string filename in filenames)
+            {
+                string id = Path.GetFileNameWithoutExtension(filename); // 파일 이름에서 ID 추출
+                Image image = GetArtifactImage(id);
+                Artifact? artifact = ReadArtifactData(id);
+                if (artifact != null && image != null)
+                {
+                    equipments.Add(artifact.Id, (artifact, image));
+                }
+                else
+                {
+                    return [];
+                }
+            }
+            return equipments;
         }
     }
 }
