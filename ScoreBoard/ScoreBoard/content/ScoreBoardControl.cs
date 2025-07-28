@@ -1,5 +1,6 @@
 ﻿using ScoreBoard.controls;
 using ScoreBoard.data;
+using ScoreBoard.data.artifact;
 using ScoreBoard.data.character;
 using ScoreBoard.data.monster;
 using ScoreBoard.data.stat;
@@ -913,28 +914,28 @@ namespace ScoreBoard.content
 
         private void pbWeapon_Click(object sender, EventArgs e)
         {
-            EditEquipment("weapon", (PictureBox)sender);
+            EditEquipment(ArtifactType.Weapon, (PictureBox)sender);
         }
 
         private void pbArmour_Click(object sender, EventArgs e)
         {
-            EditEquipment("armour", (PictureBox)sender);
+            EditEquipment(ArtifactType.Armour, (PictureBox)sender);
         }
 
         private void pbAccessory_Click(object sender, EventArgs e)
         {
-            EditEquipment("accessory", (PictureBox)sender);
+            EditEquipment(ArtifactType.Accessory, (PictureBox)sender);
         }
 
         /*
-         * EditEquipment(string type, PictureBox sender)
+         * EditEquipment(ArtifactType type, PictureBox sender)
          * - 장비를 편집하는 메서드
          * - type에 따라 팝업의 리스트를 다르게 표시
          * - sender인 PictureBox의 Image를 선택한 장비로 변경
          * - type: 장비 종류 (weapon, armour, accessory)
          * - sender: 클릭한 PictureBox 컨트롤
          */
-        private void EditEquipment(string type, PictureBox sender)
+        private void EditEquipment(ArtifactType type, PictureBox sender)
         {
             // 만약 fpnArtifact 밑에 창을 띄우면 잘리는 경우
             var modal = new EquipmentEditModal(type)
