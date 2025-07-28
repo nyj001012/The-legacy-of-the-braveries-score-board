@@ -17,19 +17,5 @@ namespace ScoreBoard.data.artifact
 
         public virtual void Equip(CorpsMember member) { }
         public virtual void Unequip(CorpsMember member) { }
-
-        public enum ArtifactRarity
-        {
-            Normal = 0,
-            Rare = 1,
-            Legendary = 2
-        }
-
-        public enum ArtifactType
-        {
-            Weapon = 0,
-            Armour = 1,
-            Accessory = 2
-        }
     }
 }
