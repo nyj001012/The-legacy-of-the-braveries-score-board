@@ -21,7 +21,7 @@ namespace ScoreBoard.utils
         };
 
         /*
-         * JsonReader.ReadCorpsData(jsonPath)
+         * ReadCorpsData(jsonPath)
          * - jsonPath: JSON 파일 경로
          * - return: JSON 파일의 Key-Value 쌍을 Dictionary<string, string> 형태로 반환
          */
@@ -48,7 +48,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ReadCorpsMembersData(corpsId)
+         * ReadCorpsMembersData(corpsId)
          * - corpsId: 군단 ID
          * - return: 해당 군단의 병사 id, name을 Dictionary<string, string> 형태로 반환
          */
@@ -80,7 +80,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.GetDataFilesById(id)
+         * GetDataFilesById(id)
          * - id: ID
          * - dataDirectory: 메타 데이터가 저장된 디렉토리 이름
          * - return: JSON 파일 경로 배열
@@ -93,7 +93,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ExtractIdAndName(filePath)
+         * ExtractIdAndName(filePath)
          * - filePath: JSON 파일 경로
          * - return: JSON 파일에서 id와 name을 추출하여 (id, name) 형태로 반환
          */
@@ -128,7 +128,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ReadMemberData(id)
+         * ReadMemberData(id)
          * - id: 병사 ID
          * - return: 해당 병사의 JSON 데이터를 반환
          */
@@ -191,7 +191,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ReadMonsterData(id)
+         * ReadMonsterData(id)
          * - id: 몬스터 ID
          * - return: 해당 몬스터의 JSON 데이터를 반환
          */
@@ -207,7 +207,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ReadArtifactData(id)
+         * ReadArtifactData(id)
          * - id: 유물 ID
          * - return: 해당 유물의 JSON 데이터를 반환
          */
@@ -224,7 +224,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.GetArtifactImage(id)
+         * GetArtifactImage(id)
          * - id: 유물 ID
          * - return: 해당 유물의 이미지 반환
          */
@@ -241,6 +241,11 @@ namespace ScoreBoard.utils
             }
         }
 
+        /*
+         * GetEquipmentIcons(type)
+         * - type: 장비 타입 (예: "weapon", "armor", "accessory")
+         * - return: 해당 타입의 장비 아이콘 목록 반환
+         */
         internal static Image? GetStatusEffectImage(StatusEffectType type)
         {
             return type switch
