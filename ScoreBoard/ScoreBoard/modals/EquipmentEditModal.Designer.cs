@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             equipContainer = new ScoreBoard.controls.DoubleBufferedPanel();
-            fpnDetails = new ScoreBoard.controls.CustomFlowLayoutPanel();
             equipList = new ScoreBoard.controls.CustomFlowLayoutPanel();
             equipScrollbar = new ReaLTaiizor.Controls.CyberScrollBar();
+            fpnDetails = new ScoreBoard.controls.CustomFlowLayoutPanel();
             lblName = new ScoreBoard.controls.TransparentTextLabel();
             fpnDescription = new ScoreBoard.controls.CustomFlowLayoutPanel();
             equipContainer.SuspendLayout();
@@ -49,25 +49,9 @@
             equipContainer.Size = new Size(327, 244);
             equipContainer.TabIndex = 0;
             // 
-            // fpnDetails
-            // 
-            fpnDetails.BackColor = Color.Gold;
-            fpnDetails.BorderColor = Color.Transparent;
-            fpnDetails.BorderThickness = 0;
-            fpnDetails.Controls.Add(lblName);
-            fpnDetails.Controls.Add(fpnDescription);
-            fpnDetails.FlowDirection = FlowDirection.TopDown;
-            fpnDetails.ImeMode = ImeMode.On;
-            fpnDetails.Location = new Point(330, 3);
-            fpnDetails.Margin = new Padding(0);
-            fpnDetails.Name = "fpnDetails";
-            fpnDetails.Size = new Size(267, 244);
-            fpnDetails.TabIndex = 0;
-            fpnDetails.Paint += customFlowLayoutPanel1_Paint;
-            // 
             // equipList
             // 
-            equipList.BackColor = Color.Gold;
+            equipList.BackColor = Color.Goldenrod;
             equipList.BorderColor = Color.Transparent;
             equipList.BorderThickness = 0;
             equipList.ImeMode = ImeMode.On;
@@ -120,6 +104,21 @@
             equipScrollbar.Timer_RGB = 300;
             equipScrollbar.Value = 0;
             // 
+            // fpnDetails
+            // 
+            fpnDetails.BackColor = Color.Goldenrod;
+            fpnDetails.BorderColor = Color.Transparent;
+            fpnDetails.BorderThickness = 0;
+            fpnDetails.Controls.Add(lblName);
+            fpnDetails.Controls.Add(fpnDescription);
+            fpnDetails.FlowDirection = FlowDirection.TopDown;
+            fpnDetails.ImeMode = ImeMode.On;
+            fpnDetails.Location = new Point(330, 3);
+            fpnDetails.Margin = new Padding(0);
+            fpnDetails.Name = "fpnDetails";
+            fpnDetails.Size = new Size(267, 244);
+            fpnDetails.TabIndex = 0;
+            // 
             // lblName
             // 
             lblName.AutoSize = true;
@@ -149,7 +148,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Goldenrod;
+            BackColor = Color.DarkGoldenrod;
             ClientSize = new Size(600, 250);
             ControlBox = false;
             Controls.Add(fpnDetails);
@@ -157,10 +156,11 @@
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "EquipmentEditModal";
-            Opacity = 0.7D;
+            Opacity = 0.92D;
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "EquipmentEditModal";
+            KeyDown += EquipmentEditModal_KeyDown;
             equipContainer.ResumeLayout(false);
             fpnDetails.ResumeLayout(false);
             fpnDetails.PerformLayout();

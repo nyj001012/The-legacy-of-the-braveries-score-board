@@ -12,14 +12,23 @@ namespace ScoreBoard.modals
 {
     public partial class EquipmentEditModal : Form
     {
-        public EquipmentEditModal()
+        public EquipmentEditModal(string type)
         {
             InitializeComponent();
+            this.KeyPreview = true;
         }
 
-        private void customFlowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void EquipmentEditModal_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
     }
 }
