@@ -203,18 +203,74 @@ namespace ScoreBoard.content
          */
         private void ShowArtifact(CorpsMember player)
         {
+            InitializeArtifactSlots(player.MaxArtifactSlot);
+
+            foreach (var artifact in player.ArtifactSlot.Where(a => a != null))
+            {
+                AssignArtifactToSlot(artifact!);
+            }
+        }
+
+        /*
+         * InitializeArtifactSlots(int maxSlots)
+         * - 유물 슬롯을 초기화하는 메서드
+         * - maxSlots: 최대 유물 슬롯 수
+         */
+        private void InitializeArtifactSlots(int maxSlots)
+        {
             PictureBox[] slotPics = { pbWeapon, pbArmour, pbAccessory1, pbAccessory2 };
-            string[] emptySlotResourceNames = { "EmptyWeaponSlot", "EmptyArmourSlot", "EmptyAccessorySlot", "EmptyAccessorySlot" };
+            string[] resourceNames = { "EmptyWeaponSlot", "EmptyArmourSlot", "EmptyAccessorySlot", "EmptyAccessorySlot" };
 
             for (int i = 0; i < slotPics.Length; i++)
             {
-                bool hasArtifact = player.ArtifactSlot.Count > i && player.ArtifactSlot[i] != null;
-
-                slotPics[i].Visible = !(i == 3 && player.ArtifactSlot.Count <= i);
-                slotPics[i].BackgroundImage = hasArtifact
-                    ? DataReader.GetArtifactImage(player.ArtifactSlot[i].Id)
-                    : (Image)Resources.ResourceManager.GetObject(emptySlotResourceNames[i])!;
+                slotPics[i].Visible = !(i == 3 && maxSlots <= 3); // 4번째 슬롯은 조건부 표시
+                slotPics[i].BackgroundImage = (Image)Resources.ResourceManager.GetObject(resourceNames[i])!;
+                slotPics[i].Tag = null;
             }
+        }
+
+        /*
+         * AssignArtifactToSlot(Artifact artifact)
+         * - 유물을 해당 슬롯에 할당하는 메서드
+         * - artifact: 할당할 Artifact 객체
+         */
+        private void AssignArtifactToSlot(Artifact artifact)
+        {
+            Image? image = DataReader.GetArtifactImage(artifact.Id);
+            if (image == null)
+            {
+                MessageBox.Show($"유물 이미지가 없습니다: {artifact.Id}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            switch (artifact.Type)
+            {
+                case ArtifactType.Weapon:
+                    SetSlotImage(pbWeapon, artifact.Id, image);
+                    break;
+                case ArtifactType.Armour:
+                    SetSlotImage(pbArmour, artifact.Id, image);
+                    break;
+                case ArtifactType.Accessory:
+                    if (pbAccessory1.Tag == null)
+                        SetSlotImage(pbAccessory1, artifact.Id, image);
+                    else
+                        SetSlotImage(pbAccessory2, artifact.Id, image);
+                    break;
+            }
+        }
+
+        /*
+         * SetSlotImage(PictureBox pictureBox, string id, Image image)
+         * - 슬롯 이미지와 태그를 설정하는 메서드
+         * - pictureBox: 설정할 PictureBox 컨트롤
+         * - id: 유물 ID
+         * - image: 설정할 이미지
+         */
+        private void SetSlotImage(PictureBox pictureBox, string id, Image image)
+        {
+            pictureBox.BackgroundImage = image;
+            pictureBox.Tag = id;
         }
 
         /*
@@ -954,8 +1010,38 @@ namespace ScoreBoard.content
             }
             if (modal.ShowDialog(this) == DialogResult.OK)
             {
-
+                EquipArtifact(type, modal.SelectedArtifact);
             }
+        }
+
+        private void EquipArtifact(ArtifactType type, Artifact? selectedArtifact)
+        {
+            if (currentShowingPlayer == null)
+                return;
+            if (selectedArtifact == null)
+            {
+                int slotIndex = currentShowingPlayer.ArtifactSlot.FindIndex(a => a?.Type == type);
+                if (slotIndex == -1) return; // 해당 타입의 아티팩트가 없다면 아무 작업도 하지 않음
+                // 해당 타입의 아티팩트가 있다면 해제
+                currentShowingPlayer.ArtifactSlot[slotIndex].Unequip(currentShowingPlayer);
+                currentShowingPlayer.ArtifactSlot.RemoveAt(slotIndex); // 해당 슬롯을 비움
+            }
+            else
+            {
+                // 선택한 아티팩트의 타입이 이미 장착된 아티팩트와 동일하다면 수정
+                int slotIndex = currentShowingPlayer.ArtifactSlot.FindIndex(a => a?.Type == selectedArtifact.Type);
+                if (slotIndex == -1) // 해당 타입의 아티팩트가 없다면 새로 장착
+                {
+                    currentShowingPlayer.ArtifactSlot.Add(selectedArtifact);
+                }
+                else // 해당 타입의 아티팩트가 있다면 수정
+                {
+                    currentShowingPlayer.ArtifactSlot[slotIndex].Unequip(currentShowingPlayer); // 기존 아티팩트를 해제
+                    currentShowingPlayer.ArtifactSlot[slotIndex] = selectedArtifact;
+                }
+                selectedArtifact.Equip(currentShowingPlayer); // 새 아티팩트를 장착
+            }
+            ShowDetail(currentShowingPlayer); // 변경된 내용을 반영하여 상세 정보 표시
         }
     }
 }

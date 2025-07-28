@@ -1376,6 +1376,7 @@
             // pbWeapon
             // 
             pbWeapon.BackgroundImageLayout = ImageLayout.Stretch;
+            pbWeapon.Cursor = Cursors.Hand;
             pbWeapon.Location = new Point(0, 0);
             pbWeapon.Margin = new Padding(0, 0, 20, 0);
             pbWeapon.Name = "pbWeapon";
@@ -1387,6 +1388,7 @@
             // pbArmour
             // 
             pbArmour.BackgroundImageLayout = ImageLayout.Stretch;
+            pbArmour.Cursor = Cursors.Hand;
             pbArmour.Location = new Point(154, 0);
             pbArmour.Margin = new Padding(0, 0, 20, 0);
             pbArmour.Name = "pbArmour";
@@ -1398,6 +1400,7 @@
             // pbAccessory1
             // 
             pbAccessory1.BackgroundImageLayout = ImageLayout.Stretch;
+            pbAccessory1.Cursor = Cursors.Hand;
             pbAccessory1.Location = new Point(308, 0);
             pbAccessory1.Margin = new Padding(0, 0, 20, 0);
             pbAccessory1.Name = "pbAccessory1";
@@ -1409,6 +1412,7 @@
             // pbAccessory2
             // 
             pbAccessory2.BackgroundImageLayout = ImageLayout.Stretch;
+            pbAccessory2.Cursor = Cursors.Hand;
             pbAccessory2.Location = new Point(462, 0);
             pbAccessory2.Margin = new Padding(0);
             pbAccessory2.Name = "pbAccessory2";
