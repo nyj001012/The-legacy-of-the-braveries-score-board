@@ -114,7 +114,7 @@
             pbSkill = new PictureBox();
             doubleBufferedPanel5 = new ScoreBoard.controls.DoubleBufferedPanel();
             transparentTextLabel17 = new ScoreBoard.controls.TransparentTextLabel();
-            customFlowLayoutPanel4 = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            fpnArtifact = new ScoreBoard.controls.CustomFlowLayoutPanel();
             pbWeapon = new PictureBox();
             pbArmour = new PictureBox();
             pbAccessory1 = new PictureBox();
@@ -170,7 +170,7 @@
             customFlowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbSkill).BeginInit();
             doubleBufferedPanel5.SuspendLayout();
-            customFlowLayoutPanel4.SuspendLayout();
+            fpnArtifact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbWeapon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbArmour).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory1).BeginInit();
@@ -806,7 +806,7 @@
             detailViewport.Controls.Add(fpnWisdom);
             detailViewport.Controls.Add(customFlowLayoutPanel3);
             detailViewport.Controls.Add(doubleBufferedPanel5);
-            detailViewport.Controls.Add(customFlowLayoutPanel4);
+            detailViewport.Controls.Add(fpnArtifact);
             detailViewport.Controls.Add(doubleBufferedPanel3);
             detailViewport.FlowDirection = FlowDirection.TopDown;
             detailViewport.Location = new Point(0, 0);
@@ -1359,19 +1359,19 @@
             transparentTextLabel17.TabIndex = 0;
             transparentTextLabel17.Text = "장비:";
             // 
-            // customFlowLayoutPanel4
+            // fpnArtifact
             // 
-            customFlowLayoutPanel4.BorderColor = Color.Transparent;
-            customFlowLayoutPanel4.BorderThickness = 0;
-            customFlowLayoutPanel4.Controls.Add(pbWeapon);
-            customFlowLayoutPanel4.Controls.Add(pbArmour);
-            customFlowLayoutPanel4.Controls.Add(pbAccessory1);
-            customFlowLayoutPanel4.Controls.Add(pbAccessory2);
-            customFlowLayoutPanel4.Location = new Point(60, 600);
-            customFlowLayoutPanel4.Margin = new Padding(0, 15, 0, 0);
-            customFlowLayoutPanel4.Name = "customFlowLayoutPanel4";
-            customFlowLayoutPanel4.Size = new Size(600, 134);
-            customFlowLayoutPanel4.TabIndex = 12;
+            fpnArtifact.BorderColor = Color.Transparent;
+            fpnArtifact.BorderThickness = 0;
+            fpnArtifact.Controls.Add(pbWeapon);
+            fpnArtifact.Controls.Add(pbArmour);
+            fpnArtifact.Controls.Add(pbAccessory1);
+            fpnArtifact.Controls.Add(pbAccessory2);
+            fpnArtifact.Location = new Point(60, 600);
+            fpnArtifact.Margin = new Padding(0, 15, 0, 0);
+            fpnArtifact.Name = "fpnArtifact";
+            fpnArtifact.Size = new Size(600, 134);
+            fpnArtifact.TabIndex = 12;
             // 
             // pbWeapon
             // 
@@ -1696,7 +1696,7 @@
             ((System.ComponentModel.ISupportInitialize)pbSkill).EndInit();
             doubleBufferedPanel5.ResumeLayout(false);
             doubleBufferedPanel5.PerformLayout();
-            customFlowLayoutPanel4.ResumeLayout(false);
+            fpnArtifact.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbWeapon).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbArmour).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory1).EndInit();
@@ -1789,7 +1789,7 @@
         private PictureBox pbSkill;
         private controls.DoubleBufferedPanel doubleBufferedPanel5;
         private controls.TransparentTextLabel transparentTextLabel17;
-        private controls.CustomFlowLayoutPanel customFlowLayoutPanel4;
+        private controls.CustomFlowLayoutPanel fpnArtifact;
         private PictureBox pbWeapon;
         private PictureBox pbArmour;
         private PictureBox pbAccessory1;

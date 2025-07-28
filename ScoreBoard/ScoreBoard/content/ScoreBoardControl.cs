@@ -936,7 +936,25 @@ namespace ScoreBoard.content
          */
         private void EditEquipment(string type, PictureBox sender)
         {
+            // 만약 fpnArtifact 밑에 창을 띄우면 잘리는 경우
+            var modal = new EquipmentEditModal(type)
+            {
+                StartPosition = FormStartPosition.Manual,
+            };
+            var point = fpnArtifact.PointToScreen(Point.Empty);
 
+            if (fpnArtifact.Location.Y + modal.Height > 790) // fpnArtifact의 위치가 화면 하단을 넘어가는 경우
+            {
+                modal.Location = new Point(point.X, point.Y - modal.Height);
+            }
+            else
+            {
+                modal.Location = point;
+            }
+            if (modal.ShowDialog(this) == DialogResult.OK)
+            {
+
+            }
         }
     }
 }
