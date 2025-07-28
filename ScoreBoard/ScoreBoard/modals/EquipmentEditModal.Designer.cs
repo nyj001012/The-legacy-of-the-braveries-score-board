@@ -128,9 +128,8 @@
             lblName.Location = new Point(10, 20);
             lblName.Margin = new Padding(10, 20, 10, 0);
             lblName.Name = "lblName";
-            lblName.Size = new Size(154, 42);
+            lblName.Size = new Size(0, 42);
             lblName.TabIndex = 0;
-            lblName.Text = "으하하하";
             // 
             // fpnDescription
             // 
@@ -160,6 +159,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "EquipmentEditModal";
+            Load += EquipmentEditModal_Load;
             KeyDown += EquipmentEditModal_KeyDown;
             equipContainer.ResumeLayout(false);
             fpnDetails.ResumeLayout(false);
