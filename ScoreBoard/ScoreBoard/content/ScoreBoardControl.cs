@@ -910,5 +910,33 @@ namespace ScoreBoard.content
         {
             InitPlayerList();
         }
+
+        private void pbWeapon_Click(object sender, EventArgs e)
+        {
+            EditEquipment("weapon", (PictureBox)sender);
+        }
+
+        private void pbArmour_Click(object sender, EventArgs e)
+        {
+            EditEquipment("armour", (PictureBox)sender);
+        }
+
+        private void pbAccessory_Click(object sender, EventArgs e)
+        {
+            EditEquipment("accessory", (PictureBox)sender);
+        }
+
+        /*
+         * EditEquipment(string type, PictureBox sender)
+         * - 장비를 편집하는 메서드
+         * - type에 따라 팝업의 리스트를 다르게 표시
+         * - sender인 PictureBox의 Image를 선택한 장비로 변경
+         * - type: 장비 종류 (weapon, armour, accessory)
+         * - sender: 클릭한 PictureBox 컨트롤
+         */
+        private void EditEquipment(string type, PictureBox sender)
+        {
+
+        }
     }
 }

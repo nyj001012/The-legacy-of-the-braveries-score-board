@@ -1382,6 +1382,7 @@
             pbWeapon.Size = new Size(134, 134);
             pbWeapon.TabIndex = 0;
             pbWeapon.TabStop = false;
+            pbWeapon.Click += pbWeapon_Click;
             // 
             // pbArmour
             // 
@@ -1392,6 +1393,7 @@
             pbArmour.Size = new Size(134, 134);
             pbArmour.TabIndex = 1;
             pbArmour.TabStop = false;
+            pbArmour.Click += pbArmour_Click;
             // 
             // pbAccessory1
             // 
@@ -1402,6 +1404,7 @@
             pbAccessory1.Size = new Size(134, 134);
             pbAccessory1.TabIndex = 2;
             pbAccessory1.TabStop = false;
+            pbAccessory1.Click += pbAccessory_Click;
             // 
             // pbAccessory2
             // 
@@ -1412,6 +1415,7 @@
             pbAccessory2.Size = new Size(134, 134);
             pbAccessory2.TabIndex = 3;
             pbAccessory2.TabStop = false;
+            pbAccessory2.Click += pbAccessory_Click;
             // 
             // doubleBufferedPanel3
             // 
