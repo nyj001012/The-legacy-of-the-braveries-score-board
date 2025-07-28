@@ -155,7 +155,7 @@ namespace ScoreBoard.controls
             {
                 if (artifacts.ElementAtOrDefault(i) != null)
                 {
-                    // TODO: 착용 중인 유물 아이콘 동적 추가
+                    SetArtifactImage(artifacts[i], i);
                 }
                 else
                 {
@@ -164,6 +164,25 @@ namespace ScoreBoard.controls
             }
 
             FpnArtifact.ResumeLayout();
+        }
+
+        protected void SetArtifactImage(Artifact artifact, int i)
+        {
+            Image? artifactImage = DataReader.GetArtifactImage(artifact.Id);
+            if (artifactImage == null)
+            {
+                MessageBox.Show($"유물 이미지가 없습니다: {artifact.Id}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            PictureBox pb = new()
+            {
+                Name = $"pbArtifact{i}",
+                Size = new Size(FpnArtifact.Size.Height, FpnArtifact.Size.Height),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Image = artifactImage,
+                Tag = artifact.Id
+            };
+            FpnArtifact.Controls.Add(pb);
         }
 
         protected void SetDefaultArtifactSlot(int index)
@@ -183,7 +202,6 @@ namespace ScoreBoard.controls
                 Size = new Size(size, size),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = image,
-                Tag = index
             };
 
             FpnArtifact.Controls.Add(pb);
