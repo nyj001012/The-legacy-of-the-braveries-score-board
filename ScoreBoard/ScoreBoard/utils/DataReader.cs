@@ -4,6 +4,7 @@ using ScoreBoard.data.monster;
 using ScoreBoard.data.statusEffect;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -219,8 +220,34 @@ namespace ScoreBoard.utils
             {
                 return null;
             }
+            // JSON 파일을 읽어오기
             string json = File.ReadAllText(jsonPath);
-            return JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions);
+            try
+            {
+                // id 형식: type_index_className (예: 0_01_Bandage)
+                string[] parts = id.Split('_');
+                if (parts.Length < 3)
+                    throw new FormatException($"유효하지 않은 ID 형식: {id}");
+
+                string className = parts[2];
+
+                return className switch
+                {
+                    "DingDingSword" => JsonSerializer.Deserialize<DingDingSword>(json, CachedJsonSerializerOptions),
+                    "VinylClothes" => JsonSerializer.Deserialize<VinylClothes>(json, CachedJsonSerializerOptions),
+                    "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
+                    "Pauldrons" => JsonSerializer.Deserialize<Pauldrons>(json, CachedJsonSerializerOptions),
+                    "Underwear" => JsonSerializer.Deserialize<Underwear>(json, CachedJsonSerializerOptions),
+                    "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
+                    "ForeheadGuard" => JsonSerializer.Deserialize<ForeheadGuard>(json, CachedJsonSerializerOptions),
+                    _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Artifact] JSON 파싱 오류 (ID: {id}): {ex.Message}");
+                return null;
+            }
         }
 
         /*
