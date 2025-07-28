@@ -106,8 +106,17 @@ namespace ScoreBoard.modals
                 Margin = new Padding(10),
                 Cursor = Cursors.Hand,
             };
-            unequipIcon.Click += (s, e) => SelectedArtifact = null;
+            unequipIcon.Click += (s, e) => UnequipArtifact();
             equipList.Controls.Add(unequipIcon);
+        }
+
+        private void UnequipArtifact()
+        {
+            SelectedArtifact = null; // 선택된 유물 해제
+            fpnDetails.SuspendLayout();
+            lblName.Text = "착용 해제"; // 라벨 텍스트 변경
+            fpnDescription.Controls.Clear(); // 기존 설명 제거
+            fpnDetails.ResumeLayout();
         }
 
         /*
@@ -124,11 +133,11 @@ namespace ScoreBoard.modals
             {
                 var label = new TransparentTextLabel
                 {
-                    Text = text,
+                    Text = $"- {text}",
                     AutoSize = true,
                     ForeColor = Color.WhiteSmoke,
                     Font = new Font("Danjo-bold", 18),
-                    Margin = new Padding(0, 0, 0, 0)
+                    Margin = new Padding(0, 0, 0, 5)
                 };
                 fpnDescription.Controls.Add(label);
             }
