@@ -16,6 +16,9 @@ namespace ScoreBoard.data.skill
         }
 
         [JsonIgnore]
-        public new Action? Execute { get; set; }
+        public Action? Activate { get; set; }
+
+        [JsonIgnore]
+        public Action? Deactivate { get; set; }
     }
 }

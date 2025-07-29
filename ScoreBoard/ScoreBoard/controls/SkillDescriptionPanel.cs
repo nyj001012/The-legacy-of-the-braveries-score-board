@@ -1,5 +1,6 @@
 ﻿using ReaLTaiizor.Controls;
 using ScoreBoard.data.skill;
+using ScoreBoard.modals;
 using ScoreBoard.Properties;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ReaLTaiizor.Drawing.Poison.PoisonPaint;
 
 namespace ScoreBoard.controls
 {
     public partial class SkillDescriptionPanel : UserControl
     {
+        private readonly ushort _level;
         private readonly List<PassiveSkill> _passives;
         private readonly List<ActiveSkill> _actives;
 
@@ -58,9 +61,10 @@ namespace ScoreBoard.controls
             Margin = new Padding(0, 0, 0, PADDING_BOTTOM),
         };
 
-        public SkillDescriptionPanel(List<PassiveSkill>? passives, List<ActiveSkill>? actives)
+        public SkillDescriptionPanel(ushort level, List<PassiveSkill>? passives, List<ActiveSkill>? actives)
         {
             InitializeComponent();
+            _level = level;
             _passives = passives ?? [];
             _actives = actives ?? [];
 
@@ -99,9 +103,9 @@ namespace ScoreBoard.controls
          */
         private void AddActiveSkillToPanel(ActiveSkill active)
         {
-            var foreColor = active.isOnCooldown
-                ? Color.FromArgb(100, 245, 245, 245)
-                : Color.WhiteSmoke;
+            var foreColor = !active.isOnCooldown && (_level >= active.RequiredLevel)
+                ? Color.WhiteSmoke
+                : Color.FromArgb(100, 245, 245, 245);
 
             AddSkillHeaderRow(active, foreColor);
             AddSkillDescriptions(active, foreColor);
@@ -113,9 +117,68 @@ namespace ScoreBoard.controls
          */
         private void AddSkillHeaderRow(ActiveSkill active, Color foreColor)
         {
-            var skillName = GetSkillNameWithRequiredLevel(active);
+            var skillName = GetSkillNameWithRequiredLevel(active); // 스킬 이름과 레벨을 조합
 
-            var cooldownPanel = new CustomFlowLayoutPanel
+            var cooldownPanel = CreateCoolDownPanel();
+
+            var skillNameLabel = CreateLabel(skillName, foreColor);
+            skillNameLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
+
+            var cooldownIcon = CreateCooldownIcon(active);
+
+            var cooldownLabel = CreateCoolDownLabel(active, foreColor);
+
+            cooldownPanel.Controls.Add(skillNameLabel);
+            cooldownPanel.Controls.Add(cooldownIcon);
+            cooldownPanel.Controls.Add(cooldownLabel);
+
+            _activePanel.Controls.Add(cooldownPanel);
+        }
+
+        /*
+         * CreateCoolDownLabel(ActiveSkill active, Color foreColor)
+         * - 쿨다운 레이블을 반환하는 메서드
+         * - ActiveSkill active: 쿨다운 레이블을 작성할 액티브 스킬
+         * - Color foreColor: 레이블의 글꼴 색
+         */
+        private TransparentTextLabel CreateCoolDownLabel(ActiveSkill active, Color foreColor)
+        {
+            var cooldownLabel = CreateLabel($"{active.Cooldown}턴", foreColor);
+            cooldownLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
+            if (_level < active.RequiredLevel)
+            {
+                cooldownLabel.Cursor = Cursors.No;
+            }
+            else
+            {
+                cooldownLabel.Cursor = Cursors.Hand;
+                cooldownLabel.Click += (s, e) => UseAndEditCooldown(active, cooldownLabel);
+            }
+            return cooldownLabel;
+        }
+
+        /*
+         * CreateCooldownIcon(ActiveSkill active)
+         * - 쿨다운 아이콘을 만들어 PictureBox로 반환하는 메서드
+         */
+        private PictureBox CreateCooldownIcon(ActiveSkill active)
+        {
+            return new PictureBox
+            {
+                Tag = active.Name, // 스킬 이름을 태그로 저장
+                Size = new Size(32, 32),
+                Image = Resources.ImgCooltime,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+            };
+        }
+
+        /*
+         * CreateCoolDownPanel()
+         * - 쿨다운 패널 생성해서 반환하는 메서드
+         */
+        private CustomFlowLayoutPanel CreateCoolDownPanel()
+        {
+            return new CustomFlowLayoutPanel
             {
                 Width = MAX_WIDTH,
                 MaximumSize = new Size(MAX_WIDTH, 0),
@@ -124,21 +187,73 @@ namespace ScoreBoard.controls
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 Margin = new Padding(0, 0, PADDING_BOTTOM, 0),
             };
+        }
 
-            var skillNameLabel = CreateLabel(skillName, foreColor);
-            var cooldownIcon = new PictureBox
+        /*
+         * UseAndEditCooldown(ActiveSkill skill)
+         * - 액티브 스킬을 사용하고 쿨타임을 수정하는 메서드입니다.
+         */
+        private void UseAndEditCooldown(ActiveSkill skill, TransparentTextLabel skillLabel)
+        {
+            // 스킬 쿨다운을 수정하는 폼을 표시
+            DetailEditModal modal = new(skill.CurrentCooldown.ToString())
             {
-                Size = new Size(32, 32),
-                Image = Resources.ImgCooltime,
-                SizeMode = PictureBoxSizeMode.StretchImage,
+                StartPosition = FormStartPosition.Manual,
+                Location = skillLabel.PointToScreen(Point.Empty),
             };
-            var cooldownLabel = CreateLabel($"{active.Cooldown}턴", foreColor);
 
-            cooldownPanel.Controls.Add(skillNameLabel);
-            cooldownPanel.Controls.Add(cooldownIcon);
-            cooldownPanel.Controls.Add(cooldownLabel);
+            if (modal.ShowDialog(this) == DialogResult.OK)
+            {
+                // 사용자가 입력한 쿨다운 값을 적용
+                if (int.TryParse(modal.InputText, out int newCooldown) && newCooldown >= 0)
+                {
+                    skill.CurrentCooldown = (ushort)newCooldown > skill.Cooldown
+                                            ? skill.Cooldown : (ushort)newCooldown;
+                    skill.isOnCooldown = newCooldown > 0;
+                    // 쿨다운 레이블 업데이트
+                    MakeSkillUnavailable(skill);
+                }
+                else
+                {
+                    MessageBox.Show($"유효한 쿨다운 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
 
-            _activePanel.Controls.Add(cooldownPanel);
+        /*
+         * MakeSkillUnavailable(ActiveSkill skill)
+         * - 액티브 스킬이 사용 불가능 상태일 때, 패널을 업데이트합니다.
+         */
+        private void MakeSkillUnavailable(ActiveSkill skill)
+        {
+            void ApplyToMatchingControls(Control parent)
+            {
+                foreach (Control control in parent.Controls)
+                {
+                    if (control.Tag?.ToString() == skill.Name)
+                    {
+                        bool onCooldown = skill.isOnCooldown;
+
+                        if (control is TransparentTextLabel label)
+                        {
+                            label.ForeColor = onCooldown
+                                ? Color.FromArgb(100, 245, 245, 245)
+                                : Color.WhiteSmoke;
+                        }
+                        else if (control is PictureBox pictureBox)
+                        {
+                            pictureBox.Image = onCooldown
+                                ? Resources.ImgCooltimeDisabled
+                                : Resources.ImgCooltime;
+                        }
+                    }
+
+                    if (control.HasChildren)
+                        ApplyToMatchingControls(control);
+                }
+            }
+
+            ApplyToMatchingControls(_activePanel);
         }
 
         /*
@@ -150,6 +265,7 @@ namespace ScoreBoard.controls
             foreach (var (desc, idx) in active.Description.Select((d, i) => (d, i)))
             {
                 var descriptionLabel = CreateLabel("= " + desc, foreColor);
+                descriptionLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
                 if (idx == active.Description.Length - 1)
                     descriptionLabel.Margin = new Padding(0, 0, 0, PADDING_BOTTOM);
 

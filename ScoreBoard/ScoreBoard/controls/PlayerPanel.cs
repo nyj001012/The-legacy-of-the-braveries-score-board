@@ -23,6 +23,8 @@ namespace ScoreBoard.controls
         {
             InitializeComponent();
 
+            this.hbPlayer.Name = $"hb{player.Id}";
+
             base.LblName = this.lblName;
             base.LblOrder = this.lblOrder;
             base.PbLv = this.pbLv;
@@ -38,6 +40,11 @@ namespace ScoreBoard.controls
 
         private void PlayerPanel_Load([NotNull] object? sender, EventArgs e)
         {
+            if (sender == null)
+            {
+                throw new ArgumentNullException(nameof(sender), "'sender' 매개 변수는 null일 수 없습니다.");
+            }
+
             InitBase(_player, _order);
         }
     }

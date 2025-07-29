@@ -4,6 +4,7 @@ using ScoreBoard.data.monster;
 using ScoreBoard.data.statusEffect;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -17,11 +18,12 @@ namespace ScoreBoard.utils
         // 캐싱된 JsonSerializerOptions 인스턴스
         private static readonly JsonSerializerOptions CachedJsonSerializerOptions = new JsonSerializerOptions
         {
-            PropertyNameCaseInsensitive = true // 대소문자 구분 없이 속성 이름을 매칭
+            PropertyNameCaseInsensitive = true, // 대소문자 구분 없이 속성 이름을 매칭
+            Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
         };
 
         /*
-         * JsonReader.ReadCorpsData(jsonPath)
+         * ReadCorpsData(jsonPath)
          * - jsonPath: JSON 파일 경로
          * - return: JSON 파일의 Key-Value 쌍을 Dictionary<string, string> 형태로 반환
          */
@@ -48,7 +50,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ReadCorpsMembersData(corpsId)
+         * ReadCorpsMembersData(corpsId)
          * - corpsId: 군단 ID
          * - return: 해당 군단의 병사 id, name을 Dictionary<string, string> 형태로 반환
          */
@@ -80,7 +82,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.GetDataFilesById(id)
+         * GetDataFilesById(id)
          * - id: ID
          * - dataDirectory: 메타 데이터가 저장된 디렉토리 이름
          * - return: JSON 파일 경로 배열
@@ -93,7 +95,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ExtractIdAndName(filePath)
+         * ExtractIdAndName(filePath)
          * - filePath: JSON 파일 경로
          * - return: JSON 파일에서 id와 name을 추출하여 (id, name) 형태로 반환
          */
@@ -128,7 +130,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ReadMemberData(id)
+         * ReadMemberData(id)
          * - id: 병사 ID
          * - return: 해당 병사의 JSON 데이터를 반환
          */
@@ -191,7 +193,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ReadMonsterData(id)
+         * ReadMonsterData(id)
          * - id: 몬스터 ID
          * - return: 해당 몬스터의 JSON 데이터를 반환
          */
@@ -207,7 +209,7 @@ namespace ScoreBoard.utils
         }
 
         /*
-         * JsonReader.ReadArtifactData(id)
+         * ReadArtifactData(id)
          * - id: 유물 ID
          * - return: 해당 유물의 JSON 데이터를 반환
          */
@@ -218,19 +220,44 @@ namespace ScoreBoard.utils
             {
                 return null;
             }
+            // JSON 파일을 읽어오기
             string json = File.ReadAllText(jsonPath);
-            CachedJsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            return JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions);
+            try
+            {
+                // id 형식: type_index_className (예: 0_01_Bandage)
+                string[] parts = id.Split('_');
+                if (parts.Length < 3)
+                    throw new FormatException($"유효하지 않은 ID 형식: {id}");
+
+                string className = parts[2];
+
+                return className switch
+                {
+                    "DingDingSword" => JsonSerializer.Deserialize<DingDingSword>(json, CachedJsonSerializerOptions),
+                    "VinylClothes" => JsonSerializer.Deserialize<VinylClothes>(json, CachedJsonSerializerOptions),
+                    "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
+                    "Pauldrons" => JsonSerializer.Deserialize<Pauldrons>(json, CachedJsonSerializerOptions),
+                    "Underwear" => JsonSerializer.Deserialize<Underwear>(json, CachedJsonSerializerOptions),
+                    "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
+                    "ForeheadGuard" => JsonSerializer.Deserialize<ForeheadGuard>(json, CachedJsonSerializerOptions),
+                    _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Artifact] JSON 파싱 오류 (ID: {id}): {ex.Message}");
+                return null;
+            }
         }
 
         /*
-         * JsonReader.GetArtifactImage(id)
+         * GetArtifactImage(id)
          * - id: 유물 ID
          * - return: 해당 유물의 이미지 반환
          */
         internal static Image GetArtifactImage(string id)
         {
-            string imagePath = $@"Resources/meta_data/artifact/{id}.png";
+            string imagePath = $@"Resources/image/artifact/{id}.png";
             if (File.Exists(imagePath))
             {
                 return Image.FromFile(imagePath);
@@ -241,6 +268,11 @@ namespace ScoreBoard.utils
             }
         }
 
+        /*
+         * GetEquipmentIcons(type)
+         * - type: 장비 타입 (예: "weapon", "armor", "accessory")
+         * - return: 해당 타입의 장비 아이콘 목록 반환
+         */
         internal static Image? GetStatusEffectImage(StatusEffectType type)
         {
             return type switch
@@ -253,12 +285,38 @@ namespace ScoreBoard.utils
                 StatusEffectType.Immortality => Image.FromFile(@"Resources/meta_data/status_effect/immortality.png"),
                 StatusEffectType.Stasis => Image.FromFile(@"Resources/meta_data/status_effect/stasis.png"),
                 StatusEffectType.Exhaustion => Image.FromFile(@"Resources/meta_data/status_effect/exhaustion.png"),
-                StatusEffectType.Slience => Image.FromFile(@"Resources/meta_data/status_effect/slience.png"),
+                StatusEffectType.Slience => Image.FromFile(@"Resources/meta_data/status_effect/silence.png"),
                 StatusEffectType.Blind => Image.FromFile(@"Resources/meta_data/status_effect/blind.png"),
                 StatusEffectType.HealingBlock => Image.FromFile(@"Resources/meta_data/status_effect/healing_block.png"),
                 StatusEffectType.Stun => Image.FromFile(@"Resources/meta_data/status_effect/stun.png"),
                 _ => null,
             };
+        }
+
+        /*
+         * GetEquipments(type)
+         * - type: 유물 타입 (예: Weapon, Armor, Accessory)
+         * - return: 해당 타입의 유물과 이미지 목록 반환
+         */
+        internal static Dictionary<string, (Artifact, Image)> GetEquipments(ArtifactType type)
+        {
+            Dictionary<string, (Artifact, Image)> equipments = [];
+            string[] filenames = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "meta_data", "artifact"), $"{(int)type}_*.json");
+            foreach (string filename in filenames)
+            {
+                string id = Path.GetFileNameWithoutExtension(filename); // 파일 이름에서 ID 추출
+                Image image = GetArtifactImage(id);
+                Artifact? artifact = ReadArtifactData(id);
+                if (artifact != null && image != null)
+                {
+                    equipments.Add(artifact.Id, (artifact, image));
+                }
+                else
+                {
+                    return [];
+                }
+            }
+            return equipments;
         }
     }
 }
