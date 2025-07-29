@@ -120,6 +120,7 @@ namespace ScoreBoard.data.character
             this.Stat.CombatStats["melee"].Value += 100;
             this.Stat.CombatStats["melee"].AttackCount += 1;
             this.MaxArtifactSlot += 1;
+            this.ArtifactSlot.Add(null);
         }
 
         /*
@@ -137,9 +138,9 @@ namespace ScoreBoard.data.character
             if (lastArtifact != null) // 마지막 유물 슬롯에 착용 중인 유물이 있었다면
             {
                 lastArtifact.Unequip(this); // 착용 해제
-                this.ArtifactSlot[MaxArtifactSlot - 1] = null;
-                this.MaxArtifactSlot = (ushort)Math.Max(0, this.MaxArtifactSlot - 1);
             }
+            this.ArtifactSlot.RemoveAt(MaxArtifactSlot - 1);
+            this.MaxArtifactSlot = (ushort)Math.Max(0, this.MaxArtifactSlot - 1);
         }
 
         /*
