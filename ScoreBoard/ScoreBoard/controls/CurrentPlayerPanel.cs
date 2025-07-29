@@ -42,8 +42,12 @@ namespace ScoreBoard.controls
 
         private void CurrentPlayerPanel_Load([NotNull] object? sender, EventArgs e)
         {
+            if (sender is null)
+            {
+                throw new ArgumentNullException(nameof(sender), "'sender' 매개 변수는 null일 수 없습니다.");
+            }
+
             InitBase(_player, _order);
         }
-
     }
 }

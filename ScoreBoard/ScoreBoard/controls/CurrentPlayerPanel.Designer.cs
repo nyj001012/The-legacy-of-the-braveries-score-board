@@ -37,10 +37,12 @@
             fpnArtifact = new CustomFlowLayoutPanel();
             pbLv = new PictureBox();
             lblName = new GradientLabel();
+            customFlowLayoutPanel1 = new CustomFlowLayoutPanel();
             pnPlayer.SuspendLayout();
             pn1PInfo.SuspendLayout();
             fpnPlayer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbLv).BeginInit();
+            customFlowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // pnPlayer
@@ -71,10 +73,9 @@
             // 
             // pn1PInfo
             // 
+            pn1PInfo.Controls.Add(customFlowLayoutPanel1);
             pn1PInfo.Controls.Add(hbPlayer);
             pn1PInfo.Controls.Add(fpnPlayer);
-            pn1PInfo.Controls.Add(pbLv);
-            pn1PInfo.Controls.Add(lblName);
             pn1PInfo.Location = new Point(89, 0);
             pn1PInfo.Margin = new Padding(0);
             pn1PInfo.Name = "pn1PInfo";
@@ -139,7 +140,7 @@
             // pbLv
             // 
             pbLv.BackgroundImageLayout = ImageLayout.Stretch;
-            pbLv.Location = new Point(411, 12);
+            pbLv.Location = new Point(16, 10);
             pbLv.Margin = new Padding(0);
             pbLv.Name = "pbLv";
             pbLv.Size = new Size(53, 53);
@@ -152,14 +153,27 @@
             lblName.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblName.GradientEnd = Color.FromArgb(72, 144, 170);
             lblName.GradientStart = Color.FromArgb(221, 237, 240);
-            lblName.Location = new Point(0, 13);
+            lblName.Location = new Point(0, 10);
             lblName.Margin = new Padding(0, 0, 15, 0);
             lblName.Name = "lblName";
             lblName.RightToLeft = RightToLeft.No;
-            lblName.Size = new Size(396, 52);
+            lblName.Size = new Size(1, 52);
             lblName.TabIndex = 0;
             lblName.Text = "예시샘플입니다.";
             lblName.TextAlign = ContentAlignment.BottomLeft;
+            // 
+            // customFlowLayoutPanel1
+            // 
+            customFlowLayoutPanel1.BorderColor = Color.Transparent;
+            customFlowLayoutPanel1.BorderThickness = 0;
+            customFlowLayoutPanel1.Controls.Add(lblName);
+            customFlowLayoutPanel1.Controls.Add(pbLv);
+            customFlowLayoutPanel1.Location = new Point(0, 0);
+            customFlowLayoutPanel1.Margin = new Padding(0);
+            customFlowLayoutPanel1.Name = "customFlowLayoutPanel1";
+            customFlowLayoutPanel1.Padding = new Padding(0, 10, 0, 0);
+            customFlowLayoutPanel1.Size = new Size(467, 68);
+            customFlowLayoutPanel1.TabIndex = 5;
             // 
             // CurrentPlayerPanel
             // 
@@ -174,6 +188,7 @@
             pn1PInfo.ResumeLayout(false);
             fpnPlayer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbLv).EndInit();
+            customFlowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -188,5 +203,6 @@
         private HealthBar hbPlayer;
         private PictureBox pbLv;
         private GradientLabel lblName;
+        private CustomFlowLayoutPanel customFlowLayoutPanel1;
     }
 }

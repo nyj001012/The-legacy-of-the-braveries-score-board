@@ -23,6 +23,7 @@ namespace ScoreBoard.controls
         {
             this.Cursor = Cursors.Hand;
             LblName.Text = player.Name;
+            LblName.AutoSize = true;
             LblOrder.Text = $"{order}P";
             InitLevel(player.Level);
             InitStatus(player.Stat);
@@ -47,7 +48,7 @@ namespace ScoreBoard.controls
             if (level < 0 || level > 3)
                 throw new ArgumentOutOfRangeException(nameof(level), "레벨은 0에서 3 사이여야 합니다.");
 
-            PbLv.Image = level switch
+            PbLv.BackgroundImage = level switch
             {
                 0 => null,
                 1 => Properties.Resources.Lv1,
@@ -146,7 +147,7 @@ namespace ScoreBoard.controls
             FpnStatus.Controls.Add(pb);
         }
 
-        protected void InitArtifact(List<Artifact> artifacts, ushort maxSlots)
+        protected void InitArtifact(List<Artifact?> artifacts, ushort maxSlots)
         {
             FpnArtifact.SuspendLayout();
             FpnArtifact.Controls.Clear();
@@ -155,7 +156,7 @@ namespace ScoreBoard.controls
             {
                 if (artifacts.ElementAtOrDefault(i) != null)
                 {
-                    SetArtifactImage(artifacts[i], i);
+                    SetArtifactImage(artifacts[i]!, i);
                 }
                 else
                 {
