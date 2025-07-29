@@ -131,6 +131,7 @@
             lblEnemy1Name = new ScoreBoard.controls.GradientLabel();
             enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             pictureBox10 = new PictureBox();
+            pbLevel = new PictureBox();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -180,6 +181,7 @@
             enemyList.SuspendLayout();
             pnEnemy1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbLevel).BeginInit();
             SuspendLayout();
             // 
             // playerContainer
@@ -824,6 +826,7 @@
             fpnBasicStatus.BorderColor = Color.Transparent;
             fpnBasicStatus.BorderThickness = 0;
             fpnBasicStatus.Controls.Add(lblName);
+            fpnBasicStatus.Controls.Add(pbLevel);
             fpnBasicStatus.Controls.Add(pbDice);
             fpnBasicStatus.Controls.Add(fpnDice);
             fpnBasicStatus.Location = new Point(60, 0);
@@ -852,7 +855,7 @@
             pbDice.BackgroundImageLayout = ImageLayout.Stretch;
             pbDice.Cursor = Cursors.Hand;
             pbDice.Image = Properties.Resources.BtnDice;
-            pbDice.Location = new Point(290, 0);
+            pbDice.Location = new Point(345, 0);
             pbDice.Margin = new Padding(0, 0, 10, 0);
             pbDice.Name = "pbDice";
             pbDice.Size = new Size(45, 45);
@@ -865,7 +868,7 @@
             fpnDice.AutoSize = true;
             fpnDice.BorderColor = Color.Transparent;
             fpnDice.BorderThickness = 0;
-            fpnDice.Location = new Point(345, 0);
+            fpnDice.Location = new Point(400, 0);
             fpnDice.Margin = new Padding(0);
             fpnDice.Name = "fpnDice";
             fpnDice.Size = new Size(0, 0);
@@ -1638,6 +1641,18 @@
             pictureBox10.TabIndex = 8;
             pictureBox10.TabStop = false;
             // 
+            // pbLevel
+            // 
+            pbLevel.BackgroundImage = Properties.Resources.BtnPlus;
+            pbLevel.BackgroundImageLayout = ImageLayout.Stretch;
+            pbLevel.Cursor = Cursors.Hand;
+            pbLevel.Location = new Point(290, 0);
+            pbLevel.Margin = new Padding(0, 0, 10, 0);
+            pbLevel.Name = "pbLevel";
+            pbLevel.Size = new Size(45, 45);
+            pbLevel.TabIndex = 5;
+            pbLevel.TabStop = false;
+            // 
             // ScoreBoardControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1715,6 +1730,7 @@
             enemyList.ResumeLayout(false);
             pnEnemy1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbLevel).EndInit();
             ResumeLayout(false);
         }
 
@@ -1823,5 +1839,6 @@
         private controls.TransparentTextLabel lblMaxHealth;
         private controls.TransparentTextLabel transparentTextLabel5;
         private controls.CustomFlowLayoutPanel fpnStatusEffect;
+        private PictureBox pbLevel;
     }
 }
