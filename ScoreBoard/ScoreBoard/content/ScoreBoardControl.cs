@@ -413,7 +413,7 @@ namespace ScoreBoard.content
 
             pbLevel.BackgroundImage = player.Level switch
             {
-                0 => null,
+                0 => Properties.Resources.BtnPlus,
                 1 => Properties.Resources.Lv1,
                 2 => Properties.Resources.Lv2,
                 3 => Properties.Resources.Lv3,
@@ -1085,6 +1085,7 @@ namespace ScoreBoard.content
                     currentShowingPlayer!.Level = newLevel; // 레벨 갱신
                     UpdateSkillsByLevel(newLevel); // 레벨에 따른 스킬 갱신
                     ShowDetail(currentShowingPlayer); // 업데이트된 내용 표시
+                    InitPlayerList();
                 }
             }
             else

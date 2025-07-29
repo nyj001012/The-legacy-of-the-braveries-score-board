@@ -76,6 +76,7 @@
             detailViewport = new ScoreBoard.controls.CustomFlowLayoutPanel();
             fpnBasicStatus = new ScoreBoard.controls.CustomFlowLayoutPanel();
             lblName = new ScoreBoard.controls.TransparentTextLabel();
+            pbLevel = new PictureBox();
             pbDice = new PictureBox();
             fpnDice = new ScoreBoard.controls.CustomFlowLayoutPanel();
             pnHealth = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -131,7 +132,6 @@
             lblEnemy1Name = new ScoreBoard.controls.GradientLabel();
             enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             pictureBox10 = new PictureBox();
-            pbLevel = new PictureBox();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -156,6 +156,7 @@
             detailList.SuspendLayout();
             detailViewport.SuspendLayout();
             fpnBasicStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbLevel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbDice).BeginInit();
             pnHealth.SuspendLayout();
             fpnStatusDetail.SuspendLayout();
@@ -181,7 +182,6 @@
             enemyList.SuspendLayout();
             pnEnemy1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbLevel).BeginInit();
             SuspendLayout();
             // 
             // playerContainer
@@ -848,6 +848,19 @@
             lblName.TabIndex = 0;
             lblName.Text = "1P 플레이어 이름";
             lblName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pbLevel
+            // 
+            pbLevel.BackgroundImage = Properties.Resources.BtnPlus;
+            pbLevel.BackgroundImageLayout = ImageLayout.Stretch;
+            pbLevel.Cursor = Cursors.Hand;
+            pbLevel.Location = new Point(290, 0);
+            pbLevel.Margin = new Padding(0, 0, 10, 0);
+            pbLevel.Name = "pbLevel";
+            pbLevel.Size = new Size(45, 45);
+            pbLevel.TabIndex = 5;
+            pbLevel.TabStop = false;
+            pbLevel.Click += pbLevel_Click;
             // 
             // pbDice
             // 
@@ -1641,19 +1654,6 @@
             pictureBox10.TabIndex = 8;
             pictureBox10.TabStop = false;
             // 
-            // pbLevel
-            // 
-            pbLevel.BackgroundImage = Properties.Resources.BtnPlus;
-            pbLevel.BackgroundImageLayout = ImageLayout.Stretch;
-            pbLevel.Cursor = Cursors.Hand;
-            pbLevel.Location = new Point(290, 0);
-            pbLevel.Margin = new Padding(0, 0, 10, 0);
-            pbLevel.Name = "pbLevel";
-            pbLevel.Size = new Size(45, 45);
-            pbLevel.TabIndex = 5;
-            pbLevel.TabStop = false;
-            pbLevel.Click += pbLevel_Click;
-            // 
             // ScoreBoardControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1696,6 +1696,7 @@
             detailViewport.ResumeLayout(false);
             fpnBasicStatus.ResumeLayout(false);
             fpnBasicStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbLevel).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbDice).EndInit();
             pnHealth.ResumeLayout(false);
             pnHealth.PerformLayout();
@@ -1731,7 +1732,6 @@
             enemyList.ResumeLayout(false);
             pnEnemy1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbLevel).EndInit();
             ResumeLayout(false);
         }
 
