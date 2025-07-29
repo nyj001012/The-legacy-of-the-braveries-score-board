@@ -3,6 +3,7 @@ using ScoreBoard.data.stat;
 using ScoreBoard.utils;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -13,6 +14,8 @@ namespace ScoreBoard.data.character
 {
     internal class Ruda : CorpsMember
     {
+        private ushort _perfectionBonus = 0;
+
         public Ruda(string id) : base()
         {
             Validator.ValidateNull(id, nameof(id));
@@ -74,13 +77,32 @@ namespace ScoreBoard.data.character
                     Description = Validator.ValidateNull(p.Description, nameof(p.Description))
                 };
 
-                skill.Execute = p.Name switch
+                skill.Activate = p.Name switch
                 {
                     "다재다능" => () => skill.isActivated = true,
                     "집행자" => () => skill.isActivated = true,
-                    "완벽주의" => () => ActivatePerfectionism(),
+                    "완벽주의" => () =>
+                    {
+                        skill.isActivated = true;
+                        ActivatePerfectionism();
+                    }
+                    ,
                     _ => null
                 };
+
+                skill.Deactivate = p.Name switch
+                {
+                    "다재다능" => () => skill.isActivated = false,
+                    "집행자" => () => skill.isActivated = false,
+                    "완벽주의" => () =>
+                    {
+                        skill.isActivated = false;
+                        DeactivatePerfectionism();
+                    }
+                    ,
+                    _ => null
+                };
+
                 return skill;
             }).ToList() ?? [];
         }
@@ -117,8 +139,23 @@ namespace ScoreBoard.data.character
          */
         private void ActivatePerfectionism()
         {
-            this.Stat.CombatStats["melee"].AttackCount += (ushort)this.ArtifactSlot.Count;
-            this.Stat.CombatStats["ranged"].AttackCount += (ushort)this.ArtifactSlot.Count;
+            _perfectionBonus = (ushort)this.ArtifactSlot.Count;
+            this.Stat.CombatStats["melee"].AttackCount += _perfectionBonus;
+            this.Stat.CombatStats["ranged"].AttackCount += _perfectionBonus;
+        }
+
+        /*
+         * DeactivatePerfectionism()
+         * - 완벽주의 패시브 스킬을 비활성화하는 메서드
+         * - 증가했던 attackCount만큼 감소
+         */
+        private void DeactivatePerfectionism()
+        {
+            ushort oldMeleeCount = this.Stat.CombatStats["melee"].AttackCount;
+            ushort oldRangedCount = this.Stat.CombatStats["ranged"].AttackCount;
+
+            this.Stat.CombatStats["melee"].AttackCount = (ushort)Math.Max(0, oldMeleeCount - _perfectionBonus);
+            this.Stat.CombatStats["ranged"].AttackCount = (ushort)Math.Max(0, oldRangedCount - _perfectionBonus);
         }
     }
 }
