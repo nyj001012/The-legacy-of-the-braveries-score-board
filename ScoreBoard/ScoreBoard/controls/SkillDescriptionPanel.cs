@@ -11,11 +11,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ReaLTaiizor.Drawing.Poison.PoisonPaint;
 
 namespace ScoreBoard.controls
 {
     public partial class SkillDescriptionPanel : UserControl
     {
+        private readonly ushort _level;
         private readonly List<PassiveSkill> _passives;
         private readonly List<ActiveSkill> _actives;
 
@@ -59,9 +61,10 @@ namespace ScoreBoard.controls
             Margin = new Padding(0, 0, 0, PADDING_BOTTOM),
         };
 
-        public SkillDescriptionPanel(List<PassiveSkill>? passives, List<ActiveSkill>? actives)
+        public SkillDescriptionPanel(ushort level, List<PassiveSkill>? passives, List<ActiveSkill>? actives)
         {
             InitializeComponent();
+            _level = level;
             _passives = passives ?? [];
             _actives = actives ?? [];
 
@@ -100,7 +103,7 @@ namespace ScoreBoard.controls
          */
         private void AddActiveSkillToPanel(ActiveSkill active)
         {
-            var foreColor = active.isOnCooldown
+            var foreColor = active.isOnCooldown || (_level < active.RequiredLevel)
                 ? Color.FromArgb(100, 245, 245, 245)
                 : Color.WhiteSmoke;
 
@@ -116,7 +119,66 @@ namespace ScoreBoard.controls
         {
             var skillName = GetSkillNameWithRequiredLevel(active); // 스킬 이름과 레벨을 조합
 
-            var cooldownPanel = new CustomFlowLayoutPanel
+            var cooldownPanel = CreateCoolDownPanel();
+
+            var skillNameLabel = CreateLabel(skillName, foreColor);
+            skillNameLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
+
+            var cooldownIcon = CreateCooldownIcon(active);
+
+            var cooldownLabel = CreateCoolDownLabel(active, foreColor);
+
+            cooldownPanel.Controls.Add(skillNameLabel);
+            cooldownPanel.Controls.Add(cooldownIcon);
+            cooldownPanel.Controls.Add(cooldownLabel);
+
+            _activePanel.Controls.Add(cooldownPanel);
+        }
+
+        /*
+         * CreateCoolDownLabel(ActiveSkill active, Color foreColor)
+         * - 쿨다운 레이블을 반환하는 메서드
+         * - ActiveSkill active: 쿨다운 레이블을 작성할 액티브 스킬
+         * - Color foreColor: 레이블의 글꼴 색
+         */
+        private TransparentTextLabel CreateCoolDownLabel(ActiveSkill active, Color foreColor)
+        {
+            var cooldownLabel = CreateLabel($"{active.Cooldown}턴", foreColor);
+            cooldownLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
+            if (_level < active.RequiredLevel)
+            {
+                cooldownLabel.Cursor = Cursors.No;
+            }
+            else
+            {
+                cooldownLabel.Cursor = Cursors.Hand;
+                cooldownLabel.Click += (s, e) => UseAndEditCooldown(active, cooldownLabel);
+            }
+            return cooldownLabel;
+        }
+
+        /*
+         * CreateCooldownIcon(ActiveSkill active)
+         * - 쿨다운 아이콘을 만들어 PictureBox로 반환하는 메서드
+         */
+        private PictureBox CreateCooldownIcon(ActiveSkill active)
+        {
+            return new PictureBox
+            {
+                Tag = active.Name, // 스킬 이름을 태그로 저장
+                Size = new Size(32, 32),
+                Image = Resources.ImgCooltime,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+            };
+        }
+
+        /*
+         * CreateCoolDownPanel()
+         * - 쿨다운 패널 생성해서 반환하는 메서드
+         */
+        private CustomFlowLayoutPanel CreateCoolDownPanel()
+        {
+            return new CustomFlowLayoutPanel
             {
                 Width = MAX_WIDTH,
                 MaximumSize = new Size(MAX_WIDTH, 0),
@@ -125,26 +187,6 @@ namespace ScoreBoard.controls
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 Margin = new Padding(0, 0, PADDING_BOTTOM, 0),
             };
-
-            var skillNameLabel = CreateLabel(skillName, foreColor);
-            skillNameLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
-            var cooldownIcon = new PictureBox
-            {
-                Tag = active.Name, // 스킬 이름을 태그로 저장
-                Size = new Size(32, 32),
-                Image = Resources.ImgCooltime,
-                SizeMode = PictureBoxSizeMode.StretchImage,
-            };
-            var cooldownLabel = CreateLabel($"{active.Cooldown}턴", foreColor);
-            cooldownLabel.Tag = active.Name; // 스킬 이름을 태그로 저장
-            cooldownLabel.Cursor = Cursors.Hand;
-            cooldownLabel.Click += (s, e) => UseAndEditCooldown(active, cooldownLabel);
-
-            cooldownPanel.Controls.Add(skillNameLabel);
-            cooldownPanel.Controls.Add(cooldownIcon);
-            cooldownPanel.Controls.Add(cooldownLabel);
-
-            _activePanel.Controls.Add(cooldownPanel);
         }
 
         /*
