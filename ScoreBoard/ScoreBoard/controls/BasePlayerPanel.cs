@@ -178,17 +178,16 @@ namespace ScoreBoard.controls
             PictureBox pb = new()
             {
                 Name = $"pbArtifact{i}",
-                Size = new Size(FpnArtifact.Size.Height, FpnArtifact.Size.Height),
+                Size = new Size(FpnArtifact.Size.Height - 5, FpnArtifact.Size.Height - 5),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = artifactImage,
-                Tag = artifact.Id
             };
             FpnArtifact.Controls.Add(pb);
         }
 
         protected void SetDefaultArtifactSlot(int index)
         {
-            int size = FpnArtifact.Size.Height;
+            int size = FpnArtifact.Size.Height - 5;
 
             Image image = index switch
             {
@@ -197,7 +196,7 @@ namespace ScoreBoard.controls
                 _ => Properties.Resources.EmptyAccessorySlot,
             };
 
-            PictureBox pb = new PictureBox
+            PictureBox pb = new()
             {
                 Name = $"pbArtifact{index}",
                 Size = new Size(size, size),
