@@ -410,6 +410,16 @@ namespace ScoreBoard.content
         private void ShowBasicInfo(CorpsMember player)
         {
             lblName.Text = player.Name;
+
+            pbLevel.BackgroundImage = player.Level switch
+            {
+                0 => null,
+                1 => Properties.Resources.Lv1,
+                2 => Properties.Resources.Lv2,
+                3 => Properties.Resources.Lv3,
+                _ => throw new NotImplementedException($"{player.Level}은(는) 유효한 레벨이 아닙니다."),
+            };
+
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (player.RequiredDiceValues.Count > 0)
             {
