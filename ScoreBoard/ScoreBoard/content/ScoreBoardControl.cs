@@ -208,7 +208,7 @@ namespace ScoreBoard.content
          */
         private void ShowArtifact(CorpsMember player)
         {
-            InitializeArtifactSlots(player.MaxArtifactSlot);
+            InitializeArtifactSlots(player);
 
             foreach (Artifact? artifact in player.ArtifactSlot)
             {
@@ -220,21 +220,21 @@ namespace ScoreBoard.content
         }
 
         /*
-         * InitializeArtifactSlots(int maxSlots)
+         * InitializeArtifactSlots(CorpsMember player)
          * - 유물 슬롯을 초기화하는 메서드
-         * - maxSlots: 최대 유물 슬롯 수
+         * - player: 유물을 가질 수 있는 플레이어
          */
-        private void InitializeArtifactSlots(int maxSlots)
+        private void InitializeArtifactSlots(CorpsMember player)
         {
             PictureBox[] slotPics = { pbWeapon, pbArmour, pbAccessory1, pbAccessory2 };
             string[] resourceNames = { "EmptyWeaponSlot", "EmptyArmourSlot", "EmptyAccessorySlot", "EmptyAccessorySlot" };
 
             for (int i = 0; i < slotPics.Length; i++)
             {
-                bool isAccessory2 = (i == 3);
-                slotPics[i].Visible = !(isAccessory2 && maxSlots <= 3); // 4번째 슬롯은 조건부
+                slotPics[i].Visible = (i < player.MaxArtifactSlot); // 4번째 슬롯은 조건부
                 slotPics[i].BackgroundImage = (Image)Resources.ResourceManager.GetObject(resourceNames[i])!;
-                slotPics[i].Tag = new ArtifactSlotInfo { ArtifactId = "", SlotIndex = i };
+                if (player.ArtifactSlot.ElementAtOrDefault(i) == default)
+                    slotPics[i].Tag = new ArtifactSlotInfo { ArtifactId = "", SlotIndex = i };
             }
         }
 
@@ -263,9 +263,9 @@ namespace ScoreBoard.content
                 default:
                     ArtifactSlotInfo info1 = (ArtifactSlotInfo)pbAccessory1.Tag!;
                     ArtifactSlotInfo info2 = (ArtifactSlotInfo)pbAccessory2.Tag!;
-                    if (info1.ArtifactId != null)
+                    if (!string.IsNullOrEmpty(info1.ArtifactId))
                         SetSlotImage(pbAccessory1, artifact.Id, image);
-                    if (info2.ArtifactId != null)
+                    if (!string.IsNullOrEmpty(info2.ArtifactId))
                         SetSlotImage(pbAccessory2, artifact.Id, image);
                     break;
             }
@@ -1054,6 +1054,11 @@ namespace ScoreBoard.content
                 // 현재 플레이어의 유물 슬롯에서 해당 타입의 유물을 제거
                 currentShowingPlayer.ArtifactSlot[info.SlotIndex]!.Unequip(currentShowingPlayer);
                 currentShowingPlayer.ArtifactSlot[info.SlotIndex] = null;
+                pb.Tag = new ArtifactSlotInfo()
+                {
+                    ArtifactId = "",
+                    SlotIndex = info.SlotIndex
+                };
             }
             else
             {
@@ -1061,9 +1066,19 @@ namespace ScoreBoard.content
                 {
                     Artifact oldArtifact = currentShowingPlayer.ArtifactSlot.Find(a => a != null && a.Id == info.ArtifactId)!;
                     oldArtifact.Unequip(currentShowingPlayer);
+                    pb.Tag = new ArtifactSlotInfo()
+                    {
+                        ArtifactId = "",
+                        SlotIndex = info.SlotIndex
+                    };
                 }
                 currentShowingPlayer.ArtifactSlot[info.SlotIndex] = selectedArtifact;
                 selectedArtifact.Equip(currentShowingPlayer);
+                pb.Tag = new ArtifactSlotInfo()
+                {
+                    ArtifactId = selectedArtifact.Id,
+                    SlotIndex = info.SlotIndex
+                };
             }
             ShowDetail(currentShowingPlayer); // 변경된 내용을 반영하여 상세 정보 표시
             InitPlayerList(); // 플레이어 리스트 업데이트
@@ -1087,10 +1102,10 @@ namespace ScoreBoard.content
                     ShowDetail(currentShowingPlayer); // 업데이트된 내용 표시
                     InitPlayerList();
                 }
-            }
-            else
-            {
-                MessageBox.Show("유효한 강화 수치(0 ~ 3)가 아닙니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    MessageBox.Show("유효한 강화 수치(0 ~ 3)가 아닙니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
