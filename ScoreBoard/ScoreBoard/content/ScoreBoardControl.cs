@@ -210,11 +210,12 @@ namespace ScoreBoard.content
         {
             InitializeArtifactSlots(player);
 
-            foreach (Artifact? artifact in player.ArtifactSlot)
+            for (int i = 0; i < player.MaxArtifactSlot; i++)
             {
-                if (artifact != null)
+                var artifact = player.ArtifactSlot.ElementAtOrDefault(i);
+                if (artifact != default)
                 {
-                    AssignArtifactToSlot(artifact);
+                    AssignArtifactToSlot(artifact, i);
                 }
             }
         }
@@ -239,11 +240,12 @@ namespace ScoreBoard.content
         }
 
         /*
-         * AssignArtifactToSlot(Artifact artifact)
+         * AssignArtifactToSlot(Artifact artifact, int index)
          * - 유물을 해당 슬롯에 할당하는 메서드
          * - artifact: 할당할 Artifact 객체
+         * - index: 유물 슬롯 인덱스
          */
-        private void AssignArtifactToSlot(Artifact artifact)
+        private void AssignArtifactToSlot(Artifact artifact, int index)
         {
             Image? image = DataReader.GetArtifactImage(artifact.Id);
             if (image == null)
@@ -252,21 +254,19 @@ namespace ScoreBoard.content
                 return;
             }
 
-            switch (artifact.Type)
+            switch (index)
             {
-                case ArtifactType.Weapon:
+                case 0:
                     SetSlotImage(pbWeapon, artifact.Id, image);
                     break;
-                case ArtifactType.Armour:
+                case 1:
                     SetSlotImage(pbArmour, artifact.Id, image);
                     break;
-                default:
-                    ArtifactSlotInfo info1 = (ArtifactSlotInfo)pbAccessory1.Tag!;
-                    ArtifactSlotInfo info2 = (ArtifactSlotInfo)pbAccessory2.Tag!;
-                    if (!string.IsNullOrEmpty(info1.ArtifactId))
-                        SetSlotImage(pbAccessory1, artifact.Id, image);
-                    if (!string.IsNullOrEmpty(info2.ArtifactId))
-                        SetSlotImage(pbAccessory2, artifact.Id, image);
+                case 2:
+                    SetSlotImage(pbAccessory1, artifact.Id, image);
+                    break;
+                case 3:
+                    SetSlotImage(pbAccessory2, artifact.Id, image);
                     break;
             }
         }
@@ -1043,45 +1043,65 @@ namespace ScoreBoard.content
          */
         private void EquipArtifact(PictureBox pb, Artifact? selectedArtifact)
         {
-            if (currentShowingPlayer == null)
+            if (currentShowingPlayer == null || pb.Tag is not ArtifactSlotInfo info)
                 return;
-            ArtifactSlotInfo info = (ArtifactSlotInfo)pb.Tag!;
-            if (selectedArtifact == null) // 선택된 유물이 없는 경우 장착 해제
-            {
-                // 유물 ID가 비어있으면 아무 작업도 하지 않음
-                if (string.IsNullOrEmpty(info.ArtifactId)) return;
 
-                // 현재 플레이어의 유물 슬롯에서 해당 타입의 유물을 제거
-                currentShowingPlayer.ArtifactSlot[info.SlotIndex]!.Unequip(currentShowingPlayer);
-                currentShowingPlayer.ArtifactSlot[info.SlotIndex] = null;
-                pb.Tag = new ArtifactSlotInfo()
-                {
-                    ArtifactId = "",
-                    SlotIndex = info.SlotIndex
-                };
+            if (selectedArtifact == null)
+            {
+                TryUnequipArtifact(info);
+                UpdateArtifactTag(pb, "", info.SlotIndex);
             }
             else
             {
-                if (!string.IsNullOrEmpty(info.ArtifactId))
-                {
-                    Artifact oldArtifact = currentShowingPlayer.ArtifactSlot.Find(a => a != null && a.Id == info.ArtifactId)!;
-                    oldArtifact.Unequip(currentShowingPlayer);
-                    pb.Tag = new ArtifactSlotInfo()
-                    {
-                        ArtifactId = "",
-                        SlotIndex = info.SlotIndex
-                    };
-                }
-                currentShowingPlayer.ArtifactSlot[info.SlotIndex] = selectedArtifact;
-                selectedArtifact.Equip(currentShowingPlayer);
-                pb.Tag = new ArtifactSlotInfo()
-                {
-                    ArtifactId = selectedArtifact.Id,
-                    SlotIndex = info.SlotIndex
-                };
+                TryUnequipArtifact(info);
+                EquipNewArtifact(info, selectedArtifact);
+                UpdateArtifactTag(pb, selectedArtifact.Id, info.SlotIndex);
             }
-            ShowDetail(currentShowingPlayer); // 변경된 내용을 반영하여 상세 정보 표시
-            InitPlayerList(); // 플레이어 리스트 업데이트
+
+            ShowDetail(currentShowingPlayer);
+            InitPlayerList();
+        }
+
+        /*
+         * TryUnequipArtifact(ArtifactSlotInfo info)
+         * - 유물 장착 해제하는 메서드
+         * - info: 장착 중인 유물의 id와 인덱스가 담긴 정보
+         */
+        private void TryUnequipArtifact(ArtifactSlotInfo info)
+        {
+            if (!string.IsNullOrEmpty(info.ArtifactId))
+            {
+                currentShowingPlayer!.ArtifactSlot[info.SlotIndex]?.Unequip(currentShowingPlayer);
+                currentShowingPlayer.ArtifactSlot[info.SlotIndex] = null;
+            }
+        }
+
+        /*
+         * EquipnewArtifact(ArtifactInfo info, Artifact newArtifact)
+         * - 새로운 유물을 장착하는 메서드
+         * - info: 유물 id와 인덱스가 저장된 객체
+         * - newArtifact: 새로 장착할 유물
+         */
+        private void EquipNewArtifact(ArtifactSlotInfo info, Artifact newArtifact)
+        {
+            currentShowingPlayer!.ArtifactSlot[info.SlotIndex] = newArtifact;
+            newArtifact.Equip(currentShowingPlayer);
+        }
+
+        /*
+         * UpdateArtifactTag(PictureBox pb, string artifactId, int slotIndex)
+         * - 유물 슬롯의 Tag를 갱신하는 메서드
+         * - pb: 유물 슬롯
+         * - artifactId: 새로운 태그의 artifactId 값
+         * - slotIndex: 새로운 태그의 slotIndex 값
+         */
+        private void UpdateArtifactTag(PictureBox pb, string artifactId, int slotIndex)
+        {
+            pb.Tag = new ArtifactSlotInfo
+            {
+                ArtifactId = artifactId,
+                SlotIndex = slotIndex
+            };
         }
 
         private void pbLevel_Click(object sender, EventArgs e)
