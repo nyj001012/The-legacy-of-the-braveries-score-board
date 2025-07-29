@@ -14,7 +14,7 @@ namespace ScoreBoard.data.character
 {
     internal class Ruda : CorpsMember
     {
-        private ushort _perfectionBonus = 0;
+        public ushort PerfectionBonus = 0;
 
         public Ruda(string id) : base()
         {
@@ -139,9 +139,13 @@ namespace ScoreBoard.data.character
          */
         private void ActivatePerfectionism()
         {
-            _perfectionBonus = (ushort)this.ArtifactSlot.Count;
-            this.Stat.CombatStats["melee"].AttackCount += _perfectionBonus;
-            this.Stat.CombatStats["ranged"].AttackCount += _perfectionBonus;
+            for (int i = 0; i < MaxArtifactSlot; i++)
+            {
+                if (this.ArtifactSlot.ElementAtOrDefault(i) != default)
+                    PerfectionBonus++;
+            }
+            this.Stat.CombatStats["melee"].AttackCount += PerfectionBonus;
+            this.Stat.CombatStats["ranged"].AttackCount += PerfectionBonus;
         }
 
         /*
@@ -154,8 +158,9 @@ namespace ScoreBoard.data.character
             ushort oldMeleeCount = this.Stat.CombatStats["melee"].AttackCount;
             ushort oldRangedCount = this.Stat.CombatStats["ranged"].AttackCount;
 
-            this.Stat.CombatStats["melee"].AttackCount = (ushort)Math.Max(0, oldMeleeCount - _perfectionBonus);
-            this.Stat.CombatStats["ranged"].AttackCount = (ushort)Math.Max(0, oldRangedCount - _perfectionBonus);
+            this.Stat.CombatStats["melee"].AttackCount = (ushort)Math.Max(0, oldMeleeCount - PerfectionBonus);
+            this.Stat.CombatStats["ranged"].AttackCount = (ushort)Math.Max(0, oldRangedCount - PerfectionBonus);
+            PerfectionBonus = 0;
         }
     }
 }

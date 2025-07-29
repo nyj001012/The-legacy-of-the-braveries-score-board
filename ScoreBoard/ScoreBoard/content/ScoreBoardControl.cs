@@ -3,6 +3,7 @@ using ScoreBoard.data;
 using ScoreBoard.data.artifact;
 using ScoreBoard.data.character;
 using ScoreBoard.data.monster;
+using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.data.statusEffect;
 using ScoreBoard.modals;
@@ -58,9 +59,29 @@ namespace ScoreBoard.content
 
         private void ScoreBoardControl_Load(object sender, EventArgs e)
         {
+            ActivateDefaultPassive();
             InitPlayerList();
             InitEnemyList();
             ShowDetail(_characters.ElementAt(0).Value);
+        }
+
+        /*
+         * ActivateDefaultPassive()
+         * - 각 캐릭터별 기본 패시브를 활성화합니다.
+         */
+        private void ActivateDefaultPassive()
+        {
+            foreach (var dict in _characters)
+            {
+                List<PassiveSkill> passiveList = dict.Value.Passives;
+                for (int i = 0; i < passiveList.Count; i++)
+                {
+                    if (passiveList[i].RequiredLevel == 0)
+                    {
+                        passiveList[i].Activate?.Invoke(); // Null 가능성을 안전하게 처리
+                    }
+                }
+            }
         }
 
         /*
@@ -1073,7 +1094,20 @@ namespace ScoreBoard.content
             {
                 currentShowingPlayer!.ArtifactSlot[info.SlotIndex]?.Unequip(currentShowingPlayer);
                 currentShowingPlayer.ArtifactSlot[info.SlotIndex] = null;
+
+                // 루다 2강의 경우, 앞으로 장착하는 유물마다 공격속도 -1
+                if (currentShowingPlayer is Ruda && currentShowingPlayer.Level >= 2)
+                {
+                    ushort bonus = ((Ruda)currentShowingPlayer).PerfectionBonus;
+                    ushort meleeCount = currentShowingPlayer.Stat.CombatStats["melee"].AttackCount;
+                    ushort rangedCount = currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount;
+
+                    ((Ruda)currentShowingPlayer).PerfectionBonus = (ushort)Math.Max(0, bonus - 1);
+                    currentShowingPlayer.Stat.CombatStats["melee"].AttackCount = (ushort)Math.Max(0, meleeCount - 1);
+                    currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount = (ushort)Math.Max(0, rangedCount - 1); ;
+                }
             }
+
         }
 
         /*
@@ -1086,6 +1120,14 @@ namespace ScoreBoard.content
         {
             currentShowingPlayer!.ArtifactSlot[info.SlotIndex] = newArtifact;
             newArtifact.Equip(currentShowingPlayer);
+
+            // 루다 2강 효과의 경우, 앞으로 장착하는 유물마다 공격속도 +1
+            if (currentShowingPlayer is Ruda && currentShowingPlayer.Level >= 2)
+            {
+                ((Ruda)currentShowingPlayer).PerfectionBonus++;
+                currentShowingPlayer.Stat.CombatStats["melee"].AttackCount++;
+                currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount++;
+            }
         }
 
         /*

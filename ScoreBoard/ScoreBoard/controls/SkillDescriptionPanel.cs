@@ -103,9 +103,9 @@ namespace ScoreBoard.controls
          */
         private void AddActiveSkillToPanel(ActiveSkill active)
         {
-            var foreColor = active.isOnCooldown || (_level < active.RequiredLevel)
-                ? Color.FromArgb(100, 245, 245, 245)
-                : Color.WhiteSmoke;
+            var foreColor = !active.isOnCooldown && (_level >= active.RequiredLevel)
+                ? Color.WhiteSmoke
+                : Color.FromArgb(100, 245, 245, 245);
 
             AddSkillHeaderRow(active, foreColor);
             AddSkillDescriptions(active, foreColor);
