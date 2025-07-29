@@ -82,7 +82,7 @@ namespace ScoreBoard.data.character
 
                 skill.Activate = p.Name switch
                 {
-                    "임페리얼 베리어" => () => skill.isActivated = false, // 일회성 효과
+                    "임페리얼 베리어" => () => skill.isActivated = true, // 일회성 효과
                     "커스텀 튜닝" => () =>
                     {
                         skill.isActivated = true;
@@ -150,7 +150,7 @@ namespace ScoreBoard.data.character
          */
         private void Tune()
         {
-            this.Stat.CombatStats["melee"].Value += 20; // 공격력 증가
+            this.Stat.CombatStats["ranged"].Value += 20; // 공격력 증가
         }
 
         /*
@@ -159,9 +159,9 @@ namespace ScoreBoard.data.character
          */
         private void Untune()
         {
-            ushort attackValue = this.Stat.CombatStats["melee"].Value;
+            ushort attackValue = this.Stat.CombatStats["ranged"].Value;
 
-            this.Stat.CombatStats["melee"].Value = (ushort)Math.Max(0, attackValue - 20);
+            this.Stat.CombatStats["ranged"].Value = (ushort)Math.Max(0, attackValue - 20);
         }
 
         /*
