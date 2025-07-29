@@ -1652,6 +1652,7 @@
             pbLevel.Size = new Size(45, 45);
             pbLevel.TabIndex = 5;
             pbLevel.TabStop = false;
+            pbLevel.Click += pbLevel_Click;
             // 
             // ScoreBoardControl
             // 

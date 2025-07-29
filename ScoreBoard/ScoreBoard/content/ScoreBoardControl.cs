@@ -558,7 +558,7 @@ namespace ScoreBoard.content
          */
         private void DisplaySkillDescription()
         {
-            skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
+            skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Level, currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
             int insertIndex = detailViewport.Controls.GetChildIndex(customFlowLayoutPanel3) + 1;
             detailViewport.Controls.Add(skillDescriptionPanel);
             detailViewport.Controls.SetChildIndex(skillDescriptionPanel, insertIndex);
@@ -1057,6 +1057,54 @@ namespace ScoreBoard.content
             }
             ShowDetail(currentShowingPlayer); // 변경된 내용을 반영하여 상세 정보 표시
             InitPlayerList(); // 플레이어 리스트 업데이트
+        }
+
+        private void pbLevel_Click(object sender, EventArgs e)
+        {
+            var editModal = new DetailEditModal(currentShowingPlayer!.Level.ToString())
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = pbLevel.PointToScreen(Point.Empty),
+            };
+
+            if (editModal.ShowDialog() == DialogResult.OK)
+            {
+                if (ushort.TryParse(editModal.InputText.Trim(), out ushort newLevel)
+                    && newLevel >= 0 && newLevel <= 3)
+                {
+                    currentShowingPlayer!.Level = newLevel; // 레벨 갱신
+                    UpdateSkillsByLevel(newLevel); // 레벨에 따른 스킬 갱신
+                    ShowDetail(currentShowingPlayer); // 업데이트된 내용 표시
+                }
+            }
+            else
+            {
+                MessageBox.Show("유효한 강화 수치(0 ~ 3)가 아닙니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /*
+         * UpdateSkillsByLevel(ushort newLevel)
+         * - 플레이어의 레벨 업데이트에 따른 패시브 및 액티브 스킬 사용 조건을 갱신하는 메서드
+         * - newLevel: 플레이어의 새 레벨
+         */
+        private void UpdateSkillsByLevel(ushort newLevel)
+        {
+            // 레벨 갱신에 따른 패시브 스킬 개방
+            // 액티브 스킬은 스킬 설명 모달을 다시 띄우면 갱신됨
+            foreach (var p in currentShowingPlayer!.Passives)
+            {
+                // 기존보다 높은 강화수치를 적용했는데, 아직 활성화 되지 않은 패시브가 있다면
+                if (p.RequiredLevel <= newLevel && !p.isActivated)
+                {
+                    p.Activate?.Invoke();
+                }
+                // 기존보다 낮은 강화수치를 적용했는데, 더 높은 단계에 활성화된 패시브가 있다면
+                else if (p.RequiredLevel > newLevel && p.isActivated)
+                {
+                    p.Deactivate?.Invoke();
+                }
+            }
         }
     }
 }
