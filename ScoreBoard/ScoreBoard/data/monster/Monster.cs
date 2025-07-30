@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ScoreBoard.data.monster
@@ -15,9 +16,17 @@ namespace ScoreBoard.data.monster
         public string Id { get; set; } = string.Empty!; // Id
         public string Name { get; set; } = string.Empty!; // 이름
         public Stat Stat { get; set; } = default!; // 스탯
-        public ushort[] RequiredDiceValues { get; set; } = default!; // 공격이 유효한 주사위 숫자
         public ushort SpawnTurn { get; set; } // 스폰 가능한 턴
         public SkillBase? SpawnElites { get; set; } // 보스 몬스터는 엘리트 몬스터를 소환할 수 있음
+
+        [JsonIgnore]
+        public Dictionary<ushort, bool> RequiredDiceValues { get; set; } = []; // 행동하기 위해 필요한 주사위 값이 키, 치명타 여부가 값
+
+        [JsonIgnore] 
+        public bool IsReported { get; set; } = false; // 보고되었는지 확인
+
+        [JsonIgnore]
+        public ushort Count { get; set; } = 0; // 개체 수
 
         protected void InitialiseNormalElite(string id, ushort spawnTurn)
         {
@@ -28,7 +37,6 @@ namespace ScoreBoard.data.monster
             Id = data.Id;
             Grade = data.Grade;
             Name = data.Name;
-            RequiredDiceValues = data.RequiredDiceValues;
             SpawnTurn = spawnTurn;
             Stat = new Stat
             {
