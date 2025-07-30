@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ScoreBoard.controls;
+using ScoreBoard.data.character;
+using ScoreBoard.data.monster;
+using ScoreBoard.modals;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,15 +11,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ScoreBoard.controls;
-using ScoreBoard.data.character;
-using ScoreBoard.modals;
 
 namespace ScoreBoard.content
 {
     public partial class OrganisationControl : UserControl
     {
-        public event EventHandler<(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)>? RequestScoreBoard; // 점수판 요청 이벤트
+        public event EventHandler<(Dictionary<string, CorpsMember> characters, List<Monster> monsters)>? RequestScoreBoard; // 점수판 요청 이벤트
         Dictionary<string, CorpsMember> selectedCharacters = [];
         List<(string id, string name, ushort count)> selectedMonsters = [];
 
@@ -93,7 +94,19 @@ namespace ScoreBoard.content
             {
                 selectedMonsters = selectMonsterModal.currentSelectedMonsters;
                 selectMonsterModal.Close();
-                RequestScoreBoard?.Invoke(this, (selectedCharacters, selectedMonsters));
+                List<Monster> selectedMonsterList = new();
+                foreach (var (id, name, count) in selectedMonsters)
+                {
+                    Monster monster = id switch
+                    {
+                        "2_01_white_soldier" => new WhiteSoldier(id, 0),// 스폰 턴은 0으로 설정
+                        "2_02_black_knight" => new BlackKnight(id, 0),
+                        _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
+                    };
+                    monster.Count = count;
+                    selectedMonsterList.Add(monster);
+                }
+                RequestScoreBoard?.Invoke(this, (selectedCharacters, selectedMonsterList));
             }
         }
 
