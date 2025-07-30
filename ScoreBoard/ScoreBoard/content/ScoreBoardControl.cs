@@ -28,12 +28,12 @@ namespace ScoreBoard.content
     {
         private SkillDescriptionPanel? skillDescriptionPanel = null; // 스킬 설명 패널
         private readonly Dictionary<string, CorpsMember> _characters;
-        private readonly List<(string id, string name, ushort count)> _monsters;
+        private readonly List<Monster> _monsters;
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
         private enum SHOWING_DATA_TYPE { Player = 0, Monster = 1 };
         private SHOWING_DATA_TYPE _showingDataType = default;
         private CorpsMember? currentShowingPlayer = null; // 현재 표시 중인 플레이어
-        private (Monster?, bool) currentShowingMonster = (null, false); // 현재 표시 중인 몬스터와 보고 여부
+        private Monster? currentShowingMonster = null; // 현재 표시 중인 몬스터와 보고 여부
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
         private readonly TransparentTextLabel cachedStatusEffectDefault = new()
@@ -51,7 +51,7 @@ namespace ScoreBoard.content
             public int SlotIndex { get; set; }
         }
 
-        public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<(string id, string name, ushort count)> monsters)
+        public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<Monster> monsters)
         {
             _characters = characters ?? throw new ArgumentNullException(nameof(characters), "캐릭터는 비어있을 수 없습니다.");
             _monsters = monsters ?? throw new ArgumentNullException(nameof(monsters), "몬스터를 선택해야 합니다.");
@@ -95,20 +95,14 @@ namespace ScoreBoard.content
             enemyList.SuspendLayout();
             enemyList.Controls.Clear();
 
-            foreach (var (id, name, count) in _monsters)
+            foreach (var m in _monsters)
             {
-                Monster monster = id switch
+                EnemyPanel enemyControl = new(m)
                 {
-                    "2_01_white_soldier" => new WhiteSoldier(id, 0),// 스폰 턴은 0으로 설정
-                    "2_02_black_knight" => new BlackKnight(id, 0),
-                    _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
-                };
-                EnemyPanel enemyControl = new(monster, count)
-                {
-                    Name = $"pn{id}"
+                    Name = $"pn{m.Id}"
                 };
                 // 현재 턴보다 스폰 턴이 큰 몬스터는 표시하지 않음
-                if (monster.SpawnTurn > currentTurn)
+                if (m.SpawnTurn > currentTurn)
                 {
                     enemyControl.Visible = false; // 스폰 턴이 0이 아닌 적은 숨김 처리
                 }
@@ -435,6 +429,7 @@ namespace ScoreBoard.content
         private void ShowBasicInfo(CorpsMember player)
         {
             lblName.Text = player.Name;
+            pbLevel.Visible = true;
 
             pbLevel.BackgroundImage = player.Level switch
             {
@@ -507,7 +502,7 @@ namespace ScoreBoard.content
             }
             else
             {
-                currentShowingMonster.Item1!.RequiredDiceValues = [.. newDiceDict.Keys];
+                currentShowingMonster!.RequiredDiceValues = newDiceDict;
             }
             UpdateDiceUI(newDiceDict);
         }
@@ -628,12 +623,15 @@ namespace ScoreBoard.content
         /*
          * ShowDetail(bool isReported, Monster monster)
          * - 몬스터의 상세 정보를 표시하는 메서드
-         * - isReported: 몬스터의 상태가 보고되었는지 여부
+         * - isReported: 몬스터의 상태가 보고되었는지 여부. 한 번 true면 계속 true
          * - monster: Monster 객체
          */
         private void ShowDetail(bool isReported, Monster monster)
         {
-            currentShowingMonster = (monster, isReported);
+            pbLevel.Visible = false;
+            if (isReported)
+                monster.IsReported = isReported;
+            currentShowingMonster = monster;
             _showingDataType = SHOWING_DATA_TYPE.Monster;
 
             detailViewport.SuspendLayout();
@@ -644,21 +642,20 @@ namespace ScoreBoard.content
             ShowBasicInfo(isReported, monster);
             ShowHealth(isReported, monster);
             ShowAttackValue(isReported, monster);
-            ShowStatusEffect(isReported, monster);
+            ShowStatusEffect(monster);
             detailViewport.ResumeLayout();
 
             ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
         }
 
         /*
-         * ShowStatusEffect(bool isReported, Monster monster)
+         * ShowStatusEffect(Monster monster)
          * - 몬스터의 상태 이상을 표시하는 메서드
-         * - isReported: 몬스터의 상태가 보고되었는지 여부
          * - monster: Monster 객체
          */
-        private void ShowStatusEffect(bool isReported, Monster monster)
+        private void ShowStatusEffect(Monster monster)
         {
-            if (isReported)
+            if (monster.IsReported)
             {
                 fpnStatusDetail.Visible = true;
                 fpnStatusEffect.Controls.Clear();
@@ -732,11 +729,11 @@ namespace ScoreBoard.content
             fpnBasicStatus.Visible = true;
             lblName.Text = monster.Name;
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
-            if (isReported && monster.RequiredDiceValues.Length > 0)
+            if (isReported && monster.RequiredDiceValues.Count > 0)
             {
                 foreach (var diceValue in monster.RequiredDiceValues)
                 {
-                    var label = CreateDiceLabel(diceValue, monster.RequiredDiceValues.Last() == diceValue);
+                    var label = CreateDiceLabel(diceValue.Key, diceValue.Value);
                     fpnDice.Controls.Add(label);
                 }
             }
@@ -834,7 +831,7 @@ namespace ScoreBoard.content
         {
             if (sender is not TransparentTextLabel label
                 || currentShowingPlayer == null
-                || currentShowingMonster.Item1 == null)
+                || currentShowingMonster == null)
                 return;
 
             Point labelPos = label.PointToScreen(Point.Empty);
@@ -855,7 +852,7 @@ namespace ScoreBoard.content
 
             var statOwner = _showingDataType == SHOWING_DATA_TYPE.Player
                 ? (object)currentShowingPlayer
-                : currentShowingMonster.Item1;
+                : currentShowingMonster;
 
             var setterMap = CreateStatSetters(statOwner);
 
@@ -928,7 +925,7 @@ namespace ScoreBoard.content
                 }
                 else
                 {
-                    UpdateMonsterHp((ushort)hp, shield);
+                    hp = UpdateMonsterHp((ushort)hp, shield);
                 }
 
                 lblCurrentHealth.Text = $"{hp}{(shield.HasValue ? $"(+{shield})" : "")}";
@@ -936,25 +933,36 @@ namespace ScoreBoard.content
             }
         }
 
-        private void UpdateMonsterHp(ushort hp, ushort? shield)
+        /*
+         * UpdateMonsterHp(ushort hp, ushort? shield)
+         * - 몬스터의 체력을 갱신하는 메서드
+         * - 체력이 최대체력보다 크면 마리 수를 증가시킴
+         */
+        private ushort UpdateMonsterHp(ushort hp, ushort? shield)
         {
             // 몬스터 마리, 그리고 그 중 한 마리의 체력 계산(예: 5마리 중 4마리는 풀피, 나머지 1마리의 체력 계산
-            int count = (int)(currentShowingMonster.Item1!.Stat.Hp / hp);
-            var newHp = (ushort)(currentShowingMonster.Item1!.Stat.MaxHp % hp);
+            ushort count = (ushort)(hp / currentShowingMonster!.Stat.MaxHp);
+            var newHp = (ushort)(hp % currentShowingMonster.Stat.MaxHp);
             if (newHp == 0) // 모든 몬스터가 풀피라면 현재 hp를 최대 체력과 같게 함
-                hp = currentShowingMonster.Item1.Stat.MaxHp;
+                hp = currentShowingMonster.Stat.MaxHp;
             else // 일부 몬스터가 풀피가 아니라면 나머지 체력을 갖게 함
                 hp = newHp;
-            int index = _monsters.FindIndex(item => item.id == currentShowingMonster.Item1.Id);
+            if (hp != 0 && count != 0) // 체력이 남아있는데, count가 0이라면 1로 보정
+                count++;
+            int index = _monsters.FindIndex(item => item.Id == currentShowingMonster.Id);
             if (index != -1)
             {
                 var monster = _monsters[index];
-                if (monster.count != count) // 몬스터의 마리 수가 달라졌다면 갱신
-                    _monsters[index] = (monster.id, monster.name, monster.count);
+                if (monster.Count != count) // 몬스터의 마리 수가 달라졌다면 갱신
+                {
+                    monster.Count = count;
+                }
             }
 
-            currentShowingMonster.Item1!.Stat.Hp = hp; // 현재 체력 갱신
-            currentShowingMonster.Item1.Stat.Shield = shield ?? 0; // 방어력 갱신
+            currentShowingMonster!.Stat.Hp = hp; // 현재 체력 갱신
+            currentShowingMonster.Stat.Shield = shield ?? 0; // 방어력 갱신
+            InitEnemyList();
+            return hp;
         }
 
         /*
@@ -978,12 +986,12 @@ namespace ScoreBoard.content
             }
             else
             {
-                var healthBar = this.Controls.Find($"hb{currentShowingMonster.Item1!.Id}", true).FirstOrDefault() as HealthBar;
+                var healthBar = this.Controls.Find($"hb{currentShowingMonster!.Id}", true).FirstOrDefault() as HealthBar;
                 enemyList.SuspendLayout();
                 // HealthBar 컨트롤을 찾아서 업데이트
-                healthBar?.SetValues(currentShowingMonster.Item1.Stat.Hp,
-                                    currentShowingMonster.Item1.Stat.Shield,
-                                    currentShowingMonster.Item1.Stat.MaxHp);
+                healthBar?.SetValues(currentShowingMonster.Stat.Hp,
+                                    currentShowingMonster.Stat.Shield,
+                                    currentShowingMonster.Stat.MaxHp);
                 enemyList.ResumeLayout();
             }
         }
@@ -1029,7 +1037,7 @@ namespace ScoreBoard.content
          */
         private void EditStatusEffect()
         {
-            if (currentShowingPlayer == null || currentShowingMonster.Item1 == null)
+            if (currentShowingPlayer == null || currentShowingMonster == null)
                 return;
             Point modalStartPos = new(fpnStatusEffect.PointToScreen(Point.Empty).X, fpnStatusEffect.PointToScreen(Point.Empty).Y + 45);
 
@@ -1037,7 +1045,7 @@ namespace ScoreBoard.content
             if (_showingDataType == SHOWING_DATA_TYPE.Player)
                 statusEffect = currentShowingPlayer.Stat.StatusEffects;
             else
-                statusEffect = currentShowingMonster.Item1.Stat.StatusEffects;
+                statusEffect = currentShowingMonster.Stat.StatusEffects;
             var editModal = new StatusEffectEditModal(statusEffect)
             {
                 StartPosition = FormStartPosition.Manual,
@@ -1055,8 +1063,8 @@ namespace ScoreBoard.content
                 }
                 else
                 {
-                    currentShowingMonster.Item1.Stat.StatusEffects = editModal.NewStatusEffects;
-                    ShowStatusEffect(currentShowingMonster.Item2, currentShowingMonster.Item1);
+                    currentShowingMonster.Stat.StatusEffects = editModal.NewStatusEffects;
+                    ShowStatusEffect(currentShowingMonster);
                     InitEnemyList();
                 }
             }
