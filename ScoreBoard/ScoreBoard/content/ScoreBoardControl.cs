@@ -925,12 +925,38 @@ namespace ScoreBoard.content
                 }
                 else
                 {
-                    hp = UpdateMonsterHp((ushort)hp, shield);
+                    if (hp == 0 && shield == null)
+                    {
+                        KillMonster();
+                        return;
+                    }
+                    else
+                        hp = UpdateMonsterHp((ushort)hp, shield);
                 }
 
                 lblCurrentHealth.Text = $"{hp}{(shield.HasValue ? $"(+{shield})" : "")}";
                 UpdateHealthBar();
             }
+        }
+
+        /*
+         * KillMonster()
+         * - 체력과 쉴드가 모두 0일 때 실행
+         * - 여러마리였다면 개체 수 - 1
+         * - 한 마리였다면 전멸 판정
+         */
+        private void KillMonster()
+        {
+            if (currentShowingMonster!.Count == 1)
+            {
+                int index = _monsters.FindIndex(a => currentShowingMonster.Id == a.Id);
+                _monsters.RemoveAt(index);
+            }
+            else
+            {
+                currentShowingMonster.Count--;
+            }
+            InitEnemyList();
         }
 
         /*
@@ -947,7 +973,7 @@ namespace ScoreBoard.content
                 hp = currentShowingMonster.Stat.MaxHp;
             else // 일부 몬스터가 풀피가 아니라면 나머지 체력을 갖게 함
                 hp = newHp;
-            if (hp != 0 && count != 0) // 체력이 남아있는데, count가 0이라면 1로 보정
+            if (hp != 0) // 체력이 남아있다면 count + 1 보정.(예: hp = 300, maxhp = 200이면 count = 1, hp = 100이므로, 2마리로 만들어준다.)
                 count++;
             int index = _monsters.FindIndex(item => item.Id == currentShowingMonster.Id);
             if (index != -1)
