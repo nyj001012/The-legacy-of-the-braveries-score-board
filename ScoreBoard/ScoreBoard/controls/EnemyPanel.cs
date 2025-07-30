@@ -33,6 +33,7 @@ namespace ScoreBoard.controls
             // 컨트롤 초기화
             InitializeComponent();
             lblName.Text = $"{_monster.Name} ({count})";
+            hbEnemy.Name = $"hb{_monster.Id}";
 
             // EnemyPanel 컨트롤의 마우스 이벤트 핸들러 등록
             RegisterMouseEvents(this);

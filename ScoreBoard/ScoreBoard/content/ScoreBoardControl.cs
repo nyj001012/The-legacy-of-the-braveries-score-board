@@ -30,7 +30,10 @@ namespace ScoreBoard.content
         private readonly Dictionary<string, CorpsMember> _characters;
         private readonly List<(string id, string name, ushort count)> _monsters;
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
+        private enum SHOWING_DATA_TYPE { Player = 0, Monster = 1 };
+        private SHOWING_DATA_TYPE _showingDataType = default;
         private CorpsMember? currentShowingPlayer = null; // 현재 표시 중인 플레이어
+        private (Monster?, bool) currentShowingMonster = (null, false); // 현재 표시 중인 몬스터와 보고 여부
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
         private readonly TransparentTextLabel cachedStatusEffectDefault = new()
@@ -151,6 +154,7 @@ namespace ScoreBoard.content
         private void ShowDetail(CorpsMember player)
         {
             currentShowingPlayer = player;
+            _showingDataType = SHOWING_DATA_TYPE.Player;
 
             PrepareViewport();
             ReplaceSkillDescriptionPanel();
@@ -497,8 +501,14 @@ namespace ScoreBoard.content
                 MessageBox.Show("유효한 주사위 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            currentShowingPlayer!.RequiredDiceValues = newDiceDict;
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
+            {
+                currentShowingPlayer!.RequiredDiceValues = newDiceDict;
+            }
+            else
+            {
+                currentShowingMonster.Item1!.RequiredDiceValues = [.. newDiceDict.Keys];
+            }
             UpdateDiceUI(newDiceDict);
         }
 
@@ -623,6 +633,9 @@ namespace ScoreBoard.content
          */
         private void ShowDetail(bool isReported, Monster monster)
         {
+            currentShowingMonster = (monster, isReported);
+            _showingDataType = SHOWING_DATA_TYPE.Monster;
+
             detailViewport.SuspendLayout();
             foreach (Control control in detailViewport.Controls)
             {
@@ -645,26 +658,26 @@ namespace ScoreBoard.content
          */
         private void ShowStatusEffect(bool isReported, Monster monster)
         {
-            if (monster.Stat.StatusEffects.Count == 0 || !isReported)
+            if (isReported)
+            {
+                fpnStatusDetail.Visible = true;
+                fpnStatusEffect.Controls.Clear();
+                if (monster.Stat.StatusEffects.Count == 0)
+                {
+                    fpnStatusEffect.Controls.Add(cachedStatusEffectDefault);
+                    return;
+                }
+
+                foreach (var statusEffect in monster.Stat.StatusEffects)
+                {
+                    var (pb, label) = CreateStatusEffectControl(statusEffect);
+                    fpnStatusEffect.Controls.Add(pb);
+                    fpnStatusEffect.Controls.Add(label);
+                }
+            }
+            else
             {
                 fpnStatusDetail.Visible = false;
-                return;
-            }
-
-            fpnStatusDetail.Visible = true;
-            fpnStatusEffect.Controls.Clear();
-
-            if (monster.Stat.StatusEffects.Count == 0)
-            {
-                fpnStatusDetail.Controls.Add(cachedStatusEffectDefault);
-                return;
-            }
-
-            foreach (var statusEffect in monster.Stat.StatusEffects)
-            {
-                var (pb, label) = CreateStatusEffectControl(statusEffect);
-                fpnStatusDetail.Controls.Add(pb);
-                fpnStatusDetail.Controls.Add(label);
             }
         }
 
@@ -699,10 +712,13 @@ namespace ScoreBoard.content
             if (isReported)
             {
                 pnHealth.Visible = true;
+                lblCurrentHealth.Text = monster.Stat.Hp.ToString();
                 if (monster.Stat.Shield > 0)
+                {
                     lblCurrentHealth.Text += $"(+{monster.Stat.Shield})";
-                lblCurrentHealth.Text += $"/{monster.Stat.MaxHp}";
+                }
             }
+            lblMaxHealth.Text = $"{monster.Stat.MaxHp}";
         }
 
         /*
@@ -816,87 +832,72 @@ namespace ScoreBoard.content
          */
         private void SimpleStatLabel_Click(object sender, EventArgs e)
         {
-            if (sender is not TransparentTextLabel label || currentShowingPlayer == null)
+            if (sender is not TransparentTextLabel label
+                || currentShowingPlayer == null
+                || currentShowingMonster.Item1 == null)
                 return;
+
+            Point labelPos = label.PointToScreen(Point.Empty);
             DetailEditModal modal = new(label.Text)
             {
                 StartPosition = FormStartPosition.Manual,
-                Location = label.PointToScreen(Point.Empty),
+                Location = labelPos,
             };
 
-            if (modal.ShowDialog(this) == DialogResult.OK)
-            {
-                if (ushort.TryParse(modal.InputText, out ushort value) && value >= 0)
-                {
-                    var labelSetters = new Dictionary<string, Action>
-                    {
-                        ["lblMaxHealth"] = () =>
-                        {
-                            currentShowingPlayer.Stat.MaxHp = value;
-                            lblMaxHealth.Text = value.ToString();
-                            UpdateHealthBar(); // 체력 바 업데이트
-                        },
-                        ["lblMovement"] = () =>
-                        {
-                            currentShowingPlayer.Stat.Movement = value;
-                            lblMovement.Text = value.ToString();
-                        },
-                        ["lblMeleeRange"] = () =>
-                        {
-                            currentShowingPlayer.Stat.CombatStats["melee"].Range = value;
-                            lblMeleeRange.Text = value.ToString();
-                        },
-                        ["lblRangedRange"] = () =>
-                        {
-                            currentShowingPlayer.Stat.CombatStats["ranged"].Range = value;
-                            lblRangedRange.Text = value.ToString();
-                        },
-                        ["lblMeleeAttack"] = () =>
-                        {
-                            currentShowingPlayer.Stat.CombatStats["melee"].Value = value;
-                            lblMeleeAttack.Text = value.ToString();
-                        },
-                        ["lblRangedAttack"] = () =>
-                        {
-                            currentShowingPlayer.Stat.CombatStats["ranged"].Value = value;
-                            lblRangedAttack.Text = value.ToString();
-                        },
-                        ["lblMeleeAttackCount"] = () =>
-                        {
-                            currentShowingPlayer.Stat.CombatStats["melee"].AttackCount = value;
-                            lblMeleeAttackCount.Text = $"{{{value}}}";
-                        },
-                        ["lblRangedAttackCount"] = () =>
-                        {
-                            currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount = value;
-                            lblRangedAttackCount.Text = $"{{{value}}}";
-                        },
-                        ["lblSpellPower"] = () =>
-                        {
-                            currentShowingPlayer.Stat.SpellPower = value;
-                            lblSpellPower.Text = value.ToString();
-                        },
-                        ["lblWisdom"] = () =>
-                        {
-                            currentShowingPlayer.Stat.Wisdom = value;
-                            lblWisdom.Text = value.ToString();
-                        },
-                    };
+            if (modal.ShowDialog(this) != DialogResult.OK)
+                return;
 
-                    if (labelSetters.TryGetValue(label.Name, out var setter))
-                    {
-                        setter();
-                    }
-                    else
-                    {
-                        MessageBox.Show("알 수 없는 항목입니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("유효한 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            if (!ushort.TryParse(modal.InputText, out ushort value))
+            {
+                MessageBox.Show("유효한 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            var statOwner = _showingDataType == SHOWING_DATA_TYPE.Player
+                ? (object)currentShowingPlayer
+                : currentShowingMonster.Item1;
+
+            var setterMap = CreateStatSetters(statOwner);
+
+            if (setterMap.TryGetValue(label.Name, out var action))
+            {
+                action(value);
+                label.Text = label.Name.Contains("AttackCount") ? $"{{{value}}}" : value.ToString();
+
+                // 체력 수정 시, 체력바 생김새도 수정
+                if (label.Name == "lblMaxHealth")
+                    UpdateHealthBar();
+            }
+            else
+            {
+                MessageBox.Show("알 수 없는 항목입니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        /*
+         * CreateStatSetters(object target)
+         * - value를 인자로 받아 target의 스탯을 설정할 수 있게 하는 메서드를 반환
+         * - target: CorpsMember 객체나 Monster 객체
+         */
+        private Dictionary<string, Action<ushort>> CreateStatSetters(object target)
+        {
+            dynamic stat = (_showingDataType == SHOWING_DATA_TYPE.Player)
+                ? ((CorpsMember)target).Stat
+                : ((Monster)target).Stat;
+
+            return new()
+            {
+                ["lblMaxHealth"] = v => stat.MaxHp = v, // 딕셔너리 생성. 키는 레이블 이름, 값은 인자(value)
+                ["lblMovement"] = v => stat.Movement = v,
+                ["lblMeleeRange"] = v => stat.CombatStats["melee"].Range = v,
+                ["lblRangedRange"] = v => stat.CombatStats["ranged"].Range = v,
+                ["lblMeleeAttack"] = v => stat.CombatStats["melee"].Value = v,
+                ["lblRangedAttack"] = v => stat.CombatStats["ranged"].Value = v,
+                ["lblMeleeAttackCount"] = v => stat.CombatStats["melee"].AttackCount = v,
+                ["lblRangedAttackCount"] = v => stat.CombatStats["ranged"].AttackCount = v,
+                ["lblSpellPower"] = v => stat.SpellPower = v,
+                ["lblWisdom"] = v => stat.Wisdom = v,
+            };
         }
 
         /*
@@ -920,29 +921,71 @@ namespace ScoreBoard.content
                     MessageBox.Show("유효한 체력 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                currentShowingPlayer!.Stat.Hp = (ushort)hp;
-                currentShowingPlayer.Stat.Shield = shield ?? 0;
+                if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                {
+                    currentShowingPlayer!.Stat.Hp = (ushort)hp;
+                    currentShowingPlayer.Stat.Shield = shield ?? 0;
+                }
+                else
+                {
+                    UpdateMonsterHp((ushort)hp, shield);
+                }
+
                 lblCurrentHealth.Text = $"{hp}{(shield.HasValue ? $"(+{shield})" : "")}";
                 UpdateHealthBar();
             }
         }
 
+        private void UpdateMonsterHp(ushort hp, ushort? shield)
+        {
+            // 몬스터 마리, 그리고 그 중 한 마리의 체력 계산(예: 5마리 중 4마리는 풀피, 나머지 1마리의 체력 계산
+            int count = (int)(currentShowingMonster.Item1!.Stat.Hp / hp);
+            var newHp = (ushort)(currentShowingMonster.Item1!.Stat.MaxHp % hp);
+            if (newHp == 0) // 모든 몬스터가 풀피라면 현재 hp를 최대 체력과 같게 함
+                hp = currentShowingMonster.Item1.Stat.MaxHp;
+            else // 일부 몬스터가 풀피가 아니라면 나머지 체력을 갖게 함
+                hp = newHp;
+            int index = _monsters.FindIndex(item => item.id == currentShowingMonster.Item1.Id);
+            if (index != -1)
+            {
+                var monster = _monsters[index];
+                if (monster.count != count) // 몬스터의 마리 수가 달라졌다면 갱신
+                    _monsters[index] = (monster.id, monster.name, monster.count);
+            }
+
+            currentShowingMonster.Item1!.Stat.Hp = hp; // 현재 체력 갱신
+            currentShowingMonster.Item1.Stat.Shield = shield ?? 0; // 방어력 갱신
+        }
+
         /*
          * UpdateHealthBar()
-         * - 현재 디테일 뷰포트에 표시된 플레이어의 체력 바를 업데이트하는 메서드
+         * - 현재 디테일 뷰포트에 표시된 플레이어 또는 몬스터의 체력 바를 업데이트하는 메서드
          */
         private void UpdateHealthBar()
         {
             // 현재 디테일 뷰포트에 표시된 플레이어의 체력 바를 업데이트
             // pn1P~4P까지 Name이 pn{currentShowingPlayer.Id}인 패널을 찾아서 HealthBar를 업데이트
-            // 현재 플레이어가 1P~4P 중 어느 것인지 확인
-            var healthBar = this.Controls.Find($"hb{currentShowingPlayer!.Id}", true).FirstOrDefault() as HealthBar;
-            playerList.SuspendLayout();
-            // HealthBar 컨트롤을 찾아서 업데이트
-            healthBar?.SetValues(currentShowingPlayer.Stat.Hp,
-                                currentShowingPlayer.Stat.Shield,
-                                currentShowingPlayer.Stat.MaxHp);
-            playerList.ResumeLayout();
+            // 현재 플레이어가 1P~4P 중 어느 것인
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
+            {
+                var healthBar = this.Controls.Find($"hb{currentShowingPlayer!.Id}", true).FirstOrDefault() as HealthBar;
+                playerList.SuspendLayout();
+                // HealthBar 컨트롤을 찾아서 업데이트
+                healthBar?.SetValues(currentShowingPlayer.Stat.Hp,
+                                    currentShowingPlayer.Stat.Shield,
+                                    currentShowingPlayer.Stat.MaxHp);
+                playerList.ResumeLayout();
+            }
+            else
+            {
+                var healthBar = this.Controls.Find($"hb{currentShowingMonster.Item1!.Id}", true).FirstOrDefault() as HealthBar;
+                enemyList.SuspendLayout();
+                // HealthBar 컨트롤을 찾아서 업데이트
+                healthBar?.SetValues(currentShowingMonster.Item1.Stat.Hp,
+                                    currentShowingMonster.Item1.Stat.Shield,
+                                    currentShowingMonster.Item1.Stat.MaxHp);
+                enemyList.ResumeLayout();
+            }
         }
 
         /*
@@ -986,11 +1029,16 @@ namespace ScoreBoard.content
          */
         private void EditStatusEffect()
         {
-            if (currentShowingPlayer == null)
+            if (currentShowingPlayer == null || currentShowingMonster.Item1 == null)
                 return;
             Point modalStartPos = new(fpnStatusEffect.PointToScreen(Point.Empty).X, fpnStatusEffect.PointToScreen(Point.Empty).Y + 45);
 
-            var editModal = new StatusEffectEditModal(currentShowingPlayer.Stat.StatusEffects)
+            List<StatusEffect> statusEffect;
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                statusEffect = currentShowingPlayer.Stat.StatusEffects;
+            else
+                statusEffect = currentShowingMonster.Item1.Stat.StatusEffects;
+            var editModal = new StatusEffectEditModal(statusEffect)
             {
                 StartPosition = FormStartPosition.Manual,
                 Location = modalStartPos,
@@ -999,9 +1047,18 @@ namespace ScoreBoard.content
             if (editModal.ShowDialog(this) == DialogResult.OK)
             {
                 // 상태 이상 업데이트
-                currentShowingPlayer.Stat.StatusEffects = editModal.NewStatusEffects;
-                ShowStatusEffect(currentShowingPlayer);
-                InitPlayerList(); // 상태 이상 패널 업데이트
+                if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                {
+                    currentShowingPlayer.Stat.StatusEffects = editModal.NewStatusEffects;
+                    ShowStatusEffect(currentShowingPlayer);
+                    InitPlayerList(); // 상태 이상 패널 업데이트
+                }
+                else
+                {
+                    currentShowingMonster.Item1.Stat.StatusEffects = editModal.NewStatusEffects;
+                    ShowStatusEffect(currentShowingMonster.Item2, currentShowingMonster.Item1);
+                    InitEnemyList();
+                }
             }
         }
 
