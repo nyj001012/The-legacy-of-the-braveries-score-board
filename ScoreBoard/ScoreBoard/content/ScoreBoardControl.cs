@@ -1369,5 +1369,14 @@ namespace ScoreBoard.content
             if (pnNote.Height != newPanelHeight)
                 pnNote.Height = newPanelHeight;
         }
+
+        /*
+         * ChangeWeather
+         * - 날씨를 바꾸기 위한 모달을 호출하고 그 데이터를 반영하는 메서드
+         */
+        private void ChangeWeather(object sender, EventArgs e)
+        {
+
+        }
     }
 }

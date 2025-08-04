@@ -736,25 +736,29 @@
             // lblWeather
             // 
             lblWeather.BackColor = Color.Transparent;
+            lblWeather.Cursor = Cursors.Hand;
             lblWeather.Font = new Font("Danjo-bold", 30F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblWeather.GradientEnd = Color.FromArgb(107, 89, 50);
             lblWeather.GradientStart = Color.FromArgb(209, 162, 97);
             lblWeather.Location = new Point(1181, 25);
             lblWeather.Name = "lblWeather";
-            lblWeather.Size = new Size(145, 70);
+            lblWeather.Size = new Size(82, 70);
             lblWeather.TabIndex = 2;
             lblWeather.Text = "1";
             lblWeather.TextAlign = ContentAlignment.MiddleLeft;
+            lblWeather.Click += ChangeWeather;
             // 
             // pbWeather
             // 
             pbWeather.BackgroundImageLayout = ImageLayout.Stretch;
+            pbWeather.Cursor = Cursors.Hand;
             pbWeather.Location = new Point(1083, 16);
             pbWeather.Margin = new Padding(0, 0, 15, 0);
             pbWeather.Name = "pbWeather";
             pbWeather.Size = new Size(80, 80);
             pbWeather.TabIndex = 1;
             pbWeather.TabStop = false;
+            pbWeather.Click += ChangeWeather;
             // 
             // lblTurn
             // 
