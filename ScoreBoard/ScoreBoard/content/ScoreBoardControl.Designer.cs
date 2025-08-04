@@ -120,8 +120,8 @@
             pbArmour = new PictureBox();
             pbAccessory1 = new PictureBox();
             pbAccessory2 = new PictureBox();
-            doubleBufferedPanel3 = new ScoreBoard.controls.DoubleBufferedPanel();
-            richTextBox1 = new RichTextBox();
+            pnNote = new ScoreBoard.controls.DoubleBufferedPanel();
+            rtbNote = new RichTextBox();
             transparentTextLabel3 = new ScoreBoard.controls.TransparentTextLabel();
             detailScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             enemyContainer = new ScoreBoard.controls.DoubleBufferedPanel();
@@ -177,7 +177,7 @@
             ((System.ComponentModel.ISupportInitialize)pbArmour).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory2).BeginInit();
-            doubleBufferedPanel3.SuspendLayout();
+            pnNote.SuspendLayout();
             enemyContainer.SuspendLayout();
             enemyList.SuspendLayout();
             pnEnemy1.SuspendLayout();
@@ -809,7 +809,7 @@
             detailViewport.Controls.Add(customFlowLayoutPanel3);
             detailViewport.Controls.Add(doubleBufferedPanel5);
             detailViewport.Controls.Add(fpnArtifact);
-            detailViewport.Controls.Add(doubleBufferedPanel3);
+            detailViewport.Controls.Add(pnNote);
             detailViewport.FlowDirection = FlowDirection.TopDown;
             detailViewport.Location = new Point(0, 0);
             detailViewport.Margin = new Padding(0);
@@ -1441,25 +1441,29 @@
             pbAccessory2.Tag = "";
             pbAccessory2.Click += pbAccessory2_Click;
             // 
-            // doubleBufferedPanel3
+            // pnNote
             // 
-            doubleBufferedPanel3.Controls.Add(richTextBox1);
-            doubleBufferedPanel3.Controls.Add(transparentTextLabel3);
-            doubleBufferedPanel3.Location = new Point(60, 749);
-            doubleBufferedPanel3.Margin = new Padding(0, 15, 0, 0);
-            doubleBufferedPanel3.Name = "doubleBufferedPanel3";
-            doubleBufferedPanel3.Size = new Size(600, 45);
-            doubleBufferedPanel3.TabIndex = 12;
+            pnNote.Controls.Add(rtbNote);
+            pnNote.Controls.Add(transparentTextLabel3);
+            pnNote.Location = new Point(60, 749);
+            pnNote.Margin = new Padding(0, 15, 0, 0);
+            pnNote.Name = "pnNote";
+            pnNote.Size = new Size(600, 45);
+            pnNote.TabIndex = 12;
             // 
-            // richTextBox1
+            // rtbNote
             // 
-            richTextBox1.BorderStyle = BorderStyle.None;
-            richTextBox1.Location = new Point(154, -2);
-            richTextBox1.Margin = new Padding(0);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(429, 42);
-            richTextBox1.TabIndex = 1;
-            richTextBox1.Text = "";
+            rtbNote.BackColor = Color.DarkGoldenrod;
+            rtbNote.BorderStyle = BorderStyle.None;
+            rtbNote.Font = new Font("나눔고딕코딩", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            rtbNote.ForeColor = Color.WhiteSmoke;
+            rtbNote.Location = new Point(167, -2);
+            rtbNote.Margin = new Padding(0);
+            rtbNote.Name = "rtbNote";
+            rtbNote.Size = new Size(433, 42);
+            rtbNote.TabIndex = 1;
+            rtbNote.Text = "";
+            rtbNote.TextChanged += rtbNote_TextChanged;
             // 
             // transparentTextLabel3
             // 
@@ -1726,8 +1730,8 @@
             ((System.ComponentModel.ISupportInitialize)pbArmour).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory2).EndInit();
-            doubleBufferedPanel3.ResumeLayout(false);
-            doubleBufferedPanel3.PerformLayout();
+            pnNote.ResumeLayout(false);
+            pnNote.PerformLayout();
             enemyContainer.ResumeLayout(false);
             enemyList.ResumeLayout(false);
             pnEnemy1.ResumeLayout(false);
@@ -1831,9 +1835,9 @@
         private controls.CustomFlowLayoutPanel fpnWisdom;
         private controls.TransparentTextLabel transparentTextLabel2;
         private controls.TransparentTextLabel lblWisdom;
-        private controls.DoubleBufferedPanel doubleBufferedPanel3;
+        private controls.DoubleBufferedPanel pnNote;
         private controls.TransparentTextLabel transparentTextLabel3;
-        private RichTextBox richTextBox1;
+        private RichTextBox rtbNote;
         private controls.DoubleBufferedPanel detailList;
         private controls.CustomFlowLayoutPanel fpnDice;
         private controls.TransparentTextLabel transparentTextLabel1;

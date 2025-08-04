@@ -200,6 +200,7 @@ namespace ScoreBoard.content
             ShowSpellPower(player);
             ShowWisdom(player);
             ShowArtifact(player);
+            ShowNote(player);
         }
 
         /*
@@ -306,6 +307,16 @@ namespace ScoreBoard.content
                 SlotIndex = info.SlotIndex,
             };
             pictureBox.BackgroundImage = image;
+        }
+
+        /*
+         * ShowNote(CoprsMember player)
+         * - 플레이어의 특이사항을 보여주는 메서드
+         * - player: 특이사항을 보여줄 플레이어
+         */
+        private void ShowNote(CorpsMember player)
+        {
+            rtbNote.Text = player.Note;
         }
 
         /*
@@ -628,21 +639,23 @@ namespace ScoreBoard.content
          */
         private void ShowDetail(bool isReported, Monster monster)
         {
-            pbLevel.Visible = false;
             if (isReported)
                 monster.IsReported = isReported;
             currentShowingMonster = monster;
             _showingDataType = SHOWING_DATA_TYPE.Monster;
 
             detailViewport.SuspendLayout();
+            pbLevel.Visible = false;
             foreach (Control control in detailViewport.Controls)
             {
                 control.Visible = false;
             }
+            pnNote.Visible = true;
             ShowBasicInfo(isReported, monster);
             ShowHealth(isReported, monster);
             ShowAttackValue(isReported, monster);
             ShowStatusEffect(monster);
+            ShowNote(monster);
             detailViewport.ResumeLayout();
 
             ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
@@ -737,6 +750,16 @@ namespace ScoreBoard.content
                     fpnDice.Controls.Add(label);
                 }
             }
+        }
+
+        /*
+         * ShowNote(Monster monster)
+         * - 몬스터의 특이사항을 표시하는 메서드
+         * - monster: 특이사항을 표시할 몬스터
+         */
+        private void ShowNote(Monster monster)
+        {
+            rtbNote.Text = monster.Note;
         }
 
         /*
@@ -1284,6 +1307,45 @@ namespace ScoreBoard.content
                     p.Deactivate?.Invoke();
                 }
             }
+        }
+
+        private void rtbNote_TextChanged(object sender, EventArgs e)
+        {
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
+            {
+                currentShowingPlayer!.Note = rtbNote.Text;
+            }
+            else
+            {
+                currentShowingMonster!.Note = rtbNote.Text;
+            }
+            AdjustNoteHeight();
+        }
+
+        /*
+         * AdjustNoteHeight()
+         * - 특이사항을 적는 패널과 RichTextBox의 높이를 조절하는 메서드
+         */
+        private void AdjustNoteHeight()
+        {
+            int lineCount = rtbNote.GetLineFromCharIndex(rtbNote.TextLength) + 1;
+
+            int lineHeight = rtbNote.Font.Height;
+            int maxLines = 5;
+            int padding = 6;
+
+            int newHeight = Math.Min(lineCount, maxLines) * lineHeight + padding;
+
+            // 리치텍스트박스 높이 변경
+            if (rtbNote.Height != newHeight)
+                rtbNote.Height = newHeight;
+
+            // 패널도 리치텍스트박스를 감쌀 수 있도록 높이 변경
+            int extra = rtbNote.Top * 2; // RichTextBox 위아래 여백 고려
+            int newPanelHeight = rtbNote.Height + extra;
+
+            if (pnNote.Height != newPanelHeight)
+                pnNote.Height = newPanelHeight;
         }
     }
 }

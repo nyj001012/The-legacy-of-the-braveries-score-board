@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ScoreBoard.data.character
@@ -22,6 +23,9 @@ namespace ScoreBoard.data.character
         public ushort MaxArtifactSlot { get; set; } = 3; // 최대 유물 슬롯 수 (예: 3개)
         public ushort Level { get; set; } = 0; // 멤버의 레벨 (예: 1, 2, 3 등)
         public Dictionary<ushort, bool> RequiredDiceValues { get; set; } = []; // 멤버가 행동하기 위해 필요한 주사위 값이 키, 치명타 여부가 값
+
+        [JsonIgnore]
+        public string Note { get; set; } = String.Empty; // 특이사항
 
         public CorpsMember()
         {

@@ -27,6 +27,9 @@ namespace ScoreBoard.data.monster
 
         [JsonIgnore]
         public ushort Count { get; set; } = 0; // 개체 수
+        
+        [JsonIgnore]
+        public string Note { get; set; } = string.Empty!; // 특이사항
 
         protected void InitialiseNormalElite(string id, ushort spawnTurn)
         {
