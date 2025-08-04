@@ -25,6 +25,7 @@ namespace ScoreBoard.modals
             this.KeyPreview = true; // 폼에서 키 이벤트를 받을 수 있도록 설정
             OldWeather = currentWeather;
             NewWeather = currentWeather;
+            _currentType = currentWeather.Type;
             lblWeatherName.Text = EnumHelper.GetEnumName(currentWeather.Type);
             lblWeatherDescription.Text = EnumHelper.GetEnumDescription(currentWeather.Type);
             tbDuration.Text = currentWeather.Duration.ToString();
