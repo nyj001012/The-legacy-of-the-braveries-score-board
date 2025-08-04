@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ScoreBoard.data.character;
+using ScoreBoard.data.monster;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +18,63 @@ namespace ScoreBoard.data.weather
         { }
 
         public Weather(WeatherType type, int duration)
-        { 
+        {
             Type = type;
             Duration = duration;
+        }
+
+        public void ApplyWeatherEffect(CorpsMember member)
+        {
+            switch (Type)
+            {
+                case WeatherType.Clear:
+                    member.WeatherMovementModifier = 0;
+                    member.WeatherRangeModifier = 0;
+                    member.WeatherDiceModifier = 0;
+                    break;
+                case WeatherType.Rain:
+                    member.WeatherMovementModifier = -1;
+                    member.WeatherRangeModifier = 0;
+                    member.WeatherDiceModifier = 0;
+                    break;
+                case WeatherType.Snow:
+                    member.WeatherMovementModifier = 0;
+                    member.WeatherRangeModifier = -1;
+                    member.WeatherDiceModifier = 0;
+                    break;
+                case WeatherType.Fog:
+                    member.WeatherMovementModifier = 0;
+                    member.WeatherRangeModifier = 0;
+                    member.WeatherDiceModifier = 1;
+                    break;
+            }
+        }
+
+        public void ApplyWeatherEffect(Monster monster)
+        {
+            switch (Type)
+            {
+                case WeatherType.Clear:
+                    monster.WeatherMovementModifier = 0;
+                    monster.WeatherRangeModifier = 0;
+                    monster.WeatherDiceModifier = 0;
+                    break;
+                case WeatherType.Rain:
+                    monster.WeatherMovementModifier = -1;
+                    monster.WeatherRangeModifier = 0;
+                    monster.WeatherDiceModifier = 0;
+                    break;
+                case WeatherType.Snow:
+                    monster.WeatherMovementModifier = 0;
+                    monster.WeatherRangeModifier = -1;
+                    monster.WeatherDiceModifier = 0;
+                    break;
+                case WeatherType.Fog:
+                    monster.WeatherMovementModifier = 0;
+                    monster.WeatherRangeModifier = 0;
+                    monster.WeatherDiceModifier = 1;
+                    break;
+            }
         }
     }
 }

@@ -31,6 +31,15 @@ namespace ScoreBoard.data.monster
         [JsonIgnore]
         public string Note { get; set; } = string.Empty!; // 특이사항
 
+        [JsonIgnore]
+        public int WeatherMovementModifier { get; set; } = 0; // 날씨로 인한 이동속도 보정치
+
+        [JsonIgnore]
+        public int WeatherRangeModifier { get; set; } = 0; // 날씨로 인한 공격 사거리 보정치
+
+        [JsonIgnore]
+        public int WeatherDiceModifier { get; set; } = 0; // 날씨로 인한 주사위 개수 보정치. Slice에 활용
+
         protected void InitialiseNormalElite(string id, ushort spawnTurn)
         {
             Validator.ValidateNull(id, nameof(id));
