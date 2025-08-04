@@ -2,6 +2,7 @@
 using ScoreBoard.data.character;
 using ScoreBoard.data.monster;
 using ScoreBoard.data.statusEffect;
+using ScoreBoard.data.weather;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -317,6 +318,24 @@ namespace ScoreBoard.utils
                 }
             }
             return equipments;
+        }
+
+        /*
+         * GetWeatherImage(type)
+         * - type: 장비 타입 (예: "weapon", "armor", "accessory")
+         * - return: 해당 타입의 장비 아이콘 목록 반환
+         */
+        internal static Image? GetWeatherImage(WeatherType type)
+        {
+            string directory = "Resources/image/weather";
+            return type switch
+            {
+                WeatherType.Clear => Image.FromFile(@$"{directory}/clear.png"),
+                WeatherType.Rain => Image.FromFile($@"{directory}/rain.png"),
+                WeatherType.Snow => Image.FromFile($@"{directory}/snow.png"),
+                WeatherType.Fog => Image.FromFile($@"{directory}/fog.png"),
+                _ => null,
+            };
         }
     }
 }
