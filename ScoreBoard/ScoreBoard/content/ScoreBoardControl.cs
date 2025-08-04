@@ -6,6 +6,7 @@ using ScoreBoard.data.monster;
 using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.data.statusEffect;
+using ScoreBoard.data.weather;
 using ScoreBoard.modals;
 using ScoreBoard.Properties;
 using ScoreBoard.utils;
@@ -36,6 +37,7 @@ namespace ScoreBoard.content
         private Monster? currentShowingMonster = null; // 현재 표시 중인 몬스터와 보고 여부
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
+        private Weather _currentWeather = new();
         private readonly TransparentTextLabel cachedStatusEffectDefault = new()
         {
             Text = "양호",
@@ -62,10 +64,30 @@ namespace ScoreBoard.content
 
         private void ScoreBoardControl_Load(object sender, EventArgs e)
         {
+            InitWeather();
             ActivateDefaultPassive();
             InitPlayerList();
             InitEnemyList();
             ShowDetail(_characters.ElementAt(0).Value);
+        }
+
+        /*
+         * InitWeather()
+         * - 날씨를 초기화하는 메서드
+         * - 현재 날씨(_currentWeather)를 기준으로 pbWeather와 lblWeather를 초기화
+         */
+        private void InitWeather()
+        {
+            Image? weatherImage = DataReader.GetWeatherImage(_currentWeather.Type);
+            if (weatherImage == null)
+            {
+                MessageBox.Show($"{EnumHelper.GetEnumName(_currentWeather.Type)} 이미지가 존재하지 않습니다.", "오류", MessageBoxButtons.OK);
+            }
+            else
+            {
+                pbWeather.BackgroundImage = weatherImage;
+            }
+            lblWeather.Text = _currentWeather.IsInfinite ? "∞" : _currentWeather.Duration.ToString();
         }
 
         /*

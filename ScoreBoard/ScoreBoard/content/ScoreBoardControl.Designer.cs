@@ -748,6 +748,7 @@
             // 
             // pbWeather
             // 
+            pbWeather.BackgroundImageLayout = ImageLayout.Stretch;
             pbWeather.Location = new Point(1083, 16);
             pbWeather.Margin = new Padding(0, 0, 15, 0);
             pbWeather.Name = "pbWeather";
