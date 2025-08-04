@@ -25,7 +25,9 @@ namespace ScoreBoard.modals
             this.KeyPreview = true; // 폼에서 키 이벤트를 받을 수 있도록 설정
             OldWeather = currentWeather;
             NewWeather = currentWeather;
-            lblWeatherName.Visible = lblWeatherDescription.Visible = tbDuration.Visible = false; // 초기에는 날씨 정보 숨김
+            lblWeatherName.Text = EnumHelper.GetEnumName(currentWeather.Type);
+            lblWeatherDescription.Text = EnumHelper.GetEnumDescription(currentWeather.Type);
+            tbDuration.Text = currentWeather.Duration.ToString();
         }
 
         private void WeatherEditModal_KeyDown(object sender, KeyEventArgs e)

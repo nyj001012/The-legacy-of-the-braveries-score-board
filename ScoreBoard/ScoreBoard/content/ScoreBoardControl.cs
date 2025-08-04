@@ -1139,6 +1139,7 @@ namespace ScoreBoard.content
                     InitEnemyList();
                 }
             }
+            // TODO => 상태이상 적용하는 메서드 구현
         }
 
         private void pbWeapon_Click(object sender, EventArgs e)
@@ -1376,7 +1377,19 @@ namespace ScoreBoard.content
          */
         private void ChangeWeather(object sender, EventArgs e)
         {
+            Point startPos = pbWeather.PointToScreen(Point.Empty);
+            var modal = new WeatherEditModal(_currentWeather)
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(startPos.X, startPos.Y + pbWeather.Height),
+            };
 
+            if (modal.ShowDialog() == DialogResult.OK)
+            {
+                _currentWeather = modal.NewWeather;
+                InitWeather();
+                // TODO => 날씨 바뀌고 효과 적용하는 메서드 구현
+            }
         }
     }
 }
