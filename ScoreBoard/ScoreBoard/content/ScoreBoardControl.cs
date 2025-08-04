@@ -875,8 +875,7 @@ namespace ScoreBoard.content
         private void SimpleStatLabel_Click(object sender, EventArgs e)
         {
             if (sender is not TransparentTextLabel label
-                || currentShowingPlayer == null
-                || currentShowingMonster == null)
+                || (currentShowingPlayer == null && currentShowingMonster == null))
                 return;
 
             Point labelPos = label.PointToScreen(Point.Empty);
