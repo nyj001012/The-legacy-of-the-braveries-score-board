@@ -277,18 +277,18 @@ namespace ScoreBoard.utils
         {
             return type switch
             {
-                StatusEffectType.Concentration => Image.FromFile(@"Resources/meta_data/status_effect/concentration.png"),
-                StatusEffectType.Plague => Image.FromFile(@"Resources/meta_data/status_effect/plague.png"),
-                StatusEffectType.BrokenSword => Image.FromFile(@"Resources/meta_data/status_effect/broken_sword.png"),
-                StatusEffectType.BrokenShield => Image.FromFile(@"Resources/meta_data/status_effect/broken_shield.png"),
-                StatusEffectType.Resurrection => Image.FromFile(@"Resources/meta_data/status_effect/resurrection.png"),
-                StatusEffectType.Immortality => Image.FromFile(@"Resources/meta_data/status_effect/immortality.png"),
-                StatusEffectType.Stasis => Image.FromFile(@"Resources/meta_data/status_effect/stasis.png"),
-                StatusEffectType.Exhaustion => Image.FromFile(@"Resources/meta_data/status_effect/exhaustion.png"),
-                StatusEffectType.Slience => Image.FromFile(@"Resources/meta_data/status_effect/silence.png"),
-                StatusEffectType.Blind => Image.FromFile(@"Resources/meta_data/status_effect/blind.png"),
-                StatusEffectType.HealingBlock => Image.FromFile(@"Resources/meta_data/status_effect/healing_block.png"),
-                StatusEffectType.Stun => Image.FromFile(@"Resources/meta_data/status_effect/stun.png"),
+                StatusEffectType.Concentration => Image.FromFile(@"Resources/image/status_effect/concentration.png"),
+                StatusEffectType.Plague => Image.FromFile(@"Resources/image/status_effect/plague.png"),
+                StatusEffectType.BrokenSword => Image.FromFile(@"Resources/image/status_effect/broken_sword.png"),
+                StatusEffectType.BrokenShield => Image.FromFile(@"Resources/image/status_effect/broken_shield.png"),
+                StatusEffectType.Resurrection => Image.FromFile(@"Resources/image/status_effect/resurrection.png"),
+                StatusEffectType.Immortality => Image.FromFile(@"Resources/image/status_effect/immortality.png"),
+                StatusEffectType.Stasis => Image.FromFile(@"Resources/image/status_effect/stasis.png"),
+                StatusEffectType.Exhaustion => Image.FromFile(@"Resources/image/status_effect/exhaustion.png"),
+                StatusEffectType.Slience => Image.FromFile(@"Resources/image/status_effect/silence.png"),
+                StatusEffectType.Blind => Image.FromFile(@"Resources/image/status_effect/blind.png"),
+                StatusEffectType.HealingBlock => Image.FromFile(@"Resources/image/status_effect/healing_block.png"),
+                StatusEffectType.Stun => Image.FromFile(@"Resources/image/status_effect/stun.png"),
                 _ => null,
             };
         }
