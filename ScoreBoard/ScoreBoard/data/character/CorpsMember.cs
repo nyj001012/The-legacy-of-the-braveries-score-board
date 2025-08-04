@@ -27,6 +27,15 @@ namespace ScoreBoard.data.character
         [JsonIgnore]
         public string Note { get; set; } = String.Empty; // 특이사항
 
+        [JsonIgnore]
+        public int WeatherMovementModifier { get; set; } = 0; // 날씨로 인한 이동속도 보정치
+        
+        [JsonIgnore]
+        public int WeatherRangeModifier { get; set; } = 0; // 날씨로 인한 공격 사거리 보정치
+        
+        [JsonIgnore]
+        public int WeatherDiceModifier { get; set; } = 0; // 날씨로 인한 주사위 개수 보정치. Slice에 활용
+
         public CorpsMember()
         {
             ArtifactSlot = [.. Enumerable.Repeat<Artifact?>(null,  MaxArtifactSlot)]; // 0: 무기, 1: 방어구, 2~3: 액세서리

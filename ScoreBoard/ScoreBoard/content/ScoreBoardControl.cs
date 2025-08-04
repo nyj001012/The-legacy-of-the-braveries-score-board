@@ -6,6 +6,7 @@ using ScoreBoard.data.monster;
 using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.data.statusEffect;
+using ScoreBoard.data.weather;
 using ScoreBoard.modals;
 using ScoreBoard.Properties;
 using ScoreBoard.utils;
@@ -36,6 +37,7 @@ namespace ScoreBoard.content
         private Monster? currentShowingMonster = null; // 현재 표시 중인 몬스터와 보고 여부
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
+        private Weather _currentWeather = new();
         private readonly TransparentTextLabel cachedStatusEffectDefault = new()
         {
             Text = "양호",
@@ -62,10 +64,30 @@ namespace ScoreBoard.content
 
         private void ScoreBoardControl_Load(object sender, EventArgs e)
         {
+            InitWeather();
             ActivateDefaultPassive();
             InitPlayerList();
             InitEnemyList();
             ShowDetail(_characters.ElementAt(0).Value);
+        }
+
+        /*
+         * InitWeather()
+         * - 날씨를 초기화하는 메서드
+         * - 현재 날씨(_currentWeather)를 기준으로 pbWeather와 lblWeather를 초기화
+         */
+        private void InitWeather()
+        {
+            Image? weatherImage = DataReader.GetWeatherImage(_currentWeather.Type);
+            if (weatherImage == null)
+            {
+                MessageBox.Show($"{EnumHelper.GetEnumName(_currentWeather.Type)} 이미지가 존재하지 않습니다.", "오류", MessageBoxButtons.OK);
+            }
+            else
+            {
+                pbWeather.BackgroundImage = weatherImage;
+            }
+            lblWeather.Text = _currentWeather.IsInfinite ? "∞" : _currentWeather.Duration.ToString();
         }
 
         /*
@@ -374,12 +396,14 @@ namespace ScoreBoard.content
                 if (type == "melee")
                 {
                     pbMelee.Visible = lblMeleeRange.Visible = true;
-                    lblMeleeRange.Text = combatStat.Range.ToString();
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + player.WeatherRangeModifier);
+                    lblMeleeRange.Text = range.ToString();
                 }
                 else
                 {
                     pbRanged.Visible = lblRangedRange.Visible = true;
-                    lblRangedRange.Text = combatStat.Range.ToString();
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + player.WeatherRangeModifier);
+                    lblRangedRange.Text = range.ToString();
                 }
             }
         }
@@ -391,7 +415,8 @@ namespace ScoreBoard.content
          */
         private void ShowMovement(CorpsMember player)
         {
-            lblMovement.Text = player.Stat.Movement.ToString();
+            ushort movement = (ushort)Math.Max(0, player.Stat.Movement + player.WeatherMovementModifier);
+            lblMovement.Text = movement.ToString();
         }
 
         /*
@@ -454,8 +479,11 @@ namespace ScoreBoard.content
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (player.RequiredDiceValues.Count > 0)
             {
+                int i = 0;
                 foreach (var diceValue in player.RequiredDiceValues)
                 {
+                    if (i++ < player.WeatherDiceModifier)
+                        continue;
                     var label = CreateDiceLabel(diceValue.Key, diceValue.Value);
                     fpnDice.Controls.Add(label);
                 }
@@ -744,8 +772,11 @@ namespace ScoreBoard.content
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (isReported && monster.RequiredDiceValues.Count > 0)
             {
+                int i = 0;
                 foreach (var diceValue in monster.RequiredDiceValues)
                 {
+                    if (i++ < monster.RequiredDiceValues.Count)
+                        continue;
                     var label = CreateDiceLabel(diceValue.Key, diceValue.Value);
                     fpnDice.Controls.Add(label);
                 }
@@ -853,8 +884,7 @@ namespace ScoreBoard.content
         private void SimpleStatLabel_Click(object sender, EventArgs e)
         {
             if (sender is not TransparentTextLabel label
-                || currentShowingPlayer == null
-                || currentShowingMonster == null)
+                || (currentShowingPlayer == null && currentShowingMonster == null))
                 return;
 
             Point labelPos = label.PointToScreen(Point.Empty);
@@ -1117,6 +1147,7 @@ namespace ScoreBoard.content
                     InitEnemyList();
                 }
             }
+            // TODO => 상태이상 적용하는 메서드 구현
         }
 
         private void pbWeapon_Click(object sender, EventArgs e)
@@ -1346,6 +1377,51 @@ namespace ScoreBoard.content
 
             if (pnNote.Height != newPanelHeight)
                 pnNote.Height = newPanelHeight;
+        }
+
+        /*
+         * ChangeWeather
+         * - 날씨를 바꾸기 위한 모달을 호출하고 그 데이터를 반영하는 메서드
+         */
+        private void ChangeWeather(object sender, EventArgs e)
+        {
+            Point startPos = pbWeather.PointToScreen(Point.Empty);
+            var modal = new WeatherEditModal(_currentWeather)
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(startPos.X, startPos.Y + pbWeather.Height),
+            };
+
+            if (modal.ShowDialog() == DialogResult.OK)
+            {
+                _currentWeather = modal.NewWeather.Duration == 0 ? new Weather() : modal.NewWeather;
+                InitWeather();
+                UpdateWeather();
+                if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                {
+                    ShowDetail(currentShowingPlayer!);
+                }
+                else
+                {
+                    ShowDetail(currentShowingMonster!.IsReported, currentShowingMonster);
+                }
+            }
+        }
+
+        /*
+         * UpdateWeather()
+         * - 날씨가 바뀜에 따라 플레이어와 몬스터를 업데이트하는 메서드
+         */
+        private void UpdateWeather()
+        {
+            foreach (var c in _characters.Values)
+            {
+                _currentWeather.ApplyWeatherEffect(c);
+            }
+            foreach (var m in _monsters)
+            {
+                _currentWeather.ApplyWeatherEffect(m);
+            }
         }
     }
 }
