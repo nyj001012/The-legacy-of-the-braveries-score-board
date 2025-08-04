@@ -396,12 +396,14 @@ namespace ScoreBoard.content
                 if (type == "melee")
                 {
                     pbMelee.Visible = lblMeleeRange.Visible = true;
-                    lblMeleeRange.Text = combatStat.Range.ToString();
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + player.WeatherRangeModifier);
+                    lblMeleeRange.Text = range.ToString();
                 }
                 else
                 {
                     pbRanged.Visible = lblRangedRange.Visible = true;
-                    lblRangedRange.Text = combatStat.Range.ToString();
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + player.WeatherRangeModifier);
+                    lblRangedRange.Text = range.ToString();
                 }
             }
         }
@@ -413,7 +415,8 @@ namespace ScoreBoard.content
          */
         private void ShowMovement(CorpsMember player)
         {
-            lblMovement.Text = player.Stat.Movement.ToString();
+            ushort movement = (ushort)Math.Max(0, player.Stat.Movement + player.WeatherMovementModifier);
+            lblMovement.Text = movement.ToString();
         }
 
         /*
@@ -476,8 +479,11 @@ namespace ScoreBoard.content
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (player.RequiredDiceValues.Count > 0)
             {
+                int i = 0;
                 foreach (var diceValue in player.RequiredDiceValues)
                 {
+                    if (i++ < player.WeatherDiceModifier)
+                        continue;
                     var label = CreateDiceLabel(diceValue.Key, diceValue.Value);
                     fpnDice.Controls.Add(label);
                 }
@@ -766,8 +772,11 @@ namespace ScoreBoard.content
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (isReported && monster.RequiredDiceValues.Count > 0)
             {
+                int i = 0;
                 foreach (var diceValue in monster.RequiredDiceValues)
                 {
+                    if (i++ < monster.RequiredDiceValues.Count)
+                        continue;
                     var label = CreateDiceLabel(diceValue.Key, diceValue.Value);
                     fpnDice.Controls.Add(label);
                 }
@@ -1385,9 +1394,33 @@ namespace ScoreBoard.content
 
             if (modal.ShowDialog() == DialogResult.OK)
             {
-                _currentWeather = modal.NewWeather;
+                _currentWeather = modal.NewWeather.Duration == 0 ? new Weather() : modal.NewWeather;
                 InitWeather();
-                // TODO => 날씨 바뀌고 효과 적용하는 메서드 구현
+                UpdateWeather();
+                if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                {
+                    ShowDetail(currentShowingPlayer!);
+                }
+                else
+                {
+                    ShowDetail(currentShowingMonster!.IsReported, currentShowingMonster);
+                }
+            }
+        }
+
+        /*
+         * UpdateWeather()
+         * - 날씨가 바뀜에 따라 플레이어와 몬스터를 업데이트하는 메서드
+         */
+        private void UpdateWeather()
+        {
+            foreach (var c in _characters.Values)
+            {
+                _currentWeather.ApplyWeatherEffect(c);
+            }
+            foreach (var m in _monsters)
+            {
+                _currentWeather.ApplyWeatherEffect(m);
             }
         }
     }
