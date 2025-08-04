@@ -1319,6 +1319,33 @@ namespace ScoreBoard.content
             {
                 currentShowingMonster!.Note = rtbNote.Text;
             }
+            AdjustNoteHeight();
+        }
+
+        /*
+         * AdjustNoteHeight()
+         * - 특이사항을 적는 패널과 RichTextBox의 높이를 조절하는 메서드
+         */
+        private void AdjustNoteHeight()
+        {
+            int lineCount = rtbNote.GetLineFromCharIndex(rtbNote.TextLength) + 1;
+
+            int lineHeight = rtbNote.Font.Height;
+            int maxLines = 5;
+            int padding = 6;
+
+            int newHeight = Math.Min(lineCount, maxLines) * lineHeight + padding;
+
+            // 리치텍스트박스 높이 변경
+            if (rtbNote.Height != newHeight)
+                rtbNote.Height = newHeight;
+
+            // 패널도 리치텍스트박스를 감쌀 수 있도록 높이 변경
+            int extra = rtbNote.Top * 2; // RichTextBox 위아래 여백 고려
+            int newPanelHeight = rtbNote.Height + extra;
+
+            if (pnNote.Height != newPanelHeight)
+                pnNote.Height = newPanelHeight;
         }
     }
 }

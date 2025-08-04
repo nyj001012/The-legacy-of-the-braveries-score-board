@@ -1453,11 +1453,14 @@
             // 
             // rtbNote
             // 
+            rtbNote.BackColor = Color.DarkGoldenrod;
             rtbNote.BorderStyle = BorderStyle.None;
-            rtbNote.Location = new Point(154, -2);
+            rtbNote.Font = new Font("나눔고딕코딩", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            rtbNote.ForeColor = Color.WhiteSmoke;
+            rtbNote.Location = new Point(167, -2);
             rtbNote.Margin = new Padding(0);
             rtbNote.Name = "rtbNote";
-            rtbNote.Size = new Size(429, 42);
+            rtbNote.Size = new Size(433, 42);
             rtbNote.TabIndex = 1;
             rtbNote.Text = "";
             rtbNote.TextChanged += rtbNote_TextChanged;
