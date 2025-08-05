@@ -886,8 +886,7 @@ namespace ScoreBoard.content
          */
         private void SimpleStatLabel_Click(object sender, EventArgs e)
         {
-            if (sender is not TransparentTextLabel label
-                || (currentShowingPlayer == null && currentShowingMonster == null))
+            if (sender is not TransparentTextLabel label)
                 return;
 
             Point labelPos = label.PointToScreen(Point.Empty);
@@ -908,7 +907,7 @@ namespace ScoreBoard.content
 
             var statOwner = _showingDataType == SHOWING_DATA_TYPE.Player
                 ? (object)currentShowingPlayer
-                : currentShowingMonster;
+                : (object)currentShowingMonster;
 
             var setterMap = CreateStatSetters(statOwner);
 
@@ -928,19 +927,25 @@ namespace ScoreBoard.content
         }
 
         /*
-         * CreateStatSetters(object target)
+         * CreateStatSetters<T>(T target)
          * - value를 인자로 받아 target의 스탯을 설정할 수 있게 하는 메서드를 반환
          * - target: CorpsMember 객체나 Monster 객체
          */
-        private Dictionary<string, Action<ushort>> CreateStatSetters(object target)
+        private Dictionary<string, Action<ushort>> CreateStatSetters<T>(T target)
+            where T : class
         {
-            dynamic stat = (_showingDataType == SHOWING_DATA_TYPE.Player)
-                ? ((CorpsMember)target).Stat
-                : ((Monster)target).Stat;
+            dynamic stat;
+
+            if (target is CorpsMember c)
+                stat = c.Stat;
+            else if (target is Monster m)
+                stat = m.Stat;
+            else
+                throw new ArgumentException("Unsupported stat owner type", nameof(target));
 
             return new()
             {
-                ["lblMaxHealth"] = v => stat.MaxHp = v, // 딕셔너리 생성. 키는 레이블 이름, 값은 인자(value)
+                ["lblMaxHealth"] = v => stat.MaxHp = v,
                 ["lblMovement"] = v => stat.Movement = v,
                 ["lblMeleeRange"] = v => stat.CombatStats["melee"].Range = v,
                 ["lblRangedRange"] = v => stat.CombatStats["ranged"].Range = v,
