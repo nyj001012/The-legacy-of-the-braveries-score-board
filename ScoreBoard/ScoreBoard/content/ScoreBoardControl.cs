@@ -1533,6 +1533,7 @@ namespace ScoreBoard.content
                     e.Duration = (ushort)Math.Max(0, e.Duration + adder);
                     return e.Duration > 0;
                 })];
+                UpdateStatusEffect(player); // 상태 이상 적용
             }
             foreach (var monster in _monsters)
             {
@@ -1541,6 +1542,7 @@ namespace ScoreBoard.content
                     e.Duration = (ushort)Math.Max(0, e.Duration + adder);
                     return e.Duration > 0;
                 })];
+                UpdateStatusEffect(monster); // 상태 이상 적용
             }
         }
     }
