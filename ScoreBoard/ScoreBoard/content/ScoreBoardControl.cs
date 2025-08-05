@@ -37,7 +37,7 @@ namespace ScoreBoard.content
         private Monster currentShowingMonster; // 현재 표시 중인 몬스터와 보고 여부
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
-        private int actionCount = 1;
+        private int actionCount = 0; // 현재 행동 횟수, 초기값은 1로 설정
         private Weather _currentWeather = new();
         private readonly TransparentTextLabel cachedStatusEffectDefault = new()
         {
@@ -147,7 +147,7 @@ namespace ScoreBoard.content
             playerList.SuspendLayout();
             playerList.Controls.Clear();
 
-            int index = 1;
+            int index = 0;
             foreach (var character in _characters.Values)
             {
                 UserControl panel = (index == actionCount % 4)
@@ -1464,13 +1464,18 @@ namespace ScoreBoard.content
 
         private void pbActionComplete_Click(object sender, EventArgs e)
         {
+            int oldTurn = currentTurn; // 현재 턴 저장
+            actionCount++;
+
             // 턴 업데이트
             UpdateTurn();
-
-            // 상태이상 지속 시간 업데이트
-            UpdateStatusEffectDuration(-1);
-            // 스킬 쿨타임 업데이트
-            UpdateSkillCooldown(-1);
+            if (oldTurn != currentTurn) // 턴이 바뀌었다면
+            {
+                // 상태이상 지속 시간 업데이트
+                UpdateStatusEffectDuration(-1);
+                // 스킬 쿨타임 업데이트
+                UpdateSkillCooldown(-1);
+            }
 
             // 플레이어 패널 업데이트
             InitPlayerList();
@@ -1508,7 +1513,6 @@ namespace ScoreBoard.content
          */
         private void UpdateTurn()
         {
-            actionCount++;
             currentTurn = actionCount / 4 + 1; // 4인 플레이어 기준으로 턴 계산
             lblTurn.Text = $"{currentTurn}턴";
         }
