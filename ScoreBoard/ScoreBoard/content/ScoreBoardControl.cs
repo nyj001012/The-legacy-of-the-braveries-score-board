@@ -150,7 +150,7 @@ namespace ScoreBoard.content
             int index = 1;
             foreach (var character in _characters.Values)
             {
-                UserControl panel = (index == currentTurn % 4)
+                UserControl panel = (index == actionCount % 4)
                     ? new CurrentPlayerPanel(character, index)
                     : new PlayerPanel(character, index);
 
@@ -1488,6 +1488,32 @@ namespace ScoreBoard.content
             actionCount++;
             currentTurn = actionCount / 4 + 1; // 4인 플레이어 기준으로 턴 계산
             lblTurn.Text = $"{currentTurn}턴";
+        }
+
+        /*
+         * UpdateStatusEffectDuration()
+         * - 상태 이상 지속 시간을 업데이트하는 메서드
+         * - 모든 플레이어와 몬스터의 상태 이상 지속 시간을 1씩 감소시킴
+         */
+        private void UpdateStatusEffectDuration()
+        {
+            // 상태 이상 지속 시간 업데이트
+            foreach (var player in _characters.Values)
+            {
+                player.Stat.StatusEffects = [.. player.Stat.StatusEffects.Where(e =>
+                {
+                    e.Duration--;
+                    return e.Duration > 0;
+                })];
+            }
+            foreach (var monster in _monsters)
+            {
+                monster.Stat.StatusEffects = [.. monster.Stat.StatusEffects.Where(e =>
+                {
+                    e.Duration--;
+                    return e.Duration > 0;
+                })];
+            }
         }
     }
 }
