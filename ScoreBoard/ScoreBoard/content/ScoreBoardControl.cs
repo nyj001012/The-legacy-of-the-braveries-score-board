@@ -1468,7 +1468,7 @@ namespace ScoreBoard.content
             UpdateTurn();
 
             // 상태이상 지속 시간 업데이트
-            UpdateStatusEffectDuration();
+            UpdateStatusEffectDuration(-1);
             // 스킬 쿨타임 업데이트
             // 플레이어 패널 업데이트
             InitPlayerList();
@@ -1491,18 +1491,19 @@ namespace ScoreBoard.content
         }
 
         /*
-         * UpdateStatusEffectDuration()
+         * UpdateStatusEffectDuration(int adder)
          * - 상태 이상 지속 시간을 업데이트하는 메서드
-         * - 모든 플레이어와 몬스터의 상태 이상 지속 시간을 1씩 감소시킴
+         * - 모든 플레이어와 몬스터의 상태 이상 지속 시간을 adder만큼 증감함
+         * - adder: 감소시킬 지속 시간 (음수면 감소, 양수면 증가)
          */
-        private void UpdateStatusEffectDuration()
+        private void UpdateStatusEffectDuration(int adder)
         {
             // 상태 이상 지속 시간 업데이트
             foreach (var player in _characters.Values)
             {
                 player.Stat.StatusEffects = [.. player.Stat.StatusEffects.Where(e =>
                 {
-                    e.Duration--;
+                    e.Duration += adder;
                     return e.Duration > 0;
                 })];
             }
@@ -1510,7 +1511,7 @@ namespace ScoreBoard.content
             {
                 monster.Stat.StatusEffects = [.. monster.Stat.StatusEffects.Where(e =>
                 {
-                    e.Duration--;
+                    e.Duration += adder;
                     return e.Duration > 0;
                 })];
             }
