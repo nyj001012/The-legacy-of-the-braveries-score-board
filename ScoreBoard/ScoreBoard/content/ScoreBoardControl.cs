@@ -37,6 +37,7 @@ namespace ScoreBoard.content
         private Monster currentShowingMonster; // 현재 표시 중인 몬스터와 보고 여부
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
+        private int actionCount = 0; // 현재 행동 횟수, 초기값은 1로 설정
         private Weather _currentWeather = new();
         private readonly TransparentTextLabel cachedStatusEffectDefault = new()
         {
@@ -146,10 +147,10 @@ namespace ScoreBoard.content
             playerList.SuspendLayout();
             playerList.Controls.Clear();
 
-            int index = 1;
+            int index = 0;
             foreach (var character in _characters.Values)
             {
-                UserControl panel = (index == currentTurn % 4)
+                UserControl panel = (index == actionCount % 4)
                     ? new CurrentPlayerPanel(character, index)
                     : new PlayerPanel(character, index);
 
@@ -1458,6 +1459,108 @@ namespace ScoreBoard.content
             foreach (var m in _monsters)
             {
                 _currentWeather.ApplyWeatherEffect(m);
+            }
+        }
+
+        private void pbActionComplete_Click(object sender, EventArgs e)
+        {
+            int oldTurn = currentTurn; // 현재 턴 저장
+            actionCount++;
+
+            // 턴 업데이트
+            UpdateTurn();
+            if (oldTurn != currentTurn) // 턴이 바뀌었다면
+            {
+                // 날씨 지속시간 업데이트
+                UpdateWeatherDuration(-1);
+                // 상태이상 지속시간 업데이트
+                UpdateStatusEffectDuration(-1);
+                // 스킬 쿨타임 업데이트
+                UpdateSkillCooldown(-1);
+            }
+
+            // 플레이어 패널 업데이트
+            InitPlayerList();
+
+            // 다음 플레이어로 상세 정보 표시
+            currentShowingPlayer = _characters.Values.ElementAt(actionCount % 4); // 4인 플레이어 기준으로 다음 플레이어 선택
+            ShowDetail(currentShowingPlayer!);
+        }
+
+        /*
+         * UpdateWeatherDuration(int adder)
+         * - 날씨 지속 시간을 adder만큼 증감하여 업데이트하는 메서드
+         * - adder: 감소시킬 지속 시간 (음수면 감소, 양수면 증가)
+         */
+        private void UpdateWeatherDuration(int adder)
+        {
+            _currentWeather.Duration = (ushort)Math.Max(0, _currentWeather.Duration + adder);
+            if (_currentWeather.Duration == 0)
+            {
+                _currentWeather = new Weather(); // 날씨가 끝나면 초기화
+            }
+            InitWeather(); // 날씨 패널 업데이트
+            UpdateWeather(); // 날씨 효과 적용
+        }
+
+        /*
+         * UpdateSkillCooldown(int adder)
+         * - 모든 플레이어의 액티브 스킬 쿨타임을 adder만큼 증감하여 업데이트하는 메서드
+         * - 액티브 스킬의 현재 쿨타임을 감소시키고, 0이 되면 쿨타임 상태를 해제
+         * - adder: 감소시킬 쿨타임 (음수면 감소, 양수면 증가)
+         */
+        private void UpdateSkillCooldown(int adder)
+        {
+            foreach (var player in _characters.Values)
+            {
+                player.Actives.ForEach(a =>
+                {
+                    a.CurrentCooldown = (ushort)Math.Max(0, a.CurrentCooldown + adder);
+                    if (a.CurrentCooldown == 0)
+                    {
+                        a.isOnCooldown = false;
+                    }
+                });
+            }
+        }
+
+        /*
+         * UpdateTurn()
+         * - 현재 턴을 업데이트하는 메서드
+         * - 4명이 한 번씩 액션을 수행하면 턴이 증가
+         */
+        private void UpdateTurn()
+        {
+            currentTurn = actionCount / 4 + 1; // 4인 플레이어 기준으로 턴 계산
+            lblTurn.Text = $"{currentTurn}턴";
+        }
+
+        /*
+         * UpdateStatusEffectDuration(int adder)
+         * - 상태 이상 지속 시간을 업데이트하는 메서드
+         * - 모든 플레이어와 몬스터의 상태 이상 지속 시간을 adder만큼 증감함
+         * - adder: 감소시킬 지속 시간 (음수면 감소, 양수면 증가)
+         */
+        private void UpdateStatusEffectDuration(int adder)
+        {
+            // 상태 이상 지속 시간 업데이트
+            foreach (var player in _characters.Values)
+            {
+                player.Stat.StatusEffects = [.. player.Stat.StatusEffects.Where(e =>
+                {
+                    e.Duration = (ushort)Math.Max(0, e.Duration + adder);
+                    return e.Duration > 0;
+                })];
+                UpdateStatusEffect(player); // 상태 이상 적용
+            }
+            foreach (var monster in _monsters)
+            {
+                monster.Stat.StatusEffects = [.. monster.Stat.StatusEffects.Where(e =>
+                {
+                    e.Duration = (ushort)Math.Max(0, e.Duration + adder);
+                    return e.Duration > 0;
+                })];
+                UpdateStatusEffect(monster); // 상태 이상 적용
             }
         }
     }
