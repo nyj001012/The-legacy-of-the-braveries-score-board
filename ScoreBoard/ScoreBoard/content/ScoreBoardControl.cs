@@ -1471,7 +1471,9 @@ namespace ScoreBoard.content
             UpdateTurn();
             if (oldTurn != currentTurn) // 턴이 바뀌었다면
             {
-                // 상태이상 지속 시간 업데이트
+                // 날씨 지속시간 업데이트
+                UpdateWeatherDuration(-1);
+                // 상태이상 지속시간 업데이트
                 UpdateStatusEffectDuration(-1);
                 // 스킬 쿨타임 업데이트
                 UpdateSkillCooldown(-1);
@@ -1483,6 +1485,22 @@ namespace ScoreBoard.content
             // 다음 플레이어로 상세 정보 표시
             currentShowingPlayer = _characters.Values.ElementAt(actionCount % 4); // 4인 플레이어 기준으로 다음 플레이어 선택
             ShowDetail(currentShowingPlayer!);
+        }
+
+        /*
+         * UpdateWeatherDuration(int adder)
+         * - 날씨 지속 시간을 adder만큼 증감하여 업데이트하는 메서드
+         * - adder: 감소시킬 지속 시간 (음수면 감소, 양수면 증가)
+         */
+        private void UpdateWeatherDuration(int adder)
+        {
+            _currentWeather.Duration = (ushort)Math.Max(0, _currentWeather.Duration + adder);
+            if (_currentWeather.Duration == 0)
+            {
+                _currentWeather = new Weather(); // 날씨가 끝나면 초기화
+            }
+            InitWeather(); // 날씨 패널 업데이트
+            UpdateWeather(); // 날씨 효과 적용
         }
 
         /*
