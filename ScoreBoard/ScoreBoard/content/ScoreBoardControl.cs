@@ -33,8 +33,8 @@ namespace ScoreBoard.content
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
         private enum SHOWING_DATA_TYPE { Player = 0, Monster = 1 };
         private SHOWING_DATA_TYPE _showingDataType = default;
-        private CorpsMember? currentShowingPlayer = null; // 현재 표시 중인 플레이어
-        private Monster? currentShowingMonster = null; // 현재 표시 중인 몬스터와 보고 여부
+        private CorpsMember currentShowingPlayer; // 현재 표시 중인 플레이어
+        private Monster currentShowingMonster; // 현재 표시 중인 몬스터와 보고 여부
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
         private Weather _currentWeather = new();
@@ -58,6 +58,8 @@ namespace ScoreBoard.content
             _characters = characters ?? throw new ArgumentNullException(nameof(characters), "캐릭터는 비어있을 수 없습니다.");
             _monsters = monsters ?? throw new ArgumentNullException(nameof(monsters), "몬스터를 선택해야 합니다.");
             InitializeComponent();
+            currentShowingMonster = _monsters.First(); // 첫 번째 몬스터를 현재 표시 중인 몬스터로 설정
+            currentShowingPlayer = _characters.ElementAtOrDefault(0).Value; // 첫 번째 캐릭터를 현재 표시 중인 플레이어로 설정
 
             cachedStatusEffectDefault.Click += (s, e) => EditStatusEffect(); // 상태 이상 편집 이벤트 핸들러 등록
         }
@@ -378,7 +380,7 @@ namespace ScoreBoard.content
                 return;
             }
 
-            ChangeTextOfAttackValueLabels(player.Stat.CombatStats);
+            ChangeTextOfAttackValueLabels(player.Stat.CombatStats, player.SEAttackValueModifier);
         }
 
         /*
@@ -735,7 +737,7 @@ namespace ScoreBoard.content
 
             fpnAttackValue.Visible = true;
 
-            ChangeTextOfAttackValueLabels(monster.Stat.CombatStats);
+            ChangeTextOfAttackValueLabels(monster.Stat.CombatStats, monster.SEAttackValueModifier);
         }
 
         /*
@@ -850,11 +852,12 @@ namespace ScoreBoard.content
         }
 
         /*
-         * ChangeTextOfAttackValueLabels(Dictionary<string, CombatStat> combatStats)
+         * ChangeTextOfAttackValueLabels(Dictionary<string, CombatStat> combatStats, double c)
          * - 플레이어의 공격력 레이블을 변경하는 메서드
          * - combatStats: 공격력 정보를 담고 있는 딕셔너리
+         * - c: 공격력 보정치
          */
-        private void ChangeTextOfAttackValueLabels(Dictionary<string, CombatStat> combatStats)
+        private void ChangeTextOfAttackValueLabels(Dictionary<string, CombatStat> combatStats, double c)
         {
             pbMeleeAttack.Visible = pbRangedAttack.Visible = false;
             lblMeleeAttack.Visible = lblRangedAttack.Visible = false;
@@ -864,13 +867,13 @@ namespace ScoreBoard.content
                 if (type == "melee")
                 {
                     pbMeleeAttack.Visible = lblMeleeAttack.Visible = lblMeleeAttackCount.Visible = true;
-                    lblMeleeAttack.Text = combatStat.Value.ToString();
+                    lblMeleeAttack.Text = Math.Round(combatStat.Value * c).ToString();
                     lblMeleeAttackCount.Text = $"{{{combatStat.AttackCount}}}";
                 }
                 else
                 {
                     pbRangedAttack.Visible = lblRangedAttack.Visible = lblRangedAttackCount.Visible = true;
-                    lblRangedAttack.Text = combatStat.Value.ToString();
+                    lblRangedAttack.Text = Math.Round(combatStat.Value * c).ToString();
                     lblRangedAttackCount.Text = $"{{{combatStat.AttackCount}}}";
                 }
             }
@@ -1137,17 +1140,46 @@ namespace ScoreBoard.content
                 if (_showingDataType == SHOWING_DATA_TYPE.Player)
                 {
                     currentShowingPlayer.Stat.StatusEffects = editModal.NewStatusEffects;
-                    ShowStatusEffect(currentShowingPlayer);
+                    UpdateStatusEffect(currentShowingPlayer);
+                    ShowDetail(currentShowingPlayer);
                     InitPlayerList(); // 상태 이상 패널 업데이트
                 }
                 else
                 {
                     currentShowingMonster.Stat.StatusEffects = editModal.NewStatusEffects;
-                    ShowStatusEffect(currentShowingMonster);
+                    UpdateStatusEffect(currentShowingMonster);
+                    ShowDetail(currentShowingMonster.IsReported, currentShowingMonster);
                     InitEnemyList();
                 }
             }
-            // TODO => 상태이상 적용하는 메서드 구현
+        }
+
+        /*
+         * UpdateStatusEffect(CorpsMember player)
+         * - 플레이어의 상태 이상을 업데이트하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void UpdateStatusEffect(CorpsMember player)
+        {
+            player.SEAttackValueModifier = 1.0; // 상태 이상에 의한 공격력 보정 초기화
+            foreach (var e in player.Stat.StatusEffects)
+            {
+                e.ApplyStatusEffect(player);
+            }
+        }
+
+        /*
+         * UpdateStatusEffect(Monster monster)
+         * - 몬스터의 상태 이상을 업데이트하는 메서드
+         * - monster: Monster 객체
+         */
+        private void UpdateStatusEffect(Monster monster)
+        {
+            monster.SEAttackValueModifier = 1.0; // 상태 이상에 의한 공격력 보정 초기화
+            foreach (var e in monster.Stat.StatusEffects)
+            {
+                e.ApplyStatusEffect(monster);
+            }
         }
 
         private void pbWeapon_Click(object sender, EventArgs e)
