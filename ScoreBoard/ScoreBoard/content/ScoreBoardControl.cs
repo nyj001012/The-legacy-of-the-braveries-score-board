@@ -151,8 +151,8 @@ namespace ScoreBoard.content
             foreach (var character in _characters.Values)
             {
                 UserControl panel = (index == actionCount % 4)
-                    ? new CurrentPlayerPanel(character, index)
-                    : new PlayerPanel(character, index);
+                    ? new CurrentPlayerPanel(character, index + 1)
+                    : new PlayerPanel(character, index + 1);
 
                 panel.Name = $"pn{character.Id}";
                 panel.Click += (s, e) => ShowDetail(character);
