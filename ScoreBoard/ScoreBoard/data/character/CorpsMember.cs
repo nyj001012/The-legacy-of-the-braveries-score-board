@@ -36,6 +36,9 @@ namespace ScoreBoard.data.character
         [JsonIgnore]
         public int WeatherDiceModifier { get; set; } = 0; // 날씨로 인한 주사위 개수 보정치. Slice에 활용
 
+        [JsonIgnore]
+        public double SEAttackValueModifier { get; set; } = 1; // 상태이상 공격력 보정치. 곱연산 활용
+
         public CorpsMember()
         {
             ArtifactSlot = [.. Enumerable.Repeat<Artifact?>(null,  MaxArtifactSlot)]; // 0: 무기, 1: 방어구, 2~3: 액세서리
