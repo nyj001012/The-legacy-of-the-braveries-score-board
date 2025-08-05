@@ -37,6 +37,7 @@ namespace ScoreBoard.content
         private Monster currentShowingMonster; // 현재 표시 중인 몬스터와 보고 여부
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
+        private int actionCount = 1;
         private Weather _currentWeather = new();
         private readonly TransparentTextLabel cachedStatusEffectDefault = new()
         {
@@ -1459,6 +1460,34 @@ namespace ScoreBoard.content
             {
                 _currentWeather.ApplyWeatherEffect(m);
             }
+        }
+
+        private void pbActionComplete_Click(object sender, EventArgs e)
+        {
+            // 턴 업데이트
+            UpdateTurn();
+
+            // 상태이상 지속 시간 업데이트
+            UpdateStatusEffectDuration();
+            // 스킬 쿨타임 업데이트
+            // 플레이어 패널 업데이트
+            InitPlayerList();
+
+            // 다음 플레이어로 상세 정보 표시
+            currentShowingPlayer = _characters.Values.ElementAt(actionCount % 4); // 4인 플레이어 기준으로 다음 플레이어 선택
+            ShowDetail(currentShowingPlayer!);
+        }
+
+        /*
+         * UpdateTurn()
+         * - 현재 턴을 업데이트하는 메서드
+         * - 4명이 한 번씩 액션을 수행하면 턴이 증가
+         */
+        private void UpdateTurn()
+        {
+            actionCount++;
+            currentTurn = actionCount / 4 + 1; // 4인 플레이어 기준으로 턴 계산
+            lblTurn.Text = $"{currentTurn}턴";
         }
     }
 }

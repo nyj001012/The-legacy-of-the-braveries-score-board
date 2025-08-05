@@ -131,7 +131,7 @@
             fpnEnemy1Status = new ScoreBoard.controls.CustomFlowLayoutPanel();
             lblEnemy1Name = new ScoreBoard.controls.GradientLabel();
             enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
-            pictureBox10 = new PictureBox();
+            pbActionComplete = new PictureBox();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -181,7 +181,7 @@
             enemyContainer.SuspendLayout();
             enemyList.SuspendLayout();
             pnEnemy1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbActionComplete).BeginInit();
             SuspendLayout();
             // 
             // playerContainer
@@ -1650,18 +1650,19 @@
             enemyScrollBar.Timer_RGB = 300;
             enemyScrollBar.Value = 0;
             // 
-            // pictureBox10
+            // pbActionComplete
             // 
-            pictureBox10.BackColor = Color.Transparent;
-            pictureBox10.BackgroundImage = Properties.Resources.BtnDone;
-            pictureBox10.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox10.Cursor = Cursors.Hand;
-            pictureBox10.Location = new Point(1506, 911);
-            pictureBox10.Margin = new Padding(0);
-            pictureBox10.Name = "pictureBox10";
-            pictureBox10.Size = new Size(244, 110);
-            pictureBox10.TabIndex = 8;
-            pictureBox10.TabStop = false;
+            pbActionComplete.BackColor = Color.Transparent;
+            pbActionComplete.BackgroundImage = Properties.Resources.BtnDone;
+            pbActionComplete.BackgroundImageLayout = ImageLayout.Stretch;
+            pbActionComplete.Cursor = Cursors.Hand;
+            pbActionComplete.Location = new Point(1506, 911);
+            pbActionComplete.Margin = new Padding(0);
+            pbActionComplete.Name = "pbActionComplete";
+            pbActionComplete.Size = new Size(244, 110);
+            pbActionComplete.TabIndex = 8;
+            pbActionComplete.TabStop = false;
+            pbActionComplete.Click += pbActionComplete_Click;
             // 
             // ScoreBoardControl
             // 
@@ -1669,7 +1670,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.ImgInGameBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(pictureBox10);
+            Controls.Add(pbActionComplete);
             Controls.Add(enemyContainer);
             Controls.Add(doubleBufferedPanel1);
             Controls.Add(playerContainer);
@@ -1740,7 +1741,7 @@
             enemyContainer.ResumeLayout(false);
             enemyList.ResumeLayout(false);
             pnEnemy1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbActionComplete).EndInit();
             ResumeLayout(false);
         }
 
@@ -1835,7 +1836,7 @@
         private controls.HealthBar hbEnemy1;
         private controls.CustomFlowLayoutPanel fpnEnemy1Status;
         private controls.GradientLabel lblEnemy1Name;
-        private PictureBox pictureBox10;
+        private PictureBox pbActionComplete;
         private PictureBox pbDice;
         private controls.CustomFlowLayoutPanel fpnWisdom;
         private controls.TransparentTextLabel transparentTextLabel2;
