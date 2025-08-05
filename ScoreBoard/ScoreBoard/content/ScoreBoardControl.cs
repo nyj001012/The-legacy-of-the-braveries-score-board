@@ -1470,12 +1470,35 @@ namespace ScoreBoard.content
             // 상태이상 지속 시간 업데이트
             UpdateStatusEffectDuration(-1);
             // 스킬 쿨타임 업데이트
+            UpdateSkillCooldown(-1);
+
             // 플레이어 패널 업데이트
             InitPlayerList();
 
             // 다음 플레이어로 상세 정보 표시
             currentShowingPlayer = _characters.Values.ElementAt(actionCount % 4); // 4인 플레이어 기준으로 다음 플레이어 선택
             ShowDetail(currentShowingPlayer!);
+        }
+
+        /*
+         * UpdateSkillCooldown(int adder)
+         * - 모든 플레이어의 액티브 스킬 쿨타임을 adder만큼 증감하여 업데이트하는 메서드
+         * - 액티브 스킬의 현재 쿨타임을 감소시키고, 0이 되면 쿨타임 상태를 해제
+         * - adder: 감소시킬 쿨타임 (음수면 감소, 양수면 증가)
+         */
+        private void UpdateSkillCooldown(int adder)
+        {
+            foreach (var player in _characters.Values)
+            {
+                player.Actives.ForEach(a =>
+                {
+                    a.CurrentCooldown = (ushort)Math.Max(0, a.CurrentCooldown + adder);
+                    if (a.CurrentCooldown == 0)
+                    {
+                        a.isOnCooldown = false;
+                    }
+                });
+            }
         }
 
         /*
@@ -1503,7 +1526,7 @@ namespace ScoreBoard.content
             {
                 player.Stat.StatusEffects = [.. player.Stat.StatusEffects.Where(e =>
                 {
-                    e.Duration += adder;
+                    e.Duration = (ushort)Math.Max(0, e.Duration + adder);
                     return e.Duration > 0;
                 })];
             }
@@ -1511,7 +1534,7 @@ namespace ScoreBoard.content
             {
                 monster.Stat.StatusEffects = [.. monster.Stat.StatusEffects.Where(e =>
                 {
-                    e.Duration += adder;
+                    e.Duration = (ushort)Math.Max(0, e.Duration + adder);
                     return e.Duration > 0;
                 })];
             }
