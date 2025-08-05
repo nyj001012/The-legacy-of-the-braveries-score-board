@@ -83,6 +83,7 @@ namespace ScoreBoard.controls
          */
         private void ShowActives()
         {
+            _activePanel.Controls.Clear(); // 기존 컨트롤을 초기화
             _activePanel.Controls.Add(CreateLabel("[액티브]", Color.WhiteSmoke));
 
             if (_actives.Count == 0)
@@ -127,12 +128,40 @@ namespace ScoreBoard.controls
             var cooldownIcon = CreateCooldownIcon(active);
 
             var cooldownLabel = CreateCoolDownLabel(active, foreColor);
+            if (active.isOnCooldown)
+                CreateCooldownTooltip(active, [cooldownPanel, skillNameLabel, cooldownIcon, cooldownLabel]);
 
             cooldownPanel.Controls.Add(skillNameLabel);
             cooldownPanel.Controls.Add(cooldownIcon);
             cooldownPanel.Controls.Add(cooldownLabel);
 
             _activePanel.Controls.Add(cooldownPanel);
+        }
+
+        /*
+         * CreateCooldownTooltip(ActiveSkill active, Control[] targets)
+         * - 액티브 스킬의 쿨다운 정보를 툴팁으로 생성합니다.
+         * - targets: 툴팁을 적용할 컨트롤 배열
+         */
+        private void CreateCooldownTooltip(ActiveSkill active, Control[] targets)
+        {
+            if (active.CurrentCooldown == 0)
+                return; // 쿨다운이 없는 경우 툴팁을 생성하지 않음
+
+            var cooldownTooltip = new ToolTip
+            {
+                AutomaticDelay = 0, // 툴팁 표시 지연 시간 (ms)
+                AutoPopDelay = 0,   // 툴팁 자동 사라지는 시간 (ms)
+                InitialDelay = 0,   // 툴팁 초기 지연 시간 (ms)
+                ReshowDelay = 0,    // 툴팁 다시 표시 지연 시간 (ms)
+                ShowAlways = true
+            };
+
+            string text = $"{active.CurrentCooldown}턴 뒤 사용가능";
+            foreach (var target in targets)
+            {
+                cooldownTooltip.SetToolTip(target, text);
+            }
         }
 
         /*
@@ -218,6 +247,7 @@ namespace ScoreBoard.controls
                     MessageBox.Show($"유효한 쿨다운 값을 입력하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            ShowActives(); // 액티브 스킬 패널을 다시 업데이트
         }
 
         /*
