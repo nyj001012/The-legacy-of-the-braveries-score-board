@@ -51,6 +51,7 @@ namespace ScoreBoard.data.character
                 MaxHp = statData.Hp,
                 Movement = statData.Movement,
                 Wisdom = statData.Wisdom, // nullable 또는 기본값 처리
+                SpellPower = statData.SpellPower,
                 CombatStats = statData.CombatStats.ToDictionary(
                     kv => kv.Key,
                     kv => new CombatStat
