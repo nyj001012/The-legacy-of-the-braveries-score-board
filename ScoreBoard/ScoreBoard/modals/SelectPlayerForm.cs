@@ -294,6 +294,8 @@ namespace ScoreBoard.modals
                     return new Hagyun(memberId);
                 case CharacterIds.SkyHaneulSoraTen:
                     return new SkyHaneulSoraTen(memberId);
+                case CharacterIds.Yenala:
+                    return new Yenala(memberId);
                 case CharacterIds.Rudeus:
                     return new Rudeus(memberId);
                 case CharacterIds.Valerian:
