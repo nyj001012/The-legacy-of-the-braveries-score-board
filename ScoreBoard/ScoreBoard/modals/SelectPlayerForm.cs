@@ -286,10 +286,18 @@ namespace ScoreBoard.modals
         {
             switch (memberId)
             {
+                case CharacterIds.Kkulga:
+                    return new Kkulga(memberId);
                 case CharacterIds.Ruda:
                     return new Ruda(memberId);
+                case CharacterIds.Hagyun:
+                    return new Hagyun(memberId);
                 case CharacterIds.SkyHaneulSoraTen:
                     return new SkyHaneulSoraTen(memberId);
+                case CharacterIds.Yenala:
+                    return new Yenala(memberId);
+                case CharacterIds.Teo:
+                    return new Teo(memberId);
                 case CharacterIds.Rudeus:
                     return new Rudeus(memberId);
                 case CharacterIds.Valerian:
