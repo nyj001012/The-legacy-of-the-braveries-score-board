@@ -290,6 +290,8 @@ namespace ScoreBoard.modals
                     return new Kkulga(memberId);
                 case CharacterIds.Ruda:
                     return new Ruda(memberId);
+                case CharacterIds.Hagyun:
+                    return new Hagyun(memberId);
                 case CharacterIds.SkyHaneulSoraTen:
                     return new SkyHaneulSoraTen(memberId);
                 case CharacterIds.Rudeus:
