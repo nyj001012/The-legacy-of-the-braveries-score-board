@@ -113,8 +113,6 @@ namespace ScoreBoard.data.character
                 skill.Execute = a.Name switch
                 {
                     "추가 보급" => () => skill.isOnCooldown = true,
-                    "결정타" => () => skill.isOnCooldown = true,
-                    "신성한 결투" => () => skill.isOnCooldown = true,
                     _ => null
                 };
                 return skill;
