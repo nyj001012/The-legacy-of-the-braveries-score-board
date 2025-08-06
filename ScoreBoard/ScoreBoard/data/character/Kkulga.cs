@@ -12,8 +12,6 @@ namespace ScoreBoard.data.character
 {
     internal class Kkulga : CorpsMember
     {
-        public ushort PerfectionBonus = 0;
-
         public Kkulga(string id) : base()
         {
             Validator.ValidateNull(id, nameof(id));

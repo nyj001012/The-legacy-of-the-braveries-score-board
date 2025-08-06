@@ -12,8 +12,6 @@ namespace ScoreBoard.data.character
 {
     internal class Hagyun : CorpsMember
     {
-        public ushort PerfectionBonus = 0;
-
         public Hagyun(string id) : base()
         {
             Validator.ValidateNull(id, nameof(id));

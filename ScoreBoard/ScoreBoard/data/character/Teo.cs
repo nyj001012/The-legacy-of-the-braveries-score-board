@@ -12,9 +12,6 @@ namespace ScoreBoard.data.character
 {
     internal class Teo : CorpsMember
     {
-        private bool isOnceActivated = false; // 스킬이 한 번 활성화되었는지 여부
-        private ushort godBonusShield = 0; // 생성된 보호막의 값
-
         public Teo(string id) : base()
         {
             Validator.ValidateNull(id, nameof(id));
