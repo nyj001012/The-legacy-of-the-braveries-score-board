@@ -8,6 +8,7 @@ namespace ScoreBoard.data.character
 {
     public static class CharacterIds
     {
+        public const string Kkulga = "201_00_Kkulga"; // 꿀가
         public const string Ruda = "201_01_Ruda"; // 루다
         public const string SkyHaneulSoraTen = "201_03_SkyHaneulSoraTen"; // 스카이하늘소라텐
         public const string Rudeus = "203_02_Rudeus"; // 루데우스
