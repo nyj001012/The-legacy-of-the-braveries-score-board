@@ -1,29 +1,22 @@
-﻿using ScoreBoard.data.skill;
+﻿using ScoreBoard.data.artifact;
+using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace ScoreBoard.data.character
 {
-    internal class Kkulga : CorpsMember
+    internal class Griffin : CorpsMember
     {
-        public Kkulga(string id) : base()
+        public ushort blackMagicCount = 0; // 흑마법 사용 횟수 카운트
+
+        public Griffin(string id)
         {
             Validator.ValidateNull(id, nameof(id));
-
             var data = DataReader.ReadMemberData(id) ?? throw new ArgumentException($"데이터 불러오기 오류: {id}");
-
             // 필드 초기화
             InitialiseBasicInfo(data);
-
             // Stat 초기화
             InitialiseStat(data.Stat);
-
             // 스킬 초기화
             InitialisePasssiveSkills(data);
             InitialiseActiveSkills(data);
@@ -41,13 +34,13 @@ namespace ScoreBoard.data.character
         {
             Validator.ValidateNull(statData, nameof(statData));
             Validator.ValidateNull(statData.CombatStats, nameof(statData.CombatStats));
-
             Stat = new Stat
             {
-                Hp = statData.Hp, // 시작 시, 현재 체력은 최대 체력
-                MaxHp = statData.Hp,
+                Hp = statData.Hp,
+                MaxHp = statData.Hp, // 시작 시, 현재 체력은 최대 체력
                 Movement = statData.Movement,
-                Wisdom = statData.Wisdom, // nullable 또는 기본값 처리
+                Wisdom = statData.Wisdom,
+                SpellPower = statData.SpellPower,
                 CombatStats = statData.CombatStats.ToDictionary(
                     kv => kv.Key,
                     kv => new CombatStat
@@ -75,31 +68,29 @@ namespace ScoreBoard.data.character
 
                 skill.Activate = p.Name switch
                 {
-                    "장군갑주" => () =>
+                    "전투기술(패시브)" => () => skill.isActivated = true,
+                    "아퀼론 아머" => () => skill.isActivated = true,
+                    "장비 보강" => () =>
                     {
                         skill.isActivated = true;
-                        WearMasterGear();
+                        UpgradeGear();
                     }
                     ,
-                    "지휘관" => () => skill.isActivated = true,
-                    "내가 누군지 알어???" => () => skill.isActivated = true,
-                    "효율적 전략" => () => skill.isActivated = true,
-                    "내가 직접 나서야겠어" => () => skill.isActivated = true,
+                    "장비 완화" => () => skill.isActivated = true,
                     _ => null
                 };
 
                 skill.Deactivate = p.Name switch
                 {
-                    "장군갑주" => () =>
+                    "전투기술(패시브)" => () => skill.isActivated = false,
+                    "아퀼론 아머" => () => skill.isActivated = false,
+                    "장비 보강" => () =>
                     {
                         skill.isActivated = false;
-                        TakeOffMasterGear();
+                        DowngradeGear();
                     }
                     ,
-                    "지휘관" => () => skill.isActivated = false,
-                    "내가 누군지 알어???" => () => skill.isActivated = false,
-                    "효율적 전략" => () => skill.isActivated = false,
-                    "내가 직접 나서야겠어" => () => skill.isActivated = false,
+                    "장비 완화" => () => skill.isActivated = false,
                     _ => null
                 };
 
@@ -123,7 +114,8 @@ namespace ScoreBoard.data.character
 
                 skill.Execute = a.Name switch
                 {
-                    "강타!" => () => skill.isOnCooldown = true,
+                    "전투기술(사용 기술)" => () => skill.isOnCooldown = true,
+                    "분노의 빨간버튼" => () => skill.isOnCooldown = true,
                     _ => null
                 };
                 return skill;
@@ -131,28 +123,29 @@ namespace ScoreBoard.data.character
         }
 
         /*
-         * WearMasterGear()
-         * - 장군갑주 착용 활성화 시 호출되는 메서드입니다.
-         * - 착용 가능한 유물 슬롯을 1개 추가합니다.
+         * 장비 보강 활성화
+         * - 악세사리 슬롯 1개 추가
          */
-        private void WearMasterGear()
+        private void UpgradeGear()
         {
             this.MaxArtifactSlot++;
-            this.ArtifactSlot = [.. this.ArtifactSlot, null]; // 유물 슬롯을 하나 추가
+            this.ArtifactSlot.Add(null); // 새로운 슬롯은 null로 초기화
         }
 
         /*
-         * TakeOffMasterGear()
-         * - 장군갑주 착용 비활성화 시 호출되는 메서드입니다.
-         * - 착용 가능한 유물 슬롯을 1개 삭제합니다.
+         * 장비 보강 비활성화
+         * - 악세사리 슬롯 1개 제거
+         * - 슬롯에 아이템이 있다면 제거
          */
-        private void TakeOffMasterGear()
+        private void DowngradeGear()
         {
-            if (this.MaxArtifactSlot > 3) // 기본 슬롯 수는 3개이므로, 그 이상일 때만 제거
+            Artifact? artifact = this.ArtifactSlot.ElementAtOrDefault(3);
+            if (artifact != default)
             {
-                this.MaxArtifactSlot--;
-                this.ArtifactSlot = [.. this.ArtifactSlot.Take(this.MaxArtifactSlot)]; // 마지막 슬롯 제거
+                artifact.Unequip(this);
             }
+            this.ArtifactSlot.RemoveAt(this.ArtifactSlot.Count - 1); // 마지막 슬롯 제거
+            this.MaxArtifactSlot--; // 최대 슬롯 수 감소
         }
     }
 }

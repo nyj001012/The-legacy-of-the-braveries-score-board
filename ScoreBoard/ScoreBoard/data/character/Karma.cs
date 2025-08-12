@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data.skill;
+﻿using ScoreBoard.data.artifact;
+using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.utils;
 using System;
@@ -10,9 +11,9 @@ using System.Xml.Linq;
 
 namespace ScoreBoard.data.character
 {
-    internal class Kkulga : CorpsMember
+    internal class Karma : CorpsMember
     {
-        public Kkulga(string id) : base()
+        public Karma(string id) : base()
         {
             Validator.ValidateNull(id, nameof(id));
 
@@ -48,6 +49,7 @@ namespace ScoreBoard.data.character
                 MaxHp = statData.Hp,
                 Movement = statData.Movement,
                 Wisdom = statData.Wisdom, // nullable 또는 기본값 처리
+                SpellPower = statData.SpellPower,
                 CombatStats = statData.CombatStats.ToDictionary(
                     kv => kv.Key,
                     kv => new CombatStat
@@ -75,31 +77,27 @@ namespace ScoreBoard.data.character
 
                 skill.Activate = p.Name switch
                 {
-                    "장군갑주" => () =>
+                    "알라루스 갑주" => () => skill.isActivated = true,
+                    "아뎁투스 엔진" => () =>
                     {
                         skill.isActivated = true;
-                        WearMasterGear();
+                        ActivateAdeptusEngine();
                     }
                     ,
-                    "지휘관" => () => skill.isActivated = true,
-                    "내가 누군지 알어???" => () => skill.isActivated = true,
-                    "효율적 전략" => () => skill.isActivated = true,
-                    "내가 직접 나서야겠어" => () => skill.isActivated = true,
+                    "돌 격 전 차" => () => skill.isActivated = true,
                     _ => null
                 };
 
                 skill.Deactivate = p.Name switch
                 {
-                    "장군갑주" => () =>
+                    "알라루스 갑주" => () => skill.isActivated = false,
+                    "아뎁투스 엔진" => () =>
                     {
                         skill.isActivated = false;
-                        TakeOffMasterGear();
+                        DeactivateAdeptusEngine();
                     }
                     ,
-                    "지휘관" => () => skill.isActivated = false,
-                    "내가 누군지 알어???" => () => skill.isActivated = false,
-                    "효율적 전략" => () => skill.isActivated = false,
-                    "내가 직접 나서야겠어" => () => skill.isActivated = false,
+                    "돌 격 전 차" => () => skill.isActivated = false,
                     _ => null
                 };
 
@@ -123,7 +121,8 @@ namespace ScoreBoard.data.character
 
                 skill.Execute = a.Name switch
                 {
-                    "강타!" => () => skill.isOnCooldown = true,
+                    "휩쓸기" => () => skill.isOnCooldown = true,
+                    "신중한 전쟁" => () => skill.isOnCooldown = true,
                     _ => null
                 };
                 return skill;
@@ -131,28 +130,28 @@ namespace ScoreBoard.data.character
         }
 
         /*
-         * WearMasterGear()
-         * - 장군갑주 착용 활성화 시 호출되는 메서드입니다.
-         * - 착용 가능한 유물 슬롯을 1개 추가합니다.
+         * ActivateAdeptusEngine()
+         * - 아뎁투스 엔진 활성화
          */
-        private void WearMasterGear()
+        private void ActivateAdeptusEngine()
         {
             this.MaxArtifactSlot++;
-            this.ArtifactSlot = [.. this.ArtifactSlot, null]; // 유물 슬롯을 하나 추가
+            this.ArtifactSlot.Add(null); // 새로운 슬롯은 null로 초기화
         }
 
         /*
-         * TakeOffMasterGear()
-         * - 장군갑주 착용 비활성화 시 호출되는 메서드입니다.
-         * - 착용 가능한 유물 슬롯을 1개 삭제합니다.
+         * DeactivateAdeptusEngine()
+         * - 아뎁투스 엔진 비활성화
          */
-        private void TakeOffMasterGear()
+        private void DeactivateAdeptusEngine()
         {
-            if (this.MaxArtifactSlot > 3) // 기본 슬롯 수는 3개이므로, 그 이상일 때만 제거
+            Artifact? artifact = this.ArtifactSlot.ElementAtOrDefault(3);
+            if (artifact != default)
             {
-                this.MaxArtifactSlot--;
-                this.ArtifactSlot = [.. this.ArtifactSlot.Take(this.MaxArtifactSlot)]; // 마지막 슬롯 제거
+                artifact.Unequip(this);
             }
+            this.ArtifactSlot.RemoveAt(3); // 마지막 슬롯 제거
+            this.MaxArtifactSlot--;
         }
     }
 }
