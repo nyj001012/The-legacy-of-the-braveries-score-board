@@ -1,0 +1,68 @@
+﻿{
+  "id": "203_00_Seokbungdius",
+  "name": "석붕디우스",
+  "corpsId": "203",
+  "description": [
+    "{ 석 붕 디 우 스 }",
+    "현 3군단장",
+    "은기사단은 처음엔 자경단이였지만 현재 그들의 공을 인정받아 3군단으로 편입되어 1중대가 됐습니다.",
+    "그의 무용과 전략은 상부에 높은 평가를 받았고 3군단의 군단장으로 추천받아 임명 됐습니다.",
+    "군단장은 용사의 후손이 아닌척 하지만 아무도 믿지않습니다."
+  ],
+  "stat": {
+    "hp": 1000,
+    "movement": 2,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 2,
+        "value": 400
+      }
+    },
+    "spellPower": 400,
+    "wisdom": 3
+  },
+  "passives": [
+    {
+      "name": "압도적(도발)",
+      "requiredLevel": 0,
+      "description": [
+        "적이 최우선으로 의식합니다."
+      ]
+    },
+    {
+      "name": "악마사냥 성기사",
+      "requiredLevel": 0,
+      "description": [
+        "아군의 명상 효율 +1",
+        "아군이 마법을 사용했을때 행동을 1회 소모하지 않습니다."
+      ]
+    },
+    {
+      "name": "단장의 위엄",
+      "requiredLevel": 1,
+      "description": [
+        "전투 시작 시 본인 체력 +500"
+      ]
+    },
+    {
+      "name": "고결한 전진",
+      "requiredLevel": 2,
+      "description": [
+        "아군 전체 받는 모든 피해 절반으로 감소"
+      ]
+    }
+  ],
+  "actives": [
+    {
+      "name": "구원자",
+      "requiredLevel": 0,
+      "cooldown": 5,
+      "description": [
+        "아군의 주변타일로 이동하며 체력을 회복시키고 전방의 피해를 무시합니다",
+        "회복량은 추가 체력의 50%"
+      ]
+    }
+  ]
+}

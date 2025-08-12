@@ -24,6 +24,8 @@ namespace ScoreBoard.data.character
         public const string John = "202_04_John"; // 요한
         public const string Karma = "202_05_Karma"; // 카르마
 
+        // 3군단
+        public const string Seokbungdius = "203_00_Seokbungdius"; // 석붕디우스
         public const string Rudeus = "203_02_Rudeus"; // 루데우스
         public const string Valerian = "204_01_Valerian"; // 발레리안
     }
