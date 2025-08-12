@@ -317,6 +317,8 @@ namespace ScoreBoard.modals
                     return new Seokbungdius(memberId);
                 case CharacterIds.Darius:
                     return new Darius(memberId);
+                case CharacterIds.Heavy:
+                    return new Heavy(memberId);
                 case CharacterIds.Rudeus:
                     return new Rudeus(memberId);
                 case CharacterIds.Valerian:
