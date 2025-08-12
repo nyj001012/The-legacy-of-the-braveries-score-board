@@ -82,15 +82,15 @@ namespace ScoreBoard.data.character
 
                 skill.Deactivate = p.Name switch
                 {
-                    "전투기술(패시브)" => () => skill.isActivated = true,
-                    "아퀼론 아머" => () => skill.isActivated = true,
+                    "전투기술(패시브)" => () => skill.isActivated = false,
+                    "아퀼론 아머" => () => skill.isActivated = false,
                     "장비 보강" => () =>
                     {
-                        skill.isActivated = true;
+                        skill.isActivated = false;
                         DowngradeGear();
                     }
                     ,
-                    "장비 완화" => () => skill.isActivated = true,
+                    "장비 완화" => () => skill.isActivated = false,
                     _ => null
                 };
 
