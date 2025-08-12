@@ -12,8 +12,6 @@ namespace ScoreBoard.data.character
 {
     internal class Seokbungdius : CorpsMember
     {
-        public ushort blackMagicCount = 0; // 흑마법 사용 횟수 카운트
-
         public Seokbungdius(string id)
         {
             Validator.ValidateNull(id, nameof(id));
@@ -77,6 +75,7 @@ namespace ScoreBoard.data.character
                     "악마사냥 성기사" => () => skill.isActivated = true,
                     "단장의 위엄" => () => skill.isActivated = true,
                     "고결한 전진" => () => skill.isActivated = true,
+                    "강타" => () => skill.isActivated = true,
                     _ => null
                 };
 
@@ -86,6 +85,7 @@ namespace ScoreBoard.data.character
                     "악마사냥 성기사" => () => skill.isActivated = false,
                     "단장의 위엄" => () => skill.isActivated = false,
                     "고결한 전진" => () => skill.isActivated = false,
+                    "강타" => () => skill.isActivated = false,
                     _ => null
                 };
 
