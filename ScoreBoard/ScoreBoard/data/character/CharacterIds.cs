@@ -20,6 +20,7 @@ namespace ScoreBoard.data.character
         public const string Alber = "202_00_Alber"; // 알베르
         public const string Maximus = "202_01_Maximus"; // 막시무스
         public const string Griffin = "202_02_Griffin"; // 그리핀
+        public const string Demian = "202_03_Demian"; // 데미안
 
         public const string Rudeus = "203_02_Rudeus"; // 루데우스
         public const string Valerian = "204_01_Valerian"; // 발레리안

@@ -306,6 +306,8 @@ namespace ScoreBoard.modals
                     return new Maximus(memberId);
                 case CharacterIds.Griffin:
                     return new Griffin(memberId);
+                case CharacterIds.Demian:
+                    return new Demian(memberId);
                 case CharacterIds.Rudeus:
                     return new Rudeus(memberId);
                 case CharacterIds.Valerian:
