@@ -310,6 +310,8 @@ namespace ScoreBoard.modals
                     return new Demian(memberId);
                 case CharacterIds.John:
                     return new John(memberId);
+                case CharacterIds.Karma:
+                    return new Karma(memberId);
                 case CharacterIds.Rudeus:
                     return new Rudeus(memberId);
                 case CharacterIds.Valerian:
