@@ -26,6 +26,7 @@ namespace ScoreBoard.data.character
 
         // 3군단
         public const string Seokbungdius = "203_00_Seokbungdius"; // 석붕디우스
+        public const string Darius = "203_01_Darius"; // 다리우스
         public const string Rudeus = "203_02_Rudeus"; // 루데우스
         public const string Valerian = "204_01_Valerian"; // 발레리안
     }

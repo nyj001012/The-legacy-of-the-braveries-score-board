@@ -315,6 +315,8 @@ namespace ScoreBoard.modals
                 // 3군단
                 case CharacterIds.Seokbungdius:
                     return new Seokbungdius(memberId);
+                case CharacterIds.Darius:
+                    return new Darius(memberId);
                 case CharacterIds.Rudeus:
                     return new Rudeus(memberId);
                 case CharacterIds.Valerian:
