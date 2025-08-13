@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data.skill;
+﻿using ScoreBoard.data.artifact;
+using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.utils;
 using System;
@@ -71,7 +72,12 @@ namespace ScoreBoard.data.character
 
                 skill.Activate = p.Name switch
                 {
-                    "라이온 가드" => () => skill.isActivated = true,
+                    "라이온 가드" => () =>
+                    {
+                        skill.isActivated = true;
+                        ActivateLionGuard();
+                    }
+                    ,
                     "비싸고 좀 가벼운 황금 사자 방패" => () =>
                     {
                         skill.isActivated = true;
@@ -84,7 +90,12 @@ namespace ScoreBoard.data.character
 
                 skill.Deactivate = p.Name switch
                 {
-                    "라이온 가드" => () => skill.isActivated = false,
+                    "라이온 가드" => () =>
+                    {
+                        skill.isActivated = false;
+                        DeactivateLionGuard();
+                    }
+                    ,
                     "비싸고 좀 가벼운 황금 사자 방패" => () =>
                     {
                         skill.isActivated = false;
@@ -97,6 +108,33 @@ namespace ScoreBoard.data.character
 
                 return skill;
             }).ToList() ?? [];
+        }
+
+        /*
+         * DeactivateLionGuard()
+         * - 라이온 가드가 비활성화될 때 호출됩니다.
+         * - 유물 슬롯 -1
+         */
+        private void DeactivateLionGuard()
+        {
+            Artifact? artifact = ArtifactSlot.ElementAtOrDefault(3);
+            if (artifact != default)
+            {
+                artifact.Unequip(this); // 4번째 슬롯에 있는 유물을 해제합니다.
+                this.ArtifactSlot.RemoveAt(3); // 4번째 슬롯 제거
+            }
+            this.MaxArtifactSlot--;
+        }
+
+        /*
+         * ActivateLionGuard()
+         * - 라이온 가드가 활성화될 때 호출됩니다.
+         * - 유물 슬롯 +1
+         */
+        private void ActivateLionGuard()
+        {
+            this.MaxArtifactSlot++;
+            this.ArtifactSlot.Add(null); // 새로운 슬롯 추가
         }
 
         private void InitialiseActiveSkills(CorpsMember data)
