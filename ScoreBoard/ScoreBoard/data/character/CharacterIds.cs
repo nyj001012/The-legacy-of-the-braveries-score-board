@@ -29,6 +29,12 @@ namespace ScoreBoard.data.character
         public const string Darius = "203_01_Darius"; // 다리우스
         public const string Rudeus = "203_02_Rudeus"; // 루데우스
         public const string Heavy = "203_03_Heavy"; // 헤비
+
+        // 4군단
+        public const string Petrus = "204_00_Petrus"; // 페트루스
         public const string Valerian = "204_01_Valerian"; // 발레리안
+        public const string Leon = "204_02_Leon"; // 레온
+        public const string Gideon = "204_03_Gideon"; // 기드온
+        public const string Joshua = "204_04_Joshua"; // 여호수아
     }
 }
