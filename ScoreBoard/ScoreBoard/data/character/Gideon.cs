@@ -155,6 +155,7 @@ namespace ScoreBoard.data.character
                 {
                     "전투개시(방어)" => () => skill.isOnCooldown = true,
                     "전투개시(공격)" => () => skill.isOnCooldown = true,
+                    "영원한" => () => skill.isOnCooldown = true,
                     _ => null
                 };
                 return skill;
