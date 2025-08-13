@@ -317,10 +317,13 @@ namespace ScoreBoard.modals
                     return new Seokbungdius(memberId);
                 case CharacterIds.Darius:
                     return new Darius(memberId);
-                case CharacterIds.Heavy:
-                    return new Heavy(memberId);
                 case CharacterIds.Rudeus:
                     return new Rudeus(memberId);
+                case CharacterIds.Heavy:
+                    return new Heavy(memberId);
+                // 4군단
+                case CharacterIds.Petrus:
+                    return new Petrus(memberId);
                 case CharacterIds.Valerian:
                     return new Valerian(memberId);
                 default:
