@@ -12,8 +12,6 @@ namespace ScoreBoard.data.character
 {
     internal class Rudeus : CorpsMember
     {
-        public ushort blackMagicCount = 0; // 흑마법 사용 횟수 카운트
-
         public Rudeus(string id)
         {
             Validator.ValidateNull(id, nameof(id));
@@ -182,7 +180,7 @@ namespace ScoreBoard.data.character
 
                 skill.Execute = a.Name switch
                 {
-                    "검!풍!" => () => blackMagicCount = 0,
+                    "검!풍!" => () => skill.isOnCooldown = true,
                     _ => null
                 };
                 return skill;
