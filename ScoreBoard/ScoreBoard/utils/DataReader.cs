@@ -260,6 +260,7 @@ namespace ScoreBoard.utils
                     "ExpensiveToothpick" => JsonSerializer.Deserialize<ExpensiveToothpick>(json, CachedJsonSerializerOptions),
                     "HBGRifle" => JsonSerializer.Deserialize<HBGRifle>(json, CachedJsonSerializerOptions),
                     "BlackGun" => JsonSerializer.Deserialize<BlackGun>(json, CachedJsonSerializerOptions),
+                    "ShockShot" => JsonSerializer.Deserialize<ShockShot>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }
