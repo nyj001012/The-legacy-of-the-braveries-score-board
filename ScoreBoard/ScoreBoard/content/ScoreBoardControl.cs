@@ -1190,7 +1190,7 @@ namespace ScoreBoard.content
 
         private void pbWeapon_Click(object sender, EventArgs e)
         {
-            EditEquipment(ArtifactType.Weapon, (PictureBox)sender);
+            EditEquipment(ArtifactType.Headgear, (PictureBox)sender);
         }
 
         private void pbArmour_Click(object sender, EventArgs e)

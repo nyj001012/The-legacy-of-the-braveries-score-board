@@ -1,7 +1,7 @@
 ﻿{
-  "id": "2_02_ForeheadGuard",
+  "id": "0_02_ForeheadGuard",
   "name": "이마보호대",
-  "type": "accessory",
+  "type": "headgear",
   "rarity": "normal",
   "equipEffect": {
     "hp": 50,
