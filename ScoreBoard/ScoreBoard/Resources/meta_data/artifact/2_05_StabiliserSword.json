@@ -1,0 +1,12 @@
+﻿{
+  "id": "2_05_StabiliserSword",
+  "name": "보정기 칼",
+  "type": "accessory",
+  "rarity": "normal",
+  "equipEffect": {
+    "atk": 30
+  },
+  "description": [
+    "공격력 +30"
+  ]
+}
