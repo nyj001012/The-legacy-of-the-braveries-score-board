@@ -1,7 +1,7 @@
 ﻿{
-  "id": "1_02_Cap",
+  "id": "0_01_Cap",
   "name": "모자",
-  "type": "armour",
+  "type": "headgear",
   "rarity": "normal",
   "equipEffect": {
     "atk": 20

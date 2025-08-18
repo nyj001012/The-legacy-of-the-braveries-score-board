@@ -116,7 +116,7 @@
             doubleBufferedPanel5 = new ScoreBoard.controls.DoubleBufferedPanel();
             transparentTextLabel17 = new ScoreBoard.controls.TransparentTextLabel();
             fpnArtifact = new ScoreBoard.controls.CustomFlowLayoutPanel();
-            pbWeapon = new PictureBox();
+            pbHeadgear = new PictureBox();
             pbArmour = new PictureBox();
             pbAccessory1 = new PictureBox();
             pbAccessory2 = new PictureBox();
@@ -173,7 +173,7 @@
             ((System.ComponentModel.ISupportInitialize)pbSkill).BeginInit();
             doubleBufferedPanel5.SuspendLayout();
             fpnArtifact.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbWeapon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbHeadgear).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbArmour).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory2).BeginInit();
@@ -1384,7 +1384,7 @@
             // 
             fpnArtifact.BorderColor = Color.Transparent;
             fpnArtifact.BorderThickness = 0;
-            fpnArtifact.Controls.Add(pbWeapon);
+            fpnArtifact.Controls.Add(pbHeadgear);
             fpnArtifact.Controls.Add(pbArmour);
             fpnArtifact.Controls.Add(pbAccessory1);
             fpnArtifact.Controls.Add(pbAccessory2);
@@ -1394,18 +1394,18 @@
             fpnArtifact.Size = new Size(600, 134);
             fpnArtifact.TabIndex = 12;
             // 
-            // pbWeapon
+            // pbHeadgear
             // 
-            pbWeapon.BackgroundImageLayout = ImageLayout.Stretch;
-            pbWeapon.Cursor = Cursors.Hand;
-            pbWeapon.Location = new Point(0, 0);
-            pbWeapon.Margin = new Padding(0, 0, 20, 0);
-            pbWeapon.Name = "pbWeapon";
-            pbWeapon.Size = new Size(134, 134);
-            pbWeapon.TabIndex = 0;
-            pbWeapon.TabStop = false;
-            pbWeapon.Tag = "";
-            pbWeapon.Click += pbWeapon_Click;
+            pbHeadgear.BackgroundImageLayout = ImageLayout.Stretch;
+            pbHeadgear.Cursor = Cursors.Hand;
+            pbHeadgear.Location = new Point(0, 0);
+            pbHeadgear.Margin = new Padding(0, 0, 20, 0);
+            pbHeadgear.Name = "pbHeadgear";
+            pbHeadgear.Size = new Size(134, 134);
+            pbHeadgear.TabIndex = 0;
+            pbHeadgear.TabStop = false;
+            pbHeadgear.Tag = "";
+            pbHeadgear.Click += pbHeadgear_Click;
             // 
             // pbArmour
             // 
@@ -1732,7 +1732,7 @@
             doubleBufferedPanel5.ResumeLayout(false);
             doubleBufferedPanel5.PerformLayout();
             fpnArtifact.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pbWeapon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbHeadgear).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbArmour).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory2).EndInit();
@@ -1825,7 +1825,7 @@
         private controls.DoubleBufferedPanel doubleBufferedPanel5;
         private controls.TransparentTextLabel transparentTextLabel17;
         private controls.CustomFlowLayoutPanel fpnArtifact;
-        private PictureBox pbWeapon;
+        private PictureBox pbHeadgear;
         private PictureBox pbArmour;
         private PictureBox pbAccessory1;
         private PictureBox pbAccessory2;

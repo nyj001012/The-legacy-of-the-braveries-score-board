@@ -234,13 +234,39 @@ namespace ScoreBoard.utils
 
                 return className switch
                 {
-                    "DingDingSword" => JsonSerializer.Deserialize<DingDingSword>(json, CachedJsonSerializerOptions),
                     "VinylClothes" => JsonSerializer.Deserialize<VinylClothes>(json, CachedJsonSerializerOptions),
                     "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
-                    "Pauldrons" => JsonSerializer.Deserialize<Pauldrons>(json, CachedJsonSerializerOptions),
                     "Underwear" => JsonSerializer.Deserialize<Underwear>(json, CachedJsonSerializerOptions),
-                    "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
                     "ForeheadGuard" => JsonSerializer.Deserialize<ForeheadGuard>(json, CachedJsonSerializerOptions),
+
+                    // 악세사리
+                    "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
+                    "OilingWeapon" => JsonSerializer.Deserialize<OilingWeapon>(json, CachedJsonSerializerOptions),
+                    "Absorber" => JsonSerializer.Deserialize<Absorber>(json, CachedJsonSerializerOptions),
+                    "Shield" => JsonSerializer.Deserialize<Shield>(json, CachedJsonSerializerOptions),
+                    "StabiliserSword" => JsonSerializer.Deserialize<StabiliserSword>(json, CachedJsonSerializerOptions),
+                    "Branch" => JsonSerializer.Deserialize<Branch>(json, CachedJsonSerializerOptions),
+                    "MagicBracelet" => JsonSerializer.Deserialize<MagicBracelet>(json, CachedJsonSerializerOptions),
+                    "DingDingSword" => JsonSerializer.Deserialize<DingDingSword>(json, CachedJsonSerializerOptions),
+                    "Aegis" => JsonSerializer.Deserialize<Aegis>(json, CachedJsonSerializerOptions),
+                    "Medic" => JsonSerializer.Deserialize<Medic>(json, CachedJsonSerializerOptions),
+                    "PowerSword" => JsonSerializer.Deserialize<PowerSword>(json, CachedJsonSerializerOptions),
+                    "ThiefTwinBlade" => JsonSerializer.Deserialize<ThiefTwinBlade>(json, CachedJsonSerializerOptions),
+                    "Ninxendo" => JsonSerializer.Deserialize<Ninxendo>(json, CachedJsonSerializerOptions),
+                    "InsigniaOfKnighthood" => JsonSerializer.Deserialize<InsigniaOfKnighthood>(json, CachedJsonSerializerOptions),
+                    "CeremonialSword" => JsonSerializer.Deserialize<CeremonialSword>(json, CachedJsonSerializerOptions),
+                    "Dakimakura" => JsonSerializer.Deserialize<Dakimakura>(json, CachedJsonSerializerOptions),
+                    "Icebox" => JsonSerializer.Deserialize<Icebox>(json, CachedJsonSerializerOptions),
+                    "ExpensiveToothpick" => JsonSerializer.Deserialize<ExpensiveToothpick>(json, CachedJsonSerializerOptions),
+                    "HBGRifle" => JsonSerializer.Deserialize<HBGRifle>(json, CachedJsonSerializerOptions),
+                    "BlackGun" => JsonSerializer.Deserialize<BlackGun>(json, CachedJsonSerializerOptions),
+                    "ShockShot" => JsonSerializer.Deserialize<ShockShot>(json, CachedJsonSerializerOptions),
+                    "Harun" => JsonSerializer.Deserialize<Harun>(json, CachedJsonSerializerOptions),
+                    "AscensionStone" => JsonSerializer.Deserialize<AscensionStone>(json, CachedJsonSerializerOptions),
+                    "CrescentPendant" => JsonSerializer.Deserialize<CrescentPendant>(json, CachedJsonSerializerOptions),
+                    "No1Sword" => JsonSerializer.Deserialize<No1Sword>(json, CachedJsonSerializerOptions),
+                    "RobotArm" => JsonSerializer.Deserialize<RobotArm>(json, CachedJsonSerializerOptions),
+                    "Eva" => JsonSerializer.Deserialize<Eva>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }

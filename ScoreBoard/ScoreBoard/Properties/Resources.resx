@@ -188,9 +188,6 @@
   <data name="EmptyArtifactSlot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\equipment_empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EmptyWeaponSlot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\equipment_empty_weapon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="EmptyArmourSlot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\equipment_empty_armour.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -223,5 +220,8 @@
   </data>
   <data name="ImgWeatherEditModal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\날씨 수정 배경.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EmptyHeadgearSlot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\equipment_empty_headgear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

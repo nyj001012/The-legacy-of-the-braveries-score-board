@@ -1,0 +1,16 @@
+﻿{
+  "id": "2_20_BlackGun",
+  "name": "흑총",
+  "type": "accessory",
+  "rarity": "legendary",
+  "equipEffect": {
+    "atk": 60,
+    "critical": 1,
+    "count": 1
+  },
+  "description": [
+    "공격력 +150",
+    "치명타 +1",
+    "공격 속도 +1"
+  ]
+}

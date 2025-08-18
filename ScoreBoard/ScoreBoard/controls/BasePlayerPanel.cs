@@ -191,7 +191,7 @@ namespace ScoreBoard.controls
 
             Image image = index switch
             {
-                0 => Properties.Resources.EmptyWeaponSlot,
+                0 => Properties.Resources.EmptyHeadgearSlot,
                 1 => Properties.Resources.EmptyArmourSlot,
                 _ => Properties.Resources.EmptyAccessorySlot,
             };

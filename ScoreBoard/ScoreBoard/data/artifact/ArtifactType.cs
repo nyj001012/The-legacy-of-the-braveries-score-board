@@ -9,7 +9,7 @@ namespace ScoreBoard.data.artifact
 {
     public enum ArtifactType
     {
-        Weapon = 0, // id 0으로 시작
+        Headgear = 0, // id 0으로 시작
         Armour = 1, // id 1로 시작
         Accessory = 2, // id 2로 시작
     }
