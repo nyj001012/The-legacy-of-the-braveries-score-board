@@ -253,6 +253,8 @@ namespace ScoreBoard.utils
                     "PowerSword" => JsonSerializer.Deserialize<PowerSword>(json, CachedJsonSerializerOptions),
                     "ThiefTwinBlade" => JsonSerializer.Deserialize<ThiefTwinBlade>(json, CachedJsonSerializerOptions),
                     "Ninxendo" => JsonSerializer.Deserialize<Ninxendo>(json, CachedJsonSerializerOptions),
+                    "InsigniaOfKnighthood" => JsonSerializer.Deserialize<InsigniaOfKnighthood>(json, CachedJsonSerializerOptions),
+                    "CeremonialSword" => JsonSerializer.Deserialize<CeremonialSword>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }
