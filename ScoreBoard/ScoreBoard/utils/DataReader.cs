@@ -243,6 +243,7 @@ namespace ScoreBoard.utils
                     "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
                     "OilingWeapon" => JsonSerializer.Deserialize<OilingWeapon>(json, CachedJsonSerializerOptions),
                     "Absorber" => JsonSerializer.Deserialize<Absorber>(json, CachedJsonSerializerOptions),
+                    "Shield" => JsonSerializer.Deserialize<Shield>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }
