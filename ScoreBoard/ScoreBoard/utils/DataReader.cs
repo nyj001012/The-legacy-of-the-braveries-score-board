@@ -245,6 +245,7 @@ namespace ScoreBoard.utils
                     "Absorber" => JsonSerializer.Deserialize<Absorber>(json, CachedJsonSerializerOptions),
                     "Shield" => JsonSerializer.Deserialize<Shield>(json, CachedJsonSerializerOptions),
                     "StabiliserSword" => JsonSerializer.Deserialize<StabiliserSword>(json, CachedJsonSerializerOptions),
+                    "Branch" => JsonSerializer.Deserialize<Branch>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }

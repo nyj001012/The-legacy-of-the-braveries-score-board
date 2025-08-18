@@ -17,5 +17,6 @@ namespace ScoreBoard.data.artifact
 
         public virtual void Equip(CorpsMember member) { }
         public virtual void Unequip(CorpsMember member) { }
+        public virtual void TriggerEffectsOnActionEnd(CorpsMember member) { }
     }
 }
