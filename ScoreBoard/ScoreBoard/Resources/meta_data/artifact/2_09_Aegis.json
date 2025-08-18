@@ -1,7 +1,7 @@
 ﻿{
   "id": "2_09_Aegis",
   "name": "Aegis",
-  "type": "weapon",
+  "type": "accessory",
   "rarity": "normal",
   "equipEffect": {
     "hp": 400,

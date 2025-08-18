@@ -1,7 +1,7 @@
 ﻿{
   "id": "2_08_DingDingSword",
   "name": "딩딩 검",
-  "type": "weapon",
+  "type": "accessory",
   "rarity": "rare",
   "equipEffect": {
     "atk": 50,
