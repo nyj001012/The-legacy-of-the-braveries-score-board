@@ -30,7 +30,7 @@ namespace ScoreBoard.data.artifact
 
         public override void Unequip(CorpsMember member)
         {
-            // 공격력 150, 공격 속도 1 감소
+            // 공격력 150, 공격 속도 2 감소
             if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
             {
                 melee.Value = (ushort)Math.Max(0, (int)melee.Value - 150);

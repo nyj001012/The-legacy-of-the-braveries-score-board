@@ -259,6 +259,7 @@ namespace ScoreBoard.utils
                     "Icebox" => JsonSerializer.Deserialize<Icebox>(json, CachedJsonSerializerOptions),
                     "ExpensiveToothpick" => JsonSerializer.Deserialize<ExpensiveToothpick>(json, CachedJsonSerializerOptions),
                     "HBGRifle" => JsonSerializer.Deserialize<HBGRifle>(json, CachedJsonSerializerOptions),
+                    "BlackGun" => JsonSerializer.Deserialize<BlackGun>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }
