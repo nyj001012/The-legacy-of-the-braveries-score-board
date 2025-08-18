@@ -30,11 +30,11 @@ namespace ScoreBoard.data.artifact
             // 공속 -1
             if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
             {
-                melee.AttackCount = (ushort)Math.Max(0, (int)melee.AttackCount - 20);
+                melee.AttackCount = (ushort)Math.Max(0, (int)melee.AttackCount - 1);
             }
             if (member.Stat.CombatStats.TryGetValue("ranged", out var ranged))
             {
-                ranged.AttackCount = (ushort)Math.Max(0, (int)ranged.AttackCount - 20);
+                ranged.AttackCount = (ushort)Math.Max(0, (int)ranged.AttackCount - 1);
             }
         }
     }
