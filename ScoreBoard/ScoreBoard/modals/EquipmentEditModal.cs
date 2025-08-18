@@ -15,7 +15,7 @@ namespace ScoreBoard.modals
 {
     public partial class EquipmentEditModal : Form
     {
-        private readonly ArtifactType _type = ArtifactType.Headgear; // 기본값은 Weapon으로 설정
+        private readonly ArtifactType _type = ArtifactType.Headgear; // 기본값은 Headgear으로 설정
         private const int ICON_SIZE = 80; // 아이콘 크기 설정
         public Artifact? SelectedArtifact { get; private set; } = null; // 선택된 유물
 

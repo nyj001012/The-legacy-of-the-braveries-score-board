@@ -272,8 +272,8 @@ namespace ScoreBoard.content
          */
         private void InitializeArtifactSlots(CorpsMember player)
         {
-            PictureBox[] slotPics = { pbWeapon, pbArmour, pbAccessory1, pbAccessory2 };
-            string[] resourceNames = { "EmptyWeaponSlot", "EmptyArmourSlot", "EmptyAccessorySlot", "EmptyAccessorySlot" };
+            PictureBox[] slotPics = { pbHeadgear, pbArmour, pbAccessory1, pbAccessory2 };
+            string[] resourceNames = { "EmptyHeadgearSlot", "EmptyArmourSlot", "EmptyAccessorySlot", "EmptyAccessorySlot" };
 
             for (int i = 0; i < slotPics.Length; i++)
             {
@@ -302,7 +302,7 @@ namespace ScoreBoard.content
             switch (index)
             {
                 case 0:
-                    SetSlotImage(pbWeapon, artifact.Id, image);
+                    SetSlotImage(pbHeadgear, artifact.Id, image);
                     break;
                 case 1:
                     SetSlotImage(pbArmour, artifact.Id, image);
@@ -1188,7 +1188,7 @@ namespace ScoreBoard.content
             }
         }
 
-        private void pbWeapon_Click(object sender, EventArgs e)
+        private void pbHeadgear_Click(object sender, EventArgs e)
         {
             EditEquipment(ArtifactType.Headgear, (PictureBox)sender);
         }
