@@ -263,6 +263,7 @@ namespace ScoreBoard.utils
                     "ShockShot" => JsonSerializer.Deserialize<ShockShot>(json, CachedJsonSerializerOptions),
                     "Harun" => JsonSerializer.Deserialize<Harun>(json, CachedJsonSerializerOptions),
                     "AscensionStone" => JsonSerializer.Deserialize<AscensionStone>(json, CachedJsonSerializerOptions),
+                    "CrescentPendant" => JsonSerializer.Deserialize<CrescentPendant>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }
