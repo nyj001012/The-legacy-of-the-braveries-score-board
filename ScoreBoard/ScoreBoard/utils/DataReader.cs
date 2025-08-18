@@ -265,6 +265,7 @@ namespace ScoreBoard.utils
                     "AscensionStone" => JsonSerializer.Deserialize<AscensionStone>(json, CachedJsonSerializerOptions),
                     "CrescentPendant" => JsonSerializer.Deserialize<CrescentPendant>(json, CachedJsonSerializerOptions),
                     "No1Sword" => JsonSerializer.Deserialize<No1Sword>(json, CachedJsonSerializerOptions),
+                    "RobotArm" => JsonSerializer.Deserialize<RobotArm>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }
