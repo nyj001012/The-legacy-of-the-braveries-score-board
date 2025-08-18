@@ -2,7 +2,7 @@
   "id": "2_09_Aegis",
   "name": "Aegis",
   "type": "accessory",
-  "rarity": "normal",
+  "rarity": "rare",
   "equipEffect": {
     "hp": 400,
     "wisdom": 1,

@@ -249,6 +249,7 @@ namespace ScoreBoard.utils
                     "MagicBracelet" => JsonSerializer.Deserialize<MagicBracelet>(json, CachedJsonSerializerOptions),
                     "DingDingSword" => JsonSerializer.Deserialize<DingDingSword>(json, CachedJsonSerializerOptions),
                     "Aegis" => JsonSerializer.Deserialize<Aegis>(json, CachedJsonSerializerOptions),
+                    "Medic" => JsonSerializer.Deserialize<Medic>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }
