@@ -1,0 +1,14 @@
+﻿{
+  "id": "2_08_DingDingSword",
+  "name": "딩딩 검",
+  "type": "weapon",
+  "rarity": "rare",
+  "equipEffect": {
+    "atk": 50,
+    "hp": 100
+  },
+  "description": [
+    "공격력 +50",
+    "체력 +100"
+  ]
+}
