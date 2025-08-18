@@ -261,6 +261,7 @@ namespace ScoreBoard.utils
                     "HBGRifle" => JsonSerializer.Deserialize<HBGRifle>(json, CachedJsonSerializerOptions),
                     "BlackGun" => JsonSerializer.Deserialize<BlackGun>(json, CachedJsonSerializerOptions),
                     "ShockShot" => JsonSerializer.Deserialize<ShockShot>(json, CachedJsonSerializerOptions),
+                    "Harun" => JsonSerializer.Deserialize<Harun>(json, CachedJsonSerializerOptions),
                     _ => JsonSerializer.Deserialize<Artifact>(json, CachedJsonSerializerOptions)
                 };
             }
