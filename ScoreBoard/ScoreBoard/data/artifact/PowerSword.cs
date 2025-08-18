@@ -41,9 +41,6 @@ namespace ScoreBoard.data.artifact
                 ranged.Value = (ushort)Math.Max(0, (int)ranged.Value - 30);
                 ranged.AttackCount = (ushort)Math.Max(0, (int)ranged.AttackCount - 1);
             }
-            // 체력 100 감소
-            member.Stat.MaxHp = (ushort)Math.Max(0, (int)member.Stat.MaxHp - 100);
-            member.Stat.Hp = (ushort)Math.Max(0, (int)member.Stat.Hp - 100);
         }
     }
 }
