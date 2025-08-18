@@ -1478,6 +1478,8 @@ namespace ScoreBoard.content
                 // 스킬 쿨타임 업데이트
                 UpdateSkillCooldown(-1);
             }
+            // 현재 행동 완료한 플레이어의 유물에 의한 상태 업데이트
+            UpdateCurrentPlayerStatByArtifact();
 
             // 플레이어 패널 업데이트
             InitPlayerList();
@@ -1485,6 +1487,33 @@ namespace ScoreBoard.content
             // 다음 플레이어로 상세 정보 표시
             currentShowingPlayer = _characters.Values.ElementAt(actionCount % 4); // 4인 플레이어 기준으로 다음 플레이어 선택
             ShowDetail(currentShowingPlayer!);
+        }
+
+        /*
+         * UpdateCurrentPlayerStatByArtifact()
+         * - 현재 플레이어의 유물에 의한 상태를 업데이트하는 메서드
+         * - 행동 종료 시 유물에 의한 상태를 갱신
+         */
+        private void UpdateCurrentPlayerStatByArtifact()
+        {
+            if (currentShowingPlayer == null)
+                return;
+
+            // 현재 플레이어의 유물에 의한 상태 업데이트
+            foreach (var artifact in currentShowingPlayer.ArtifactSlot)
+            {
+                if (artifact == null)
+                    continue;
+                else
+                {
+                    artifact.TriggerEffectsOnActionEnd(currentShowingPlayer);
+                }
+            }
+
+            // 상세 정보 갱신
+            ShowDetail(currentShowingPlayer);
+            // 플레이어 리스트 갱신
+            InitPlayerList();
         }
 
         /*
