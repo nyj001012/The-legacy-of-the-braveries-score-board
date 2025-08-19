@@ -1,0 +1,13 @@
+﻿{
+  "id": "1_12_HighPriest",
+  "name": "대사제",
+  "type": "armour",
+  "rarity": "legendary",
+  "equipEffect": {
+    "spellPower": 300
+  },
+  "description": [
+    "주문력 +300",
+    "1회 초과 치유"
+  ]
+}
