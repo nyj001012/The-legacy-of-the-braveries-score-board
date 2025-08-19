@@ -39,5 +39,36 @@ namespace ScoreBoard.utils
                 || member is Gideon
                 || member is Griffin;
         }
+
+        /*
+         * IsDealer<T>(T member)
+         * - T는 CorpsMember의 자식 클래스여야 함
+         * - member가 Kkulga, Ruda, Hagyun, Yenala, Maximus, Demian, Darius, Rudeus, Heavy, Valerian, Leon 중 하나인지 확인
+         */
+        public static bool IsDealer<T>(T member) where T : class
+        {
+            return member is Kkulga
+                || member is Ruda
+                || member is Hagyun
+                || member is Yenala
+                || member is Maximus
+                || member is Demian
+                || member is Darius
+                || member is Rudeus
+                || member is Heavy
+                || member is Valerian
+                || member is Leon;
+        }
+
+        /*
+         * IsSupporter<T>(T member)
+         * - T는 CorpsMember의 자식 클래스여야 함
+         * - member가 Teo, John 중 하나인지 확인
+         */
+        public static bool IsSupporter<T>(T member) where T : class
+        {
+            return member is Teo
+                || member is John;
+        }
     }
 }
