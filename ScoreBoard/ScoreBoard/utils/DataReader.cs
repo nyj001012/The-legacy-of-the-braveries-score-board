@@ -257,6 +257,7 @@ namespace ScoreBoard.utils
                     // 투구
                     "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
                     "ForeheadGuard" => JsonSerializer.Deserialize<ForeheadGuard>(json, CachedJsonSerializerOptions),
+                    "Headband" => JsonSerializer.Deserialize<Headband>(json, CachedJsonSerializerOptions),
 
                     // 악세사리
                     "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
