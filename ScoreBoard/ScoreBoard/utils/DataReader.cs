@@ -263,6 +263,7 @@ namespace ScoreBoard.utils
                     "LaurelWreath" => JsonSerializer.Deserialize<LaurelWreath>(json, CachedJsonSerializerOptions),
                     "Biker" => JsonSerializer.Deserialize<Biker>(json, CachedJsonSerializerOptions),
                     "ConeHat" => JsonSerializer.Deserialize<ConeHat>(json, CachedJsonSerializerOptions),
+                    "Helmet" => JsonSerializer.Deserialize<Helmet>(json, CachedJsonSerializerOptions),
 
                     // 악세사리
                     "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
