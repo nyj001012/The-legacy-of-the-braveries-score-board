@@ -27,7 +27,7 @@ namespace ScoreBoard.data.artifact
         }
         public override void Unequip(CorpsMember member)
         {
-            // 주문력 100 감소
+            // 지혜 1 감소
             if (member.Stat.Wisdom.HasValue)
             {
                 member.Stat.Wisdom = (ushort?)(Math.Max(0, member.Stat.Wisdom.Value - 1));

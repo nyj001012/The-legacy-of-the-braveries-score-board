@@ -1,0 +1,13 @@
+﻿{
+  "id": "1_18_Highend",
+  "name": "고오급",
+  "type": "armour",
+  "rarity": "legendary",
+  "equipEffect": {
+    "atk": 60
+  },
+  "description": [
+    "공격력 +60",
+    "피해량 50% 흡수"
+  ]
+}

@@ -1,0 +1,13 @@
+﻿{
+  "id": "1_13_Hood",
+  "name": "두건",
+  "type": "armour",
+  "rarity": "legendary",
+  "equipEffect": {
+    "spellPower": 500
+  },
+  "description": [
+    "주문력 +500",
+    "공격 후 주문력 만큼의 피해"
+  ]
+}

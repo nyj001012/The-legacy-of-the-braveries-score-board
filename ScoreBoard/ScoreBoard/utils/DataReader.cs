@@ -234,9 +234,28 @@ namespace ScoreBoard.utils
 
                 return className switch
                 {
+                    // 방어구
                     "VinylClothes" => JsonSerializer.Deserialize<VinylClothes>(json, CachedJsonSerializerOptions),
-                    "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
+                    "PetitShieldClothes" => JsonSerializer.Deserialize<PetitShieldClothes>(json, CachedJsonSerializerOptions),
+                    "Shirt" => JsonSerializer.Deserialize<Shirt>(json, CachedJsonSerializerOptions),
                     "Underwear" => JsonSerializer.Deserialize<Underwear>(json, CachedJsonSerializerOptions),
+                    "BulletproofVest" => JsonSerializer.Deserialize<BulletproofVest>(json, CachedJsonSerializerOptions),
+                    "Robe" => JsonSerializer.Deserialize<Robe>(json, CachedJsonSerializerOptions),
+                    "WizardCloak" => JsonSerializer.Deserialize<WizardCloak>(json, CachedJsonSerializerOptions),
+                    "Training" => JsonSerializer.Deserialize<Training>(json, CachedJsonSerializerOptions),
+                    "Swimsuit" => JsonSerializer.Deserialize<Swimsuit>(json, CachedJsonSerializerOptions),
+                    "Suit" => JsonSerializer.Deserialize<Suit>(json, CachedJsonSerializerOptions),
+                    "BbangBbangSuit" => JsonSerializer.Deserialize<BbangBbangSuit>(json, CachedJsonSerializerOptions),
+                    "HighPriest" => JsonSerializer.Deserialize<HighPriest>(json, CachedJsonSerializerOptions),
+                    "Hood" => JsonSerializer.Deserialize<Hood>(json, CachedJsonSerializerOptions),
+                    "General" => JsonSerializer.Deserialize<General>(json, CachedJsonSerializerOptions),
+                    "Titan" => JsonSerializer.Deserialize<Titan>(json, CachedJsonSerializerOptions),
+                    "Sage" => JsonSerializer.Deserialize<Sage>(json, CachedJsonSerializerOptions),
+                    "LuxuryJacket" => JsonSerializer.Deserialize<LuxuryJacket>(json, CachedJsonSerializerOptions),
+                    "Highend" => JsonSerializer.Deserialize<Highend>(json, CachedJsonSerializerOptions),
+
+                    // 투구
+                    "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
                     "ForeheadGuard" => JsonSerializer.Deserialize<ForeheadGuard>(json, CachedJsonSerializerOptions),
 
                     // 악세사리
