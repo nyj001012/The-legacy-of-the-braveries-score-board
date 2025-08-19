@@ -240,7 +240,8 @@ namespace ScoreBoard.utils
                     "Shirt" => JsonSerializer.Deserialize<Shirt>(json, CachedJsonSerializerOptions),
                     "Underwear" => JsonSerializer.Deserialize<Underwear>(json, CachedJsonSerializerOptions),
                     "BulletproofVest" => JsonSerializer.Deserialize<BulletproofVest>(json, CachedJsonSerializerOptions),
-                    "Robe" => JsonSerializer.Deserialize<Robes>(json, CachedJsonSerializerOptions),
+                    "Robe" => JsonSerializer.Deserialize<Robe>(json, CachedJsonSerializerOptions),
+                    "WizardCloak" => JsonSerializer.Deserialize<WizardCloak>(json, CachedJsonSerializerOptions),
 
                     // 투구
                     "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
