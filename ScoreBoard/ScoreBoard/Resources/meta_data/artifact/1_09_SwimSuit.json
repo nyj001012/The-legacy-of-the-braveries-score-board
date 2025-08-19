@@ -1,0 +1,14 @@
+﻿{
+  "id": "1_09_Swimsuit",
+  "name": "수영복",
+  "type": "armour",
+  "rarity": "rare",
+  "equipEffect": {
+    "hp": 100,
+    "spellPower": 200
+  },
+  "description": [
+    "체력 +100",
+    "주문력 +200"
+  ]
+}
