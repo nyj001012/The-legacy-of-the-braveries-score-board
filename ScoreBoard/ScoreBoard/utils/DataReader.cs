@@ -234,7 +234,10 @@ namespace ScoreBoard.utils
 
                 return className switch
                 {
+                    // 방어구
                     "VinylClothes" => JsonSerializer.Deserialize<VinylClothes>(json, CachedJsonSerializerOptions),
+                    "PetitShieldClothes" => JsonSerializer.Deserialize<PetitShieldClothes>(json, CachedJsonSerializerOptions),
+                    "Shirt" => JsonSerializer.Deserialize<Shirt>(json, CachedJsonSerializerOptions),
                     "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
                     "Underwear" => JsonSerializer.Deserialize<Underwear>(json, CachedJsonSerializerOptions),
                     "ForeheadGuard" => JsonSerializer.Deserialize<ForeheadGuard>(json, CachedJsonSerializerOptions),

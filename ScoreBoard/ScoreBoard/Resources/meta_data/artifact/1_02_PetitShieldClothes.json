@@ -1,0 +1,12 @@
+﻿{
+  "id": "1_02_PetitShieldClothes",
+  "name": "쁘띠 방패옷",
+  "type": "armour",
+  "rarity": "normal",
+  "equipEffect": {
+    "hp": 300
+  },
+  "description": [
+    "체력 +300"
+  ]
+}
