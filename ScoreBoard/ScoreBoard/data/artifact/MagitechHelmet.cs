@@ -18,7 +18,6 @@ namespace ScoreBoard.data.artifact
             if (member.Stat.SpellPower.HasValue)
             {
                 member.Stat.SpellPower = (ushort?)(member.Stat.SpellPower.Value + 400);
-                member.ArtifactSpellPowerMultiplier *= 2;
             }
 
             // 이동 속도 +1
@@ -30,7 +29,6 @@ namespace ScoreBoard.data.artifact
             if (member.Stat.SpellPower.HasValue)
             {
                 member.Stat.SpellPower = (ushort?)(Math.Max(0, member.Stat.SpellPower.Value - 400));
-                member.ArtifactSpellPowerMultiplier /= 2;
             }
 
             // 이동 속도 -1
