@@ -916,7 +916,8 @@ namespace ScoreBoard.content
             {
                 action(value);
                 label.Text = label.Name.Contains("AttackCount") ? $"{{{value}}}" : value.ToString();
-
+                if (label.Name.Contains("SpellPower") && statOwner is CorpsMember)
+                    label.Text = $"{value * currentShowingPlayer.ArtifactSpellPowerMultiplier}";
                 // 체력 수정 시, 체력바 생김새도 수정
                 if (label.Name == "lblMaxHealth")
                     UpdateHealthBar();
