@@ -253,12 +253,13 @@ namespace ScoreBoard.utils
                     "Sage" => JsonSerializer.Deserialize<Sage>(json, CachedJsonSerializerOptions),
                     "LuxuryJacket" => JsonSerializer.Deserialize<LuxuryJacket>(json, CachedJsonSerializerOptions),
                     "Highend" => JsonSerializer.Deserialize<Highend>(json, CachedJsonSerializerOptions),
-                    "BulletproofHelmet" => JsonSerializer.Deserialize<BulletproofHelmet>(json, CachedJsonSerializerOptions),
 
                     // 투구
                     "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
                     "ForeheadGuard" => JsonSerializer.Deserialize<ForeheadGuard>(json, CachedJsonSerializerOptions),
                     "Headband" => JsonSerializer.Deserialize<Headband>(json, CachedJsonSerializerOptions),
+                    "BulletproofHelmet" => JsonSerializer.Deserialize<BulletproofHelmet>(json, CachedJsonSerializerOptions),
+                    "Tiara" => JsonSerializer.Deserialize<Tiara>(json, CachedJsonSerializerOptions),
 
                     // 악세사리
                     "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
