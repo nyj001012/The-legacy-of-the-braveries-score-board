@@ -1,0 +1,15 @@
+﻿{
+  "id": "0_10_Rider",
+  "name": "라이더",
+  "type": "headgear",
+  "rarity": "rare",
+  "equipEffect": {
+    "spellPower": 100,
+    "count": 1
+  },
+  "description": [
+    "주문력 +100",
+    "공격속도 +1",
+    "전투 후 주문력 50% 추가 피해"
+  ]
+}
