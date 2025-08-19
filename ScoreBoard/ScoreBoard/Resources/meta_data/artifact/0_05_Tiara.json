@@ -2,7 +2,7 @@
   "id": "0_05_Tiara",
   "name": "티아라",
   "type": "headgear",
-  "rarity": "normal",
+  "rarity": "rare",
   "equipEffect": {
     "atk": 20,
     "count": 1,
