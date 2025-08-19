@@ -10,12 +10,16 @@ namespace ScoreBoard.data.artifact
 {
     internal class BbangBbangSuit : Artifact
     {
+        private ushort hpIncrease = 0; // 체력 증가량
+
         public BbangBbangSuit()
         {
         }
 
         public override void Equip(CorpsMember member)
         {
+            hpIncrease = Validator.IsTanker(member) ? (ushort)1000 : (ushort)500;
+
             // 공격력 20 증가
             if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
             {
@@ -25,18 +29,8 @@ namespace ScoreBoard.data.artifact
             {
                 ranged.Value += 20;
             }
-            if (Validator.IsTanker(member))
-            {
-                // 체력 1000 증가
-                member.Stat.MaxHp += 1000;
-                member.Stat.Hp += 1000;
-            }
-            else
-            {
-                // 체력 500 증가
-                member.Stat.MaxHp += 500;
-                member.Stat.Hp += 500;
-            }
+            member.Stat.MaxHp += hpIncrease;
+            member.Stat.Hp += hpIncrease;
         }
 
         public override void Unequip(CorpsMember member)
@@ -50,18 +44,8 @@ namespace ScoreBoard.data.artifact
             {
                 ranged.Value = (ushort)Math.Max(0, (int)ranged.Value - 20);
             }
-            if (Validator.IsTanker(member))
-            {
-                // 체력 1000 감소
-                member.Stat.MaxHp = (ushort)Math.Max(0, (int)member.Stat.MaxHp - 1000);
-                member.Stat.Hp = (ushort)Math.Max(0, (int)member.Stat.Hp - 1000);
-            }
-            else
-            {
-                // 체력 500 감소
-                member.Stat.MaxHp = (ushort)Math.Max(0, (int)member.Stat.MaxHp - 500);
-                member.Stat.Hp = (ushort)Math.Max(0, (int)member.Stat.Hp - 500);
-            }
+            member.Stat.MaxHp = (ushort)Math.Max(0, (int)member.Stat.MaxHp - hpIncrease);
+            member.Stat.Hp = (ushort)Math.Max(0, (int)member.Stat.Hp - hpIncrease);
         }
     }
 }
