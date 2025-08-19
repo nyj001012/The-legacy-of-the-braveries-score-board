@@ -245,6 +245,7 @@ namespace ScoreBoard.utils
                     "Training" => JsonSerializer.Deserialize<Training>(json, CachedJsonSerializerOptions),
                     "Swimsuit" => JsonSerializer.Deserialize<Swimsuit>(json, CachedJsonSerializerOptions),
                     "Suit" => JsonSerializer.Deserialize<Suit>(json, CachedJsonSerializerOptions),
+                    "BbangBbangSuit" => JsonSerializer.Deserialize<BbangBbangSuit>(json, CachedJsonSerializerOptions),
 
                     // 투구
                     "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
