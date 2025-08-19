@@ -242,6 +242,7 @@ namespace ScoreBoard.utils
                     "BulletproofVest" => JsonSerializer.Deserialize<BulletproofVest>(json, CachedJsonSerializerOptions),
                     "Robe" => JsonSerializer.Deserialize<Robe>(json, CachedJsonSerializerOptions),
                     "WizardCloak" => JsonSerializer.Deserialize<WizardCloak>(json, CachedJsonSerializerOptions),
+                    "Training" => JsonSerializer.Deserialize<Training>(json, CachedJsonSerializerOptions),
 
                     // 투구
                     "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
