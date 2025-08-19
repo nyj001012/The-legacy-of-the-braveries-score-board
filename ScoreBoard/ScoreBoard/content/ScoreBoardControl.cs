@@ -365,7 +365,7 @@ namespace ScoreBoard.content
         {
             bool hasSpellPower = player.Stat.SpellPower != null;
             fpnSpellPower.Visible = hasSpellPower;
-            if (hasSpellPower) lblSpellPower.Text = player.Stat.SpellPower!.Value.ToString();
+            if (hasSpellPower) lblSpellPower.Text = (player.Stat.SpellPower!.Value * player.ArtifactSpellPowerMultiplier).ToString();
         }
 
         /*

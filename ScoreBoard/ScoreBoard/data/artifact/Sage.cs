@@ -14,20 +14,20 @@ namespace ScoreBoard.data.artifact
         }
         public override void Equip(CorpsMember member)
         {
-            // 주문력 400 증가 및 2배
+            // 주문력 400 증가
             if (member.Stat.SpellPower.HasValue)
             {
-                member.ArtifactSpellPowerAdder += 400;
+                member.Stat.SpellPower = (ushort?)(member.Stat.SpellPower.Value + 400);
                 member.ArtifactSpellPowerMultiplier *= 2;
             }
         }
         public override void Unequip(CorpsMember member)
         {
-            // 주문력 400 감소 및 반절
+            // 주문력 400 감소
             if (member.Stat.SpellPower.HasValue)
             {
-                member.ArtifactSpellPowerAdder = Math.Max(0, member.ArtifactSpellPowerAdder - 400);
-                member.ArtifactSpellPowerMultiplier = Math.Max(1, member.ArtifactSpellPowerMultiplier / 2);
+                member.Stat.SpellPower = (ushort?)(Math.Max(0, member.Stat.SpellPower.Value - 400));
+                member.ArtifactSpellPowerMultiplier /= 2;
             }
         }
     }

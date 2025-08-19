@@ -9,8 +9,6 @@ namespace ScoreBoard.data.artifact
 {
     internal class WizardCloak : Artifact
     {
-        private int spPowerIncrease = 0; // 주문력 증가량
-
         public WizardCloak()
         {
         }
@@ -20,8 +18,8 @@ namespace ScoreBoard.data.artifact
             // 주문력 500, 2배 증가
             if (member.Stat.SpellPower.HasValue)
             {
-                spPowerIncrease = (member.Stat.SpellPower.Value + 500) * 2 - member.Stat.SpellPower.Value;
-                member.Stat.SpellPower  = (ushort?)(member.Stat.SpellPower.Value + spPowerIncrease);
+                member.ArtifactSpellPowerMultiplier *= 2;
+                member.Stat.SpellPower  = (ushort?)(member.Stat.SpellPower.Value + 500);
             }
 
             // 체력 300 증가
@@ -32,10 +30,10 @@ namespace ScoreBoard.data.artifact
         public override void Unequip(CorpsMember member)
         {
             // 주문력 500, 2배 감소
-            if (member.Stat.SpellPower.HasValue && spPowerIncrease > 0)
+            if (member.Stat.SpellPower.HasValue)
             {
-                member.Stat.SpellPower = (ushort?)(Math.Max(0, member.Stat.SpellPower.Value - spPowerIncrease));
-                spPowerIncrease = 0; // 초기화
+                member.ArtifactSpellPowerMultiplier /= 2;
+                member.Stat.SpellPower = (ushort?)(Math.Max(0, member.Stat.SpellPower.Value - 500));
             }
 
             // 체력 300 감소

@@ -42,9 +42,6 @@ namespace ScoreBoard.data.character
         [JsonIgnore]
         public int ArtifactSpellPowerMultiplier { get; set; } = 1; // 유물에 의한 곱연산 보정치
 
-        [JsonIgnore]
-        public int ArtifactSpellPowerAdder { get; set; } = 0; // 유물에 의한 주문력 합연산 보정치
-
         public CorpsMember()
         {
             ArtifactSlot = [.. Enumerable.Repeat<Artifact?>(null,  MaxArtifactSlot)]; // 0: 무기, 1: 방어구, 2~3: 액세서리
