@@ -270,6 +270,7 @@ namespace ScoreBoard.utils
                     "Dandy" => JsonSerializer.Deserialize<Dandy>(json, CachedJsonSerializerOptions),
                     "MonsterHelmet" => JsonSerializer.Deserialize<MonsterHelmet>(json, CachedJsonSerializerOptions),
                     "Assassin" => JsonSerializer.Deserialize<Assassin>(json, CachedJsonSerializerOptions),
+                    "HornHelmet" => JsonSerializer.Deserialize<HornHelmet>(json, CachedJsonSerializerOptions),
 
                     // 악세사리
                     "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
