@@ -267,6 +267,7 @@ namespace ScoreBoard.utils
                     "Rider" => JsonSerializer.Deserialize<Rider>(json, CachedJsonSerializerOptions),
                     "SpaceHelmet" => JsonSerializer.Deserialize<SpaceHelmet>(json, CachedJsonSerializerOptions),
                     "Magitech" => JsonSerializer.Deserialize<MagitechHelmet>(json, CachedJsonSerializerOptions),
+                    "Dandy" => JsonSerializer.Deserialize<Dandy>(json, CachedJsonSerializerOptions),
 
                     // 악세사리
                     "Bandage" => JsonSerializer.Deserialize<Bandage>(json, CachedJsonSerializerOptions),
