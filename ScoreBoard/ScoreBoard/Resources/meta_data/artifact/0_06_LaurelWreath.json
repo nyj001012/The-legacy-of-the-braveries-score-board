@@ -1,0 +1,14 @@
+﻿{
+  "id": "0_06_LaurelWreath",
+  "name": "월계관",
+  "type": "headgear",
+  "rarity": "rare",
+  "equipEffect": {
+    "hp": 100,
+    "atk": 30
+  },
+  "description": [
+    "체력 +100",
+    "공격력 +20"
+  ]
+}
