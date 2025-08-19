@@ -36,6 +36,7 @@ namespace ScoreBoard.utils
                 || member is Seokbungdius
                 || member is Petrus
                 || member is Joshua
+                || member is Gideon
                 || member is Griffin;
         }
     }
