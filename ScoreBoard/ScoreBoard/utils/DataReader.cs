@@ -252,6 +252,7 @@ namespace ScoreBoard.utils
                     "Titan" => JsonSerializer.Deserialize<Titan>(json, CachedJsonSerializerOptions),
                     "Sage" => JsonSerializer.Deserialize<Sage>(json, CachedJsonSerializerOptions),
                     "LuxuryJacket" => JsonSerializer.Deserialize<LuxuryJacket>(json, CachedJsonSerializerOptions),
+                    "Highend" => JsonSerializer.Deserialize<Highend>(json, CachedJsonSerializerOptions),
 
                     // 투구
                     "Cap" => JsonSerializer.Deserialize<Cap>(json, CachedJsonSerializerOptions),
