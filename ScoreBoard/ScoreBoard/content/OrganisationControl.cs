@@ -103,6 +103,7 @@ namespace ScoreBoard.content
                         "2_02_Imp" => new Imp(id, 0),
                         "2_03_BeastDemon" => new BeastDemon(id, 0),
                         "2_04_SoldierBot" => new SoldierBot(id, 0),
+                        "2_05_ArcherBot" => new ArcherBot(id, 0),
                         _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
                     };
                     monster.Count = count;

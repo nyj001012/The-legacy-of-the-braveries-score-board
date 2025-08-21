@@ -1,15 +1,15 @@
 ﻿{
   "type": 2,
-  "id": "2_01_Slime",
-  "name": "슬라임",
+  "id": "2_05_ArcherBot",
+  "name": "궁병 봇",
   "stat": {
-    "hp": 300,
+    "hp": 1000,
     "combatStat": {
       "ranged": {
         "type": "atk",
         "range": 1,
-        "attackCount": 1,
-        "value": 300
+        "attackCount": 8,
+        "value": 100
       }
     }
   }
