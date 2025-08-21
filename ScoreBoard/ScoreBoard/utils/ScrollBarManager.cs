@@ -18,39 +18,38 @@ namespace ScoreBoard.utils
          * - content: 스크롤할 컨텐츠. container 내부에 있어야 함 (CustomFlowLayoutPanel)
          * - scrollBar: 스크롤바. container 내부에 있어야 함 (CyberScrollBar)
          */
-        public static void SetScrollBar(System.Windows.Forms.Panel container, CustomFlowLayoutPanel content, CyberScrollBar scrollBar)
+        public static void SetScrollBar(Control container, Control content, CyberScrollBar bar)
         {
-            var visibleControls = content.Controls.Cast<Control>().Where(c => c.Visible);
-            int contentHeight = visibleControls.Any()
-                                ? visibleControls.Max(c => c.Bottom)
-                                : 0;
+            int contentHeight =
+                content is FlowLayoutPanel flp
+                ? flp.DisplayRectangle.Height
+                : content.Controls.Cast<Control>()
+                    .Where(c => c.Visible)
+                    .Select(c => c.Bottom + c.Margin.Bottom)
+                    .DefaultIfEmpty(0)
+                    .Max() + content.Padding.Bottom;
 
-            if (contentHeight <= container.Height)
+            int viewport = container.ClientSize.Height - container.Padding.Vertical;
+
+            if (contentHeight <= viewport)
             {
-                scrollBar.Enabled = false;
-                scrollBar.Value = 0;
-                content.Top = 0;
+                bar.Enabled = false;
+                content.Top = container.Padding.Top;
+                return;
             }
-            else
+
+            bar.Enabled = true;
+            bar.Minimum = 0;
+            bar.Maximum = Math.Max(0, contentHeight - viewport);
+            // bar.SmallStep 등은 기존처럼
+
+            // 위치 이동은 ValueChanged 한 곳에서만
+            bar.ValueChanged -= OnScroll;
+            bar.ValueChanged += OnScroll;
+
+            void OnScroll(object? s, EventArgs e)
             {
-                scrollBar.Enabled = true;
-                scrollBar.Minimum = 0;
-                scrollBar.Maximum = Math.Max(0, contentHeight - container.Height);
-
-                // 중복 방지: 기존 핸들러 제거
-                scrollBar.ValueChanged -= ScrollBar_ValueChanged;
-
-                // 새로 바인딩
-                bindings[scrollBar] = content;
-                scrollBar.ValueChanged += ScrollBar_ValueChanged;
-            }
-        }
-
-        private static void ScrollBar_ValueChanged(object? sender, EventArgs e)
-        {
-            if (sender is CyberScrollBar sb && bindings.TryGetValue(sb, out var content))
-            {
-                content.Top = -sb.Value;
+                content.Top = container.Padding.Top - bar.Value;
             }
         }
     }
