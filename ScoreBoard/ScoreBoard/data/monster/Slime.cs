@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data.monster
 {
-    internal class WhiteSoldier : Monster
+    internal class Slime : Monster
     {
-        public WhiteSoldier(string id, ushort spawnTurn) : base()
+        public Slime(string id, ushort spawnTurn) : base()
         {
             InitialiseNormalElite(id, spawnTurn);
         }
