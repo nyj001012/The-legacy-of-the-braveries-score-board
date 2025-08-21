@@ -48,6 +48,7 @@ namespace ScoreBoard.content
             Margin = new Padding(0, 0, 0, 0),
             Cursor = Cursors.Hand
         };
+
         public class ArtifactSlotInfo
         {
             public string ArtifactId { get; set; } = "";
@@ -481,6 +482,7 @@ namespace ScoreBoard.content
         {
             lblName.Text = player.Name;
             pbLevel.Visible = true;
+            pbAdditionalEnemy.Visible = false;
 
             pbLevel.BackgroundImage = player.Level switch
             {
@@ -689,6 +691,7 @@ namespace ScoreBoard.content
 
             detailViewport.SuspendLayout();
             pbLevel.Visible = false;
+            pbAdditionalEnemy.Visible = true;
             foreach (Control control in detailViewport.Controls)
             {
                 control.Visible = false;
@@ -1609,6 +1612,11 @@ namespace ScoreBoard.content
         private void enemyList_MouseEnter(object sender, EventArgs e)
         {
             enemyList.Focus();
+        }
+
+        private void pbAdditionalEnemy_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -79,6 +79,7 @@
             pbLevel = new PictureBox();
             pbDice = new PictureBox();
             fpnDice = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            pbAdditionalEnemy = new PictureBox();
             pnHealth = new ScoreBoard.controls.CustomFlowLayoutPanel();
             lblHealthLabel = new ScoreBoard.controls.TransparentTextLabel();
             lblCurrentHealth = new ScoreBoard.controls.TransparentTextLabel();
@@ -158,6 +159,7 @@
             fpnBasicStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbLevel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbDice).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbAdditionalEnemy).BeginInit();
             pnHealth.SuspendLayout();
             fpnStatusDetail.SuspendLayout();
             doubleBufferedPanel4.SuspendLayout();
@@ -834,6 +836,7 @@
             fpnBasicStatus.Controls.Add(pbLevel);
             fpnBasicStatus.Controls.Add(pbDice);
             fpnBasicStatus.Controls.Add(fpnDice);
+            fpnBasicStatus.Controls.Add(pbAdditionalEnemy);
             fpnBasicStatus.Location = new Point(60, 0);
             fpnBasicStatus.Margin = new Padding(0);
             fpnBasicStatus.Name = "fpnBasicStatus";
@@ -891,6 +894,18 @@
             fpnDice.Name = "fpnDice";
             fpnDice.Size = new Size(0, 0);
             fpnDice.TabIndex = 4;
+            // 
+            // pbAdditionalEnemy
+            // 
+            pbAdditionalEnemy.BackgroundImageLayout = ImageLayout.Zoom;
+            pbAdditionalEnemy.Image = Properties.Resources.reportAdditional;
+            pbAdditionalEnemy.Location = new Point(400, 0);
+            pbAdditionalEnemy.Margin = new Padding(0);
+            pbAdditionalEnemy.Name = "pbAdditionalEnemy";
+            pbAdditionalEnemy.Size = new Size(146, 45);
+            pbAdditionalEnemy.TabIndex = 6;
+            pbAdditionalEnemy.TabStop = false;
+            pbAdditionalEnemy.Click += pbAdditionalEnemy_Click;
             // 
             // pnHealth
             // 
@@ -1713,6 +1728,7 @@
             fpnBasicStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbLevel).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbDice).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbAdditionalEnemy).EndInit();
             pnHealth.ResumeLayout(false);
             pnHealth.PerformLayout();
             fpnStatusDetail.ResumeLayout(false);
@@ -1856,5 +1872,6 @@
         private controls.TransparentTextLabel transparentTextLabel5;
         private controls.CustomFlowLayoutPanel fpnStatusEffect;
         private PictureBox pbLevel;
+        private PictureBox pbAdditionalEnemy;
     }
 }
