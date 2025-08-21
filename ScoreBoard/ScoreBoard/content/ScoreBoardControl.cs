@@ -1616,7 +1616,29 @@ namespace ScoreBoard.content
 
         private void pbAdditionalEnemy_Click(object sender, EventArgs e)
         {
-
+            List<(string id, string name, ushort count)> additionalEnemies = [];
+            var modal = new SelectMonsterForm(additionalEnemies)
+            {
+                StartPosition = FormStartPosition.CenterParent,
+            };
+            if (modal.ShowDialog(this) == DialogResult.OK)
+            {
+                additionalEnemies = modal.currentSelectedMonsters;
+                foreach (var (id, name, count) in additionalEnemies)
+                {
+                    int index = _monsters.FindIndex(monster => monster.Id == id);
+                    // 없는 몬스터라면 새로 추가
+                    if (index == -1)
+                    {
+                        _monsters.Add(DataReader.GetMonster(id));
+                    }
+                    else
+                    {
+                        // 이미 있는 몬스터라면 마리수 추가
+                        _monsters[index].Count += count;
+                    }
+                }
+            }
         }
     }
 }
