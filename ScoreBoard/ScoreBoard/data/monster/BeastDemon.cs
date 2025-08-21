@@ -10,7 +10,7 @@ namespace ScoreBoard.data.monster
     {
         public BeastDemon(string id, ushort spawnTurn) : base()
         {
-            InitialiseNormalElite(id, spawnTurn);
+            Initialise(id, spawnTurn);
         }
     }
 }

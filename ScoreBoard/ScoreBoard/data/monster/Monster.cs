@@ -16,8 +16,6 @@ namespace ScoreBoard.data.monster
         public string Id { get; set; } = string.Empty!; // Id
         public string Name { get; set; } = string.Empty!; // 이름
         public Stat Stat { get; set; } = default!; // 스탯
-        public ushort SpawnTurn { get; set; } // 스폰 가능한 턴
-        public SkillBase? SpawnElites { get; set; } // 보스 몬스터는 엘리트 몬스터를 소환할 수 있음
 
         [JsonIgnore]
         public Dictionary<ushort, bool> RequiredDiceValues { get; set; } = []; // 행동하기 위해 필요한 주사위 값이 키, 치명타 여부가 값
@@ -43,7 +41,7 @@ namespace ScoreBoard.data.monster
         [JsonIgnore]
         public double SEAttackValueModifier { get; set; } = 1; // 상태이상 공격력 보정치. 곱연산 활용
 
-        protected void InitialiseNormalElite(string id, ushort spawnTurn)
+        protected void Initialise(string id, ushort spawnTurn)
         {
             Validator.ValidateNull(id, nameof(id));
 
@@ -52,7 +50,6 @@ namespace ScoreBoard.data.monster
             Id = data.Id;
             Grade = data.Grade;
             Name = data.Name;
-            SpawnTurn = spawnTurn;
             Stat = new Stat
             {
                 Hp = data.Stat.Hp,
