@@ -123,8 +123,6 @@ namespace ScoreBoard.content
 
             foreach (var m in _monsters)
             {
-                if (m.SpawnTurn >= currentTurn)
-                    continue;
                 EnemyPanel enemyControl = new(m)
                 {
                     Name = $"pn{m.Id}"
