@@ -119,24 +119,38 @@ namespace ScoreBoard.content
         {
             enemyList.SuspendLayout();
             enemyList.Controls.Clear();
+            int height = 0;
 
             foreach (var m in _monsters)
             {
+                if (m.SpawnTurn >= currentTurn)
+                    continue;
                 EnemyPanel enemyControl = new(m)
                 {
                     Name = $"pn{m.Id}"
                 };
-                // 현재 턴보다 스폰 턴이 큰 몬스터는 표시하지 않음
-                if (m.SpawnTurn > currentTurn)
-                {
-                    enemyControl.Visible = false; // 스폰 턴이 0이 아닌 적은 숨김 처리
-                }
                 enemyControl.DetailRequested += (s, e) => ShowDetail(e.Item1, e.Item2); // 상세 정보 요청 이벤트 핸들러 등록
                 enemyList.Controls.Add(enemyControl);
+                height = height + enemyControl.Height + enemyControl.Margin.Bottom;
             }
-
             enemyList.ResumeLayout();
+            enemyList.PerformLayout();
+            enemyList.Height = height;
             ScrollBarManager.SetScrollBar(enemyContainer, enemyList, enemyScrollBar);
+        }
+
+        private void enemyList_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (!enemyScrollBar.Enabled) return;
+
+            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * enemyScrollBar.SmallStep;
+            int newScrollValue = enemyScrollBar.Value + delta;
+
+            // 스크롤 범위 안에서만 동작하도록 조정
+
+            newScrollValue = Math.Max(enemyScrollBar.Minimum, Math.Min(enemyScrollBar.Maximum, newScrollValue));
+            enemyScrollBar.Value = newScrollValue;
+            enemyList.Top = -newScrollValue;
         }
 
         /*
@@ -1592,6 +1606,11 @@ namespace ScoreBoard.content
                 })];
                 UpdateStatusEffect(monster); // 상태 이상 적용
             }
+        }
+
+        private void enemyList_MouseEnter(object sender, EventArgs e)
+        {
+            enemyList.Focus();
         }
     }
 }
