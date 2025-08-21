@@ -1608,17 +1608,16 @@ namespace ScoreBoard.content
                 foreach (var (id, name, count) in additionalEnemies)
                 {
                     int index = _monsters.FindIndex(monster => monster.Id == id);
-                    // 없는 몬스터라면 새로 추가
-                    if (index == -1)
+                    if (index == -1) // 없는 몬스터라면 새로 추가
                     {
-                        _monsters.Add(DataReader.GetMonster(id));
+                        Monster newEnemy = DataReader.GetMonster(id);
+                        newEnemy.Count = count;
+                        _monsters.Add(newEnemy);
                     }
-                    else
-                    {
-                        // 이미 있는 몬스터라면 마리수 추가
+                    else // 이미 있는 몬스터라면 마리수 추가
                         _monsters[index].Count += count;
-                    }
                 }
+                InitEnemyList();
             }
         }
     }
