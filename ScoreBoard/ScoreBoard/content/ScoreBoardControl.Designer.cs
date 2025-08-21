@@ -833,10 +833,10 @@
             fpnBasicStatus.BorderColor = Color.Transparent;
             fpnBasicStatus.BorderThickness = 0;
             fpnBasicStatus.Controls.Add(lblName);
+            fpnBasicStatus.Controls.Add(pbAdditionalEnemy);
             fpnBasicStatus.Controls.Add(pbLevel);
             fpnBasicStatus.Controls.Add(pbDice);
             fpnBasicStatus.Controls.Add(fpnDice);
-            fpnBasicStatus.Controls.Add(pbAdditionalEnemy);
             fpnBasicStatus.Location = new Point(60, 0);
             fpnBasicStatus.Margin = new Padding(0);
             fpnBasicStatus.Name = "fpnBasicStatus";
@@ -862,7 +862,7 @@
             pbLevel.BackgroundImage = Properties.Resources.BtnPlus;
             pbLevel.BackgroundImageLayout = ImageLayout.Stretch;
             pbLevel.Cursor = Cursors.Hand;
-            pbLevel.Location = new Point(290, 0);
+            pbLevel.Location = new Point(436, 0);
             pbLevel.Margin = new Padding(0, 0, 10, 0);
             pbLevel.Name = "pbLevel";
             pbLevel.Size = new Size(45, 45);
@@ -876,7 +876,7 @@
             pbDice.BackgroundImageLayout = ImageLayout.Stretch;
             pbDice.Cursor = Cursors.Hand;
             pbDice.Image = Properties.Resources.BtnDice;
-            pbDice.Location = new Point(345, 0);
+            pbDice.Location = new Point(491, 0);
             pbDice.Margin = new Padding(0, 0, 10, 0);
             pbDice.Name = "pbDice";
             pbDice.Size = new Size(45, 45);
@@ -889,7 +889,7 @@
             fpnDice.AutoSize = true;
             fpnDice.BorderColor = Color.Transparent;
             fpnDice.BorderThickness = 0;
-            fpnDice.Location = new Point(400, 0);
+            fpnDice.Location = new Point(546, 0);
             fpnDice.Margin = new Padding(0);
             fpnDice.Name = "fpnDice";
             fpnDice.Size = new Size(0, 0);
@@ -898,8 +898,9 @@
             // pbAdditionalEnemy
             // 
             pbAdditionalEnemy.BackgroundImageLayout = ImageLayout.Zoom;
+            pbAdditionalEnemy.Cursor = Cursors.Hand;
             pbAdditionalEnemy.Image = Properties.Resources.reportAdditional;
-            pbAdditionalEnemy.Location = new Point(400, 0);
+            pbAdditionalEnemy.Location = new Point(290, 0);
             pbAdditionalEnemy.Margin = new Padding(0);
             pbAdditionalEnemy.Name = "pbAdditionalEnemy";
             pbAdditionalEnemy.Size = new Size(146, 45);
