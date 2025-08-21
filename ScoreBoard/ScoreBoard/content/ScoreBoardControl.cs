@@ -48,6 +48,7 @@ namespace ScoreBoard.content
             Margin = new Padding(0, 0, 0, 0),
             Cursor = Cursors.Hand
         };
+
         public class ArtifactSlotInfo
         {
             public string ArtifactId { get; set; } = "";
@@ -123,19 +124,17 @@ namespace ScoreBoard.content
 
             foreach (var m in _monsters)
             {
-                if (m.SpawnTurn >= currentTurn)
-                    continue;
                 EnemyPanel enemyControl = new(m)
                 {
-                    Name = $"pn{m.Id}"
+                    Name = $"pn{m.Id}",
+                    Location = new Point(0, height) // 동적 추가로 인해 Location이 0,0으로 자동 계산되어 수동으로 계산
                 };
                 enemyControl.DetailRequested += (s, e) => ShowDetail(e.Item1, e.Item2); // 상세 정보 요청 이벤트 핸들러 등록
                 enemyList.Controls.Add(enemyControl);
-                height = height + enemyControl.Height + enemyControl.Margin.Bottom;
+                height = height + enemyControl.Height + enemyControl.Margin.Bottom + enemyControl.Margin.Top;
             }
             enemyList.ResumeLayout();
-            enemyList.PerformLayout();
-            enemyList.Height = height;
+            enemyList.Height = height + enemyList.Padding.Bottom + enemyList.Padding.Top;
             ScrollBarManager.SetScrollBar(enemyContainer, enemyList, enemyScrollBar);
         }
 
@@ -483,6 +482,7 @@ namespace ScoreBoard.content
         {
             lblName.Text = player.Name;
             pbLevel.Visible = true;
+            pbAdditionalEnemy.Visible = false;
 
             pbLevel.BackgroundImage = player.Level switch
             {
@@ -691,6 +691,7 @@ namespace ScoreBoard.content
 
             detailViewport.SuspendLayout();
             pbLevel.Visible = false;
+            pbAdditionalEnemy.Visible = true;
             foreach (Control control in detailViewport.Controls)
             {
                 control.Visible = false;
@@ -1038,30 +1039,10 @@ namespace ScoreBoard.content
 
         /*
          * UpdateMonsterHp(ushort hp, ushort? shield)
-         * - 몬스터의 체력을 갱신하는 메서드
-         * - 체력이 최대체력보다 크면 마리 수를 증가시킴
+         * - 몬스터의 체력과 보호막을 갱신하는 메서드
          */
         private ushort UpdateMonsterHp(ushort hp, ushort? shield)
         {
-            // 몬스터 마리, 그리고 그 중 한 마리의 체력 계산(예: 5마리 중 4마리는 풀피, 나머지 1마리의 체력 계산
-            ushort count = (ushort)(hp / currentShowingMonster!.Stat.MaxHp);
-            var newHp = (ushort)(hp % currentShowingMonster.Stat.MaxHp);
-            if (newHp == 0) // 모든 몬스터가 풀피라면 현재 hp를 최대 체력과 같게 함
-                hp = currentShowingMonster.Stat.MaxHp;
-            else // 일부 몬스터가 풀피가 아니라면 나머지 체력을 갖게 함
-                hp = newHp;
-            if (hp != 0) // 체력이 남아있다면 count + 1 보정.(예: hp = 300, maxhp = 200이면 count = 1, hp = 100이므로, 2마리로 만들어준다.)
-                count++;
-            int index = _monsters.FindIndex(item => item.Id == currentShowingMonster.Id);
-            if (index != -1)
-            {
-                var monster = _monsters[index];
-                if (monster.Count != count) // 몬스터의 마리 수가 달라졌다면 갱신
-                {
-                    monster.Count = count;
-                }
-            }
-
             currentShowingMonster!.Stat.Hp = hp; // 현재 체력 갱신
             currentShowingMonster.Stat.Shield = shield ?? 0; // 방어력 갱신
             InitEnemyList();
@@ -1611,6 +1592,33 @@ namespace ScoreBoard.content
         private void enemyList_MouseEnter(object sender, EventArgs e)
         {
             enemyList.Focus();
+        }
+
+        private void pbAdditionalEnemy_Click(object sender, EventArgs e)
+        {
+            List<(string id, string name, ushort count)> additionalEnemies = [];
+            var modal = new SelectMonsterForm(additionalEnemies)
+            {
+                StartPosition = FormStartPosition.CenterParent,
+            };
+
+            if (modal.ShowDialog(this) == DialogResult.OK)
+            {
+                additionalEnemies = modal.currentSelectedMonsters;
+                foreach (var (id, name, count) in additionalEnemies)
+                {
+                    int index = _monsters.FindIndex(monster => monster.Id == id);
+                    if (index == -1) // 없는 몬스터라면 새로 추가
+                    {
+                        Monster newEnemy = DataReader.GetMonster(id);
+                        newEnemy.Count = count;
+                        _monsters.Add(newEnemy);
+                    }
+                    else // 이미 있는 몬스터라면 마리수 추가
+                        _monsters[index].Count += count;
+                }
+                InitEnemyList();
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ScoreBoard.data.monster
     {
         public Imp(string id, ushort spawnTurn) : base()
         {
-            InitialiseNormalElite(id, spawnTurn);
+            Initialise(id, spawnTurn);
         }
     }
 }

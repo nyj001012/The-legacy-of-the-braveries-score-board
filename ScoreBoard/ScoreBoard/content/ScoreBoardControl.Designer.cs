@@ -76,6 +76,7 @@
             detailViewport = new ScoreBoard.controls.CustomFlowLayoutPanel();
             fpnBasicStatus = new ScoreBoard.controls.CustomFlowLayoutPanel();
             lblName = new ScoreBoard.controls.TransparentTextLabel();
+            pbAdditionalEnemy = new PictureBox();
             pbLevel = new PictureBox();
             pbDice = new PictureBox();
             fpnDice = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -156,6 +157,7 @@
             detailList.SuspendLayout();
             detailViewport.SuspendLayout();
             fpnBasicStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbAdditionalEnemy).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbLevel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbDice).BeginInit();
             pnHealth.SuspendLayout();
@@ -831,6 +833,7 @@
             fpnBasicStatus.BorderColor = Color.Transparent;
             fpnBasicStatus.BorderThickness = 0;
             fpnBasicStatus.Controls.Add(lblName);
+            fpnBasicStatus.Controls.Add(pbAdditionalEnemy);
             fpnBasicStatus.Controls.Add(pbLevel);
             fpnBasicStatus.Controls.Add(pbDice);
             fpnBasicStatus.Controls.Add(fpnDice);
@@ -854,12 +857,25 @@
             lblName.Text = "1P 플레이어 이름";
             lblName.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // pbAdditionalEnemy
+            // 
+            pbAdditionalEnemy.BackgroundImageLayout = ImageLayout.Zoom;
+            pbAdditionalEnemy.Cursor = Cursors.Hand;
+            pbAdditionalEnemy.Image = Properties.Resources.reportAdditional;
+            pbAdditionalEnemy.Location = new Point(290, 0);
+            pbAdditionalEnemy.Margin = new Padding(0, 0, 10, 0);
+            pbAdditionalEnemy.Name = "pbAdditionalEnemy";
+            pbAdditionalEnemy.Size = new Size(146, 45);
+            pbAdditionalEnemy.TabIndex = 6;
+            pbAdditionalEnemy.TabStop = false;
+            pbAdditionalEnemy.Click += pbAdditionalEnemy_Click;
+            // 
             // pbLevel
             // 
             pbLevel.BackgroundImage = Properties.Resources.BtnPlus;
             pbLevel.BackgroundImageLayout = ImageLayout.Stretch;
             pbLevel.Cursor = Cursors.Hand;
-            pbLevel.Location = new Point(290, 0);
+            pbLevel.Location = new Point(446, 0);
             pbLevel.Margin = new Padding(0, 0, 10, 0);
             pbLevel.Name = "pbLevel";
             pbLevel.Size = new Size(45, 45);
@@ -873,7 +889,7 @@
             pbDice.BackgroundImageLayout = ImageLayout.Stretch;
             pbDice.Cursor = Cursors.Hand;
             pbDice.Image = Properties.Resources.BtnDice;
-            pbDice.Location = new Point(345, 0);
+            pbDice.Location = new Point(501, 0);
             pbDice.Margin = new Padding(0, 0, 10, 0);
             pbDice.Name = "pbDice";
             pbDice.Size = new Size(45, 45);
@@ -886,7 +902,7 @@
             fpnDice.AutoSize = true;
             fpnDice.BorderColor = Color.Transparent;
             fpnDice.BorderThickness = 0;
-            fpnDice.Location = new Point(400, 0);
+            fpnDice.Location = new Point(556, 0);
             fpnDice.Margin = new Padding(0);
             fpnDice.Name = "fpnDice";
             fpnDice.Size = new Size(0, 0);
@@ -1711,6 +1727,7 @@
             detailViewport.ResumeLayout(false);
             fpnBasicStatus.ResumeLayout(false);
             fpnBasicStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbAdditionalEnemy).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbLevel).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbDice).EndInit();
             pnHealth.ResumeLayout(false);
@@ -1856,5 +1873,6 @@
         private controls.TransparentTextLabel transparentTextLabel5;
         private controls.CustomFlowLayoutPanel fpnStatusEffect;
         private PictureBox pbLevel;
+        private PictureBox pbAdditionalEnemy;
     }
 }

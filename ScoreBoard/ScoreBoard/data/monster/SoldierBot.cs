@@ -11,7 +11,7 @@ namespace ScoreBoard.data.monster
     {
         public SoldierBot(string id, ushort spawnTurn) : base()
         {
-            InitialiseNormalElite(id, spawnTurn);
+            Initialise(id, spawnTurn);
         }
     }
 }
