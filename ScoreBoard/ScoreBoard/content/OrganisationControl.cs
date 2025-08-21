@@ -99,7 +99,7 @@ namespace ScoreBoard.content
                 {
                     Monster monster = id switch
                     {
-                        "2_01_white_soldier" => new WhiteSoldier(id, 0),// 스폰 턴은 0으로 설정
+                        "2_01_white_soldier" => new Slime(id, 0),// 스폰 턴은 0으로 설정
                         "2_02_black_knight" => new BlackKnight(id, 0),
                         _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
                     };
