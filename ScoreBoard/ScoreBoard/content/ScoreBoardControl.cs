@@ -125,15 +125,15 @@ namespace ScoreBoard.content
             {
                 EnemyPanel enemyControl = new(m)
                 {
-                    Name = $"pn{m.Id}"
+                    Name = $"pn{m.Id}",
+                    Location = new Point(0, height) // 동적 추가로 인해 Location이 0,0으로 자동 계산되어 수동으로 계산
                 };
                 enemyControl.DetailRequested += (s, e) => ShowDetail(e.Item1, e.Item2); // 상세 정보 요청 이벤트 핸들러 등록
                 enemyList.Controls.Add(enemyControl);
-                height = height + enemyControl.Height + enemyControl.Margin.Bottom;
+                height = height + enemyControl.Height + enemyControl.Margin.Bottom + enemyControl.Margin.Top;
             }
             enemyList.ResumeLayout();
-            enemyList.PerformLayout();
-            enemyList.Height = height;
+            enemyList.Height = height + enemyList.Padding.Bottom + enemyList.Padding.Top;
             ScrollBarManager.SetScrollBar(enemyContainer, enemyList, enemyScrollBar);
         }
 
