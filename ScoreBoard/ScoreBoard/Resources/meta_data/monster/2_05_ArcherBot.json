@@ -1,16 +1,15 @@
 ﻿{
   "type": 2,
-  "id": "2_01_white_soldier",
-  "name": "백병",
+  "id": "2_05_ArcherBot",
+  "name": "궁병 봇",
   "stat": {
-    "hp": 150,
-    "movement": 3,
+    "hp": 1000,
     "combatStat": {
       "ranged": {
         "type": "atk",
         "range": 1,
-        "attackCount": 4,
-        "value": 50
+        "attackCount": 8,
+        "value": 100
       }
     }
   }

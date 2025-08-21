@@ -99,8 +99,11 @@ namespace ScoreBoard.content
                 {
                     Monster monster = id switch
                     {
-                        "2_01_white_soldier" => new WhiteSoldier(id, 0),// 스폰 턴은 0으로 설정
-                        "2_02_black_knight" => new BlackKnight(id, 0),
+                        "2_01_Slime" => new Slime(id, 0),// 스폰 턴은 0으로 설정
+                        "2_02_Imp" => new Imp(id, 0),
+                        "2_03_BeastDemon" => new BeastDemon(id, 0),
+                        "2_04_SoldierBot" => new SoldierBot(id, 0),
+                        "2_05_ArcherBot" => new ArcherBot(id, 0),
                         _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
                     };
                     monster.Count = count;

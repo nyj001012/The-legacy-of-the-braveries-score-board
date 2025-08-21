@@ -1543,12 +1543,16 @@
             enemyList.BorderColor = Color.Transparent;
             enemyList.BorderThickness = 0;
             enemyList.Controls.Add(pnEnemy1);
+            enemyList.FlowDirection = FlowDirection.TopDown;
             enemyList.Location = new Point(0, 0);
             enemyList.Margin = new Padding(0);
             enemyList.Name = "enemyList";
             enemyList.Padding = new Padding(25, 35, 25, 35);
             enemyList.Size = new Size(597, 786);
             enemyList.TabIndex = 1;
+            enemyList.WrapContents = false;
+            enemyList.MouseEnter += enemyList_MouseEnter;
+            enemyList.MouseWheel += enemyList_MouseWheel;
             // 
             // pnEnemy1
             // 
@@ -1642,6 +1646,7 @@
             enemyScrollBar.Rounding = true;
             enemyScrollBar.RoundingInt = 7;
             enemyScrollBar.Size = new Size(26, 786);
+            enemyScrollBar.SmallStep = 20;
             enemyScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             enemyScrollBar.TabIndex = 0;
             enemyScrollBar.Tag = "Cyber";

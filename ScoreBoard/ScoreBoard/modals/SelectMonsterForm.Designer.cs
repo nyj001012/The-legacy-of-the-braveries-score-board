@@ -8,8 +8,8 @@
             gradeScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             gradeListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             monsterListContainer = new ScoreBoard.controls.DoubleBufferedPanel();
-            monsterScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             monsterList = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            monsterScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             transparentTextLabel1 = new ScoreBoard.controls.TransparentTextLabel();
             reportedContainer = new ScoreBoard.controls.DoubleBufferedPanel();
             reportedList = new ScoreBoard.controls.CustomFlowLayoutPanel();
@@ -105,6 +105,18 @@
             monsterListContainer.Size = new Size(506, 720);
             monsterListContainer.TabIndex = 6;
             // 
+            // monsterList
+            // 
+            monsterList.BackColor = Color.Transparent;
+            monsterList.BorderColor = Color.Transparent;
+            monsterList.BorderThickness = 0;
+            monsterList.FlowDirection = FlowDirection.TopDown;
+            monsterList.Location = new Point(0, 0);
+            monsterList.Margin = new Padding(0);
+            monsterList.Name = "monsterList";
+            monsterList.Size = new Size(506, 720);
+            monsterList.TabIndex = 0;
+            // 
             // monsterScrollBar
             // 
             monsterScrollBar.Alpha = 50;
@@ -149,18 +161,6 @@
             monsterScrollBar.Value = 0;
             monsterScrollBar.Visible = false;
             // 
-            // monsterList
-            // 
-            monsterList.BackColor = Color.Transparent;
-            monsterList.BorderColor = Color.Transparent;
-            monsterList.BorderThickness = 0;
-            monsterList.FlowDirection = FlowDirection.TopDown;
-            monsterList.Location = new Point(0, 0);
-            monsterList.Margin = new Padding(0);
-            monsterList.Name = "monsterList";
-            monsterList.Size = new Size(506, 720);
-            monsterList.TabIndex = 0;
-            // 
             // transparentTextLabel1
             // 
             transparentTextLabel1.BackColor = Color.Transparent;
@@ -177,9 +177,10 @@
             reportedContainer.BackColor = Color.Transparent;
             reportedContainer.Controls.Add(reportedList);
             reportedContainer.Controls.Add(reportedScrollBar);
-            reportedContainer.Location = new Point(0, 3);
+            reportedContainer.Location = new Point(0, 0);
+            reportedContainer.Margin = new Padding(0);
             reportedContainer.Name = "reportedContainer";
-            reportedContainer.Size = new Size(544, 517);
+            reportedContainer.Size = new Size(544, 520);
             reportedContainer.TabIndex = 11;
             // 
             // reportedList
@@ -188,10 +189,11 @@
             reportedList.BorderColor = Color.Transparent;
             reportedList.BorderThickness = 0;
             reportedList.FlowDirection = FlowDirection.TopDown;
-            reportedList.Location = new Point(3, 3);
+            reportedList.Location = new Point(0, 0);
+            reportedList.Margin = new Padding(0);
             reportedList.Name = "reportedList";
             reportedList.Padding = new Padding(20, 0, 20, 0);
-            reportedList.Size = new Size(541, 511);
+            reportedList.Size = new Size(544, 520);
             reportedList.TabIndex = 0;
             reportedList.ControlAdded += reportedList_UpdateBtnDecisionVisibility;
             reportedList.ControlRemoved += reportedList_UpdateBtnDecisionVisibility;
@@ -261,6 +263,7 @@
             btnDecision.BackgroundImageLayout = ImageLayout.Stretch;
             btnDecision.Cursor = Cursors.Hand;
             btnDecision.Location = new Point(187, 550);
+            btnDecision.Margin = new Padding(0);
             btnDecision.Name = "btnDecision";
             btnDecision.Size = new Size(177, 60);
             btnDecision.TabIndex = 9;
