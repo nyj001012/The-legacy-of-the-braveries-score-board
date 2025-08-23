@@ -416,6 +416,7 @@ namespace ScoreBoard.utils
                 "0_03_BlueDoga" => new BlueDoga(id),
                 "0_04_KingraZulu" => new KingraZulu(id),
                 "0_05_WarMachine" => new WarMachine(id),
+                "0_06_LordOfDemon" => new LordOfDemon(id),
 
                 // 엘리트
                 "1_01_Zaku" => new Zaku(id),
