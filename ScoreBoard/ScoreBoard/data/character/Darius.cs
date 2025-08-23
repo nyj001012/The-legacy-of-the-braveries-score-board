@@ -14,9 +14,9 @@ namespace ScoreBoard.data.character
     {
         public Darius(string id)
         {
-            // 스킬 초기화
             Initialise(id);
         }
+
         protected override void InitialisePasssiveSkills(CorpsMember data)
         {
             Validator.ValidateNull(data.Passives, nameof(data.Passives));
