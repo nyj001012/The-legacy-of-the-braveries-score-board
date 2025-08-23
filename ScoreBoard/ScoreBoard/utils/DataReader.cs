@@ -412,6 +412,7 @@ namespace ScoreBoard.utils
             {
                 // 엘리트
                 "1_01_Zaku" => new Zaku(id),
+                "1_02_GearaDoga" => new GearaDoga(id),
 
                 // 일반
                 "2_01_Slime" => new Slime(id),// 스폰 턴은 0으로 설정
