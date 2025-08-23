@@ -26,49 +26,10 @@ namespace ScoreBoard.data.character
 
         public SkyHaneulSoraTen(string id) : base()
         {
-            Validator.ValidateNull(id, nameof(id));
-            var data = DataReader.ReadMemberData(id) ?? throw new ArgumentException($"데이터 불러오기 오류: {id}");
-            // 필드 초기화
-            InitialiseBasicInfo(data);
-            // Stat 초기화
-            InitialiseStat(data.Stat);
-            // 스킬 초기화
-            InitialisePasssiveSkills(data);
-            InitialiseActiveSkills(data);
+            Initialise(id);
         }
 
-        private void InitialiseBasicInfo(CorpsMember data)
-        {
-            Id = Validator.ValidateNull(data.Id, nameof(data.Id));
-            Name = Validator.ValidateNull(data.Name, nameof(data.Name));
-            CorpsId = Validator.ValidateNull(data.CorpsId, nameof(data.CorpsId));
-            Description = Validator.ValidateNull(data.Description, nameof(data.Description));
-        }
-
-        private void InitialiseStat(Stat statData)
-        {
-            Validator.ValidateNull(statData, nameof(statData));
-            Validator.ValidateNull(statData.CombatStats, nameof(statData.CombatStats));
-            Stat = new Stat
-            {
-                Hp = statData.Hp,
-                MaxHp = statData.Hp, // 시작 시, 현재 체력은 최대 체력
-                Movement = statData.Movement,
-                Wisdom = statData.Wisdom, // nullable 또는 기본값 처리
-                CombatStats = statData.CombatStats.ToDictionary(
-                    kv => kv.Key,
-                    kv => new CombatStat
-                    {
-                        Type = kv.Value.Type,
-                        Range = kv.Value.Range,
-                        AttackCount = kv.Value.AttackCount,
-                        Value = kv.Value.Value
-                    }
-                ) ?? []
-            };
-        }
-
-        private void InitialisePasssiveSkills(CorpsMember data)
+        protected override void InitialisePasssiveSkills(CorpsMember data)
         {
             Validator.ValidateNull(data.Passives, nameof(data.Passives));
             Passives = data.Passives?.Select(p =>
@@ -173,9 +134,9 @@ namespace ScoreBoard.data.character
             foreach (var ally in _allies)
             {
                 if (ally.Id == this.Id) continue; // 본인은 제외
-                if (ally.Stat.CombatStats["ranged"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("ranged", out CombatStat? r))
                 {
-                    ally.Stat.CombatStats["ranged"].Value += 100; // 아군 원거리 공격력 증가
+                    r.Value += 100; // 아군 원거리 공격력 증가
                 }
             }
         }
@@ -189,10 +150,9 @@ namespace ScoreBoard.data.character
             foreach (var ally in _allies)
             {
                 if (ally.Id == this.Id) continue; // 본인은 제외
-                if (ally.Stat.CombatStats["ranged"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("ranged", out CombatStat? r))
                 {
-                    ushort attackValue = ally.Stat.CombatStats["ranged"].Value;
-                    ally.Stat.CombatStats["ranged"].Value = (ushort)Math.Max(0, attackValue - 100);
+                    r.Value = (ushort)Math.Max(0, r.Value - 100);
                 }
             }
         }
@@ -205,13 +165,13 @@ namespace ScoreBoard.data.character
         {
             foreach (var ally in _allies)
             {
-                if (ally.Stat.CombatStats["melee"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("melee", out CombatStat? m))
                 {
-                    ally.Stat.CombatStats["melee"].AttackCount++; // 근접 공속 1 증가
+                    m.AttackCount++; // 근접 공속 1 증가
                 }
-                if (ally.Stat.CombatStats["ranged"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("ranged", out CombatStat? r))
                 {
-                    ally.Stat.CombatStats["ranged"].AttackCount++; // 원거리 공속 1 증가
+                    r.AttackCount++; // 원거리 공속 1 증가
                 }
             }
         }
@@ -224,15 +184,13 @@ namespace ScoreBoard.data.character
         {
             foreach (var ally in _allies)
             {
-                if (ally.Stat.CombatStats["melee"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("melee", out CombatStat? m))
                 {
-                    ushort count = ally.Stat.CombatStats["melee"].AttackCount;
-                    ally.Stat.CombatStats["melee"].AttackCount = (ushort)Math.Max(0, count - 1);
+                    m.AttackCount = (ushort)Math.Max(0, m.AttackCount - 1);
                 }
-                if (ally.Stat.CombatStats["ranged"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("ranged", out CombatStat? r))
                 {
-                    ushort count = ally.Stat.CombatStats["ranged"].AttackCount;
-                    ally.Stat.CombatStats["ranged"].AttackCount = (ushort)Math.Max(0, count - 1);
+                    r.AttackCount = (ushort)Math.Max(0, r.AttackCount - 1);
                 }
             }
         }
@@ -273,7 +231,7 @@ namespace ScoreBoard.data.character
             this.Stat.Movement++;
         }
 
-        private void InitialiseActiveSkills(CorpsMember data)
+        protected override void InitialiseActiveSkills(CorpsMember data)
         {
             Validator.ValidateNull(data.Actives, nameof(data.Actives));
             Actives = data.Actives?.Select(a =>
