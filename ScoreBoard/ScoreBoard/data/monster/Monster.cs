@@ -41,7 +41,7 @@ namespace ScoreBoard.data.monster
         [JsonIgnore]
         public double SEAttackValueModifier { get; set; } = 1; // 상태이상 공격력 보정치. 곱연산 활용
 
-        protected void Initialise(string id, ushort spawnTurn)
+        protected void Initialise(string id)
         {
             Validator.ValidateNull(id, nameof(id));
 

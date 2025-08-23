@@ -8,9 +8,9 @@ namespace ScoreBoard.data.monster
 {
     internal class BeastDemon : Monster
     {
-        public BeastDemon(string id, ushort spawnTurn) : base()
+        public BeastDemon(string id) : base()
         {
-            Initialise(id, spawnTurn);
+            Initialise(id);
         }
     }
 }

@@ -9,9 +9,9 @@ namespace ScoreBoard.data.monster
 {
     internal class Imp : Monster
     {
-        public Imp(string id, ushort spawnTurn) : base()
+        public Imp(string id) : base()
         {
-            Initialise(id, spawnTurn);
+            Initialise(id);
         }
     }
 }
