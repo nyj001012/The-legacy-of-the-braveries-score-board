@@ -58,6 +58,15 @@ namespace ScoreBoard.content
         public ScoreBoardControl(Dictionary<string, CorpsMember> characters, List<Monster> monsters)
         {
             _characters = characters ?? throw new ArgumentNullException(nameof(characters), "캐릭터는 비어있을 수 없습니다.");
+            // 스카이하늘소라텐의 경우, 동료 세팅
+            foreach (var c in _characters.Values)
+            {
+                if (c is SkyHaneulSoraTen s)
+                {
+                    s.SetAllies([.. characters.Values]);
+                    break;
+                }
+            }
             _monsters = monsters ?? throw new ArgumentNullException(nameof(monsters), "몬스터를 선택해야 합니다.");
             InitializeComponent();
             currentShowingMonster = _monsters.First(); // 첫 번째 몬스터를 현재 표시 중인 몬스터로 설정

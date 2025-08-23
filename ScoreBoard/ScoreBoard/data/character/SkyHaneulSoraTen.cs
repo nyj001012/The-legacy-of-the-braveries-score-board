@@ -134,9 +134,9 @@ namespace ScoreBoard.data.character
             foreach (var ally in _allies)
             {
                 if (ally.Id == this.Id) continue; // 본인은 제외
-                if (ally.Stat.CombatStats["ranged"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("ranged", out CombatStat? r))
                 {
-                    ally.Stat.CombatStats["ranged"].Value += 100; // 아군 원거리 공격력 증가
+                    r.Value += 100; // 아군 원거리 공격력 증가
                 }
             }
         }
@@ -150,10 +150,9 @@ namespace ScoreBoard.data.character
             foreach (var ally in _allies)
             {
                 if (ally.Id == this.Id) continue; // 본인은 제외
-                if (ally.Stat.CombatStats["ranged"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("ranged", out CombatStat? r))
                 {
-                    ushort attackValue = ally.Stat.CombatStats["ranged"].Value;
-                    ally.Stat.CombatStats["ranged"].Value = (ushort)Math.Max(0, attackValue - 100);
+                    r.Value = (ushort)Math.Max(0, r.Value - 100);
                 }
             }
         }
@@ -166,13 +165,13 @@ namespace ScoreBoard.data.character
         {
             foreach (var ally in _allies)
             {
-                if (ally.Stat.CombatStats["melee"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("melee", out CombatStat? m))
                 {
-                    ally.Stat.CombatStats["melee"].AttackCount++; // 근접 공속 1 증가
+                    m.AttackCount++; // 근접 공속 1 증가
                 }
-                if (ally.Stat.CombatStats["ranged"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("ranged", out CombatStat? r))
                 {
-                    ally.Stat.CombatStats["ranged"].AttackCount++; // 원거리 공속 1 증가
+                    r.AttackCount++; // 원거리 공속 1 증가
                 }
             }
         }
@@ -185,15 +184,13 @@ namespace ScoreBoard.data.character
         {
             foreach (var ally in _allies)
             {
-                if (ally.Stat.CombatStats["melee"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("melee", out CombatStat? m))
                 {
-                    ushort count = ally.Stat.CombatStats["melee"].AttackCount;
-                    ally.Stat.CombatStats["melee"].AttackCount = (ushort)Math.Max(0, count - 1);
+                    m.AttackCount = (ushort)Math.Max(0, m.AttackCount - 1);
                 }
-                if (ally.Stat.CombatStats["ranged"] != null)
+                if (ally.Stat.CombatStats.TryGetValue("ranged", out CombatStat? r))
                 {
-                    ushort count = ally.Stat.CombatStats["ranged"].AttackCount;
-                    ally.Stat.CombatStats["ranged"].AttackCount = (ushort)Math.Max(0, count - 1);
+                    r.AttackCount = (ushort)Math.Max(0, r.AttackCount - 1);
                 }
             }
         }
