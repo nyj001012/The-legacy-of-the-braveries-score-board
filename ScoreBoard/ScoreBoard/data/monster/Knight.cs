@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScoreBoard.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data.monster
 {
-    internal class BeastDemon : Monster
+    internal class Knight : Monster
     {
-        public BeastDemon(string id) : base()
+        public Knight(string id) : base()
         {
             Initialise(id);
         }

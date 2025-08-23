@@ -9,9 +9,9 @@ namespace ScoreBoard.data.monster
 {
     internal class SoldierBot : Monster
     {
-        public SoldierBot(string id, ushort spawnTurn) : base()
+        public SoldierBot(string id) : base()
         {
-            Initialise(id, spawnTurn);
+            Initialise(id);
         }
     }
 }

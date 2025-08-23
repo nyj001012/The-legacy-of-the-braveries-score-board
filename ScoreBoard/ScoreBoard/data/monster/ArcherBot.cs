@@ -9,9 +9,9 @@ namespace ScoreBoard.data.monster
 {
     internal class ArcherBot : Monster
     {
-        public ArcherBot(string id, ushort spawnTurn) : base()
+        public ArcherBot(string id) : base()
         {
-            Initialise(id, spawnTurn);
+            Initialise(id);
         }
     }
 }

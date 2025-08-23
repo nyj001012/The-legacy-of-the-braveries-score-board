@@ -410,11 +410,22 @@ namespace ScoreBoard.utils
         {
             return id switch
             {
-                "2_01_Slime" => new Slime(id, 0),// 스폰 턴은 0으로 설정
-                "2_02_Imp" => new Imp(id, 0),
-                "2_03_BeastDemon" => new BeastDemon(id, 0),
-                "2_04_SoldierBot" => new SoldierBot(id, 0),
-                "2_05_ArcherBot" => new ArcherBot(id, 0),
+                // 엘리트
+                "1_01_Zaku" => new Zaku(id),
+                "1_02_GearaDoga" => new GearaDoga(id),
+                "1_03_GearaZulu" => new GearaZulu(id),
+                "1_04_GearaZuluGuard" => new GearaZuluGuard(id),
+                "1_05_Bishop" => new Bishop(id),
+                "1_06_Knight" => new Knight(id),
+                "1_07_Queen" => new Queen(id),
+                "1_08_King" => new King(id),
+
+                // 일반
+                "2_01_Slime" => new Slime(id),// 스폰 턴은 0으로 설정
+                "2_02_Imp" => new Imp(id),
+                "2_03_BeastDemon" => new BeastDemon(id),
+                "2_04_SoldierBot" => new SoldierBot(id),
+                "2_05_ArcherBot" => new ArcherBot(id),
                 _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
             };
         }

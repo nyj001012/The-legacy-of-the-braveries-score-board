@@ -9,9 +9,9 @@ namespace ScoreBoard.data.monster
 {
     internal class Slime : Monster
     {
-        public Slime(string id, ushort spawnTurn) : base()
+        public Slime(string id) : base()
         {
-            Initialise(id, spawnTurn);
+            Initialise(id);
         }
     }
 }
