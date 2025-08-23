@@ -64,7 +64,8 @@ namespace ScoreBoard.data.monster
                         AttackCount = kv.Value.AttackCount,
                         Value = kv.Value.Value
                     }
-                ) ?? []
+                ) ?? [],
+                SpellPower = data.Stat.SpellPower
             };
         }
     }

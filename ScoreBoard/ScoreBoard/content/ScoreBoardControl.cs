@@ -700,11 +700,28 @@ namespace ScoreBoard.content
             ShowBasicInfo(isReported, monster);
             ShowHealth(isReported, monster);
             ShowAttackValue(isReported, monster);
+            ShowSpellPower(monster);
             ShowStatusEffect(monster);
             ShowNote(monster);
             detailViewport.ResumeLayout();
 
             ScrollBarManager.SetScrollBar(detailList, detailViewport, detailScrollBar);
+        }
+
+        /*
+         * ShowSpellPower(Monster monster)
+         * - 몬스터의 주문력을 표시하는 메서드
+         * - monster: Monster 객체
+         */
+        private void ShowSpellPower(Monster monster)
+        {
+            if (!monster.IsReported)
+                return;
+            if (monster.Stat.SpellPower.HasValue)
+            {
+                fpnSpellPower.Visible = true;
+                lblSpellPower.Text = monster.Stat.SpellPower.ToString();
+            }
         }
 
         /*
