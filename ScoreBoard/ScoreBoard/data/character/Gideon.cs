@@ -15,50 +15,10 @@ namespace ScoreBoard.data.character
     {
         public Gideon(string id)
         {
-            Validator.ValidateNull(id, nameof(id));
-            var data = DataReader.ReadMemberData(id) ?? throw new ArgumentException($"데이터 불러오기 오류: {id}");
-            // 필드 초기화
-            InitialiseBasicInfo(data);
-            // Stat 초기화
-            InitialiseStat(data.Stat);
-            // 스킬 초기화
-            InitialisePasssiveSkills(data);
-            InitialiseActiveSkills(data);
+            Initialise(id);
         }
 
-        private void InitialiseBasicInfo(CorpsMember data)
-        {
-            Id = Validator.ValidateNull(data.Id, nameof(data.Id));
-            Name = Validator.ValidateNull(data.Name, nameof(data.Name));
-            CorpsId = Validator.ValidateNull(data.CorpsId, nameof(data.CorpsId));
-            Description = Validator.ValidateNull(data.Description, nameof(data.Description));
-        }
-
-        private void InitialiseStat(Stat statData)
-        {
-            Validator.ValidateNull(statData, nameof(statData));
-            Validator.ValidateNull(statData.CombatStats, nameof(statData.CombatStats));
-            Stat = new Stat
-            {
-                Hp = statData.Hp,
-                MaxHp = statData.Hp, // 시작 시, 현재 체력은 최대 체력
-                Movement = statData.Movement,
-                Wisdom = statData.Wisdom,
-                SpellPower = statData.SpellPower,
-                CombatStats = statData.CombatStats.ToDictionary(
-                    kv => kv.Key,
-                    kv => new CombatStat
-                    {
-                        Type = kv.Value.Type,
-                        Range = kv.Value.Range,
-                        AttackCount = kv.Value.AttackCount,
-                        Value = kv.Value.Value
-                    }
-                ) ?? []
-            };
-        }
-
-        private void InitialisePasssiveSkills(CorpsMember data)
+        protected override void InitialisePasssiveSkills(CorpsMember data)
         {
             Validator.ValidateNull(data.Passives, nameof(data.Passives));
             Passives = data.Passives?.Select(p =>
@@ -137,7 +97,7 @@ namespace ScoreBoard.data.character
             this.ArtifactSlot.Add(null); // 새로운 슬롯 추가
         }
 
-        private void InitialiseActiveSkills(CorpsMember data)
+        protected override void InitialiseActiveSkills(CorpsMember data)
         {
             Validator.ValidateNull(data.Actives, nameof(data.Actives));
             Actives = data.Actives?.Select(a =>
