@@ -785,13 +785,13 @@ namespace ScoreBoard.content
             if (isReported)
             {
                 pnHealth.Visible = true;
-                lblCurrentHealth.Text = monster.Stat.Hp.ToString();
+                lblCurrentHealth.Text = monster.Stat.Hp < 0 ? "?" : monster.Stat.Hp.ToString();
                 if (monster.Stat.Shield > 0)
                 {
                     lblCurrentHealth.Text += $"(+{monster.Stat.Shield})";
                 }
             }
-            lblMaxHealth.Text = $"{monster.Stat.MaxHp}";
+            lblMaxHealth.Text = monster.Stat.MaxHp < 0 ? "?" : monster.Stat.Hp.ToString();
         }
 
         /*
