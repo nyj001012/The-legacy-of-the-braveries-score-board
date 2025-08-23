@@ -415,6 +415,8 @@ namespace ScoreBoard.utils
                 "1_02_GearaDoga" => new GearaDoga(id),
                 "1_03_GearaZulu" => new GearaZulu(id),
                 "1_04_GearaZuluGuard" => new GearaZuluGuard(id),
+                "1_05_Bishop" => new Bishop(id),
+
 
                 // 일반
                 "2_01_Slime" => new Slime(id),// 스폰 턴은 0으로 설정

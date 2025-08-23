@@ -1,0 +1,10 @@
+﻿{
+  "type": 1,
+  "id": "1_05_Bishop",
+  "name": "비숍",
+  "stat": {
+    "hp": 500,
+    "combatStat": {
+    }
+  }
+}
