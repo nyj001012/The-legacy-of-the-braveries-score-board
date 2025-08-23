@@ -418,7 +418,7 @@ namespace ScoreBoard.utils
                 "1_05_Bishop" => new Bishop(id),
                 "1_06_Knight" => new Knight(id),
                 "1_07_Queen" => new Queen(id),
-
+                "1_08_King" => new King(id),
 
                 // 일반
                 "2_01_Slime" => new Slime(id),// 스폰 턴은 0으로 설정
