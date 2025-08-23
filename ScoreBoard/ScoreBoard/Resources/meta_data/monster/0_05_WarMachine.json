@@ -1,0 +1,10 @@
+﻿{
+  "type": 1,
+  "id": "0_05_WarMachine",
+  "name": "전쟁기계",
+  "stat": {
+    "hp": 40000,
+    "combatStat": {
+    }
+  }
+}
