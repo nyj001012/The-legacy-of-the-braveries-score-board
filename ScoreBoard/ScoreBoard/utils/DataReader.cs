@@ -410,6 +410,18 @@ namespace ScoreBoard.utils
         {
             return id switch
             {
+                // 보스
+                "0_01_RedZaku" => new RedZaku(id),
+                "0_02_SixNineZaku" => new SixNineZaku(id),
+                "0_03_BlueDoga" => new BlueDoga(id),
+                "0_04_KingraZulu" => new KingraZulu(id),
+                "0_05_WarMachine" => new WarMachine(id),
+                "0_06_LordOfDemon" => new LordOfDemon(id),
+                "0_07_Gundam" => new Gundam(id),
+                "0_08_Sazabi" => new Sazabi(id),
+                "0_09_Saza" => new Saza(id),
+                "0_10_Golden" => new Golden(id),
+
                 // 엘리트
                 "1_01_Zaku" => new Zaku(id),
                 "1_02_GearaDoga" => new GearaDoga(id),
