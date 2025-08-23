@@ -416,6 +416,7 @@ namespace ScoreBoard.utils
                 "1_03_GearaZulu" => new GearaZulu(id),
                 "1_04_GearaZuluGuard" => new GearaZuluGuard(id),
                 "1_05_Bishop" => new Bishop(id),
+                "1_06_Knight" => new Knight(id),
 
 
                 // 일반
