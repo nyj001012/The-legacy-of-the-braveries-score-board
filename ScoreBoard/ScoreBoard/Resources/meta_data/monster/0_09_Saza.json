@@ -1,0 +1,10 @@
+﻿{
+  "type": 1,
+  "id": "0_09_Saza",
+  "name": "사자",
+  "stat": {
+    "hp": -1,
+    "combatStat": {
+    }
+  }
+}
