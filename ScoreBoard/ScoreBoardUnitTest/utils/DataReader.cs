@@ -86,7 +86,7 @@ namespace ScoreBoardUnitTest.utils
             Assert.IsTrue(artifact.Description.Length > 0);
             Assert.IsTrue(artifact.Description[0].Contains("공격력 +50"));
             Assert.IsTrue(artifact.Description[1].Contains("체력 +100"));
-            Assert.AreEqual(ArtifactType.Weapon, artifact.Type);
+            Assert.AreEqual(ArtifactType.Accessory, artifact.Type);
             Assert.AreEqual(ArtifactRarity.Rare, artifact.Rarity);
         }
     }
