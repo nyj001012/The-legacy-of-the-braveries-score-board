@@ -420,6 +420,7 @@ namespace ScoreBoard.utils
                 "0_07_Gundam" => new Gundam(id),
                 "0_08_Sazabi" => new Sazabi(id),
                 "0_09_Saza" => new Saza(id),
+                "0_10_Golden" => new Golden(id),
 
                 // 엘리트
                 "1_01_Zaku" => new Zaku(id),
