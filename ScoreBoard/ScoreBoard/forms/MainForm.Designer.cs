@@ -28,24 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
+            pbGoBack = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pbGoBack).BeginInit();
             SuspendLayout();
+            // 
+            // pbGoBack
+            // 
+            pbGoBack.BackColor = Color.Transparent;
+            pbGoBack.BackgroundImage = Properties.Resources.btnGoBack;
+            pbGoBack.BackgroundImageLayout = ImageLayout.Stretch;
+            pbGoBack.Cursor = Cursors.Hand;
+            pbGoBack.Location = new Point(50, 25);
+            pbGoBack.Margin = new Padding(0);
+            pbGoBack.Name = "pbGoBack";
+            pbGoBack.Size = new Size(70, 70);
+            pbGoBack.TabIndex = 0;
+            pbGoBack.TabStop = false;
+            pbGoBack.Visible = false;
+            pbGoBack.Click += pbGoBack_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.ImgInGameBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(pbGoBack);
             Margin = new Padding(3, 4, 3, 4);
             MaximumSize = new Size(1920, 1080);
             MinimumSize = new Size(1920, 1080);
             Name = "MainForm";
             Text = "용사 이야기 점수판";
             Shown += MainForm_Shown;
+            ((System.ComponentModel.ISupportInitialize)pbGoBack).EndInit();
             ResumeLayout(false);
 
         }
         #endregion
+
+        private PictureBox pbGoBack;
     }
 }
 

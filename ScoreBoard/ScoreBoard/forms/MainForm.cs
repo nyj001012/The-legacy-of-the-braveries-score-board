@@ -16,6 +16,8 @@ namespace ScoreBoard.forms
     public partial class MainForm : Form
     {
         private readonly Panel _containerPanel;
+        private readonly Stack<UserControl> _history = new();
+        private UserControl? _currentControl;
 
         public MainForm()
         {
@@ -34,11 +36,17 @@ namespace ScoreBoard.forms
          * - control: 표시할 UserControl 객체
          * - 기능: 현재 폼에 UserControl을 표시하는 메서드
          */
-        private void ShowControl(UserControl control)
+        private void ShowControl(UserControl control, bool addToHistory)
         {
+            if (_currentControl != null && addToHistory)
+                _history.Push(_currentControl);
+
+            pbGoBack.Visible = _history.Count > 0;
+
             _containerPanel.Controls.Clear();
             control.Dock = DockStyle.Fill;
             _containerPanel.Controls.Add(control);
+            _currentControl = control;
         }
 
         /*
@@ -54,17 +62,26 @@ namespace ScoreBoard.forms
                 organisationControl.RequestScoreBoard += (_, data) =>
                 {
                     var (characters, monsters) = data;
-                    ShowControl(new ScoreBoardControl(characters, monsters)); // 점수판 컨트롤 표시
+                    ShowControl(new ScoreBoardControl(characters, monsters), true); // 점수판 컨트롤 표시
                 };
-                ShowControl(organisationControl); // 부대 편성 컨트롤 표시
+                ShowControl(organisationControl, true); // 부대 편성 컨트롤 표시
             };
 
-            ShowControl(mainControl);
+            ShowControl(mainControl, true);
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
             ShowMainControl();
+        }
+
+        private void pbGoBack_Click(object sender, EventArgs e)
+        {
+            UserControl oldControl = _history.Pop();
+            if (oldControl != null)
+            {
+                ShowControl(oldControl, false);
+            }
         }
     }
 }
