@@ -1,0 +1,11 @@
+﻿# ClickOnce 산출물: 바이트 그대로 유지 (개행 변환 금지)
+# Deploy 폴더 전체 잠금
+/Deploy/** -text
+
+# 주요 확장자 잠금
+*.application -text
+*.manifest   -text
+*.json       -text
+*.deploy     -text
+*.dll        binary
+*.exe        binary
