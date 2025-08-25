@@ -1,0 +1,16 @@
+﻿{
+  "type": 2,
+  "id": "2_01_Slime",
+  "name": "슬라임",
+  "stat": {
+    "hp": 300,
+    "combatStat": {
+      "ranged": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 1,
+        "value": 300
+      }
+    }
+  }
+}

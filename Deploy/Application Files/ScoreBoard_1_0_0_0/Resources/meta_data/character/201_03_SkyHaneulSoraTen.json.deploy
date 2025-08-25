@@ -1,0 +1,73 @@
+﻿{
+  "id": "201_03_SkyHaneulSoraTen",
+  "name": "스카이하늘소라텐",
+  "corpsId": "201",
+  "description": [
+    "{ 김-스카이하늘소라텐 }",
+    "1군단 2중대 전투소대 소속된 김스카이는",
+    "그의 할아버지가 대성전의 최전방을 책임진 푸른 군단의 장군이었고 할아버지를 본받아 자연스럽게 군인이 되었지만 재능은 그렇지 못했습니다.",
+    "하지만 그의 노력과 근성은 그가 군인이 되어 활약하는 걸 그 누구도 막지 못했습니다."
+  ],
+  "stat": {
+    "hp": 300,
+    "movement": 4,
+    "combatStat": {
+      "ranged": {
+        "type": "atk",
+        "range": 3,
+        "attackCount": 6,
+        "value": 70
+      }
+    }
+  },
+  "passives": [
+    {
+      "name": "임페리얼 베리어",
+      "requiredLevel": 0,
+      "description": [
+        "채력이 1로 1회 생존합니다."
+      ]
+    },
+    {
+      "name": "커스텀 튜닝",
+      "requiredLevel": 1,
+      "description": [
+        "공격력 20 증가"
+      ]
+    },
+    {
+      "name": "목청이 터질 정도로! wahhhhhhh!",
+      "requiredLevel": 2,
+      "description": [
+        "본인을 제외한 모든 아군 원거리는 공격력 + 100 부여"
+      ]
+    },
+    {
+      "name": "전투의 함성!",
+      "requiredLevel": 2,
+      "description": [
+        "본인과 아군의 공속이 1 증가합니다."
+      ]
+    },
+    {
+      "name": "진⭐급",
+      "requiredLevel": 3,
+      "description": [
+        "체력 1000",
+        "공격 횟수 8, 공격력 200으로 증가",
+        "치명타 유효 숫자 하나 추가",
+        "이동 거리 3으로 감소"
+      ]
+    }
+  ],
+  "actives": [
+    {
+      "name": "매콤한 주먹",
+      "requiredLevel": 0,
+      "cooldown": 3,
+      "description": [
+        "적을 기절시킵니다."
+      ]
+    }
+  ]
+}
