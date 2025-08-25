@@ -1,0 +1,16 @@
+﻿{
+  "id": "2_09_Aegis",
+  "name": "Aegis",
+  "type": "accessory",
+  "rarity": "rare",
+  "equipEffect": {
+    "hp": 400,
+    "wisdom": 1,
+    "cooldown": 1
+  },
+  "description": [
+    "체력 +400",
+    "지혜 +1",
+    "쿨다운 -1"
+  ]
+}

@@ -1,0 +1,16 @@
+﻿{
+  "type": 2,
+  "id": "2_03_BeastDemon",
+  "name": "짐승 악마",
+  "stat": {
+    "hp": 400,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 1,
+        "value": 200
+      }
+    }
+  }
+}

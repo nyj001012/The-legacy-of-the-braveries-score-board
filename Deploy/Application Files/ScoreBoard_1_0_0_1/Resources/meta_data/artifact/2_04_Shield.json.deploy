@@ -1,0 +1,12 @@
+﻿{
+  "id": "2_04_Shield",
+  "name": "방패",
+  "type": "accessory",
+  "rarity": "normal",
+  "equipEffect": {
+    "hp": 200
+  },
+  "description": [
+    "체력 +200"
+  ]
+}

@@ -1,0 +1,13 @@
+﻿{
+  "id": "0_20_MagicalHat",
+  "name": "마법스런 모자",
+  "type": "headgear",
+  "rarity": "legendary",
+  "equipEffect": {
+    "spellPower": 700
+  },
+  "description": [
+    "주문력 +700",
+    "주문력 2배"
+  ]
+}

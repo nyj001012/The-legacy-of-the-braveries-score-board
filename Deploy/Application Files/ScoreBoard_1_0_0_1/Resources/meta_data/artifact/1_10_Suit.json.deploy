@@ -1,0 +1,14 @@
+﻿{
+  "id": "1_10_Suit",
+  "name": "정장",
+  "type": "armour",
+  "rarity": "legendary",
+  "equipEffect": {
+    "atk": 50,
+    "count": 1
+  },
+  "description": [
+    "공격력 +50",
+    "공격 속도 +1"
+  ]
+}
