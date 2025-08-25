@@ -197,6 +197,7 @@
             reportedList.Padding = new Padding(20, 0, 20, 0);
             reportedList.Size = new Size(544, 520);
             reportedList.TabIndex = 0;
+            reportedList.WrapContents = false;
             reportedList.ControlAdded += reportedList_UpdateBtnDecisionVisibility;
             reportedList.ControlRemoved += reportedList_UpdateBtnDecisionVisibility;
             reportedList.DragDrop += reportedList_DragDrop;
