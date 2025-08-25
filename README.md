@@ -33,24 +33,29 @@
 
 가장 먼저 점수판 프로그램 실행 시 표시되는 화면입니다.
 각각 부대편성, 기록 보관소, 훈련 교본, 시크릿 코드 버튼이 있습니다.
+<br><br><br><br>
 
 ![organise](./image/main/organise.png)
 부대 편성 버튼은 출전할 형제들의 정보를 입력하는 기능을 제공합니다.
+<br><br><br><br>
 
 ![archive](./image/main/archive.png)
 > 미구현된 기능
 
 기록 보관소 버튼은 여러 형제의 전투 기록 또는 적들의 정보 등을 기록해둔 곳입니다.  
+<br><br><br><br>
 
 ![training-manual](./image/main/training-manual.png)
 다음은 훈련 교본 버튼입니다. 클릭 시, 훈련 교본 페이지로 이동합니다.  
 현재 보고 계신 이 페이지 말입니다.
+<br><br><br><br>
 
 ![secret-code](./image/main/secret-code.png)
 > 미구현된 기능
 
 시크릿 코드를 입력할 수 있는 버튼입니다.  
 여러 시크릿 코드를 입력하면 추가 컨텐츠를 해금할 수 있습니다.
+<br><br><br><br>
 
 ## 출전 병사 선택
 부대편성 버튼 클릭 시 표시되는 화면입니다.
@@ -60,30 +65,35 @@
 각 슬롯을 클릭하면 1P부터 4P까지의 형제를 선택하는 팝업창을 띄웁니다.
 
 **해당 팝업창은 ESC를 눌러 닫을 수 있습니다.**
+<br><br><br><br>
 
 ![select-corps](./image/select-soldier/select-corps.png)
 부대편성 화면의 슬롯을 클릭했을 시 뜨는 팝업입니다.  
 각 군단을 클릭하여 선택할 수 있습니다.  
 군단을 클릭하면 군단별 형제 목록이 표시됩니다.
+<br><br><br><br>
 
 ![select-soldiers](./image/select-soldier/select-soldiers.png)
 각 군단을 클릭했을 때 표시되는 군단별 형제 목록입니다.  
 형제의 이름을 클릭하면 그 형제에 대한 상세 정보가 표시됩니다.
+<br><br><br><br>
 
 ![soldier-info](./image/select-soldier/soldier-info.png)
 형제의 이름을 클릭했을 때 표시되는 형제의 상세 정보입니다.  
 스크를링을 하여 형제의 이름, 체력, 사거리, 공격력 등의 스탯을 확인할 수 있으며, 입대 배경 또한 볼 수 있습니다.
 
 **결정 버튼을 클릭하면 슬롯에 세팅됩니다.**
+<br><br><br><br>
 
 ![select-soldier-end](./image/select-soldier/select-soldier-end.png)
 참전이 결정된 형제는 해당 영역과 같이 표시되며, X 버튼으로 참전을 취소할 수 있습니다.
+<br><br><br><br>
 
 ![select-all](./image/select-soldier/select-all.png)
 4명의 형제들이 모두 참전을 결정하면, 참전 버튼이 활성화됩니다.
 
 참전 버튼을 클릭하면 적의 정보를 입력할 수 있는 팝업이 표시됩니다.
-
+<br><br><br><br>
 ## 보고된 적 선택
 ## 점수판 기능 소개
 ### 병사 간편 정보
