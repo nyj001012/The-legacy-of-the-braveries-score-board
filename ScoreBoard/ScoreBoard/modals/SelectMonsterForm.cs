@@ -121,7 +121,7 @@ namespace ScoreBoard.modals
                 monsterList.Controls.Add(label);
             }
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
-            UpdateReportedListHeight();
+            monsterList.Height = ComputeListHeight(monsterList);
             ScrollBarManager.SetScrollBar(monsterListContainer, monsterList, monsterScrollBar); // 병사 리스트 스크롤바 설정
         }
 
