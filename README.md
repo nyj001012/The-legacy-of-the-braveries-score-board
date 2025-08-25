@@ -1,4 +1,6 @@
 ﻿# 용사 이야기 훈련 교본
+> [다운로드](https://nyj001012.github.io/The-lagacy-of-the-braveries-score-board/Deploy/setup.exe)
+
 - 작성자: 가이우스
 - 직급: 전술연산관
 - 소속: 테사루스 시엔치에 
