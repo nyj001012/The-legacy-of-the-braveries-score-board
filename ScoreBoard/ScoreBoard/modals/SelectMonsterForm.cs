@@ -100,24 +100,27 @@ namespace ScoreBoard.modals
          */
         private void ShowMonsters(ushort gradeId)
         {
+            labelHeight = 0;
+
             this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
-            Dictionary<string, string> membersMap = DataReader.ReadMonsterDataByGradeId(gradeId);
-            if (membersMap.Count == 0)
+            Dictionary<string, string> monstersMap = DataReader.ReadMonsterDataByGradeId(gradeId);
+            if (monstersMap.Count == 0)
             {
                 MessageBox.Show("해당 등급의 몬스터 정보가 없습니다.");
                 return;
             }
             monsterList.Controls.Clear(); // 이전 병사 리스트 초기화
-            foreach (var member in membersMap)
+            foreach (var m in monstersMap)
             {
-                var label = CreateListItem(member.Key, member.Value);
-                label.Click += (s, e) => AddToReported(member.Key, member.Value);
-                label.DoubleClick += (s, e) => AddToReported(member.Key, member.Value);
+                var label = CreateListItem(m.Key, m.Value);
+                label.Click += (s, e) => AddToReported(m.Key, m.Value);
+                label.DoubleClick += (s, e) => AddToReported(m.Key, m.Value);
                 monsterList.Controls.Add(label);
                 labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
-            ScrollBarManager.SetScrollBar(monsterListContainer, monsterList, monsterScrollBar); // 병사 리스트 스크롤바 설정
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
+            monsterList.Height = labelHeight;
+            ScrollBarManager.SetScrollBar(monsterListContainer, monsterList, monsterScrollBar); // 병사 리스트 스크롤바 설정
         }
 
         /*
