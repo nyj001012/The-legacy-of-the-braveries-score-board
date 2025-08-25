@@ -1,0 +1,74 @@
+﻿{
+  "id": "202_04_John",
+  "name": "요한",
+  "corpsId": "202",
+  "description": [
+    "{ 요한 }",
+    "성직자(?)",
+    "신은 존재하지만 믿지는 않는다",
+    "막시무스 : 그럼 자네는 왜 군종병을 지원했나?",
+    "요한 : 군생활 개꿀루트라서?",
+    "막시무스 : 나가게"
+  ],
+  "stat": {
+    "hp": 200,
+    "movement": 2,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 2,
+        "value": 100
+      }
+    },
+    "spellPower": 100
+  },
+  "passives": [
+    {
+      "name": "거 좋은 거요 좋은 거",
+      "requiredLevel": 1,
+      "description": [
+        "아군의 회복 효과를 50% 같이 받음"
+      ]
+    },
+    {
+      "name": "일단 그분께서 지켜주신다 그러라네",
+      "requiredLevel": 2,
+      "description": [
+        "아군 전체 CC 무효"
+      ]
+    }
+  ],
+  "actives": [
+    {
+      "name": "예로부터...",
+      "requiredLevel": 0,
+      "cooldown": 3,
+      "description": [
+        "일반 공격 후 자동 발동",
+        "체력이 낮은 아군의 체력을 회복합니다.",
+        "계수는 주문력의 10%"
+      ]
+    },
+    {
+      "name": "-다운 게인",
+      "requiredLevel": 0,
+      "cooldown": 0,
+      "description": [
+        "기절 부여",
+        "계수는 공격력 100%, 주문력 50%",
+        "패시브 '예로 부터...' 바로 활성화"
+      ]
+    },
+    {
+      "name": "시원한 방",
+      "requiredLevel": 3,
+      "cooldown": 0,
+      "description": [
+        "정신 집중(피격 시 취소)",
+        "주사위 리롤한 후, 리롤한 만큼을 위력으로 하는 공격을 합니다.",
+        "기본 공격력 x (주사위)"
+      ]
+    }
+  ]
+}

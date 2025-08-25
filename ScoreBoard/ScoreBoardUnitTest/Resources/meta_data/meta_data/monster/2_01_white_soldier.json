@@ -1,0 +1,18 @@
+﻿{
+  "type": 2,
+  "id": "2_01_white_soldier",
+  "name": "백병",
+  "stat": {
+    "hp": 150,
+    "movement": 3,
+    "combatStat": {
+      "ranged": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 4,
+        "value": 50
+      }
+    }
+  },
+  "attackDiceValue": [ 1, 2 ]
+}

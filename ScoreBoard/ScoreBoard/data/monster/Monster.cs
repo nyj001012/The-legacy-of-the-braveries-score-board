@@ -1,0 +1,72 @@
+﻿using ScoreBoard.data.skill;
+using ScoreBoard.data.stat;
+using ScoreBoard.utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
+namespace ScoreBoard.data.monster
+{
+    public class Monster
+    {
+        public ushort Grade { get; set; } // 몬스터 등급 (예: 0 보스, 1 엘리트, 2 일반).
+        public string Id { get; set; } = string.Empty!; // Id
+        public string Name { get; set; } = string.Empty!; // 이름
+        public Stat Stat { get; set; } = default!; // 스탯
+
+        [JsonIgnore]
+        public Dictionary<ushort, bool> RequiredDiceValues { get; set; } = []; // 행동하기 위해 필요한 주사위 값이 키, 치명타 여부가 값
+
+        [JsonIgnore] 
+        public bool IsReported { get; set; } = false; // 보고되었는지 확인
+
+        [JsonIgnore]
+        public ushort Count { get; set; } = 0; // 개체 수
+        
+        [JsonIgnore]
+        public string Note { get; set; } = string.Empty!; // 특이사항
+
+        [JsonIgnore]
+        public int WeatherMovementModifier { get; set; } = 0; // 날씨로 인한 이동속도 보정치
+
+        [JsonIgnore]
+        public int WeatherRangeModifier { get; set; } = 0; // 날씨로 인한 공격 사거리 보정치
+
+        [JsonIgnore]
+        public int WeatherDiceModifier { get; set; } = 0; // 날씨로 인한 주사위 개수 보정치. Slice에 활용
+
+        [JsonIgnore]
+        public double SEAttackValueModifier { get; set; } = 1; // 상태이상 공격력 보정치. 곱연산 활용
+
+        protected void Initialise(string id)
+        {
+            Validator.ValidateNull(id, nameof(id));
+
+            var data = DataReader.ReadMonsterData(id) ?? throw new ArgumentException($"데이터 불러오기 오류: {id}");
+
+            Id = data.Id;
+            Grade = data.Grade;
+            Name = data.Name;
+            Stat = new Stat
+            {
+                Hp = data.Stat.Hp,
+                MaxHp = data.Stat.Hp, // 최대 체력은 현재 체력과 동일
+                Movement = data.Stat.Movement,
+                CombatStats = data.Stat.CombatStats.ToDictionary(
+                    kv => kv.Key,
+                    kv => new CombatStat
+                    {
+                        Type = kv.Value.Type,
+                        Range = kv.Value.Range,
+                        AttackCount = kv.Value.AttackCount,
+                        Value = kv.Value.Value
+                    }
+                ) ?? [],
+                SpellPower = data.Stat.SpellPower
+            };
+        }
+    }
+}

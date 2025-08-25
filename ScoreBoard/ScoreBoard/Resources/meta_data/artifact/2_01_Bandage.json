@@ -1,0 +1,12 @@
+﻿{
+  "id": "2_01_Bandage",
+  "name": "붕대",
+  "type": "accessory",
+  "rarity": "normal",
+  "equipEffect": {
+    "spellPower": 100
+  },
+  "description": [
+    "주문력 +100"
+  ]
+}
