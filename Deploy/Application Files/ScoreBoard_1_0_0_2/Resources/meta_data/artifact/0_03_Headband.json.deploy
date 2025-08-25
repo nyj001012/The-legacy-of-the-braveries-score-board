@@ -1,0 +1,12 @@
+﻿{
+  "id": "0_03_Headband",
+  "name": "머리테",
+  "type": "headgear",
+  "rarity": "normal",
+  "equipEffect": {
+    "spellPower": 50
+  },
+  "description": [
+    "주문력 +50"
+  ]
+}

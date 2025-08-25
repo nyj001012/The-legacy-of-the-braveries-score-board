@@ -1,0 +1,75 @@
+﻿{
+  "id": "204_00_Petrus",
+  "name": "페트루스",
+  "corpsId": "204",
+  "description": [
+    "{ 최-페트루스 }",
+    "4 군단장",
+    "4번 군단은 소수정예 기사단입니다.",
+    "창설 이전부터 현재까지 검술 실력을 가장 중요하게 여기는 군단입니다.",
+    "근접전이 상징이고 포기할수없던 페르투스 장군은 갑주를 더 단단하게 강화할지언정 절대 원거리 무기는 들지않겠다 합니다.",
+    "최근엔 원거리 무기를 어느정도는 허용했습니다. 공중의 적을 검으로 벨순 없으니까요!",
+    "4군단원들도 모두 같은 생각 같습니다."
+  ],
+  "stat": {
+    "hp": 800,
+    "movement": 2,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 4,
+        "value": 400
+      },
+      "ranged": {
+        "type": "atk",
+        "range": 2,
+        "attackCount": 1,
+        "value": 100
+      }
+    }
+  },
+  "passives": [
+    {
+      "name": "위압감",
+      "requiredLevel": 0,
+      "description": [
+        "3칸 이내 적의 행동력을 1 감소시킵니다."
+      ]
+    },
+    {
+      "name": "강렬함",
+      "requiredLevel": 0,
+      "description": [
+        "주변 적 공속 -1"
+      ]
+    },
+    {
+      "name": "전투의 열광",
+      "requiredLevel": 1,
+      "description": [
+        "아군 모두에게 '모든 피해의 50% 흡수'하는 능력 부여",
+        "이동 속도 +2"
+      ]
+    }
+  ],
+  "actives": [
+    {
+      "name": "꿀꿀포 사격",
+      "requiredLevel": 0,
+      "cooldown": 3,
+      "description": [
+        "전방 2칸에 사격합니다.(광역)"
+      ]
+    },
+    {
+      "name": "정복자",
+      "requiredLevel": 3,
+      "cooldown": 5,
+      "description": [
+        "5턴 동안 모든 행동에 궁버프가 추가됩니다.",
+        "도끼 피해는 1000 * 공격속도"
+      ]
+    }
+  ]
+}

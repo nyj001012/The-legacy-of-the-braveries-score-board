@@ -1,0 +1,10 @@
+﻿{
+  "type": 1,
+  "id": "0_07_Gundam",
+  "name": "건담",
+  "stat": {
+    "hp": -1,
+    "combatStat": {
+    }
+  }
+}

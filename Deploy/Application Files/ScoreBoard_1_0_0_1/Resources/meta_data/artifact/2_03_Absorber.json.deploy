@@ -1,0 +1,11 @@
+﻿{
+  "id": "2_03_Absorber",
+  "name": "흡수기",
+  "type": "accessory",
+  "rarity": "normal",
+  "equipEffect": {
+  },
+  "description": [
+    "모든 공격 10% 흡수"
+  ]
+}

@@ -1,0 +1,14 @@
+﻿{
+  "id": "0_02_ForeheadGuard",
+  "name": "이마보호대",
+  "type": "headgear",
+  "rarity": "normal",
+  "equipEffect": {
+    "hp": 50,
+    "wisdom": 1
+  },
+  "description": [
+    "체력 +50",
+    "지혜 +1"
+  ]
+}

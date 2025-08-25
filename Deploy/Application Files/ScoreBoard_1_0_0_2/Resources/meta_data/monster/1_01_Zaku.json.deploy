@@ -1,0 +1,16 @@
+﻿{
+  "type": 1,
+  "id": "1_01_Zaku",
+  "name": "자쿠",
+  "stat": {
+    "hp": 20000,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 4,
+        "value": 100
+      }
+    }
+  }
+}

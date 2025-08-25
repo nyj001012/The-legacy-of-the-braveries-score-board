@@ -1,0 +1,14 @@
+﻿{
+  "id": "0_13_Dandy",
+  "name": "멋쟁이",
+  "type": "headgear",
+  "rarity": "rare",
+  "equipEffect": {
+    "hp": 300,
+    "atk": 30
+  },
+  "description": [
+    "체력 +300",
+    "근접 캐릭터는 공격력 +30"
+  ]
+}

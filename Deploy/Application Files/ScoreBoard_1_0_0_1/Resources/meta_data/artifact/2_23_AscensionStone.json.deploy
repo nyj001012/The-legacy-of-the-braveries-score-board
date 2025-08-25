@@ -1,0 +1,13 @@
+﻿{
+  "id": "2_23_AscensionStone",
+  "name": "초월석",
+  "type": "accessory",
+  "rarity": "legendary",
+  "equipEffect": {
+    "hp": 800
+  },
+  "description": [
+    "체력 +800",
+    "죽을 위기 시 체력 100% 회복"
+  ]
+}

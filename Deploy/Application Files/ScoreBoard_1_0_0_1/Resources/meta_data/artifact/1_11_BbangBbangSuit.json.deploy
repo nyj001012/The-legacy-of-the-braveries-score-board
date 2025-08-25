@@ -1,0 +1,15 @@
+﻿{
+  "id": "1_11_BbangBbangSuit",
+  "name": "빵빵슈트",
+  "type": "armour",
+  "rarity": "legendary",
+  "equipEffect": {
+    "hp": 500,
+    "atk": 20
+  },
+  "description": [
+    "체력 +500",
+    "공격력 +20",
+    "탱커 캐릭터라면 체력 +500 추가"
+  ]
+}

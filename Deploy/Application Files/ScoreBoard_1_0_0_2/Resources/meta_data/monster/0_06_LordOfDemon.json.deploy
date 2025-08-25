@@ -1,0 +1,10 @@
+﻿{
+  "type": 1,
+  "id": "0_06_LordOfDemon",
+  "name": "마왕",
+  "stat": {
+    "hp": -1,
+    "combatStat": {
+    }
+  }
+}
