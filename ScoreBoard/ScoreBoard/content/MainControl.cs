@@ -1,13 +1,14 @@
-﻿using System;
+﻿using ScoreBoard.content;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ScoreBoard.content;
 
 namespace ScoreBoard
 {
@@ -34,7 +35,7 @@ namespace ScoreBoard
          */
         private void btnDataArchive_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("지원하지 않는 기능입니다.");
         }
 
         /*
@@ -43,7 +44,33 @@ namespace ScoreBoard
          */
         private void btnGuide_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/nyj001012/The-lagacy-of-the-braveries-score-board");
+            OpenUrl("https://github.com/nyj001012/The-lagacy-of-the-braveries-score-board/blob/main/README.md");
+        }
+
+        /*
+         * OpenUrl(string url)
+         * - 지정된 주소로 웹사이트를 여는 메서드
+         * - url: 웹사이트 url
+         */
+        private static void OpenUrl(string url)
+        {
+            try
+            {
+                if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
+                {
+                    MessageBox.Show("유효한 URL이 아닙니다.");
+                    return;
+                }
+
+                Process.Start(new ProcessStartInfo(uri.ToString())
+                {
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"브라우저를 여는 중 오류: {ex.Message}");
+            }
         }
 
         /*
@@ -52,7 +79,7 @@ namespace ScoreBoard
          */
         private void btnSecretCode_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("지원하지 않는 기능입니다.");
         }
 
         private void MainControl_Load(object sender, EventArgs e)
