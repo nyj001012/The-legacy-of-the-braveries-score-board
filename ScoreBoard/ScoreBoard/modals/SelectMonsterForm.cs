@@ -11,7 +11,8 @@ namespace ScoreBoard.modals
 {
     public partial class SelectMonsterForm : Form
     {
-        private int labelHeight = 0; // 레이블의 총 높이. 동적 레이블 높이를 계산하기 위해 사용
+        private const int DEFAULT_REPORTED_HEIGHT = 520; // 기본 reportedList 높이
+        private int reportedHeight = 0; // reportedList의 총 높이
         private readonly int verticalSpace = 20; // 레이블 간의 수직 여백. 동적으로 레이블을 생성할 때 사용
         internal readonly List<(string id, string name, ushort count)> currentSelectedMonsters = []; // 선택된 몬스터들을 저장하는 리스트 (monsterId, count)
         private Point dragStartPoint; // 드래그 시작 지점
@@ -32,6 +33,7 @@ namespace ScoreBoard.modals
 
         private void SelectMonsterForm_Load(object sender, EventArgs e)
         {
+            reportedHeight = 0;
             ShowMonsterGrade(); // 몬스터 종류 표시
             reportedList.Controls.Clear();
             if (currentSelectedMonsters != null) // 기존에 저장된 내용이 있다면 불러오기
@@ -40,7 +42,10 @@ namespace ScoreBoard.modals
                 {
                     var newLabel = CreateReportedLabel(id, name, count);
                     reportedList.Controls.Add(newLabel);
+                    reportedHeight += newLabel.PreferredHeight + verticalSpace * 2;
                 }
+                reportedList.Height = reportedList.Height > reportedHeight ? reportedList.Height : reportedHeight;
+                ScrollBarManager.SetScrollBar(reportedContainer, reportedList, reportedScrollBar);
             }
         }
 
@@ -64,10 +69,10 @@ namespace ScoreBoard.modals
                 var label = CreateListItem(null, grade.Key);
                 label.Click += (s, e) => ShowMonsters(grade.Value.Id);
                 gradeList.Controls.Add(label);
-                labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
-            ScrollBarManager.SetScrollBar(gradeListContainer, gradeList, gradeScrollBar); // 스크롤바 설정
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
+            gradeList.Height = ComputeListHeight(gradeList);
+            ScrollBarManager.SetScrollBar(gradeListContainer, gradeList, gradeScrollBar); // 스크롤바 설정
         }
 
         /*
@@ -101,23 +106,23 @@ namespace ScoreBoard.modals
         private void ShowMonsters(ushort gradeId)
         {
             this.SuspendLayout(); // 폼 로드 중 레이아웃 업데이트 일시 중지
-            Dictionary<string, string> membersMap = DataReader.ReadMonsterDataByGradeId(gradeId);
-            if (membersMap.Count == 0)
+            Dictionary<string, string> monstersMap = DataReader.ReadMonsterDataByGradeId(gradeId);
+            if (monstersMap.Count == 0)
             {
                 MessageBox.Show("해당 등급의 몬스터 정보가 없습니다.");
                 return;
             }
             monsterList.Controls.Clear(); // 이전 병사 리스트 초기화
-            foreach (var member in membersMap)
+            foreach (var m in monstersMap)
             {
-                var label = CreateListItem(member.Key, member.Value);
-                label.Click += (s, e) => AddToReported(member.Key, member.Value);
-                label.DoubleClick += (s, e) => AddToReported(member.Key, member.Value);
+                var label = CreateListItem(m.Key, m.Value);
+                label.Click += (s, e) => AddToReported(m.Key, m.Value);
+                label.DoubleClick += (s, e) => AddToReported(m.Key, m.Value);
                 monsterList.Controls.Add(label);
-                labelHeight += label.Height + verticalSpace * 2; // 레이블 높이 + 여백
             }
-            ScrollBarManager.SetScrollBar(monsterListContainer, monsterList, monsterScrollBar); // 병사 리스트 스크롤바 설정
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
+            monsterList.Height = ComputeListHeight(monsterList);
+            ScrollBarManager.SetScrollBar(monsterListContainer, monsterList, monsterScrollBar); // 병사 리스트 스크롤바 설정
         }
 
         /*
@@ -138,6 +143,8 @@ namespace ScoreBoard.modals
             {
                 currentSelectedMonsters.Add((id, monsterName, count));
                 var newLabel = CreateReportedLabel(id, monsterName, count);
+                reportedHeight += newLabel.PreferredHeight + verticalSpace * 2;
+                reportedList.Height = reportedList.Height > reportedHeight ? reportedList.Height : reportedHeight;
                 reportedList.Controls.Add(newLabel);
             }
             else
@@ -149,8 +156,8 @@ namespace ScoreBoard.modals
                     label.Text = $"{monsterName} ({count})";
                 }
             }
-            ScrollBarManager.SetScrollBar(reportedContainer, reportedList, reportedScrollBar);
             this.ResumeLayout(); // 폼 로드 후 레이아웃 업데이트 재개
+            ScrollBarManager.SetScrollBar(reportedContainer, reportedList, reportedScrollBar);
         }
 
         /*
@@ -211,22 +218,25 @@ namespace ScoreBoard.modals
         private void removeFromReported(TransparentTextLabel label, (string id, string name, ushort count) monster)
         {
             this.SuspendLayout();
-            int index = currentSelectedMonsters.FindIndex(monster => monster.id == label.Name);
+
+            int index = currentSelectedMonsters.FindIndex(m => m.id == label.Name);
             ushort newCount = (ushort)(currentSelectedMonsters[index].count - 1);
+
             if (newCount == 0)
             {
                 currentSelectedMonsters.RemoveAt(index);
                 reportedList.Controls.RemoveByKey(monster.id);
-                reportedList.Invalidate();
+                label.Dispose();
             }
             else
             {
                 currentSelectedMonsters[index] = (monster.id, monster.name, newCount);
                 label.Text = $"{monster.name} ({newCount})";
             }
-            this.ResumeLayout();
-        }
 
+            this.ResumeLayout();
+            UpdateReportedListHeight();
+        }
 
         /*
          * SelectPlayerForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -316,6 +326,60 @@ namespace ScoreBoard.modals
             this.Close(); // 폼 닫기
         }
 
+        /*
+         * ComputeListHeight(CustomFlowLayoutPanel panel)
+         * - panel의 높이 계산
+         * - panel: List 역할을 하는 패널
+         */
+        private int ComputeListHeight(CustomFlowLayoutPanel panel)
+        {
+            int h = 0;
+            foreach (Control c in panel.Controls)
+            {
+                if (c.Visible)
+                    h += c.PreferredSize.Height + verticalSpace * 2;
+            }
+            return h;
+        }
+
+
+        /*
+         * UpdateReportedLayout()
+         * - ReportedList의 Height 업데이트
+         */
+        private void UpdateReportedListHeight()
+        {
+            reportedList.SuspendLayout();
+
+            reportedHeight = ComputeListHeight(reportedList);
+            reportedList.Height = Math.Max(DEFAULT_REPORTED_HEIGHT, reportedHeight);
+
+            reportedList.ResumeLayout();
+            reportedList.PerformLayout();
+
+            ScrollBarManager.SetScrollBar(reportedContainer, reportedList, reportedScrollBar);
+        }
+
+        /*
+         * RemoveReportedLabel(TransparentTextLabel label)
+         * - reportedList에서 label을 제거하는 메서드
+         * - label: 제거할 label
+         */
+        private void RemoveReportedLabel(TransparentTextLabel label)
+        {
+            // 데이터에서 제거
+            int index = currentSelectedMonsters.FindIndex(m => m.id == label.Name);
+            if (index != -1)
+                currentSelectedMonsters.RemoveAt(index);
+
+            // UI에서 제거
+            reportedList.Controls.Remove(label);
+            label.Dispose();
+
+            // 레이아웃/스크롤 갱신
+            UpdateReportedListHeight();
+        }
+
         private void reportedList_DragLeave(object sender, EventArgs e)
         {
             if (draggedLabel != null)
@@ -332,13 +396,7 @@ namespace ScoreBoard.modals
                         Point pt = reportedList.PointToClient(Cursor.Position);
                         if (!reportedList.ClientRectangle.Contains(pt))
                         {
-                            int index = currentSelectedMonsters.FindIndex(m => m.id == labelToRemove.Name);
-                            if (index != -1)
-                            {
-                                currentSelectedMonsters.RemoveAt(index);
-                                reportedList.Controls.Remove(labelToRemove);
-                                reportedList.Invalidate();
-                            }
+                            RemoveReportedLabel(labelToRemove);
                         }
                     });
                 });
@@ -363,13 +421,7 @@ namespace ScoreBoard.modals
             // 바깥으로 드롭한 경우: 제거
             if (!reportedList.ClientRectangle.Contains(pt))
             {
-                int index = currentSelectedMonsters.FindIndex(m => m.id == dragged.Name);
-                if (index != -1)
-                {
-                    currentSelectedMonsters.RemoveAt(index);
-                    reportedList.Controls.Remove(dragged);
-                    reportedList.Invalidate();
-                }
+                RemoveReportedLabel(dragged);
                 return;
             }
 

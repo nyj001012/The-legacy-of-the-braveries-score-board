@@ -116,6 +116,7 @@
             monsterList.Name = "monsterList";
             monsterList.Size = new Size(506, 720);
             monsterList.TabIndex = 0;
+            monsterList.MouseWheel += monsterList_MouseWheel;
             // 
             // monsterScrollBar
             // 
@@ -141,7 +142,8 @@
             monsterScrollBar.LinearGradient_Background = false;
             monsterScrollBar.LinearGradient_Value = false;
             monsterScrollBar.LinearGradientPen = false;
-            monsterScrollBar.Location = new Point(193, 3);
+            monsterScrollBar.Location = new Point(193, 0);
+            monsterScrollBar.Margin = new Padding(0);
             monsterScrollBar.Maximum = 100;
             monsterScrollBar.Minimum = 0;
             monsterScrollBar.Name = "monsterScrollBar";
@@ -150,8 +152,8 @@
             monsterScrollBar.RGB = false;
             monsterScrollBar.Rounding = false;
             monsterScrollBar.RoundingInt = 7;
-            monsterScrollBar.Size = new Size(10, 720);
-            monsterScrollBar.SmallStep = 10;
+            monsterScrollBar.Size = new Size(36, 720);
+            monsterScrollBar.SmallStep = 20;
             monsterScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             monsterScrollBar.TabIndex = 5;
             monsterScrollBar.Tag = "Cyber";
@@ -195,6 +197,7 @@
             reportedList.Padding = new Padding(20, 0, 20, 0);
             reportedList.Size = new Size(544, 520);
             reportedList.TabIndex = 0;
+            reportedList.WrapContents = false;
             reportedList.ControlAdded += reportedList_UpdateBtnDecisionVisibility;
             reportedList.ControlRemoved += reportedList_UpdateBtnDecisionVisibility;
             reportedList.DragDrop += reportedList_DragDrop;
