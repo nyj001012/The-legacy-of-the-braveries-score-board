@@ -35,6 +35,9 @@ namespace ScoreBoard.data.character
         public const string Valerian = "204_01_Valerian"; // 발레리안
         public const string Leon = "204_02_Leon"; // 레온
         public const string Gideon = "204_03_Gideon"; // 기드온
-        public const string Joshua = "204_04_Joshua"; // 여호수아
+        public const string Joshua = "204_04_Joshua"; // 조슈아
+
+        // 특수
+        public const string Eliza = "301_00_Eliza"; // 엘리자
     }
 }

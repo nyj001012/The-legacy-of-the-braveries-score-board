@@ -332,6 +332,9 @@ namespace ScoreBoard.modals
                     return new Gideon(memberId);
                 case CharacterIds.Joshua:
                     return new Joshua(memberId);
+                // 특수
+                case CharacterIds.Eliza:
+                    return new Eliza(memberId);
                 default:
                     throw new ArgumentException($"잘못된 데이터입니다. memberId: {memberId}");
             }
