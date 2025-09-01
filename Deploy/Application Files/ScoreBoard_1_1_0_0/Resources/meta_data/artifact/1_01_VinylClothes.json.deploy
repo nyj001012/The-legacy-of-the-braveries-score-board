@@ -1,0 +1,12 @@
+﻿{
+  "id": "1_01_VinylClothes",
+  "name": "비닐옷",
+  "type": "armour",
+  "rarity": "normal",
+  "equipEffect": {
+    "atk": 20
+  },
+  "description": [
+    "공격력 +20"
+  ]
+}

@@ -1,0 +1,89 @@
+﻿{
+  "id": "301_00_Eliza",
+  "name": "엘리자",
+  "corpsId": "301",
+  "description": [
+    "{ 엘리자 }",
+    "흑깃"
+  ],
+  "stat": {
+    "hp": 200,
+    "movement": 4,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 4,
+        "value": 100
+      }
+    }
+  },
+  "passives": [
+    {
+      "name": "검 이름: 변호사(물리)",
+      "requiredLevel": 0,
+      "description": [
+        "아군 원거리가 결투 대상으로 지정되면 대신 결투함"
+      ]
+    },
+    {
+      "name": "몰아침",
+      "requiredLevel": 0,
+      "description": [
+        "결투 승리 시 발동",
+        "한 번 더 전투 리롤 (선제공격)"
+      ]
+    },
+    {
+      "name": "대전사",
+      "requiredLevel": 1,
+      "description": [
+        "결투 승리 시 강인도 1회복 발동",
+        "결투 지정된 아군 강인도 1회복"
+      ]
+    },
+    {
+      "name": "나만 몰아침",
+      "requiredLevel": 2,
+      "description": [
+        "[몰아침] 스킬 사용 시 반격당하지 않음"
+      ]
+    },
+    {
+      "name": "깃털 각인",
+      "requiredLevel": 3,
+      "description": [
+        "3스택을 직접 터트릴 시 스택을 소모하지 않고 유지"
+      ]
+    },
+    {
+      "name": "흑깃",
+      "requiredLevel": 3,
+      "description": [
+        "전투대상 유닛에게 디버프 [흑깃] 부여 (근거리 아군 포함)",
+        "보스 몬스터 대상은 한 부위에만 부여",
+        "최대 3스택"
+      ]
+    },
+    {
+      "name": "깃털 파괴",
+      "requiredLevel": 3,
+      "description": [
+        "대상의 부위가 파괴됐거나 3스택을 터트릴 시 엘리자의 물리 500%만큼 추가 피해",
+        "특수 스킬 [응징] 발동"
+      ]
+    },
+    {
+      "name": "[특수] 응징",
+      "requiredLevel": 3,
+      "description": [
+        "[몰아침] 스킬의 강화",
+        "대상에 스택만큼 개수의 주사위 리롤",
+        "모든 공격 치명타",
+        "반격 무시"
+      ]
+    }
+  ],
+  "actives": [
+  ]
+}

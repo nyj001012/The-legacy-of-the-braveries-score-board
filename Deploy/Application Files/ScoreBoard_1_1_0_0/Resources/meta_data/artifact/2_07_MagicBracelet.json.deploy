@@ -1,0 +1,14 @@
+﻿{
+  "id": "2_07_MagicBracelet",
+  "name": "마 팔",
+  "type": "accessory",
+  "rarity": "rare",
+  "equipEffect": {
+    "spellPower": 300,
+    "cooldown": 1
+  },
+  "description": [
+    "주문력 +300",
+    "스킬 쿨다운 -1"
+  ]
+}

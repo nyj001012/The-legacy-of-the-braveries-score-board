@@ -1,0 +1,16 @@
+﻿{
+  "id": "2_24_CrescentPendant",
+  "name": "초승달 팬던트",
+  "type": "accessory",
+  "rarity": "legendary",
+  "equipEffect": {
+    "hp": 100,
+    "atk": 80
+  },
+  "description": [
+    "체력 +100",
+    "공격력 +80",
+    "피해량 20% 흡수",
+    "전투 시 이동력 +2"
+  ]
+}

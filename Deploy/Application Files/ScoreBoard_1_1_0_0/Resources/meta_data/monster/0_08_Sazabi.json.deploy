@@ -1,0 +1,10 @@
+﻿{
+  "type": 1,
+  "id": "0_08_Sazabi",
+  "name": "사자비",
+  "stat": {
+    "hp": -1,
+    "combatStat": {
+    }
+  }
+}

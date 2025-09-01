@@ -1,0 +1,16 @@
+﻿{
+  "type": 2,
+  "id": "2_04_SoldierBot",
+  "name": "병사 봇",
+  "stat": {
+    "hp": 300,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 1,
+        "value": 300
+      }
+    }
+  }
+}

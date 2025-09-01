@@ -1,0 +1,13 @@
+﻿{
+  "id": "1_14_General",
+  "name": "장군",
+  "type": "armour",
+  "rarity": "legendary",
+  "equipEffect": {
+    "atk": 100
+  },
+  "description": [
+    "공격력 +100",
+    "딜러 캐릭터라면 공격력 +200 추가"
+  ]
+}

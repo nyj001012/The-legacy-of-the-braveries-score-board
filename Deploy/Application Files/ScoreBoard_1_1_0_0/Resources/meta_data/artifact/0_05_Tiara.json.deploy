@@ -1,0 +1,16 @@
+﻿{
+  "id": "0_05_Tiara",
+  "name": "티아라",
+  "type": "headgear",
+  "rarity": "rare",
+  "equipEffect": {
+    "atk": 20,
+    "count": 1,
+    "critical": 1
+  },
+  "description": [
+    "공격력 +20",
+    "공격 속도 +1",
+    "치명타 +1"
+  ]
+}

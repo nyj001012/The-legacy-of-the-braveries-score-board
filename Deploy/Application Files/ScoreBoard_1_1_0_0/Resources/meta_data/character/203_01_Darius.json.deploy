@@ -1,0 +1,68 @@
+﻿{
+  "id": "203_01_Darius",
+  "name": "다리우스",
+  "corpsId": "203",
+  "description": [
+    "{ 다리우스 }",
+    "'햄부거 인더스트리 2대 회장'",
+    "'햄부거'인더스트리는 1대 회장이자 전세대 용사 '진우'가 패스트푸드로 시작하여 무기 사업으로 성장시킨 회사입니다.",
+    "그의 손자인 다리우스는 '햄부거'의 성장을 위해 이번 반란 진압에 직접 참전하였습니다.",
+    "이번 전쟁을 성공적으로 마무리  한다면 좋은 광고가 될것이 분명합니다."
+  ],
+  "stat": {
+    "hp": 200,
+    "movement": 2,
+    "combatStat": {
+      "ranged": {
+        "type": "atk",
+        "range": 5,
+        "attackCount": 1,
+        "value": 100
+      }
+    },
+    "spellPower": 0
+  },
+  "passives": [
+    {
+      "name": "수완가",
+      "requiredLevel": 0,
+      "description": [
+        "크레딧 획득량 50% 증가"
+      ]
+    },
+    {
+      "name": "위치 특정",
+      "requiredLevel": 1,
+      "description": [
+        "지정된 아군 주변 6칸 정찰"
+      ]
+    },
+    {
+      "name": "재벌가",
+      "requiredLevel": 2,
+      "description": [
+        "크레딧 획득량 100% 증가"
+      ]
+    },
+    {
+      "name": "(소환) 햄부기 전차",
+      "requiredLevel": 3,
+      "description": [
+        "체력: 5000",
+        "공격력: 본체 공격력 + 주문력",
+        "[액티브] 포격 개시 (쿨: 5턴)",
+        " 다음 공격을 지점 타격으로 변경"
+      ]
+    }
+  ],
+  "actives": [
+    {
+      "name": "햄부거의 정보력",
+      "requiredLevel": 0,
+      "cooldown": 5,
+      "description": [
+        "지역을 정찰합니다."
+      ]
+    }
+  ]
+}
