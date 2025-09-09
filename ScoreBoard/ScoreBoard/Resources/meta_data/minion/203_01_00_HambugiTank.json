@@ -1,0 +1,28 @@
+﻿{
+  "id": "203_01_00_HambugiTank",
+  "name": "햄부기 전차",
+  "stat": {
+    "hp": 5000,
+    "movement": 0,
+    "combatStat": {
+      "ranged": {
+        "type": "atk",
+        "range": 0,
+        "attackCount": 1,
+        "value": 0
+      }
+    }
+  },
+  "passives": [
+  ],
+  "actives": [
+    {
+      "name": "포격 개시",
+      "requiredLevel": 0,
+      "cooldown": 5,
+      "description": [
+        "다음 공격을 지점 타격으로 변경"
+      ]
+    }
+  ]
+}

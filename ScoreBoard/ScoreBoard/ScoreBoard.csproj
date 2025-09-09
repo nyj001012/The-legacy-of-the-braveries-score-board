@@ -45,7 +45,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\image\weather\" />
-	  <Folder Include="Resources\meta_data\minion\" />
 	</ItemGroup>
 
 </Project>
