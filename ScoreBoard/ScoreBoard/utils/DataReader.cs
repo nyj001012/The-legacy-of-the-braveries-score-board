@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -443,10 +444,35 @@ namespace ScoreBoard.utils
             };
         }
 
-        internal static Minion ReadMinionData(string mid)
+        /*
+         * ReadMinionData(mid)
+         * - mid: 소환수 ID
+         * - return: 해당 소환수의 JSON 데이터를 반환
+         */
+        internal static Minion? ReadMinionData(string mid)
         {
-            // TODO => 미니언 데이터 읽기 구현
-            return new Minion();
+            string jsonPath = $@"Resources/meta_data/minion/{mid}.json";
+            if (!File.Exists(jsonPath))
+            {
+                return null;
+            }
+
+            string json = File.ReadAllText(jsonPath);
+            return JsonSerializer.Deserialize<Minion>(json, CachedJsonSerializerOptions);
+        }
+
+        /*
+         * GetMinion(mid)
+         * - mid: 소환수 id
+         * - return: 소환수 id에 맞는 소환수 객체 반환
+         */
+        internal static Minion GetMinion(string mid)
+        {
+            return mid switch
+            {
+                "203_01_00_HambugiTank" => new HambugiTank(mid),
+                _ => throw new ArgumentException($"알 수 없는 소환수 ID: {mid}"),
+            };
         }
     }
 }
