@@ -58,7 +58,7 @@ namespace ScoreBoard.data.character
 
             if (data.MinionIds.Length > 0)
             {
-                Minions = data.MinionIds.Select(mid => DataReader.ReadMinionData(mid)).Where(m => m != null).ToList() ?? [];
+                Minions = data.MinionIds.Select(mid => DataReader.GetMinion(mid)).Where(m => m != null).ToList() ?? [];
             }
         }
 
