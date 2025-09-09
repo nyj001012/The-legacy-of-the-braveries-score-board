@@ -1,5 +1,6 @@
 ﻿using ScoreBoard.data.artifact;
 using ScoreBoard.data.character;
+using ScoreBoard.data.minion;
 using ScoreBoard.data.monster;
 using ScoreBoard.data.statusEffect;
 using ScoreBoard.data.weather;
@@ -135,7 +136,7 @@ namespace ScoreBoard.utils
          * - id: 병사 ID
          * - return: 해당 병사의 JSON 데이터를 반환
          */
-        internal static CorpsMember? ReadMemberData(string id)
+        internal static CorpsMemberDTO? ReadMemberData(string id)
         {
             string jsonPath = @$"Resources/meta_data/character/{id}.json";
             if (!File.Exists(jsonPath))
@@ -143,7 +144,7 @@ namespace ScoreBoard.utils
                 return null;
             }
             string json = File.ReadAllText(jsonPath);
-            return JsonSerializer.Deserialize<CorpsMember>(json, CachedJsonSerializerOptions);
+            return JsonSerializer.Deserialize<CorpsMemberDTO>(json, CachedJsonSerializerOptions);
         }
 
         /*
@@ -440,6 +441,12 @@ namespace ScoreBoard.utils
                 "2_05_ArcherBot" => new ArcherBot(id),
                 _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
             };
+        }
+
+        internal static Minion ReadMinionData(string mid)
+        {
+            // TODO => 미니언 데이터 읽기 구현
+            return new Minion();
         }
     }
 }
