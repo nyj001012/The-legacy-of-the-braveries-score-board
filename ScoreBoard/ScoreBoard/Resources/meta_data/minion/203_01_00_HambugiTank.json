@@ -24,5 +24,8 @@
         "다음 공격을 지점 타격으로 변경"
       ]
     }
-  ]
+  ],
+  "summonAvailableTurn": 0,
+  "summonEndTurn": -1,
+  "isSummonable": false
 }
