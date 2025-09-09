@@ -39,5 +39,6 @@ namespace ScoreBoard.data.character
 
         // 특수
         public const string Eliza = "301_00_Eliza"; // 엘리자
+        public const string Julius = "301_01_Julius"; // 율리우스
     }
 }
