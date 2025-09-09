@@ -1,5 +1,6 @@
 ﻿using ScoreBoard.data.artifact;
 using ScoreBoard.data.character;
+using ScoreBoard.data.minion;
 using ScoreBoard.data.monster;
 using ScoreBoard.data.statusEffect;
 using ScoreBoard.data.weather;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -135,7 +137,7 @@ namespace ScoreBoard.utils
          * - id: 병사 ID
          * - return: 해당 병사의 JSON 데이터를 반환
          */
-        internal static CorpsMember? ReadMemberData(string id)
+        internal static CorpsMemberDTO? ReadMemberData(string id)
         {
             string jsonPath = @$"Resources/meta_data/character/{id}.json";
             if (!File.Exists(jsonPath))
@@ -143,7 +145,7 @@ namespace ScoreBoard.utils
                 return null;
             }
             string json = File.ReadAllText(jsonPath);
-            return JsonSerializer.Deserialize<CorpsMember>(json, CachedJsonSerializerOptions);
+            return JsonSerializer.Deserialize<CorpsMemberDTO>(json, CachedJsonSerializerOptions);
         }
 
         /*
@@ -439,6 +441,37 @@ namespace ScoreBoard.utils
                 "2_04_SoldierBot" => new SoldierBot(id),
                 "2_05_ArcherBot" => new ArcherBot(id),
                 _ => throw new ArgumentException($"알 수 없는 몬스터 ID: {id}"),
+            };
+        }
+
+        /*
+         * ReadMinionData(mid)
+         * - mid: 소환수 ID
+         * - return: 해당 소환수의 JSON 데이터를 반환
+         */
+        internal static Minion? ReadMinionData(string mid)
+        {
+            string jsonPath = $@"Resources/meta_data/minion/{mid}.json";
+            if (!File.Exists(jsonPath))
+            {
+                return null;
+            }
+
+            string json = File.ReadAllText(jsonPath);
+            return JsonSerializer.Deserialize<Minion>(json, CachedJsonSerializerOptions);
+        }
+
+        /*
+         * GetMinion(mid)
+         * - mid: 소환수 id
+         * - return: 소환수 id에 맞는 소환수 객체 반환
+         */
+        internal static Minion GetMinion(string mid)
+        {
+            return mid switch
+            {
+                "203_01_00_HambugiTank" => new HambugiTank(mid),
+                _ => throw new ArgumentException($"알 수 없는 소환수 ID: {mid}"),
             };
         }
     }
