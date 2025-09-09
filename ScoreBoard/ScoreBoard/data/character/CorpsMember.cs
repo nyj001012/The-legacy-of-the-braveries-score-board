@@ -27,22 +27,11 @@ namespace ScoreBoard.data.character
         public Dictionary<ushort, bool> RequiredDiceValues { get; set; } = []; // 멤버가 행동하기 위해 필요한 주사위 값이 키, 치명타 여부가 값
         public List<Minion> Minions { get; set; } = []; // 멤버가 소환한 소환수 정보 배열
 
-        [JsonIgnore]
         public string Note { get; set; } = String.Empty; // 특이사항
-
-        [JsonIgnore]
         public int WeatherMovementModifier { get; set; } = 0; // 날씨로 인한 이동속도 보정치
-        
-        [JsonIgnore]
         public int WeatherRangeModifier { get; set; } = 0; // 날씨로 인한 공격 사거리 보정치
-        
-        [JsonIgnore]
         public int WeatherDiceModifier { get; set; } = 0; // 날씨로 인한 주사위 개수 보정치. Slice에 활용
-
-        [JsonIgnore]
         public double SEAttackValueModifier { get; set; } = 1; // 상태이상 공격력 보정치. 곱연산 활용
-
-        [JsonIgnore]
         public int ArtifactSpellPowerMultiplier { get; set; } = 1; // 유물에 의한 곱연산 보정치
 
         public CorpsMember()

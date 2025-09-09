@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data.minion
 {
-    internal class Minion
+    public class Minion
     {
         public string Id { get; set; } = string.Empty; // 소환수 ID: [캐릭터 ID]_[번호]_이름
         public string Name { get; set; } = string.Empty; // 소환수 이름 (예: 햄부기 전차)
