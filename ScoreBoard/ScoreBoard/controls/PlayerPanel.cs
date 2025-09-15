@@ -23,6 +23,10 @@ namespace ScoreBoard.controls
         {
             InitializeComponent();
 
+            // ---- AutoSize 체인 설정 (스크롤 없이 키우기) ----
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
             this.hbPlayer.Name = $"hb{player.Id}";
 
             base.LblName = this.lblName;
@@ -31,6 +35,8 @@ namespace ScoreBoard.controls
             base.FpnStatus = this.fpnStatus;
             base.FpnArtifact = this.fpnArtifact;
             base.HbPlayer = this.hbPlayer;
+            base.PnInfo = this.pnInfo;
+            base.PnPlayer = this.pnPlayer;
 
             _player = player;
             _order = order;
