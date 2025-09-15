@@ -298,7 +298,11 @@ namespace ScoreBoard.content
             Minion minion = player.Minions.FirstOrDefault(m => m.Id == mId)!;
             if (minion.IsSummonable)
             {
-                // TODO => 소환수 소환 로직 구현 필요
+                // 소환하면 이미 소환중이므로 소환 불가로 변경
+                minion.IsSummonable = false;
+
+                // playerList에 변경 사항 반영
+                InitPlayerList();
             }
         }
 
