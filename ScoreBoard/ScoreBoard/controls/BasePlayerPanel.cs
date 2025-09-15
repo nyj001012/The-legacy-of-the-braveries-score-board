@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data.artifact;
+﻿using ScoreBoard.content;
+using ScoreBoard.data.artifact;
 using ScoreBoard.data.character;
 using ScoreBoard.data.minion;
 using ScoreBoard.data.stat;
@@ -74,6 +75,11 @@ namespace ScoreBoard.controls
             PnInfo.Location = new Point(LblOrder.Width, 0); // 왼쪽 라벨 옆에 고정 배치
         }
 
+        /*
+         * RegisterClickRecursive(Control control)
+         * - 지정한 컨트롤과 자식 컨트롤에 클릭 이벤트 핸들러 등록
+         * - 단, Tag가 "minion"인 컨트롤은 제외 (미니언 클릭 이벤트 방지)
+         */
         private void RegisterClickRecursive(Control control)
         {
             foreach (Control c in control.Controls)
@@ -85,6 +91,20 @@ namespace ScoreBoard.controls
 
                 if (c.HasChildren)
                     RegisterClickRecursive(c);
+            }
+        }
+
+        /*
+         * RegisterClickRecursive(Control root, EventHandler handler)
+         * - 지정한 컨트롤과 자식 컨트롤에 클릭 이벤트 핸들러 등록
+         */
+        private void RegisterClickRecursive(Control root, EventHandler handler)
+        {
+            foreach (Control c in root.Controls)
+            {
+                c.Click -= handler; // 중복 방지
+                c.Click += handler;
+                if (c.HasChildren) RegisterClickRecursive(c, handler);
             }
         }
 
@@ -294,6 +314,11 @@ namespace ScoreBoard.controls
                 fpnMinion.Controls.Add(lblMinionName);
                 fpnMinion.Controls.Add(hbMinion);
                 PnInfo.Controls.Add(fpnMinion);
+
+                // 소환수 클릭 이벤트 할당
+                EventHandler minionClick = (s, e) => FindAncestor<ScoreBoardControl>(this)?.ShowMinion(m);
+                fpnMinion.Click += (s, e) => minionClick(s, e);
+                RegisterClickRecursive(fpnMinion, minionClick);
             }
         }
 
@@ -313,6 +338,17 @@ namespace ScoreBoard.controls
 
             // 부모가 FlowLayoutPanel 등일 경우, 레이아웃 갱신
             this.Parent?.PerformLayout();
+        }
+
+        /*
+         * FindAncestor<T>(Control start) where T : Control
+         * - 지정한 컨트롤의 조상 중 T 타입인 첫 번째 컨트롤을 반환
+         */
+        protected static T? FindAncestor<T>(Control start) where T : Control
+        {
+            for (Control? p = start.Parent; p != null; p = p.Parent)
+                if (p is T t) return t;
+            return null;
         }
     }
 }
