@@ -2,6 +2,7 @@
 using ScoreBoard.data;
 using ScoreBoard.data.artifact;
 using ScoreBoard.data.character;
+using ScoreBoard.data.minion;
 using ScoreBoard.data.monster;
 using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
@@ -247,7 +248,58 @@ namespace ScoreBoard.content
             ShowSpellPower(player);
             ShowWisdom(player);
             ShowArtifact(player);
+            ShowMinion(player);
             ShowNote(player);
+        }
+
+        /*
+         * ShowSummon(CorpsMember player)
+         * - 플레이어의 소환수를 표시하는 메서드
+         * - player: CorpsMember 객체
+         */
+        private void ShowMinion(CorpsMember player)
+        {
+            if (player.Minions.Count == 0)
+            {
+                pnMinion.Visible = false;
+                return;
+            }
+            fpnMinion.Controls.Clear();
+            // 소환수에 해당하는 PictureBox를 pnMinion에 추가
+            foreach (var minion in player.Minions)
+            {
+                PictureBox pb = new()
+                {
+                    Size = new Size(ICON_SIZE, ICON_SIZE),
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Margin = new Padding(0, 0, 5, 0),
+                };
+                Image? image = DataReader.GetMinionImage(minion.Id);
+                if (image == null)
+                {
+                    MessageBox.Show($"소환수 이미지가 없습니다: {minion.Id}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    continue;
+                }
+                pb.Image = image;
+                pb.Click += (s, e) => SummonMinion(player, minion.Id);
+                pb.Cursor = minion.IsSummonable ? Cursors.Hand : Cursors.No; // 소환 가능 여부에 따라 커서 변경
+                fpnMinion.Controls.Add(pb);
+            }
+        }
+
+        /*
+         * SummonMinion(CorpsMember player, string mId)
+         * - 소환수 아이콘 클릭 시 소환수를 소환하는 메서드
+         * - player: CorpsMember 객체
+         * - mId: 소환수 ID
+         */
+        private void SummonMinion(CorpsMember player, string mId)
+        {
+            Minion minion = player.Minions.FirstOrDefault(m => m.Id == mId)!;
+            if (minion.IsSummonable)
+            {
+                // TODO => 소환수 소환 로직 구현 필요
+            }
         }
 
         /*

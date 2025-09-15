@@ -121,6 +121,8 @@
             pbArmour = new PictureBox();
             pbAccessory1 = new PictureBox();
             pbAccessory2 = new PictureBox();
+            pnMinion = new ScoreBoard.controls.CustomFlowLayoutPanel();
+            transparentTextLabel7 = new ScoreBoard.controls.TransparentTextLabel();
             pnNote = new ScoreBoard.controls.DoubleBufferedPanel();
             rtbNote = new RichTextBox();
             transparentTextLabel3 = new ScoreBoard.controls.TransparentTextLabel();
@@ -133,6 +135,7 @@
             lblEnemy1Name = new ScoreBoard.controls.GradientLabel();
             enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             pbActionComplete = new PictureBox();
+            fpnMinion = new ScoreBoard.controls.CustomFlowLayoutPanel();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -179,6 +182,7 @@
             ((System.ComponentModel.ISupportInitialize)pbArmour).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory2).BeginInit();
+            pnMinion.SuspendLayout();
             pnNote.SuspendLayout();
             enemyContainer.SuspendLayout();
             enemyList.SuspendLayout();
@@ -206,9 +210,10 @@
             playerList.Controls.Add(pn3P);
             playerList.Controls.Add(pn4P);
             playerList.Location = new Point(0, 0);
+            playerList.Margin = new Padding(0);
             playerList.Name = "playerList";
             playerList.Padding = new Padding(15, 35, 15, 35);
-            playerList.Size = new Size(600, 930);
+            playerList.Size = new Size(603, 930);
             playerList.TabIndex = 1;
             // 
             // pn1P
@@ -816,6 +821,7 @@
             detailViewport.Controls.Add(customFlowLayoutPanel3);
             detailViewport.Controls.Add(doubleBufferedPanel5);
             detailViewport.Controls.Add(fpnArtifact);
+            detailViewport.Controls.Add(pnMinion);
             detailViewport.Controls.Add(pnNote);
             detailViewport.FlowDirection = FlowDirection.TopDown;
             detailViewport.Location = new Point(0, 0);
@@ -1462,11 +1468,36 @@
             pbAccessory2.Tag = "";
             pbAccessory2.Click += pbAccessory2_Click;
             // 
+            // pnMinion
+            // 
+            pnMinion.BorderColor = Color.Transparent;
+            pnMinion.BorderThickness = 0;
+            pnMinion.Controls.Add(transparentTextLabel7);
+            pnMinion.Controls.Add(fpnMinion);
+            pnMinion.Location = new Point(60, 749);
+            pnMinion.Margin = new Padding(0, 15, 0, 0);
+            pnMinion.Name = "pnMinion";
+            pnMinion.Size = new Size(600, 45);
+            pnMinion.TabIndex = 13;
+            // 
+            // transparentTextLabel7
+            // 
+            transparentTextLabel7.AutoSize = true;
+            transparentTextLabel7.BackColor = Color.Transparent;
+            transparentTextLabel7.Font = new Font("Danjo-bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            transparentTextLabel7.ForeColor = Color.WhiteSmoke;
+            transparentTextLabel7.Location = new Point(0, 0);
+            transparentTextLabel7.Margin = new Padding(0);
+            transparentTextLabel7.Name = "transparentTextLabel7";
+            transparentTextLabel7.Size = new Size(99, 42);
+            transparentTextLabel7.TabIndex = 0;
+            transparentTextLabel7.Text = "소환:";
+            // 
             // pnNote
             // 
             pnNote.Controls.Add(rtbNote);
             pnNote.Controls.Add(transparentTextLabel3);
-            pnNote.Location = new Point(60, 749);
+            pnNote.Location = new Point(60, 809);
             pnNote.Margin = new Padding(0, 15, 0, 0);
             pnNote.Name = "pnNote";
             pnNote.Size = new Size(600, 45);
@@ -1685,6 +1716,17 @@
             pbActionComplete.TabStop = false;
             pbActionComplete.Click += pbActionComplete_Click;
             // 
+            // fpnMinion
+            // 
+            fpnMinion.BorderColor = Color.Transparent;
+            fpnMinion.BorderThickness = 0;
+            fpnMinion.Cursor = Cursors.Hand;
+            fpnMinion.Location = new Point(99, 0);
+            fpnMinion.Margin = new Padding(0);
+            fpnMinion.Name = "fpnMinion";
+            fpnMinion.Size = new Size(500, 45);
+            fpnMinion.TabIndex = 2;
+            // 
             // ScoreBoardControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1758,6 +1800,8 @@
             ((System.ComponentModel.ISupportInitialize)pbArmour).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbAccessory2).EndInit();
+            pnMinion.ResumeLayout(false);
+            pnMinion.PerformLayout();
             pnNote.ResumeLayout(false);
             pnNote.PerformLayout();
             enemyContainer.ResumeLayout(false);
@@ -1874,5 +1918,8 @@
         private controls.CustomFlowLayoutPanel fpnStatusEffect;
         private PictureBox pbLevel;
         private PictureBox pbAdditionalEnemy;
+        private controls.CustomFlowLayoutPanel pnMinion;
+        private controls.TransparentTextLabel transparentTextLabel7;
+        private controls.CustomFlowLayoutPanel fpnMinion;
     }
 }

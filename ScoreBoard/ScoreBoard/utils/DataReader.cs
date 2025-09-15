@@ -474,5 +474,18 @@ namespace ScoreBoard.utils
                 _ => throw new ArgumentException($"알 수 없는 소환수 ID: {mid}"),
             };
         }
+
+        internal static Image? GetMinionImage(string mid)
+        {
+            string imagePath = $@"Resources/image/minion/{mid}.png";
+            if (File.Exists(imagePath))
+            {
+                return Image.FromFile(imagePath);
+            }
+            else
+            {
+                throw new FileNotFoundException($"소환수 이미지 파일을 찾을 수 없습니다: {imagePath}");
+            }
+        }
     }
 }
