@@ -32,10 +32,11 @@ namespace ScoreBoard.content
         private readonly Dictionary<string, CorpsMember> _characters;
         private readonly List<Monster> _monsters;
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
-        private enum SHOWING_DATA_TYPE { Player = 0, Monster = 1 };
+        private enum SHOWING_DATA_TYPE { Player = 0, Monster = 1, Minion = 2 };
         private SHOWING_DATA_TYPE _showingDataType = default;
         private CorpsMember currentShowingPlayer; // 현재 표시 중인 플레이어
         private Monster currentShowingMonster; // 현재 표시 중인 몬스터와 보고 여부
+        private Minion? currentShowingMinion; // 현재 표시 중인 소환수
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
         private int actionCount = 0; // 현재 행동 횟수, 초기값은 1로 설정
@@ -173,14 +174,13 @@ namespace ScoreBoard.content
             int index = 0;
             foreach (var character in _characters.Values)
             {
-                UserControl panel = (index == actionCount % 4)
+                BasePlayerPanel panel = (index == actionCount % 4)
                     ? new CurrentPlayerPanel(character, index + 1)
                     : new PlayerPanel(character, index + 1);
 
                 panel.Name = $"pn{character.Id}";
                 panel.Click += (s, e) => ShowDetail(character);
                 panel.Tag = index; // 패널에 인덱스 저장
-
                 playerList.Controls.Add(panel);
                 index++;
             }
@@ -1701,6 +1701,11 @@ namespace ScoreBoard.content
                 }
                 InitEnemyList();
             }
+        }
+
+        public void ShowMinion(Minion minion)
+        {
+            currentShowingMinion = minion;
         }
     }
 }

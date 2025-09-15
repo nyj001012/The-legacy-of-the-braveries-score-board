@@ -78,7 +78,11 @@ namespace ScoreBoard.controls
         {
             foreach (Control c in control.Controls)
             {
+                if (c.Tag as string == "minion") continue; // 미니언은 클릭 이벤트 제외
+
+                c.Click -= (s, e) => this.OnClick(e); // 중복 등록 방지
                 c.Click += (s, e) => this.OnClick(e);
+
                 if (c.HasChildren)
                     RegisterClickRecursive(c);
             }
@@ -267,6 +271,7 @@ namespace ScoreBoard.controls
                     AutoSize = true,
                     Margin = new Padding(0, 15, 0, 0),
                     FlowDirection = FlowDirection.TopDown,
+                    Tag = "minion",
                 };
                 TransparentTextLabel lblMinionName = new()
                 {
@@ -274,6 +279,7 @@ namespace ScoreBoard.controls
                     Font = new Font("Danjo-bold", (int)(LblName.Font.Size * 0.8)),
                     ForeColor = Color.WhiteSmoke,
                     AutoSize = true,
+                    Tag = "minion"
                 };
                 HealthBar hbMinion = new()
                 {
@@ -283,6 +289,7 @@ namespace ScoreBoard.controls
                     Margin = new Padding(0, 15, 0, 0),
                     BackColor = Color.Transparent,
                     Font = new Font("Danjo-bold", (int)(HbPlayer.Font.Size * 0.8)),
+                    Tag = "minion"
                 };
                 fpnMinion.Controls.Add(lblMinionName);
                 fpnMinion.Controls.Add(hbMinion);
