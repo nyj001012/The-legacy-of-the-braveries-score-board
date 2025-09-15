@@ -30,7 +30,7 @@
         {
             pnPlayer = new DoubleBufferedPanel();
             lblOrder = new GradientLabel();
-            pn1PInfo = new DoubleBufferedPanel();
+            pn1PInfo = new CustomFlowLayoutPanel();
             customFlowLayoutPanel1 = new CustomFlowLayoutPanel();
             lblName = new GradientLabel();
             pbLv = new PictureBox();
@@ -53,7 +53,7 @@
             pnPlayer.Location = new Point(0, 0);
             pnPlayer.Margin = new Padding(15, 25, 15, 25);
             pnPlayer.Name = "pnPlayer";
-            pnPlayer.Size = new Size(555, 183);
+            pnPlayer.Size = new Size(555, 199);
             pnPlayer.TabIndex = 1;
             pnPlayer.Tag = "1";
             // 
@@ -67,7 +67,7 @@
             lblOrder.Location = new Point(0, 0);
             lblOrder.Margin = new Padding(0);
             lblOrder.Name = "lblOrder";
-            lblOrder.Size = new Size(88, 183);
+            lblOrder.Size = new Size(88, 199);
             lblOrder.TabIndex = 0;
             lblOrder.Text = "1P";
             lblOrder.TextAlign = ContentAlignment.MiddleCenter;
@@ -75,13 +75,16 @@
             // pn1PInfo
             // 
             pn1PInfo.AutoSize = true;
+            pn1PInfo.BorderColor = Color.Transparent;
+            pn1PInfo.BorderThickness = 0;
             pn1PInfo.Controls.Add(customFlowLayoutPanel1);
-            pn1PInfo.Controls.Add(hbPlayer);
             pn1PInfo.Controls.Add(fpnPlayer);
+            pn1PInfo.Controls.Add(hbPlayer);
+            pn1PInfo.FlowDirection = FlowDirection.TopDown;
             pn1PInfo.Location = new Point(89, 0);
             pn1PInfo.Margin = new Padding(0);
             pn1PInfo.Name = "pn1PInfo";
-            pn1PInfo.Size = new Size(467, 182);
+            pn1PInfo.Size = new Size(467, 199);
             pn1PInfo.TabIndex = 1;
             // 
             // customFlowLayoutPanel1
@@ -131,7 +134,7 @@
             hbPlayer.Font = new Font("Danjo-bold", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             hbPlayer.Health = 70;
             hbPlayer.HealthColor = Color.FromArgb(119, 185, 69);
-            hbPlayer.Location = new Point(1, 135);
+            hbPlayer.Location = new Point(0, 150);
             hbPlayer.Margin = new Padding(0, 15, 0, 15);
             hbPlayer.MaxValue = 100;
             hbPlayer.Name = "hbPlayer";
@@ -149,7 +152,7 @@
             fpnPlayer.BorderThickness = 0;
             fpnPlayer.Controls.Add(fpnStatus);
             fpnPlayer.Controls.Add(fpnArtifact);
-            fpnPlayer.Location = new Point(1, 68);
+            fpnPlayer.Location = new Point(0, 83);
             fpnPlayer.Margin = new Padding(0, 15, 0, 0);
             fpnPlayer.Name = "fpnPlayer";
             fpnPlayer.Size = new Size(466, 52);
@@ -185,7 +188,7 @@
             Controls.Add(pnPlayer);
             Margin = new Padding(15, 25, 15, 25);
             Name = "CurrentPlayerPanel";
-            Size = new Size(555, 183);
+            Size = new Size(555, 199);
             pnPlayer.ResumeLayout(false);
             pnPlayer.PerformLayout();
             pn1PInfo.ResumeLayout(false);
@@ -202,7 +205,7 @@
         private CustomFlowLayoutPanel fpnPlayer;
         private CustomFlowLayoutPanel fpnStatus;
         private CustomFlowLayoutPanel fpnArtifact;
-        private DoubleBufferedPanel pn1PInfo;
+        private CustomFlowLayoutPanel pn1PInfo;
         private HealthBar hbPlayer;
         private PictureBox pbLv;
         private GradientLabel lblName;
