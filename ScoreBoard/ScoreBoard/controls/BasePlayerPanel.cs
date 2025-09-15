@@ -26,25 +26,10 @@ namespace ScoreBoard.controls
         {
             this.Cursor = Cursors.Hand;
 
-            PnPlayer.Dock = DockStyle.None;                     // ← Dock.Left 끊기
-            PnPlayer.AutoSize = true;
-            PnPlayer.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            PnPlayer.Location = new Point(0, 0);
+            // AutoSize 체인 설정 (스크롤 없이 키우기)
+            SetAutoSize();
 
-            // 왼쪽 번호 라벨(1P~4P): 고정 폭, 자동 높이 동기화 대상
-            LblOrder.Dock = DockStyle.None;
-            LblOrder.AutoSize = false;
-            LblOrder.Width = 88;                                // 네가 쓰던 폭
-            LblOrder.Location = new Point(0, 0);
-
-            // 오른쪽 정보 패널(pnInfo): 세로로만 쌓이고, AutoSize로 높이 계산
-            PnInfo.AutoSize = true;
-            PnInfo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            PnInfo.WrapContents = false;
-            PnInfo.AutoScroll = false;
-            PnInfo.Margin = new Padding(0);
-            PnInfo.Location = new Point(LblOrder.Width, 0);     // ← 왼쪽 라벨 옆에 고정 배치
-
+            // 플레이어 정보 초기화
             LblName.Text = player.Name;
             LblName.AutoSize = true;
             LblOrder.Text = $"{order}P";
@@ -54,9 +39,39 @@ namespace ScoreBoard.controls
             InitSummon(player.Minions);
             HbPlayer.SetValues(player.Stat.Hp, player.Stat.Shield, player.Stat.MaxHp);
 
+            // 클릭 이벤트를 패널 전체에 걸치도록 설정
             RegisterClickRecursive(this);
+
             // pnInfo 높이가 바뀔 때 전체 높이 동기화
             PnInfo.SizeChanged += (_, __) => SyncHeights();
+            PnInfo.PerformLayout(); // 강제 레이아웃 갱신
+            SyncHeights();
+        }
+
+        /*
+         * SetAutoSize()
+         * - AutoSize 체인 설정 (스크롤 없이 키우기)
+         */
+        private void SetAutoSize()
+        {
+            PnPlayer.Dock = DockStyle.None; // Dock.Left 끊기
+            PnPlayer.AutoSize = true;
+            PnPlayer.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PnPlayer.Location = new Point(0, 0);
+
+            // 왼쪽 번호 라벨(1P~4P): 고정 폭, 자동 높이 동기화 대상
+            LblOrder.Dock = DockStyle.None;
+            LblOrder.AutoSize = false;
+            LblOrder.Width = 88;
+            LblOrder.Location = new Point(0, 0);
+
+            // 오른쪽 정보 패널(pnInfo): 세로로만 쌓이고, AutoSize로 높이 계산
+            PnInfo.AutoSize = true;
+            PnInfo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PnInfo.WrapContents = false;
+            PnInfo.AutoScroll = false;
+            PnInfo.Margin = new Padding(0);
+            PnInfo.Location = new Point(LblOrder.Width, 0); // 왼쪽 라벨 옆에 고정 배치
         }
 
         private void RegisterClickRecursive(Control control)
