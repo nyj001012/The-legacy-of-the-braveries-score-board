@@ -1,5 +1,6 @@
 ﻿using ScoreBoard.data.artifact;
 using ScoreBoard.data.character;
+using ScoreBoard.data.minion;
 using ScoreBoard.data.stat;
 using ScoreBoard.data.statusEffect;
 using ScoreBoard.utils;
@@ -18,19 +19,44 @@ namespace ScoreBoard.controls
         protected CustomFlowLayoutPanel FpnStatus { get; set; } = null!;
         protected CustomFlowLayoutPanel FpnArtifact { get; set; } = null!;
         protected HealthBar HbPlayer { get; set; } = null!;
+        protected DoubleBufferedPanel PnPlayer { get; set; } = null!;
+        protected CustomFlowLayoutPanel PnInfo { get; set; } = null!;
 
         protected void InitBase(CorpsMember player, int order)
         {
             this.Cursor = Cursors.Hand;
+
+            PnPlayer.Dock = DockStyle.None;                     // ← Dock.Left 끊기
+            PnPlayer.AutoSize = true;
+            PnPlayer.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PnPlayer.Location = new Point(0, 0);
+
+            // 왼쪽 번호 라벨(1P~4P): 고정 폭, 자동 높이 동기화 대상
+            LblOrder.Dock = DockStyle.None;
+            LblOrder.AutoSize = false;
+            LblOrder.Width = 88;                                // 네가 쓰던 폭
+            LblOrder.Location = new Point(0, 0);
+
+            // 오른쪽 정보 패널(pnInfo): 세로로만 쌓이고, AutoSize로 높이 계산
+            PnInfo.AutoSize = true;
+            PnInfo.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PnInfo.WrapContents = false;
+            PnInfo.AutoScroll = false;
+            PnInfo.Margin = new Padding(0);
+            PnInfo.Location = new Point(LblOrder.Width, 0);     // ← 왼쪽 라벨 옆에 고정 배치
+
             LblName.Text = player.Name;
             LblName.AutoSize = true;
             LblOrder.Text = $"{order}P";
             InitLevel(player.Level);
             InitStatus(player.Stat);
             InitArtifact(player.ArtifactSlot, player.MaxArtifactSlot);
+            InitSummon(player.Minions);
             HbPlayer.SetValues(player.Stat.Hp, player.Stat.Shield, player.Stat.MaxHp);
 
             RegisterClickRecursive(this);
+            // pnInfo 높이가 바뀔 때 전체 높이 동기화
+            PnInfo.SizeChanged += (_, __) => SyncHeights();
         }
 
         private void RegisterClickRecursive(Control control)
@@ -140,7 +166,7 @@ namespace ScoreBoard.controls
                 InitialDelay = 0, // 툴팁 초기 지연 시간 (ms)
                 ReshowDelay = 0, // 툴팁 다시 표시 지연 시간 (ms)
             };
-            
+
             string caption = $"{EnumHelper.GetEnumName(effect.Type)}:" +
                              $"{(effect.IsInfinite ? "∞" : $"{effect.Duration}턴")}";
             toolTip.SetToolTip(pb, caption);
@@ -205,6 +231,66 @@ namespace ScoreBoard.controls
             };
 
             FpnArtifact.Controls.Add(pb);
+        }
+
+        /*
+         * InitSummon(List<Minion> minions)
+         * - 소환수 요약 정보를 pnInfo에 표시
+         * - minions: 소환수 리스트
+         */
+        protected void InitSummon(List<Minion> minions)
+        {
+            List<Minion> aliveMinions = minions.Where(m => m.Stat.Hp > 0).ToList();
+            if (aliveMinions.Count < 0)
+                return;
+
+            foreach (Minion m in aliveMinions)
+            {
+                CustomFlowLayoutPanel fpnMinion = new()
+                {
+                    Width = PnInfo.Width,
+                    AutoSize = true,
+                    Margin = new Padding(0, 15, 0, 0),
+                    FlowDirection = FlowDirection.TopDown,
+                };
+                TransparentTextLabel lblMinionName = new()
+                {
+                    Text = m.Name,
+                    Font = new Font("Danjo-bold", (int)(LblName.Font.Size * 0.8)),
+                    ForeColor = Color.WhiteSmoke,
+                    AutoSize = true,
+                };
+                HealthBar hbMinion = new()
+                {
+                    Name = $"hb{m.Id}",
+                    Width = (int)(HbPlayer.Width * 0.8),
+                    Height = (int)(HbPlayer.Height * 0.8),
+                    Margin = new Padding(0, 15, 0, 0),
+                    BackColor = Color.Transparent,
+                    Font = new Font("Danjo-bold", (int)(HbPlayer.Font.Size * 0.8)),
+                };
+                fpnMinion.Controls.Add(lblMinionName);
+                fpnMinion.Controls.Add(hbMinion);
+                PnInfo.Controls.Add(fpnMinion);
+            }
+        }
+
+        private void SyncHeights()
+        {
+            // pnInfo는 FlowLayoutPanel이라 PreferredSize가 정확함
+            var infoH = PnInfo.PreferredSize.Height;
+            var orderH = LblOrder.PreferredSize.Height; // GradientLabel이면 Height 써도 무방
+            var h = Math.Max(Math.Max(infoH, orderH), this.MinimumSize.Height);
+
+            if (LblOrder.Height != h) LblOrder.Height = h;
+            if (PnPlayer.Height != h) PnPlayer.Height = h;
+            if (this.Height != h) this.Height = h;
+
+            // 좌우 배치 유지
+            if (PnInfo.Left != LblOrder.Width) PnInfo.Left = LblOrder.Width;
+
+            // 부모가 FlowLayoutPanel 등일 경우, 레이아웃 갱신
+            this.Parent?.PerformLayout();
         }
     }
 }
