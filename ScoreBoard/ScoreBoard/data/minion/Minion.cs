@@ -57,7 +57,7 @@ namespace ScoreBoard.data.minion
             Validator.ValidateNull(statData.CombatStats, nameof(statData.CombatStats));
             Stat = new Stat
             {
-                Hp = statData.Hp,
+                Hp = 0, // 소환 시 체력을 MaxHp로 세팅
                 MaxHp = statData.Hp, // 시작 시, 현재 체력은 최대 체력
                 Movement = statData.Movement,
                 Wisdom = statData.Wisdom,
@@ -88,5 +88,18 @@ namespace ScoreBoard.data.minion
          * - 각 내용은 객체에서 구현
          */
         protected virtual void InitialiseActiveSkills(Minion data) { }
+
+        /*
+         * OnSummon()
+         * - 소환 시 호출되는 메서드
+         * - 소환 시 체력을 최대 체력으로 세팅하고, IsSummonable을 false로 변경
+         */
+        protected virtual void OnSummon()
+        {
+            // 소환 시 체력을 최대 체력으로 세팅
+            Stat.Hp = Stat.MaxHp;
+            // 소환이 이미 되어있기 때문에 IsSummonable을 false로 변경
+            IsSummonable = false;
+        }
     }
 }
