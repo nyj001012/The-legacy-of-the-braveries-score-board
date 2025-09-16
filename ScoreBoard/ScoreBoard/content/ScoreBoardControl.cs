@@ -724,7 +724,7 @@ namespace ScoreBoard.content
         {
             if (_showingDataType == SHOWING_DATA_TYPE.Player)
                 skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Level, currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
-            if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
                 skillDescriptionPanel = new SkillDescriptionPanel(0, currentShowingMinion!.Passives, currentShowingMinion.Actives);
             else
                 return;
