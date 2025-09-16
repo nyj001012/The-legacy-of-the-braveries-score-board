@@ -35,8 +35,8 @@ namespace ScoreBoard.controls
             LblName.AutoSize = true;
             LblOrder.Text = $"{order}P";
             InitLevel(player.Level);
-            InitStatus(player.Stat);
-            InitArtifact(player.ArtifactSlot, player.MaxArtifactSlot);
+            InitStatus(FpnStatus, player.Stat);
+            InitArtifact(FpnArtifact, player.ArtifactSlot, player.MaxArtifactSlot);
             InitSummon(player.Minions);
             HbPlayer.SetValues(player.Stat.Hp, player.Stat.Shield, player.Stat.MaxHp);
 
@@ -108,6 +108,11 @@ namespace ScoreBoard.controls
             }
         }
 
+        /*
+         * InitLevel(ushort level)
+         * - 레벨 아이콘 초기화 메서드
+         * - level: 캐릭터의 레벨 (0~3)
+         */
         protected void InitLevel(ushort level)
         {
             if (level < 0 || level > 3)
@@ -123,22 +128,28 @@ namespace ScoreBoard.controls
             };
         }
 
-        protected void InitStatus(Stat stat)
+        /*
+         * InitStatus(CustomFlowLayoutPanel panel, Stat stat)
+         * - 상태이상 패널 초기화 메서드
+         * - panel: 상태이상 아이콘을 표시할 패널
+         * - stat: 캐릭터의 Stat 객체
+         */
+        protected void InitStatus(CustomFlowLayoutPanel panel, Stat stat)
         {
-            FpnStatus.SuspendLayout();
-            FpnStatus.Controls.Clear();
+            panel.SuspendLayout();
+            panel.Controls.Clear();
 
             if (stat.StatusEffects.Count > 0)
             {
-                FpnStatus.Visible = true;
+                panel.Visible = true;
                 AddStatusEffectIcons(stat.StatusEffects);
             }
             else
             {
-                FpnStatus.Visible = false;
+                panel.Visible = false;
             }
 
-            FpnStatus.ResumeLayout();
+            panel.ResumeLayout();
         }
 
         /*
@@ -212,10 +223,16 @@ namespace ScoreBoard.controls
             FpnStatus.Controls.Add(pb);
         }
 
-        protected void InitArtifact(List<Artifact?> artifacts, ushort maxSlots)
+        /*
+         * InitArtifact(CustomFlowLayoutPanel panel, List<Artifact?> artifacts, ushort maxSlots)
+         * - 유물 패널 초기화 메서드
+         * - panel: 유물 아이콘을 표시할 패널
+         * - artifacts: 캐릭터의 유물 리스트
+         */
+        protected void InitArtifact(CustomFlowLayoutPanel panel, List<Artifact?> artifacts, ushort maxSlots)
         {
-            FpnArtifact.SuspendLayout();
-            FpnArtifact.Controls.Clear();
+            panel.SuspendLayout();
+            panel.Controls.Clear();
 
             for (int i = 0; i < maxSlots; i++)
             {
@@ -229,9 +246,15 @@ namespace ScoreBoard.controls
                 }
             }
 
-            FpnArtifact.ResumeLayout();
+            panel.ResumeLayout();
         }
 
+        /*
+         * SetArtifactImage(Artifact artifact, int i)
+         * - 유물 아이콘을 패널에 추가하는 메서드
+         * - artifact: 유물 객체
+         * - i: 유물 슬롯 인덱스 (0: 무기, 1: 방어구, 2~3: 액세서리)
+         */
         protected void SetArtifactImage(Artifact artifact, int i)
         {
             Image? artifactImage = DataReader.GetArtifactImage(artifact.Id);
@@ -250,6 +273,11 @@ namespace ScoreBoard.controls
             FpnArtifact.Controls.Add(pb);
         }
 
+        /*
+         * SetDefaultArtifactSlot(int index)
+         * - 유물 슬롯이 비어있을 때 기본 아이콘을 표시하는 메서드
+         * - index: 유물 슬롯 인덱스 (0: 무기, 1: 방어구, 2~3: 액세서리)
+         */
         protected void SetDefaultArtifactSlot(int index)
         {
             int size = FpnArtifact.Size.Height - 5;
@@ -285,33 +313,13 @@ namespace ScoreBoard.controls
 
             foreach (Minion m in aliveMinions)
             {
-                CustomFlowLayoutPanel fpnMinion = new()
-                {
-                    Width = PnInfo.Width,
-                    AutoSize = true,
-                    Margin = new Padding(0, 15, 0, 0),
-                    FlowDirection = FlowDirection.TopDown,
-                    Tag = "minion",
-                };
-                TransparentTextLabel lblMinionName = new()
-                {
-                    Text = m.Name,
-                    Font = new Font("Danjo-bold", (int)(LblName.Font.Size * 0.8)),
-                    ForeColor = Color.WhiteSmoke,
-                    AutoSize = true,
-                    Tag = "minion"
-                };
-                HealthBar hbMinion = new()
-                {
-                    Name = $"hb{m.Id}",
-                    Width = (int)(HbPlayer.Width * 0.8),
-                    Height = (int)(HbPlayer.Height * 0.8),
-                    Margin = new Padding(0, 15, 0, 0),
-                    BackColor = Color.Transparent,
-                    Font = new Font("Danjo-bold", (int)(HbPlayer.Font.Size * 0.8)),
-                    Tag = "minion"
-                };
+                CustomFlowLayoutPanel fpnMinion = CreateMinionPanel();
+                TransparentTextLabel lblMinionName = CreateMinionLabel(m.Name);
+                CustomFlowLayoutPanel fpnStatusInfo = CreateMinionStatusPanel(m.Stat, m.ArtifactSlot, m.MaxArtifactSlot);
+                HealthBar hbMinion = CreateMinionHealthBar(m.Id, m.Stat);
+
                 fpnMinion.Controls.Add(lblMinionName);
+                fpnMinion.Controls.Add(fpnStatusInfo);
                 fpnMinion.Controls.Add(hbMinion);
                 PnInfo.Controls.Add(fpnMinion);
 
@@ -320,6 +328,125 @@ namespace ScoreBoard.controls
                 fpnMinion.Click += (s, e) => minionClick(s, e);
                 RegisterClickRecursive(fpnMinion, minionClick);
             }
+        }
+
+        /*
+         * CreateMinionHealthBar(string minionId)
+         * - 소환수 체력바 생성 메서드
+         * - minionId: 소환수 ID
+         */
+        private CustomFlowLayoutPanel CreateMinionPanel()
+        {
+            return new()
+            {
+                Width = PnInfo.Width,
+                AutoSize = true,
+                Margin = new Padding(0, 15, 0, 0),
+                FlowDirection = FlowDirection.TopDown,
+                Tag = "minion",
+            };
+        }
+
+        /*
+         * CreateMinionLabel(string name)
+         * - 소환수 이름 라벨 생성 메서드
+         * - name: 소환수 이름
+         */
+        private TransparentTextLabel CreateMinionLabel(string name)
+        {
+            return new()
+            {
+                Text = name,
+                Font = new Font("Danjo-bold", (int)(LblName.Font.Size * 0.8)),
+                ForeColor = Color.WhiteSmoke,
+                AutoSize = true,
+                Tag = "minion"
+            };
+        }
+
+        /*
+         * CreateMinionStatusPanel(List<StatusEffect> statusEffects, List<Artifact?> artifacts, ushort maxSlots)
+         * - 소환수 상태이상 및 유물 패널 생성 메서드
+         * - statusEffects: 소환수의 상태이상 리스트
+         * - artifacts: 소환수의 유물 리스트
+         * - maxSlots: 소환수의 최대 유물 슬롯 수
+         */
+        private CustomFlowLayoutPanel CreateMinionStatusPanel(Stat stat, List<Artifact?> artifacts, ushort maxSlots)
+        {
+            CustomFlowLayoutPanel fpnStatusInfo = new()
+            {
+                Width = PnInfo.Width,
+                AutoSize = true,
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = false,
+                Tag = "minion",
+            };
+            fpnStatusInfo.Controls.Add(CreateMinionStatusEffect(stat));
+            fpnStatusInfo.Controls.Add(CreateMinionArtifactPanel(artifacts, maxSlots));
+            return fpnStatusInfo;
+        }
+
+        /*
+         * CreateMinionStatusEffect(List<StatusEffect> statusEffects)
+         * - 소환수 상태이상 패널 생성 메서드
+         * - statusEffects: 소환수의 상태이상 리스트
+         */
+        private CustomFlowLayoutPanel CreateMinionStatusEffect(Stat stat)
+        {
+            CustomFlowLayoutPanel fpnStatus = new()
+            {
+                AutoSize = true,
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = false,
+                Tag = "minion",
+            };
+
+            InitStatus(fpnStatus, stat);
+            return fpnStatus;
+        }
+
+        /*
+         * CreateMinionArtifactPanel(List<Artifact?> artifacts, ushort maxSlots)
+         * - 소환수 유물 패널 생성 메서드
+         * - artifacts: 소환수의 유물 리스트
+         * - maxSlots: 소환수의 최대 유물 슬롯 수
+         */
+        private CustomFlowLayoutPanel CreateMinionArtifactPanel(List<Artifact?> artifacts, ushort maxSlots)
+        {
+            CustomFlowLayoutPanel fpnArtifact = new()
+            {
+                AutoSize = true,
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = false,
+                Margin = new Padding(10, 0, 0, 0),
+                Tag = "minion",
+            };
+
+            InitArtifact(fpnArtifact, artifacts, maxSlots);
+            return fpnArtifact;
+        }
+
+        /*
+         * CreateMinionHealthBar(string minionId, Stat stat)
+         * - 소환수 체력바 생성 메서드
+         * - minionId: 소환수 ID
+         * - stat: 소환수의 Stat 객체
+         */
+        private HealthBar CreateMinionHealthBar(string name, Stat stat)
+        {
+            HealthBar hb = new()
+            {
+                Name = $"hb{name}",
+                Width = (int)(HbPlayer.Width * 0.8),
+                Height = (int)(HbPlayer.Height * 0.8),
+                Margin = new Padding(0, 15, 0, 0),
+                BackColor = Color.Transparent,
+                Font = new Font("Danjo-bold", (int)(HbPlayer.Font.Size * 0.8)),
+                Tag = "minion"
+            };
+            hb.SetValues(stat.Hp, stat.Shield, stat.MaxHp);
+
+            return hb;
         }
 
         private void SyncHeights()
