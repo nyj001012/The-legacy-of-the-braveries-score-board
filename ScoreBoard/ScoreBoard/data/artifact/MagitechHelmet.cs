@@ -12,7 +12,7 @@ namespace ScoreBoard.data.artifact
         public MagitechHelmet()
         {
         }
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase member)
         {
             // 주문력 400 증가
             if (member.Stat.SpellPower.HasValue)
@@ -23,7 +23,7 @@ namespace ScoreBoard.data.artifact
             // 이동 속도 +1
             member.Stat.Movement++;
         }
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase member)
         {
             // 주문력 400 감소
             if (member.Stat.SpellPower.HasValue)

@@ -13,27 +13,27 @@ namespace ScoreBoard.data.artifact
         {
         }
 
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase unit)
         {
             // 공격력 90 증가
-            if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
+            if (unit.Stat.CombatStats.TryGetValue("melee", out var melee))
             {
                 melee.Value += 90;
             }
-            if (member.Stat.CombatStats.TryGetValue("ranged", out var ranged))
+            if (unit.Stat.CombatStats.TryGetValue("ranged", out var ranged))
             {
                 ranged.Value += 90;
             }
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase unit)
         {
             // 공격력 20 감소
-            if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
+            if (unit.Stat.CombatStats.TryGetValue("melee", out var melee))
             {
                 melee.Value = (ushort)Math.Max(0, (int)melee.Value - 90);
             }
-            if (member.Stat.CombatStats.TryGetValue("ranged", out var ranged))
+            if (unit.Stat.CombatStats.TryGetValue("ranged", out var ranged))
             {
                 ranged.Value = (ushort)Math.Max(0, (int)ranged.Value - 90);
             }

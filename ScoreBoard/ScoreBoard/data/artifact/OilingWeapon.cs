@@ -12,7 +12,7 @@ namespace ScoreBoard.data.artifact
         public OilingWeapon()
         {
         }
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase member)
         {
             // 공속 +1
             if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
@@ -25,7 +25,7 @@ namespace ScoreBoard.data.artifact
             }
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase member)
         {
             // 공속 -1
             if (member.Stat.CombatStats.TryGetValue("melee", out var melee))

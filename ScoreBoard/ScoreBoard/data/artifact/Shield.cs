@@ -13,14 +13,14 @@ namespace ScoreBoard.data.artifact
         {
         }
 
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase member)
         {
             // 체력 +200
             member.Stat.Hp += 200;
             member.Stat.MaxHp += 200;
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase member)
         {
             // 체력 -200
             member.Stat.MaxHp = (ushort)(Math.Max(0, member.Stat.MaxHp - 200));

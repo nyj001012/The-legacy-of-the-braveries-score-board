@@ -13,7 +13,7 @@ namespace ScoreBoard.data.artifact
         {
         }
 
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase member)
         {
             // 체력 400 증가
             member.Stat.Hp += 400;
@@ -27,7 +27,7 @@ namespace ScoreBoard.data.artifact
                 skill.isOnCooldown = skill.Cooldown > 0;
             }
         }
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase member)
         {
             // 체력 400 감소
             member.Stat.Hp = (ushort)Math.Max(0, member.Stat.Hp - 400);

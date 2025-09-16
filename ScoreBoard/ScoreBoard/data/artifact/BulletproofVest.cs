@@ -13,18 +13,18 @@ namespace ScoreBoard.data.artifact
         {
         }
 
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase unit)
         {
             // 체력 500 증가
-            member.Stat.MaxHp += 500;
-            member.Stat.Hp += 500;
+            unit.Stat.MaxHp += 500;
+            unit.Stat.Hp += 500;
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase unit)
         {
             // 체력 500 감소
-            member.Stat.MaxHp = (ushort)Math.Max(0, member.Stat.MaxHp - 500);
-            member.Stat.Hp = (ushort)Math.Max(0, member.Stat.Hp - 500);
+            unit.Stat.MaxHp = (ushort)Math.Max(0, unit.Stat.MaxHp - 500);
+            unit.Stat.Hp = (ushort)Math.Max(0, unit.Stat.Hp - 500);
         }
     }
 }

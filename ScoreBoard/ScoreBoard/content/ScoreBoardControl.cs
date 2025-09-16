@@ -331,7 +331,7 @@ namespace ScoreBoard.content
          */
         private void ShowArtifact(CorpsMember player)
         {
-            InitializeArtifactSlots(player);
+            InitializeArtifactSlots(player.ArtifactSlot, player.MaxArtifactSlot);
 
             for (int i = 0; i < player.MaxArtifactSlot; i++)
             {
@@ -344,20 +344,21 @@ namespace ScoreBoard.content
         }
 
         /*
-         * InitializeArtifactSlots(CorpsMember player)
+         * InitializeArtifactSlots(List<Artifact> slot, ushort maxSlot)
          * - 유물 슬롯을 초기화하는 메서드
-         * - player: 유물을 가질 수 있는 플레이어
+         * - slot: 유물 슬롯 리스트
+         * - maxSlot: 최대 슬롯 수 (1~4)
          */
-        private void InitializeArtifactSlots(CorpsMember player)
+        private void InitializeArtifactSlots(List<Artifact?> slot, ushort maxSlot)
         {
             PictureBox[] slotPics = { pbHeadgear, pbArmour, pbAccessory1, pbAccessory2 };
             string[] resourceNames = { "EmptyHeadgearSlot", "EmptyArmourSlot", "EmptyAccessorySlot", "EmptyAccessorySlot" };
 
             for (int i = 0; i < slotPics.Length; i++)
             {
-                slotPics[i].Visible = (i < player.MaxArtifactSlot); // 4번째 슬롯은 조건부
+                slotPics[i].Visible = (i < maxSlot); // 4번째 슬롯은 조건부
                 slotPics[i].BackgroundImage = (Image)Resources.ResourceManager.GetObject(resourceNames[i])!;
-                if (player.ArtifactSlot.ElementAtOrDefault(i) == default)
+                if (slot.ElementAtOrDefault(i) == default)
                     slotPics[i].Tag = new ArtifactSlotInfo { ArtifactId = "", SlotIndex = i };
             }
         }
@@ -1399,12 +1400,16 @@ namespace ScoreBoard.content
             }
             else
             {
+
                 TryUnequipArtifact(info);
                 EquipNewArtifact(info, selectedArtifact);
                 UpdateArtifactTag(pb, selectedArtifact.Id, info.SlotIndex);
             }
 
-            ShowDetail(currentShowingPlayer);
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                ShowDetail(currentShowingPlayer);
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                ShowDetail(currentShowingMinion!);
             InitPlayerList();
         }
 
@@ -1415,7 +1420,9 @@ namespace ScoreBoard.content
          */
         private void TryUnequipArtifact(ArtifactSlotInfo info)
         {
-            if (!string.IsNullOrEmpty(info.ArtifactId))
+            if (string.IsNullOrEmpty(info.ArtifactId))
+                return;
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
             {
                 currentShowingPlayer!.ArtifactSlot[info.SlotIndex]?.Unequip(currentShowingPlayer);
                 currentShowingPlayer.ArtifactSlot[info.SlotIndex] = null;
@@ -1432,7 +1439,11 @@ namespace ScoreBoard.content
                     currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount = (ushort)Math.Max(0, rangedCount - 1); ;
                 }
             }
-
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+            {
+                currentShowingMinion!.ArtifactSlot[info.SlotIndex]?.Unequip(currentShowingMinion);
+                currentShowingMinion.ArtifactSlot[info.SlotIndex] = null;
+            }
         }
 
         /*
@@ -1809,7 +1820,7 @@ namespace ScoreBoard.content
             ShowAttackValue(minion);
             ShowSpellPower(minion);
             ShowWisdom(minion);
-            //ShowArtifact(player);
+            ShowArtifact(minion);
             //ShowNote(minion);
         }
 
@@ -1940,6 +1951,31 @@ namespace ScoreBoard.content
             bool hasWisdom = minion.Stat.Wisdom != null;
             fpnWisdom.Visible = hasWisdom;
             if (hasWisdom) lblWisdom.Text = minion.Stat.Wisdom!.Value.ToString();
+        }
+
+        /*
+         * ShowArtifact(Minion minion)
+         * - 미니언의 유물을 표시하는 메서드
+         * - minion: Minion 객체
+         */
+        private void ShowArtifact(Minion minion)
+        {
+            if (minion.ArtifactSlot.Count == 0)
+            {
+                fpnArtifact.Visible = false;
+                return;
+            }
+            fpnArtifact.Visible = true;
+            InitializeArtifactSlots(minion.ArtifactSlot, minion.MaxArtifactSlot);
+
+            for (int i = 0; i < minion.MaxArtifactSlot; i++)
+            {
+                var artifact = minion.ArtifactSlot.ElementAtOrDefault(i);
+                if (artifact != default)
+                {
+                    AssignArtifactToSlot(artifact, i);
+                }
+            }
         }
     }
 }

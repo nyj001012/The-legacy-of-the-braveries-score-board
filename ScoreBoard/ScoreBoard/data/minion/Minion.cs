@@ -11,23 +11,11 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data.minion
 {
-    public class Minion
+    public class Minion : UnitBase
     {
-        public string Id { get; set; } = string.Empty; // 소환수 ID: [캐릭터 ID]_[번호]_이름
-        public string Name { get; set; } = string.Empty; // 소환수 이름 (예: 햄부기 전차)
-        public Stat Stat { get; set; } = new(); // 소환수의 능력치 정보
-        public List<PassiveSkill> Passives { get; set; } = []; // 소환수의 패시브 스킬 정보
-        public List<ActiveSkill> Actives { get; set; } = []; // 소환수의 능력치 정보
         public int SummonAvailableTurn { get; set; } = 0; // 소환 가능 턴 (예: 0턴 후 소환 가능)
         public int SummonEndTurn { get; set; } = -1; // 소환 종료 턴 (예: 3턴 후 소환 종료, -1이면 죽기 전까지 소환 유지)
         public bool IsSummonable { get; set; } = false; // 소환 가능 여부
-        public List<Artifact?> ArtifactSlot { get; set; } = []; // 유물 슬롯 정보 (예: 무기, 방어구 등)
-        public ushort MaxArtifactSlot { get; set; } = 0; // 최대 유물 슬롯 수 (예: 3개)
-        public int WeatherMovementModifier { get; set; } = 0; // 날씨로 인한 이동속도 보정치
-        public int WeatherRangeModifier { get; set; } = 0; // 날씨로 인한 공격 사거리 보정치
-        public int WeatherDiceModifier { get; set; } = 0; // 날씨로 인한 주사위 개수 보정치. Slice에 활용
-        public double SEAttackValueModifier { get; set; } = 1; // 상태이상 공격력 보정치. 곱연산 활용
-        public int ArtifactSpellPowerMultiplier { get; set; } = 1; // 유물에 의한 곱연산 보정치
 
 
         public void Initialise(string mid)
@@ -53,6 +41,7 @@ namespace ScoreBoard.data.minion
         {
             Id = Validator.ValidateNull(data.Id, nameof(data.Id));
             Name = Validator.ValidateNull(data.Name, nameof(data.Name));
+            MaxArtifactSlot = data.MaxArtifactSlot;
         }
 
         /*
