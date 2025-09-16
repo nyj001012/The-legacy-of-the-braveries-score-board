@@ -23,7 +23,12 @@ namespace ScoreBoard.data.minion
         public bool IsSummonable { get; set; } = false; // 소환 가능 여부
         public List<Artifact?> ArtifactSlot { get; set; } = []; // 유물 슬롯 정보 (예: 무기, 방어구 등)
         public ushort MaxArtifactSlot { get; set; } = 0; // 최대 유물 슬롯 수 (예: 3개)
-        
+        public int WeatherMovementModifier { get; set; } = 0; // 날씨로 인한 이동속도 보정치
+        public int WeatherRangeModifier { get; set; } = 0; // 날씨로 인한 공격 사거리 보정치
+        public int WeatherDiceModifier { get; set; } = 0; // 날씨로 인한 주사위 개수 보정치. Slice에 활용
+        public double SEAttackValueModifier { get; set; } = 1; // 상태이상 공격력 보정치. 곱연산 활용
+        public int ArtifactSpellPowerMultiplier { get; set; } = 1; // 유물에 의한 곱연산 보정치
+
 
         public void Initialise(string mid)
         {

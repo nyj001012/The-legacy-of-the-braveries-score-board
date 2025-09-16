@@ -1244,6 +1244,8 @@ namespace ScoreBoard.content
             List<StatusEffect> statusEffect;
             if (_showingDataType == SHOWING_DATA_TYPE.Player)
                 statusEffect = currentShowingPlayer.Stat.StatusEffects;
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                statusEffect = currentShowingMinion!.Stat.StatusEffects;
             else
                 statusEffect = currentShowingMonster.Stat.StatusEffects;
             var editModal = new StatusEffectEditModal(statusEffect)
@@ -1260,6 +1262,13 @@ namespace ScoreBoard.content
                     currentShowingPlayer.Stat.StatusEffects = editModal.NewStatusEffects;
                     UpdateStatusEffect(currentShowingPlayer);
                     ShowDetail(currentShowingPlayer);
+                    InitPlayerList(); // 상태 이상 패널 업데이트
+                }
+                else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                {
+                    currentShowingMinion!.Stat.StatusEffects = editModal.NewStatusEffects;
+                    UpdateStatusEffect(currentShowingMinion);
+                    ShowMinion(currentShowingMinion);
                     InitPlayerList(); // 상태 이상 패널 업데이트
                 }
                 else
@@ -1297,6 +1306,20 @@ namespace ScoreBoard.content
             foreach (var e in monster.Stat.StatusEffects)
             {
                 e.ApplyStatusEffect(monster);
+            }
+        }
+
+        /*
+         * UpdateStatusEffect(Minion minion)
+         * - 소환수의 상태 이상을 업데이트하는 메서드
+         * - minion: Minion 객체
+         */
+        private void UpdateStatusEffect(Minion minion)
+        {
+            minion.SEAttackValueModifier = 1.0; // 상태 이상에 의한 공격력 보정 초기화
+            foreach (var e in minion.Stat.StatusEffects)
+            {
+                e.ApplyStatusEffect(minion);
             }
         }
 
@@ -1762,7 +1785,7 @@ namespace ScoreBoard.content
         {
             ShowBasicInfo(minion);
             ShowHealth(minion);
-            //ShowStatusEffect(player);
+            ShowStatusEffect(minion);
             //ShowMovement(minion);
             //ShowAttackRange(minion);
             //ShowAttackValue(minion);
@@ -1785,6 +1808,11 @@ namespace ScoreBoard.content
             pbDice.Visible = false;
         }
 
+        /*
+         * ShowHealth(Minion minion)
+         * - 미니언의 체력을 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
         private void ShowHealth(Minion minion)
         {
             lblCurrentHealth.Text = minion.Stat.Hp.ToString();
@@ -1793,6 +1821,29 @@ namespace ScoreBoard.content
                 lblCurrentHealth.Text += $"(+{minion.Stat.Shield})";
             }
             lblMaxHealth.Text = $"{minion.Stat.MaxHp}";
+        }
+
+        /*
+         * ShowStatusEffect(Minion minion)
+         * - 미니언의 상태 이상을 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        private void ShowStatusEffect(Minion minion)
+        {
+            fpnStatusDetail.Visible = true;
+            fpnStatusEffect.Controls.Clear();
+            if (minion.Stat.StatusEffects.Count == 0)
+            {
+                fpnStatusEffect.Controls.Add(cachedStatusEffectDefault);
+                return;
+            }
+
+            foreach (var statusEffect in minion.Stat.StatusEffects)
+            {
+                var (pb, label) = CreateStatusEffectControl(statusEffect);
+                fpnStatusEffect.Controls.Add(pb);
+                fpnStatusEffect.Controls.Add(label);
+            }
         }
     }
 }
