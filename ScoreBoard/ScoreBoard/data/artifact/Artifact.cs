@@ -15,8 +15,8 @@ namespace ScoreBoard.data.artifact
         public ArtifactType Type { get; set; } = ArtifactType.Headgear;
         public ArtifactRarity Rarity { get; set; } = ArtifactRarity.Normal; // 유물의 희귀도 (Normal, Rare, Legendary)
 
-        public virtual void Equip(CorpsMember member) { }
-        public virtual void Unequip(CorpsMember member) { }
-        public virtual void TriggerEffectsOnActionEnd(CorpsMember member) { }
+        public virtual void Equip(UnitBase member) { }
+        public virtual void Unequip(UnitBase member) { }
+        public virtual void TriggerEffectsOnActionEnd(UnitBase member) { }
     }
 }

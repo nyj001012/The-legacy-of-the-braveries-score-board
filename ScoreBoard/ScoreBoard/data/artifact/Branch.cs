@@ -13,28 +13,28 @@ namespace ScoreBoard.data.artifact
         {
         }
 
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase unit)
         {
             // 주문력 50 증가
-            if (member.Stat.SpellPower.HasValue)
+            if (unit.Stat.SpellPower.HasValue)
             {
-                member.Stat.SpellPower = (ushort?)(member.Stat.SpellPower.Value + 50);
+                unit.Stat.SpellPower = (ushort?)(unit.Stat.SpellPower.Value + 50);
             }
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase unit)
         {
-            if (member.Stat.SpellPower.HasValue)
+            if (unit.Stat.SpellPower.HasValue)
             {
                 // 주문력 50 감소
-                member.Stat.SpellPower = (ushort?)(Math.Max(0, member.Stat.SpellPower.Value - 50));
+                unit.Stat.SpellPower = (ushort?)(Math.Max(0, unit.Stat.SpellPower.Value - 50));
             }
         }
 
-        public override void TriggerEffectsOnActionEnd(CorpsMember member)
+        public override void TriggerEffectsOnActionEnd(UnitBase unit)
         {
             // 체력 50 회복
-            member.Stat.Hp = (ushort)Math.Min(member.Stat.MaxHp, member.Stat.Hp + 50);
+            unit.Stat.Hp = (ushort)Math.Min(unit.Stat.MaxHp, unit.Stat.Hp + 50);
         }
     }
 }

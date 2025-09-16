@@ -114,7 +114,7 @@
             customFlowLayoutPanel3 = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel15 = new ScoreBoard.controls.TransparentTextLabel();
             pbSkill = new PictureBox();
-            doubleBufferedPanel5 = new ScoreBoard.controls.DoubleBufferedPanel();
+            pnArtifact = new ScoreBoard.controls.DoubleBufferedPanel();
             transparentTextLabel17 = new ScoreBoard.controls.TransparentTextLabel();
             fpnArtifact = new ScoreBoard.controls.CustomFlowLayoutPanel();
             pbHeadgear = new PictureBox();
@@ -123,6 +123,7 @@
             pbAccessory2 = new PictureBox();
             pnMinion = new ScoreBoard.controls.CustomFlowLayoutPanel();
             transparentTextLabel7 = new ScoreBoard.controls.TransparentTextLabel();
+            fpnMinion = new ScoreBoard.controls.CustomFlowLayoutPanel();
             pnNote = new ScoreBoard.controls.DoubleBufferedPanel();
             rtbNote = new RichTextBox();
             transparentTextLabel3 = new ScoreBoard.controls.TransparentTextLabel();
@@ -135,7 +136,6 @@
             lblEnemy1Name = new ScoreBoard.controls.GradientLabel();
             enemyScrollBar = new ReaLTaiizor.Controls.CyberScrollBar();
             pbActionComplete = new PictureBox();
-            fpnMinion = new ScoreBoard.controls.CustomFlowLayoutPanel();
             playerContainer.SuspendLayout();
             playerList.SuspendLayout();
             pn1P.SuspendLayout();
@@ -176,7 +176,7 @@
             fpnWisdom.SuspendLayout();
             customFlowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbSkill).BeginInit();
-            doubleBufferedPanel5.SuspendLayout();
+            pnArtifact.SuspendLayout();
             fpnArtifact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbHeadgear).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbArmour).BeginInit();
@@ -819,7 +819,7 @@
             detailViewport.Controls.Add(fpnSpellPower);
             detailViewport.Controls.Add(fpnWisdom);
             detailViewport.Controls.Add(customFlowLayoutPanel3);
-            detailViewport.Controls.Add(doubleBufferedPanel5);
+            detailViewport.Controls.Add(pnArtifact);
             detailViewport.Controls.Add(fpnArtifact);
             detailViewport.Controls.Add(pnMinion);
             detailViewport.Controls.Add(pnNote);
@@ -1380,14 +1380,14 @@
             pbSkill.TabStop = false;
             pbSkill.Click += pbSkill_Click;
             // 
-            // doubleBufferedPanel5
+            // pnArtifact
             // 
-            doubleBufferedPanel5.Controls.Add(transparentTextLabel17);
-            doubleBufferedPanel5.Location = new Point(60, 540);
-            doubleBufferedPanel5.Margin = new Padding(0, 15, 0, 0);
-            doubleBufferedPanel5.Name = "doubleBufferedPanel5";
-            doubleBufferedPanel5.Size = new Size(600, 45);
-            doubleBufferedPanel5.TabIndex = 11;
+            pnArtifact.Controls.Add(transparentTextLabel17);
+            pnArtifact.Location = new Point(60, 540);
+            pnArtifact.Margin = new Padding(0, 15, 0, 0);
+            pnArtifact.Name = "pnArtifact";
+            pnArtifact.Size = new Size(600, 45);
+            pnArtifact.TabIndex = 11;
             // 
             // transparentTextLabel17
             // 
@@ -1492,6 +1492,17 @@
             transparentTextLabel7.Size = new Size(99, 42);
             transparentTextLabel7.TabIndex = 0;
             transparentTextLabel7.Text = "소환:";
+            // 
+            // fpnMinion
+            // 
+            fpnMinion.BorderColor = Color.Transparent;
+            fpnMinion.BorderThickness = 0;
+            fpnMinion.Cursor = Cursors.Hand;
+            fpnMinion.Location = new Point(99, 0);
+            fpnMinion.Margin = new Padding(0);
+            fpnMinion.Name = "fpnMinion";
+            fpnMinion.Size = new Size(500, 45);
+            fpnMinion.TabIndex = 2;
             // 
             // pnNote
             // 
@@ -1716,17 +1727,6 @@
             pbActionComplete.TabStop = false;
             pbActionComplete.Click += pbActionComplete_Click;
             // 
-            // fpnMinion
-            // 
-            fpnMinion.BorderColor = Color.Transparent;
-            fpnMinion.BorderThickness = 0;
-            fpnMinion.Cursor = Cursors.Hand;
-            fpnMinion.Location = new Point(99, 0);
-            fpnMinion.Margin = new Padding(0);
-            fpnMinion.Name = "fpnMinion";
-            fpnMinion.Size = new Size(500, 45);
-            fpnMinion.TabIndex = 2;
-            // 
             // ScoreBoardControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1793,8 +1793,8 @@
             customFlowLayoutPanel3.ResumeLayout(false);
             customFlowLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbSkill).EndInit();
-            doubleBufferedPanel5.ResumeLayout(false);
-            doubleBufferedPanel5.PerformLayout();
+            pnArtifact.ResumeLayout(false);
+            pnArtifact.PerformLayout();
             fpnArtifact.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbHeadgear).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbArmour).EndInit();
@@ -1888,7 +1888,7 @@
         private controls.CustomFlowLayoutPanel customFlowLayoutPanel3;
         private controls.TransparentTextLabel transparentTextLabel15;
         private PictureBox pbSkill;
-        private controls.DoubleBufferedPanel doubleBufferedPanel5;
+        private controls.DoubleBufferedPanel pnArtifact;
         private controls.TransparentTextLabel transparentTextLabel17;
         private controls.CustomFlowLayoutPanel fpnArtifact;
         private PictureBox pbHeadgear;

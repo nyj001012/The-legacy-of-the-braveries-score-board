@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data.character;
+﻿using ScoreBoard.data.artifact;
+using ScoreBoard.data.character;
 using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.utils;
@@ -10,16 +11,12 @@ using System.Threading.Tasks;
 
 namespace ScoreBoard.data.minion
 {
-    public class Minion
+    public class Minion : UnitBase
     {
-        public string Id { get; set; } = string.Empty; // 소환수 ID: [캐릭터 ID]_[번호]_이름
-        public string Name { get; set; } = string.Empty; // 소환수 이름 (예: 햄부기 전차)
-        public Stat Stat { get; set; } = new(); // 소환수의 능력치 정보
-        public List<PassiveSkill> Passives { get; set; } = []; // 소환수의 패시브 스킬 정보
-        public List<ActiveSkill> Actives { get; set; } = []; // 소환수의 능력치 정보
         public int SummonAvailableTurn { get; set; } = 0; // 소환 가능 턴 (예: 0턴 후 소환 가능)
         public int SummonEndTurn { get; set; } = -1; // 소환 종료 턴 (예: 3턴 후 소환 종료, -1이면 죽기 전까지 소환 유지)
         public bool IsSummonable { get; set; } = false; // 소환 가능 여부
+
 
         public void Initialise(string mid)
         {
@@ -44,6 +41,7 @@ namespace ScoreBoard.data.minion
         {
             Id = Validator.ValidateNull(data.Id, nameof(data.Id));
             Name = Validator.ValidateNull(data.Name, nameof(data.Name));
+            MaxArtifactSlot = data.MaxArtifactSlot;
         }
 
         /*
@@ -57,7 +55,7 @@ namespace ScoreBoard.data.minion
             Validator.ValidateNull(statData.CombatStats, nameof(statData.CombatStats));
             Stat = new Stat
             {
-                Hp = statData.Hp,
+                Hp = 0, // 소환 시 체력을 MaxHp로 세팅
                 MaxHp = statData.Hp, // 시작 시, 현재 체력은 최대 체력
                 Movement = statData.Movement,
                 Wisdom = statData.Wisdom,
@@ -88,5 +86,18 @@ namespace ScoreBoard.data.minion
          * - 각 내용은 객체에서 구현
          */
         protected virtual void InitialiseActiveSkills(Minion data) { }
+
+        /*
+         * OnSummon()
+         * - 소환 시 호출되는 메서드
+         * - 소환 시 체력을 최대 체력으로 세팅하고, IsSummonable을 false로 변경
+         */
+        protected virtual void OnSummon()
+        {
+            // 소환 시 체력을 최대 체력으로 세팅
+            Stat.Hp = Stat.MaxHp;
+            // 소환이 이미 되어있기 때문에 IsSummonable을 false로 변경
+            IsSummonable = false;
+        }
     }
 }

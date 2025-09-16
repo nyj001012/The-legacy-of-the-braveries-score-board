@@ -12,11 +12,11 @@ namespace ScoreBoard.data.artifact
         public Absorber()
         {
         }
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase unit)
         {
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase unit)
         {
         }
     }

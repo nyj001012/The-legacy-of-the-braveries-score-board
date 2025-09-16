@@ -25,6 +25,7 @@
       ]
     }
   ],
+  "maxArtifactSlot": 0,
   "summonAvailableTurn": 0,
   "summonEndTurn": -1,
   "isSummonable": false

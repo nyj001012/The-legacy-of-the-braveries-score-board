@@ -1,4 +1,5 @@
 ﻿using ScoreBoard.data.character;
+using ScoreBoard.data.minion;
 using ScoreBoard.data.monster;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,33 @@ namespace ScoreBoard.data.weather
                     member.WeatherMovementModifier = 0;
                     member.WeatherRangeModifier = 0;
                     member.WeatherDiceModifier = 1;
+                    break;
+            }
+        }
+
+        public void ApplyWeatherEffect(Minion minion)
+        {
+            switch (Type)
+            {
+                case WeatherType.Clear:
+                    minion.WeatherMovementModifier = 0;
+                    minion.WeatherRangeModifier = 0;
+                    minion.WeatherDiceModifier = 0;
+                    break;
+                case WeatherType.Rain:
+                    minion.WeatherMovementModifier = -1;
+                    minion.WeatherRangeModifier = 0;
+                    minion.WeatherDiceModifier = 0;
+                    break;
+                case WeatherType.Snow:
+                    minion.WeatherMovementModifier = 0;
+                    minion.WeatherRangeModifier = -1;
+                    minion.WeatherDiceModifier = 0;
+                    break;
+                case WeatherType.Fog:
+                    minion.WeatherMovementModifier = 0;
+                    minion.WeatherRangeModifier = 0;
+                    minion.WeatherDiceModifier = 1;
                     break;
             }
         }

@@ -1,4 +1,5 @@
 ﻿using ScoreBoard.data.character;
+using ScoreBoard.data.minion;
 using ScoreBoard.data.monster;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,25 @@ namespace ScoreBoard.data.statusEffect
                     break;
                 default:
                     member.SEAttackValueModifier = 1; // 기본값은 1 (변경 없음)
+                    break;
+            }
+        }
+
+        /*
+         * ApplyStatusEffect(Minion minion)
+         * - 상태이상을 Minion 적용하는 메소드
+         * - 화면상 표시되는 수치에 영향을 주는 상태이상만 적용
+         * - minion: 상태이상을 적용할 Minion 객체
+         */
+        public void ApplyStatusEffect(Minion minion)
+        {
+            switch (Type)
+            {
+                case StatusEffectType.BrokenSword:
+                    minion.SEAttackValueModifier = 0.5; // 공격력 -50%. 곱연산 활용
+                    break;
+                default:
+                    minion.SEAttackValueModifier = 1; // 기본값은 1 (변경 없음)
                     break;
             }
         }

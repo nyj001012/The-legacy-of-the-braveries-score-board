@@ -32,10 +32,11 @@ namespace ScoreBoard.content
         private readonly Dictionary<string, CorpsMember> _characters;
         private readonly List<Monster> _monsters;
         private const int MarginInPanel = 10; // 오른쪽 여백 설정
-        private enum SHOWING_DATA_TYPE { Player = 0, Monster = 1 };
+        private enum SHOWING_DATA_TYPE { Player = 0, Monster = 1, Minion = 2 };
         private SHOWING_DATA_TYPE _showingDataType = default;
         private CorpsMember currentShowingPlayer; // 현재 표시 중인 플레이어
         private Monster currentShowingMonster; // 현재 표시 중인 몬스터와 보고 여부
+        private Minion? currentShowingMinion; // 현재 표시 중인 소환수
         private const int ICON_SIZE = 45; // 아이콘 크기 설정
         private int currentTurn = 1; // 현재 턴, 초기값은 1로 설정
         private int actionCount = 0; // 현재 행동 횟수, 초기값은 1로 설정
@@ -173,14 +174,13 @@ namespace ScoreBoard.content
             int index = 0;
             foreach (var character in _characters.Values)
             {
-                UserControl panel = (index == actionCount % 4)
+                BasePlayerPanel panel = (index == actionCount % 4)
                     ? new CurrentPlayerPanel(character, index + 1)
                     : new PlayerPanel(character, index + 1);
 
                 panel.Name = $"pn{character.Id}";
                 panel.Click += (s, e) => ShowDetail(character);
                 panel.Tag = index; // 패널에 인덱스 저장
-
                 playerList.Controls.Add(panel);
                 index++;
             }
@@ -298,7 +298,11 @@ namespace ScoreBoard.content
             Minion minion = player.Minions.FirstOrDefault(m => m.Id == mId)!;
             if (minion.IsSummonable)
             {
-                // TODO => 소환수 소환 로직 구현 필요
+                // 소환하면 이미 소환중이므로 소환 불가로 변경
+                minion.IsSummonable = false;
+
+                // playerList에 변경 사항 반영
+                InitPlayerList();
             }
         }
 
@@ -325,13 +329,19 @@ namespace ScoreBoard.content
          * - 플레이어의 유물을 표시하는 메서드
          * - player: CorpsMember 객체
          */
-        private void ShowArtifact(CorpsMember player)
+        private void ShowArtifact(UnitBase unit)
         {
-            InitializeArtifactSlots(player);
-
-            for (int i = 0; i < player.MaxArtifactSlot; i++)
+            if (unit.MaxArtifactSlot == 0)
             {
-                var artifact = player.ArtifactSlot.ElementAtOrDefault(i);
+                pnArtifact.Visible = fpnArtifact.Visible = false;
+                return;
+            }
+            pnArtifact.Visible = fpnArtifact.Visible = true;
+            InitializeArtifactSlots(unit.ArtifactSlot, unit.MaxArtifactSlot);
+
+            for (int i = 0; i < unit.MaxArtifactSlot; i++)
+            {
+                var artifact = unit.ArtifactSlot.ElementAtOrDefault(i);
                 if (artifact != default)
                 {
                     AssignArtifactToSlot(artifact, i);
@@ -340,20 +350,21 @@ namespace ScoreBoard.content
         }
 
         /*
-         * InitializeArtifactSlots(CorpsMember player)
+         * InitializeArtifactSlots(List<Artifact> slot, ushort maxSlot)
          * - 유물 슬롯을 초기화하는 메서드
-         * - player: 유물을 가질 수 있는 플레이어
+         * - slot: 유물 슬롯 리스트
+         * - maxSlot: 최대 슬롯 수 (1~4)
          */
-        private void InitializeArtifactSlots(CorpsMember player)
+        private void InitializeArtifactSlots(List<Artifact?> slot, ushort maxSlot)
         {
             PictureBox[] slotPics = { pbHeadgear, pbArmour, pbAccessory1, pbAccessory2 };
             string[] resourceNames = { "EmptyHeadgearSlot", "EmptyArmourSlot", "EmptyAccessorySlot", "EmptyAccessorySlot" };
 
             for (int i = 0; i < slotPics.Length; i++)
             {
-                slotPics[i].Visible = (i < player.MaxArtifactSlot); // 4번째 슬롯은 조건부
+                slotPics[i].Visible = (i < maxSlot); // 4번째 슬롯은 조건부
                 slotPics[i].BackgroundImage = (Image)Resources.ResourceManager.GetObject(resourceNames[i])!;
-                if (player.ArtifactSlot.ElementAtOrDefault(i) == default)
+                if (slot.ElementAtOrDefault(i) == default)
                     slotPics[i].Tag = new ArtifactSlotInfo { ArtifactId = "", SlotIndex = i };
             }
         }
@@ -409,109 +420,109 @@ namespace ScoreBoard.content
         }
 
         /*
-         * ShowNote(CoprsMember player)
+         * ShowNote(UnitBase unit)
          * - 플레이어의 특이사항을 보여주는 메서드
-         * - player: 특이사항을 보여줄 플레이어
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowNote(CorpsMember player)
+        private void ShowNote(UnitBase unit)
         {
-            rtbNote.Text = player.Note;
+            rtbNote.Text = unit.Note;
         }
 
         /*
-         * ShowWisdom(CorpsMember player)
+         * ShowWisdom(UnitBase unit)
          * - 플레이어의 지혜를 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowWisdom(CorpsMember player)
+        private void ShowWisdom(UnitBase unit)
         {
-            bool hasWisdom = player.Stat.Wisdom != null;
+            bool hasWisdom = unit.Stat.Wisdom != null;
             fpnWisdom.Visible = hasWisdom;
-            if (hasWisdom) lblWisdom.Text = player.Stat.Wisdom!.Value.ToString();
+            if (hasWisdom) lblWisdom.Text = unit.Stat.Wisdom!.Value.ToString();
         }
 
         /*
-         * ShowSpellPower(CorpsMember player)
+         * ShowSpellPower(UnitBase unit)
          * - 플레이어의 주문력을 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowSpellPower(CorpsMember player)
+        private void ShowSpellPower(UnitBase unit)
         {
-            bool hasSpellPower = player.Stat.SpellPower != null;
+            bool hasSpellPower = unit.Stat.SpellPower != null;
             fpnSpellPower.Visible = hasSpellPower;
-            if (hasSpellPower) lblSpellPower.Text = (player.Stat.SpellPower!.Value * player.ArtifactSpellPowerMultiplier).ToString();
+            if (hasSpellPower) lblSpellPower.Text = (unit.Stat.SpellPower!.Value * unit.ArtifactSpellPowerMultiplier).ToString();
         }
 
         /*
-         * ShowAttackValue(CorpsMember player)
+         * ShowAttackValue(UnitBase unit)
          * - 플레이어의 공격력, 공격 가능 횟수(속도)을 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowAttackValue(CorpsMember player)
+        private void ShowAttackValue(UnitBase unit)
         {
-            if (player.Stat.CombatStats.Count == 0)
+            if (unit.Stat.CombatStats.Count == 0)
             {
                 fpnAttackValue.Visible = false;
                 return;
             }
 
-            ChangeTextOfAttackValueLabels(player.Stat.CombatStats, player.SEAttackValueModifier);
+            ChangeTextOfAttackValueLabels(unit.Stat.CombatStats, unit.SEAttackValueModifier);
         }
 
         /*
-         * ShowAttackRange(CorpsMember player)
+         * ShowAttackRange(UnitBase unit)
          * - 플레이어의 공격 사거리를 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowAttackRange(CorpsMember player)
+        private void ShowAttackRange(UnitBase unit)
         {
             pbMelee.Visible = pbRanged.Visible = false;
             lblMeleeRange.Visible = lblRangedRange.Visible = false;
 
-            foreach (var (type, combatStat) in player.Stat.CombatStats)
+            foreach (var (type, combatStat) in unit.Stat.CombatStats)
             {
                 if (type == "melee")
                 {
                     pbMelee.Visible = lblMeleeRange.Visible = true;
-                    ushort range = (ushort)Math.Max(0, combatStat.Range + player.WeatherRangeModifier);
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + unit.WeatherRangeModifier);
                     lblMeleeRange.Text = range.ToString();
                 }
                 else
                 {
                     pbRanged.Visible = lblRangedRange.Visible = true;
-                    ushort range = (ushort)Math.Max(0, combatStat.Range + player.WeatherRangeModifier);
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + unit.WeatherRangeModifier);
                     lblRangedRange.Text = range.ToString();
                 }
             }
         }
 
         /*
-         * ShowMovement(CorpsMember player)
+         * ShowMovement(UnitBase unit)
          * - 플레이어의 이동 속도를 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowMovement(CorpsMember player)
+        private void ShowMovement(UnitBase unit)
         {
-            ushort movement = (ushort)Math.Max(0, player.Stat.Movement + player.WeatherMovementModifier);
+            ushort movement = (ushort)Math.Max(0, unit.Stat.Movement + unit.WeatherMovementModifier);
             lblMovement.Text = movement.ToString();
         }
 
         /*
-         * ShowStatusEffect(CorpsMember player)
-         * - 플레이어의 상태 이상을 표시하는 메서드
-         * - player: CorpsMember 객체
+         * ShowStatusEffect(UnitBase unit)
+         * - 플레이어, 미니언의 상태 이상을 표시하는 메서드
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowStatusEffect(CorpsMember player)
+        private void ShowStatusEffect(UnitBase unit)
         {
             fpnStatusDetail.Visible = true;
             fpnStatusEffect.Controls.Clear();
-            if (player.Stat.StatusEffects.Count == 0)
+            if (unit.Stat.StatusEffects.Count == 0)
             {
                 fpnStatusEffect.Controls.Add(cachedStatusEffectDefault);
                 return;
             }
 
-            foreach (var statusEffect in player.Stat.StatusEffects)
+            foreach (var statusEffect in unit.Stat.StatusEffects)
             {
                 var (pb, label) = CreateStatusEffectControl(statusEffect);
                 fpnStatusEffect.Controls.Add(pb);
@@ -520,18 +531,18 @@ namespace ScoreBoard.content
         }
 
         /*
-         * ShowHealth(CorpsMember player)
+         * ShowHealth(UnitBase unit)
          * - 플레이어의 체력을 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowHealth(CorpsMember player)
+        private void ShowHealth(UnitBase unit)
         {
-            lblCurrentHealth.Text = player.Stat.Hp.ToString();
-            if (player.Stat.Shield > 0)
+            lblCurrentHealth.Text = unit.Stat.Hp.ToString();
+            if (unit.Stat.Shield > 0)
             {
-                lblCurrentHealth.Text += $"(+{player.Stat.Shield})";
+                lblCurrentHealth.Text += $"(+{unit.Stat.Shield})";
             }
-            lblMaxHealth.Text = $"{player.Stat.MaxHp}";
+            lblMaxHealth.Text = $"{unit.Stat.MaxHp}";
         }
 
         /*
@@ -543,6 +554,7 @@ namespace ScoreBoard.content
         {
             lblName.Text = player.Name;
             pbLevel.Visible = true;
+            pbDice.Visible = true;
             pbAdditionalEnemy.Visible = false;
 
             pbLevel.BackgroundImage = player.Level switch
@@ -553,7 +565,6 @@ namespace ScoreBoard.content
                 3 => Properties.Resources.Lv3,
                 _ => throw new NotImplementedException($"{player.Level}은(는) 유효한 레벨이 아닙니다."),
             };
-
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (player.RequiredDiceValues.Count > 0)
             {
@@ -711,7 +722,12 @@ namespace ScoreBoard.content
          */
         private void DisplaySkillDescription()
         {
-            skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Level, currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Level, currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
+            if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                skillDescriptionPanel = new SkillDescriptionPanel(0, currentShowingMinion!.Passives, currentShowingMinion.Actives);
+            else
+                return;
             int insertIndex = detailViewport.Controls.GetChildIndex(customFlowLayoutPanel3) + 1;
             detailViewport.Controls.Add(skillDescriptionPanel);
             detailViewport.Controls.SetChildIndex(skillDescriptionPanel, insertIndex);
@@ -865,7 +881,9 @@ namespace ScoreBoard.content
         {
             fpnBasicStatus.Visible = true;
             lblName.Text = monster.Name;
+            pbDice.Visible = isReported;
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
+
             if (isReported && monster.RequiredDiceValues.Count > 0)
             {
                 int i = 0;
@@ -999,21 +1017,39 @@ namespace ScoreBoard.content
                 return;
             }
 
-            var statOwner = _showingDataType == SHOWING_DATA_TYPE.Player
-                ? (object)currentShowingPlayer
-                : (object)currentShowingMonster;
+            var statOwner = _showingDataType switch
+            {
+                SHOWING_DATA_TYPE.Player => currentShowingPlayer as object,
+                SHOWING_DATA_TYPE.Monster => currentShowingMonster as object,
+                SHOWING_DATA_TYPE.Minion => currentShowingMinion as object,
+                _ => null
+            };
 
+            if (statOwner == null)
+            {
+                MessageBox.Show("스탯을 설정할 수 없습니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 레이블 이름에 따라 해당 스탯을 설정하는 액션 딕셔너리 생성
             var setterMap = CreateStatSetters(statOwner);
 
             if (setterMap.TryGetValue(label.Name, out var action))
             {
                 action(value);
-                label.Text = label.Name.Contains("AttackCount") ? $"{{{value}}}" : value.ToString();
-                if (label.Name.Contains("SpellPower") && statOwner is CorpsMember)
-                    label.Text = $"{value * currentShowingPlayer.ArtifactSpellPowerMultiplier}";
                 // 체력 수정 시, 체력바 생김새도 수정
                 if (label.Name == "lblMaxHealth")
                     UpdateHealthBar();
+                else
+                {
+                    // ShowDetail 다시 호출하여 UI 업데이트
+                    if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                        ShowDetail(currentShowingPlayer!);
+                    else if (_showingDataType == SHOWING_DATA_TYPE.Monster)
+                        ShowDetail(currentShowingMonster!.IsReported, currentShowingMonster!);
+                    else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                        ShowDetail(currentShowingMinion!);
+                }
             }
             else
             {
@@ -1035,6 +1071,8 @@ namespace ScoreBoard.content
                 stat = c.Stat;
             else if (target is Monster m)
                 stat = m.Stat;
+            else if (target is Minion min)
+                stat = min.Stat;
             else
                 throw new ArgumentException("Unsupported stat owner type", nameof(target));
 
@@ -1079,7 +1117,7 @@ namespace ScoreBoard.content
                     currentShowingPlayer!.Stat.Hp = (ushort)hp;
                     currentShowingPlayer.Stat.Shield = shield ?? 0;
                 }
-                else
+                else if (_showingDataType == SHOWING_DATA_TYPE.Monster)
                 {
                     if (hp == 0 && shield == null)
                     {
@@ -1089,7 +1127,11 @@ namespace ScoreBoard.content
                     else
                         hp = UpdateMonsterHp((ushort)hp, shield);
                 }
-
+                else
+                {
+                    currentShowingMinion!.Stat.Hp = (ushort)hp;
+                    currentShowingMinion.Stat.Shield = shield ?? 0;
+                }
                 lblCurrentHealth.Text = $"{hp}{(shield.HasValue ? $"(+{shield})" : "")}";
                 UpdateHealthBar();
             }
@@ -1129,7 +1171,7 @@ namespace ScoreBoard.content
 
         /*
          * UpdateHealthBar()
-         * - 현재 디테일 뷰포트에 표시된 플레이어 또는 몬스터의 체력 바를 업데이트하는 메서드
+         * - 현재 디테일 뷰포트에 표시된 플레이어 또는 몬스터, 소환수의 체력 바를 업데이트하는 메서드
          */
         private void UpdateHealthBar()
         {
@@ -1146,7 +1188,7 @@ namespace ScoreBoard.content
                                     currentShowingPlayer.Stat.MaxHp);
                 playerList.ResumeLayout();
             }
-            else
+            else if (_showingDataType == SHOWING_DATA_TYPE.Monster)
             {
                 var healthBar = this.Controls.Find($"hb{currentShowingMonster!.Id}", true).FirstOrDefault() as HealthBar;
                 enemyList.SuspendLayout();
@@ -1155,6 +1197,16 @@ namespace ScoreBoard.content
                                     currentShowingMonster.Stat.Shield,
                                     currentShowingMonster.Stat.MaxHp);
                 enemyList.ResumeLayout();
+            }
+            else
+            {
+                var healthBar = this.Controls.Find($"hb{currentShowingMinion!.Id}", true).FirstOrDefault() as HealthBar;
+                playerList.SuspendLayout();
+                // HealthBar 컨트롤을 찾아서 업데이트
+                healthBar?.SetValues(currentShowingMinion.Stat.Hp,
+                                    currentShowingMinion.Stat.Shield,
+                                    currentShowingMinion.Stat.MaxHp);
+                playerList.ResumeLayout();
             }
         }
 
@@ -1206,6 +1258,8 @@ namespace ScoreBoard.content
             List<StatusEffect> statusEffect;
             if (_showingDataType == SHOWING_DATA_TYPE.Player)
                 statusEffect = currentShowingPlayer.Stat.StatusEffects;
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                statusEffect = currentShowingMinion!.Stat.StatusEffects;
             else
                 statusEffect = currentShowingMonster.Stat.StatusEffects;
             var editModal = new StatusEffectEditModal(statusEffect)
@@ -1222,6 +1276,13 @@ namespace ScoreBoard.content
                     currentShowingPlayer.Stat.StatusEffects = editModal.NewStatusEffects;
                     UpdateStatusEffect(currentShowingPlayer);
                     ShowDetail(currentShowingPlayer);
+                    InitPlayerList(); // 상태 이상 패널 업데이트
+                }
+                else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                {
+                    currentShowingMinion!.Stat.StatusEffects = editModal.NewStatusEffects;
+                    UpdateStatusEffect(currentShowingMinion);
+                    ShowDetail(currentShowingMinion);
                     InitPlayerList(); // 상태 이상 패널 업데이트
                 }
                 else
@@ -1259,6 +1320,20 @@ namespace ScoreBoard.content
             foreach (var e in monster.Stat.StatusEffects)
             {
                 e.ApplyStatusEffect(monster);
+            }
+        }
+
+        /*
+         * UpdateStatusEffect(Minion minion)
+         * - 소환수의 상태 이상을 업데이트하는 메서드
+         * - minion: Minion 객체
+         */
+        private void UpdateStatusEffect(Minion minion)
+        {
+            minion.SEAttackValueModifier = 1.0; // 상태 이상에 의한 공격력 보정 초기화
+            foreach (var e in minion.Stat.StatusEffects)
+            {
+                e.ApplyStatusEffect(minion);
             }
         }
 
@@ -1331,12 +1406,16 @@ namespace ScoreBoard.content
             }
             else
             {
+
                 TryUnequipArtifact(info);
                 EquipNewArtifact(info, selectedArtifact);
                 UpdateArtifactTag(pb, selectedArtifact.Id, info.SlotIndex);
             }
 
-            ShowDetail(currentShowingPlayer);
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                ShowDetail(currentShowingPlayer);
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                ShowDetail(currentShowingMinion!);
             InitPlayerList();
         }
 
@@ -1347,7 +1426,9 @@ namespace ScoreBoard.content
          */
         private void TryUnequipArtifact(ArtifactSlotInfo info)
         {
-            if (!string.IsNullOrEmpty(info.ArtifactId))
+            if (string.IsNullOrEmpty(info.ArtifactId))
+                return;
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
             {
                 currentShowingPlayer!.ArtifactSlot[info.SlotIndex]?.Unequip(currentShowingPlayer);
                 currentShowingPlayer.ArtifactSlot[info.SlotIndex] = null;
@@ -1364,7 +1445,11 @@ namespace ScoreBoard.content
                     currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount = (ushort)Math.Max(0, rangedCount - 1); ;
                 }
             }
-
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+            {
+                currentShowingMinion!.ArtifactSlot[info.SlotIndex]?.Unequip(currentShowingMinion);
+                currentShowingMinion.ArtifactSlot[info.SlotIndex] = null;
+            }
         }
 
         /*
@@ -1458,6 +1543,10 @@ namespace ScoreBoard.content
             {
                 currentShowingPlayer!.Note = rtbNote.Text;
             }
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+            {
+                currentShowingMinion!.Note = rtbNote.Text;
+            }
             else
             {
                 currentShowingMonster!.Note = rtbNote.Text;
@@ -1513,6 +1602,10 @@ namespace ScoreBoard.content
                 {
                     ShowDetail(currentShowingPlayer!);
                 }
+                else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                {
+                    ShowDetail(currentShowingMinion!);
+                }
                 else
                 {
                     ShowDetail(currentShowingMonster!.IsReported, currentShowingMonster);
@@ -1529,6 +1622,13 @@ namespace ScoreBoard.content
             foreach (var c in _characters.Values)
             {
                 _currentWeather.ApplyWeatherEffect(c);
+                if (c.Minions.Count > 0)
+                {
+                    foreach (var minion in c.Minions)
+                    {
+                        _currentWeather.ApplyWeatherEffect(minion);
+                    }
+                }
             }
             foreach (var m in _monsters)
             {
@@ -1697,6 +1797,55 @@ namespace ScoreBoard.content
                 }
                 InitEnemyList();
             }
+        }
+
+        /*
+         * ShowDetail(Minion minion)
+         * - 미니언의 상세 정보를 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        public void ShowDetail(Minion minion)
+        {
+            currentShowingMinion = minion;
+            _showingDataType = SHOWING_DATA_TYPE.Minion;
+
+            PrepareViewport();
+            ReplaceSkillDescriptionPanel();
+            DisplayMinionStats(minion);
+            FinalizeViewportLayout();
+        }
+
+        /*
+         * DisplayMinionStats(Minion minion)
+         * - 미니언의 상세 정보를 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        private void DisplayMinionStats(Minion minion)
+        {
+            pnMinion.Visible = false;
+            ShowBasicInfo(minion);
+            ShowHealth(minion);
+            ShowStatusEffect(minion);
+            ShowMovement(minion);
+            ShowAttackRange(minion);
+            ShowAttackValue(minion);
+            ShowSpellPower(minion);
+            ShowWisdom(minion);
+            ShowArtifact(minion);
+            ShowNote(minion);
+        }
+
+        /*
+         * ShowBasicInfo(Minion minion)
+         * - 미니언의 기본 정보를 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        private void ShowBasicInfo(Minion minion)
+        {
+            lblName.Text = minion.Name;
+            pbLevel.Visible = false;
+            pbAdditionalEnemy.Visible = false;
+            pbDice.Visible = false;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data.skill;
+﻿using ScoreBoard.data.minion;
+using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.utils;
 using System;
@@ -34,7 +35,14 @@ namespace ScoreBoard.data.character
                     "수완가" => () => skill.isActivated = true,
                     "위치 특정" => () => skill.isActivated = true,
                     "재벌가" => () => skill.isActivated = true,
-                    "(소환) 햄부기 전차" => () => skill.isActivated = true,
+                    "(소환) 햄부기 전차" => () =>
+                    {
+                        skill.isActivated = true;
+                        Minion minion = this.Minions[0];
+                        minion.IsSummonable = true;
+                        minion.Stat.Hp = minion.Stat.MaxHp; // 소환시 체력 = 최대 체력
+                        minion.Stat.CombatStats["ranged"].Value = (ushort)(Stat.CombatStats["ranged"].Value + (Stat.SpellPower ?? 0));
+                    },
                     _ => null
                 };
 
@@ -43,7 +51,14 @@ namespace ScoreBoard.data.character
                     "수완가" => () => skill.isActivated = false,
                     "위치 특정" => () => skill.isActivated = false,
                     "재벌가" => () => skill.isActivated = false,
-                    "(소환) 햄부기 전차" => () => skill.isActivated = false,
+                    "(소환) 햄부기 전차" => () =>
+                    {
+                        skill.isActivated = false;
+                        Minion minion = this.Minions.Find(m => m.Name == "햄부기 전차")!;
+                        minion.IsSummonable = false;
+                        minion.Stat.Hp = 0; // 소환 해제 시 체력 0
+                    }
+                    ,
                     _ => null
                 };
 
