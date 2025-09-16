@@ -1574,6 +1574,10 @@ namespace ScoreBoard.content
                 {
                     ShowDetail(currentShowingPlayer!);
                 }
+                else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                {
+                    ShowMinion(currentShowingMinion!);
+                }
                 else
                 {
                     ShowDetail(currentShowingMonster!.IsReported, currentShowingMonster);
@@ -1590,6 +1594,13 @@ namespace ScoreBoard.content
             foreach (var c in _characters.Values)
             {
                 _currentWeather.ApplyWeatherEffect(c);
+                if (c.Minions.Count > 0)
+                {
+                    foreach (var minion in c.Minions)
+                    {
+                        _currentWeather.ApplyWeatherEffect(minion);
+                    }
+                }
             }
             foreach (var m in _monsters)
             {
@@ -1786,7 +1797,7 @@ namespace ScoreBoard.content
             ShowBasicInfo(minion);
             ShowHealth(minion);
             ShowStatusEffect(minion);
-            //ShowMovement(minion);
+            ShowMovement(minion);
             //ShowAttackRange(minion);
             //ShowAttackValue(minion);
             //ShowSpellPower(minion);
@@ -1844,6 +1855,17 @@ namespace ScoreBoard.content
                 fpnStatusEffect.Controls.Add(pb);
                 fpnStatusEffect.Controls.Add(label);
             }
+        }
+
+        /*
+         * ShowMovement(Minion minion)
+         * - 미니언의 이동력을 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        private void ShowMovement(Minion minion)
+        {
+            ushort movement = (ushort)Math.Max(0, minion.Stat.Movement + minion.WeatherMovementModifier);
+            lblMovement.Text = movement.ToString();
         }
     }
 }
