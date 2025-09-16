@@ -330,7 +330,7 @@ namespace ScoreBoard.controls
                 PnInfo.Controls.Add(fpnMinion);
 
                 // 소환수 클릭 이벤트 할당
-                EventHandler minionClick = (s, e) => FindAncestor<ScoreBoardControl>(this)?.ShowMinion(m);
+                EventHandler minionClick = (s, e) => FindAncestor<ScoreBoardControl>(this)?.ShowDetail(m);
                 fpnMinion.Click += (s, e) => minionClick(s, e);
                 RegisterClickRecursive(fpnMinion, minionClick);
             }

@@ -1806,7 +1806,7 @@ namespace ScoreBoard.content
             ShowStatusEffect(minion);
             ShowMovement(minion);
             ShowAttackRange(minion);
-            //ShowAttackValue(minion);
+            ShowAttackValue(minion);
             //ShowSpellPower(minion);
             //ShowWisdom(minion);
             //ShowArtifact(player);
@@ -1900,6 +1900,22 @@ namespace ScoreBoard.content
                     lblRangedRange.Text = range.ToString();
                 }
             }
+        }
+
+        /*
+         * ShowAttackValue(Minion minion)
+         * - 미니언의 공격력을 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        private void ShowAttackValue(Minion minion)
+        {
+            if (minion.Stat.CombatStats.Count == 0)
+            {
+                fpnAttackValue.Visible = false;
+                return;
+            }
+
+            ChangeTextOfAttackValueLabels(minion.Stat.CombatStats, minion.SEAttackValueModifier);
         }
     }
 }
