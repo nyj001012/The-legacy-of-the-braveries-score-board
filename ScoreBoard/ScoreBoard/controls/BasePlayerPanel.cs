@@ -393,8 +393,10 @@ namespace ScoreBoard.controls
                 fpnStatusInfo.Visible = false;
                 return fpnStatusInfo;
             }
-            fpnStatusInfo.Controls.Add(CreateMinionStatusEffect(stat));
-            fpnStatusInfo.Controls.Add(CreateMinionArtifactPanel(artifacts, maxSlots));
+            if (stat.StatusEffects.Count > 0)
+                fpnStatusInfo.Controls.Add(CreateMinionStatusEffect(stat));
+            if (maxSlots > 0)
+                fpnStatusInfo.Controls.Add(CreateMinionArtifactPanel(artifacts, maxSlots));
             return fpnStatusInfo;
         }
 
