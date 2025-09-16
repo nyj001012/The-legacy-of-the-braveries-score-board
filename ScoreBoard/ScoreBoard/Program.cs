@@ -1,4 +1,4 @@
-using ScoreBoard.forms;
+﻿using ScoreBoard.forms;
 
 namespace ScoreBoard
 {

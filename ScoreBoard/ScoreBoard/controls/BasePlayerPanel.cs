@@ -142,7 +142,7 @@ namespace ScoreBoard.controls
             if (stat.StatusEffects.Count > 0)
             {
                 panel.Visible = true;
-                AddStatusEffectIcons(stat.StatusEffects);
+                AddStatusEffectIcons(panel, stat.StatusEffects);
             }
             else
             {
@@ -153,15 +153,17 @@ namespace ScoreBoard.controls
         }
 
         /*
-         * AddStatusEffectIcons(List<StatusEffect> statusEffects)
+         * AddStatusEffectIcons(CustomFlowLayoutPanel panel, List<StatusEffect> statusEffects)
          * - 상태이상 아이콘을 패널에 추가하는 메서드
          * - 최대 3개 아이콘을 표시하고, 4개 이상일 경우 +N 표시
+         * - panel: 상태이상 아이콘을 표시할 패널
+         * - statusEffects: 캐릭터의 상태이상 리스트
          */
-        private void AddStatusEffectIcons(List<StatusEffect> statusEffects)
+        private void AddStatusEffectIcons(CustomFlowLayoutPanel panel, List<StatusEffect> statusEffects)
         {
-            FpnStatus.Controls.Clear(); // 기존 아이콘 제거
+            panel.Controls.Clear(); // 기존 아이콘 제거
 
-            int iconSize = FpnStatus.Height;
+            int iconSize = panel.Height;
             int margin = 3; // 기본 Margin값
             int count = 0;
 
@@ -182,21 +184,25 @@ namespace ScoreBoard.controls
                             Size = new Size(iconSize, iconSize),
                             Margin = new Padding(0, margin, 0, 0)
                         };
-                        FpnStatus.Controls.Add(label);
+                        panel.Controls.Add(label);
                     }
                     break;
                 }
 
-                CreateStatusEffectIcon(effect, iconSize, margin);
+                CreateStatusEffectIcon(panel, effect, iconSize, margin);
                 count++;
             }
         }
 
         /*
-         * CreateStatusEffectIcon(StatusEffect effect, int size)
+         * CreateStatusEffectIcon(CustomFlowLayoutPanel panel, StatusEffect effect, int size, int margin)
          * - 상태이상 아이콘을 생성하고 패널에 추가하는 메서드
+         * - panel: 상태이상 아이콘을 표시할 패널
+         * - effect: 상태이상 객체
+         * - size: 아이콘 크기 (정사각형)
+         * - margin: 아이콘 오른쪽 마진
          */
-        private void CreateStatusEffectIcon(StatusEffect effect, int size, int margin)
+        private void CreateStatusEffectIcon(CustomFlowLayoutPanel panel, StatusEffect effect, int size, int margin)
         {
             PictureBox pb = new()
             {
@@ -220,7 +226,7 @@ namespace ScoreBoard.controls
             string caption = $"{EnumHelper.GetEnumName(effect.Type)}:" +
                              $"{(effect.IsInfinite ? "∞" : $"{effect.Duration}턴")}";
             toolTip.SetToolTip(pb, caption);
-            FpnStatus.Controls.Add(pb);
+            panel.Controls.Add(pb);
         }
 
         /*
@@ -376,6 +382,7 @@ namespace ScoreBoard.controls
             CustomFlowLayoutPanel fpnStatusInfo = new()
             {
                 Width = PnInfo.Width,
+                Height = PnInfo.Height,
                 AutoSize = true,
                 FlowDirection = FlowDirection.LeftToRight,
                 WrapContents = false,
