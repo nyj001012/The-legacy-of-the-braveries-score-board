@@ -345,7 +345,7 @@ namespace ScoreBoard.controls
         {
             return new()
             {
-                Width = PnInfo.Width,
+                Width = (int)(PnPlayer.Width * 0.8),
                 AutoSize = true,
                 Margin = new Padding(0, 15, 0, 0),
                 FlowDirection = FlowDirection.TopDown,
@@ -381,9 +381,9 @@ namespace ScoreBoard.controls
         {
             CustomFlowLayoutPanel fpnStatusInfo = new()
             {
-                Width = PnInfo.Width,
-                Height = PnInfo.Height,
-                AutoSize = true,
+                Width = (int)(PnInfo.Width * 0.8),
+                Height = (int)(FpnStatus.Height * 0.8),
+                AutoSize = false,
                 FlowDirection = FlowDirection.LeftToRight,
                 WrapContents = false,
                 Tag = "minion",
@@ -402,7 +402,9 @@ namespace ScoreBoard.controls
         {
             CustomFlowLayoutPanel fpnStatus = new()
             {
-                AutoSize = true,
+                Width = (int)(FpnStatus.Width * 0.8),
+                Height = (int)(FpnStatus.Height * 0.8),
+                AutoSize = false,
                 FlowDirection = FlowDirection.LeftToRight,
                 WrapContents = false,
                 Tag = "minion",
@@ -422,10 +424,12 @@ namespace ScoreBoard.controls
         {
             CustomFlowLayoutPanel fpnArtifact = new()
             {
-                AutoSize = true,
+                Width = (int)(FpnArtifact.Width * 0.8),
+                Height = (int)(FpnArtifact.Height * 0.8),
+                AutoSize = false,
                 FlowDirection = FlowDirection.LeftToRight,
                 WrapContents = false,
-                Margin = new Padding(10, 0, 0, 0),
+                Margin = new Padding(8, 0, 0, 0),
                 Tag = "minion",
             };
 
