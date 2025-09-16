@@ -1030,12 +1030,19 @@ namespace ScoreBoard.content
             if (setterMap.TryGetValue(label.Name, out var action))
             {
                 action(value);
-                label.Text = label.Name.Contains("AttackCount") ? $"{{{value}}}" : value.ToString();
-                if (label.Name.Contains("SpellPower") && statOwner is CorpsMember)
-                    label.Text = $"{value * currentShowingPlayer.ArtifactSpellPowerMultiplier}";
                 // 체력 수정 시, 체력바 생김새도 수정
                 if (label.Name == "lblMaxHealth")
                     UpdateHealthBar();
+                else
+                {
+                    // ShowDetail 다시 호출하여 UI 업데이트
+                    if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                        ShowDetail(currentShowingPlayer!);
+                    else if (_showingDataType == SHOWING_DATA_TYPE.Monster)
+                        ShowDetail(currentShowingMonster!.IsReported, currentShowingMonster!);
+                    else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                        ShowDetail(currentShowingMinion!);
+                }
             }
             else
             {
@@ -1268,7 +1275,7 @@ namespace ScoreBoard.content
                 {
                     currentShowingMinion!.Stat.StatusEffects = editModal.NewStatusEffects;
                     UpdateStatusEffect(currentShowingMinion);
-                    ShowMinion(currentShowingMinion);
+                    ShowDetail(currentShowingMinion);
                     InitPlayerList(); // 상태 이상 패널 업데이트
                 }
                 else
@@ -1576,7 +1583,7 @@ namespace ScoreBoard.content
                 }
                 else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
                 {
-                    ShowMinion(currentShowingMinion!);
+                    ShowDetail(currentShowingMinion!);
                 }
                 else
                 {
@@ -1772,11 +1779,11 @@ namespace ScoreBoard.content
         }
 
         /*
-         * ShowMinion(Minion minion)
+         * ShowDetail(Minion minion)
          * - 미니언의 상세 정보를 표시하는 메서드
          * - minion: 표시할 미니언 객체
          */
-        public void ShowMinion(Minion minion)
+        public void ShowDetail(Minion minion)
         {
             currentShowingMinion = minion;
             _showingDataType = SHOWING_DATA_TYPE.Minion;
@@ -1798,7 +1805,7 @@ namespace ScoreBoard.content
             ShowHealth(minion);
             ShowStatusEffect(minion);
             ShowMovement(minion);
-            //ShowAttackRange(minion);
+            ShowAttackRange(minion);
             //ShowAttackValue(minion);
             //ShowSpellPower(minion);
             //ShowWisdom(minion);
@@ -1866,6 +1873,33 @@ namespace ScoreBoard.content
         {
             ushort movement = (ushort)Math.Max(0, minion.Stat.Movement + minion.WeatherMovementModifier);
             lblMovement.Text = movement.ToString();
+        }
+
+        /*
+         * ShowAttackRange(Minion minion)
+         * - 미니언의 공격 범위를 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        private void ShowAttackRange(Minion minion)
+        {
+            pbMelee.Visible = pbRanged.Visible = false;
+            lblMeleeRange.Visible = lblRangedRange.Visible = false;
+
+            foreach (var (type, combatStat) in minion.Stat.CombatStats)
+            {
+                if (type == "melee")
+                {
+                    pbMelee.Visible = lblMeleeRange.Visible = true;
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + minion.WeatherRangeModifier);
+                    lblMeleeRange.Text = range.ToString();
+                }
+                else
+                {
+                    pbRanged.Visible = lblRangedRange.Visible = true;
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + minion.WeatherRangeModifier);
+                    lblRangedRange.Text = range.ToString();
+                }
+            }
         }
     }
 }
