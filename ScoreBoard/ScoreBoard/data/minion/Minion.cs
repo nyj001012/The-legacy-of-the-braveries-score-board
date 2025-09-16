@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data.character;
+﻿using ScoreBoard.data.artifact;
+using ScoreBoard.data.character;
 using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.utils;
@@ -20,6 +21,9 @@ namespace ScoreBoard.data.minion
         public int SummonAvailableTurn { get; set; } = 0; // 소환 가능 턴 (예: 0턴 후 소환 가능)
         public int SummonEndTurn { get; set; } = -1; // 소환 종료 턴 (예: 3턴 후 소환 종료, -1이면 죽기 전까지 소환 유지)
         public bool IsSummonable { get; set; } = false; // 소환 가능 여부
+        public List<Artifact?> ArtifactSlot { get; set; } = []; // 유물 슬롯 정보 (예: 무기, 방어구 등)
+        public ushort MaxArtifactSlot { get; set; } = 0; // 최대 유물 슬롯 수 (예: 3개)
+        
 
         public void Initialise(string mid)
         {

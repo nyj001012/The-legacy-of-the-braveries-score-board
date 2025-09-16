@@ -715,7 +715,12 @@ namespace ScoreBoard.content
          */
         private void DisplaySkillDescription()
         {
-            skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Level, currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
+                skillDescriptionPanel = new SkillDescriptionPanel(currentShowingPlayer!.Level, currentShowingPlayer!.Passives, currentShowingPlayer.Actives);
+            if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+                skillDescriptionPanel = new SkillDescriptionPanel(0, currentShowingMinion!.Passives, currentShowingMinion.Actives);
+            else
+                return;
             int insertIndex = detailViewport.Controls.GetChildIndex(customFlowLayoutPanel3) + 1;
             detailViewport.Controls.Add(skillDescriptionPanel);
             detailViewport.Controls.SetChildIndex(skillDescriptionPanel, insertIndex);
@@ -1737,7 +1742,6 @@ namespace ScoreBoard.content
             //ShowSpellPower(minion);
             //ShowWisdom(minion);
             //ShowArtifact(player);
-            //ShowMinion(player);
             //ShowNote(minion);
         }
 
