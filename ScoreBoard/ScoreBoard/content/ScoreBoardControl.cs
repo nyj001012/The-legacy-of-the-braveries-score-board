@@ -547,6 +547,7 @@ namespace ScoreBoard.content
         {
             lblName.Text = player.Name;
             pbLevel.Visible = true;
+            pbDice.Visible = true;
             pbAdditionalEnemy.Visible = false;
 
             pbLevel.BackgroundImage = player.Level switch
@@ -557,7 +558,6 @@ namespace ScoreBoard.content
                 3 => Properties.Resources.Lv3,
                 _ => throw new NotImplementedException($"{player.Level}은(는) 유효한 레벨이 아닙니다."),
             };
-
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
             if (player.RequiredDiceValues.Count > 0)
             {
@@ -869,7 +869,9 @@ namespace ScoreBoard.content
         {
             fpnBasicStatus.Visible = true;
             lblName.Text = monster.Name;
+            pbDice.Visible = isReported;
             fpnDice.Controls.Clear(); // 기존 다이스 값 제거
+
             if (isReported && monster.RequiredDiceValues.Count > 0)
             {
                 int i = 0;
@@ -1703,9 +1705,53 @@ namespace ScoreBoard.content
             }
         }
 
+        /*
+         * ShowMinion(Minion minion)
+         * - 미니언의 상세 정보를 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
         public void ShowMinion(Minion minion)
         {
             currentShowingMinion = minion;
+            _showingDataType = SHOWING_DATA_TYPE.Minion;
+
+            PrepareViewport();
+            ReplaceSkillDescriptionPanel();
+            DisplayMinionStats(minion);
+            FinalizeViewportLayout();
+        }
+
+        /*
+         * DisplayMinionStats(Minion minion)
+         * - 미니언의 상세 정보를 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        private void DisplayMinionStats(Minion minion)
+        {
+            ShowBasicInfo(minion);
+            //ShowHealth(minion);
+            //ShowStatusEffect(player);
+            //ShowMovement(minion);
+            //ShowAttackRange(minion);
+            //ShowAttackValue(minion);
+            //ShowSpellPower(minion);
+            //ShowWisdom(minion);
+            //ShowArtifact(player);
+            //ShowMinion(player);
+            //ShowNote(minion);
+        }
+
+        /*
+         * ShowBasicInfo(Minion minion)
+         * - 미니언의 기본 정보를 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        private void ShowBasicInfo(Minion minion)
+        {
+            lblName.Text = minion.Name;
+            pbLevel.Visible = false;
+            pbAdditionalEnemy.Visible = false;
+            pbDice.Visible = false;
         }
     }
 }
