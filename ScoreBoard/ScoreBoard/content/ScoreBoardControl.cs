@@ -1807,8 +1807,8 @@ namespace ScoreBoard.content
             ShowMovement(minion);
             ShowAttackRange(minion);
             ShowAttackValue(minion);
-            //ShowSpellPower(minion);
-            //ShowWisdom(minion);
+            ShowSpellPower(minion);
+            ShowWisdom(minion);
             //ShowArtifact(player);
             //ShowNote(minion);
         }
@@ -1916,6 +1916,30 @@ namespace ScoreBoard.content
             }
 
             ChangeTextOfAttackValueLabels(minion.Stat.CombatStats, minion.SEAttackValueModifier);
+        }
+
+        /*
+         * ShowSpellPower(Minion minion)
+         * - 미니언의 주문력을 표시하는 메서드
+         * - minion: 표시할 미니언 객체
+         */
+        private void ShowSpellPower(Minion minion)
+        {
+            bool hasSpellPower = minion.Stat.SpellPower != null;
+            fpnSpellPower.Visible = hasSpellPower;
+            if (hasSpellPower) lblSpellPower.Text = (minion.Stat.SpellPower!.Value * minion.ArtifactSpellPowerMultiplier).ToString();
+        }
+
+        /*
+         * ShowWisdom(Minion minion)
+         * - 미니언의 지혜를 표시하는 메서드
+         * - minion: Minion 객체
+         */
+        private void ShowWisdom(Minion minion)
+        {
+            bool hasWisdom = minion.Stat.Wisdom != null;
+            fpnWisdom.Visible = hasWisdom;
+            if (hasWisdom) lblWisdom.Text = minion.Stat.Wisdom!.Value.ToString();
         }
     }
 }
