@@ -85,7 +85,7 @@
             pnInfo.Location = new Point(92, 0);
             pnInfo.Margin = new Padding(0);
             pnInfo.Name = "pnInfo";
-            pnInfo.Size = new Size(419, 157);
+            pnInfo.Size = new Size(419, 152);
             pnInfo.TabIndex = 2;
             pnInfo.WrapContents = false;
             // 
@@ -133,8 +133,8 @@
             fpnPlayer.BorderThickness = 0;
             fpnPlayer.Controls.Add(fpnStatus);
             fpnPlayer.Controls.Add(fpnArtifact);
-            fpnPlayer.Location = new Point(0, 66);
-            fpnPlayer.Margin = new Padding(0, 10, 0, 0);
+            fpnPlayer.Location = new Point(0, 61);
+            fpnPlayer.Margin = new Padding(0, 5, 0, 0);
             fpnPlayer.Name = "fpnPlayer";
             fpnPlayer.Size = new Size(418, 45);
             fpnPlayer.TabIndex = 2;
@@ -170,7 +170,7 @@
             hbPlayer.Font = new Font("Danjo-bold", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             hbPlayer.Health = 70;
             hbPlayer.HealthColor = Color.FromArgb(119, 185, 69);
-            hbPlayer.Location = new Point(0, 121);
+            hbPlayer.Location = new Point(0, 116);
             hbPlayer.Margin = new Padding(0, 10, 0, 10);
             hbPlayer.MaxValue = 100;
             hbPlayer.Name = "hbPlayer";

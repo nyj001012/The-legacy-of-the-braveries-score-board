@@ -100,7 +100,7 @@
             customFlowLayoutPanel1.Margin = new Padding(0);
             customFlowLayoutPanel1.Name = "customFlowLayoutPanel1";
             customFlowLayoutPanel1.Padding = new Padding(0, 10, 0, 0);
-            customFlowLayoutPanel1.Size = new Size(467, 68);
+            customFlowLayoutPanel1.Size = new Size(467, 60);
             customFlowLayoutPanel1.TabIndex = 5;
             // 
             // lblName
@@ -113,7 +113,7 @@
             lblName.Margin = new Padding(0, 0, 15, 0);
             lblName.Name = "lblName";
             lblName.RightToLeft = RightToLeft.No;
-            lblName.Size = new Size(1, 52);
+            lblName.Size = new Size(118, 52);
             lblName.TabIndex = 0;
             lblName.Text = "예시샘플입니다.";
             lblName.TextAlign = ContentAlignment.BottomLeft;
@@ -121,10 +121,10 @@
             // pbLv
             // 
             pbLv.BackgroundImageLayout = ImageLayout.Stretch;
-            pbLv.Location = new Point(16, 10);
-            pbLv.Margin = new Padding(0);
+            pbLv.Location = new Point(133, 10);
+            pbLv.Margin = new Padding(0, 0, 0, 10);
             pbLv.Name = "pbLv";
-            pbLv.Size = new Size(53, 53);
+            pbLv.Size = new Size(50, 50);
             pbLv.TabIndex = 1;
             pbLv.TabStop = false;
             // 
@@ -134,8 +134,8 @@
             fpnPlayer.BorderThickness = 0;
             fpnPlayer.Controls.Add(fpnStatus);
             fpnPlayer.Controls.Add(fpnArtifact);
-            fpnPlayer.Location = new Point(0, 83);
-            fpnPlayer.Margin = new Padding(0, 15, 0, 0);
+            fpnPlayer.Location = new Point(0, 70);
+            fpnPlayer.Margin = new Padding(0, 10, 0, 0);
             fpnPlayer.Name = "fpnPlayer";
             fpnPlayer.Size = new Size(466, 52);
             fpnPlayer.TabIndex = 2;
@@ -171,7 +171,7 @@
             hbPlayer.Font = new Font("Danjo-bold", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             hbPlayer.Health = 70;
             hbPlayer.HealthColor = Color.FromArgb(119, 185, 69);
-            hbPlayer.Location = new Point(0, 150);
+            hbPlayer.Location = new Point(0, 137);
             hbPlayer.Margin = new Padding(0, 15, 0, 15);
             hbPlayer.MaxValue = 100;
             hbPlayer.Name = "hbPlayer";

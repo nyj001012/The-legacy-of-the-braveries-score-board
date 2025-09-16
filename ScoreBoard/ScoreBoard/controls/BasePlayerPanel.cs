@@ -388,6 +388,11 @@ namespace ScoreBoard.controls
                 WrapContents = false,
                 Tag = "minion",
             };
+            if (stat.StatusEffects.Count == 0 && maxSlots == 0)
+            {
+                fpnStatusInfo.Visible = false;
+                return fpnStatusInfo;
+            }
             fpnStatusInfo.Controls.Add(CreateMinionStatusEffect(stat));
             fpnStatusInfo.Controls.Add(CreateMinionArtifactPanel(artifacts, maxSlots));
             return fpnStatusInfo;
