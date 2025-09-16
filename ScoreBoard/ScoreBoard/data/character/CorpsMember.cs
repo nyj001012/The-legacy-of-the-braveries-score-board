@@ -18,7 +18,6 @@ namespace ScoreBoard.data.character
         public string[] Description { get; set; } = []; // 배경 설명
         public ushort Level { get; set; } = 0; // 멤버의 레벨 (예: 1, 2, 3 등)
         public List<Minion> Minions { get; set; } = []; // 멤버가 소환한 소환수 정보 배열
-        public string Note { get; set; } = String.Empty; // 특이사항
 
         public CorpsMember()
         {

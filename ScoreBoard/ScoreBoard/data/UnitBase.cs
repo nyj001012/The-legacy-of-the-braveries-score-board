@@ -24,5 +24,6 @@ namespace ScoreBoard.data
         public int WeatherDiceModifier { get; set; } = 0; // 날씨로 인한 주사위 개수 보정치. Slice에 활용
         public double SEAttackValueModifier { get; set; } = 1; // 상태이상 공격력 보정치. 곱연산 활용
         public int ArtifactSpellPowerMultiplier { get; set; } = 1; // 유물에 의한 곱연산 보정치
+        public string Note { get; set; } = String.Empty; // 특이사항
     }
 }

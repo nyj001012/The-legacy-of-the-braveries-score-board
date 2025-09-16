@@ -329,13 +329,19 @@ namespace ScoreBoard.content
          * - 플레이어의 유물을 표시하는 메서드
          * - player: CorpsMember 객체
          */
-        private void ShowArtifact(CorpsMember player)
+        private void ShowArtifact(UnitBase unit)
         {
-            InitializeArtifactSlots(player.ArtifactSlot, player.MaxArtifactSlot);
-
-            for (int i = 0; i < player.MaxArtifactSlot; i++)
+            if (unit.MaxArtifactSlot == 0)
             {
-                var artifact = player.ArtifactSlot.ElementAtOrDefault(i);
+                pnArtifact.Visible = fpnArtifact.Visible = false;
+                return;
+            }
+            pnArtifact.Visible = fpnArtifact.Visible = true;
+            InitializeArtifactSlots(unit.ArtifactSlot, unit.MaxArtifactSlot);
+
+            for (int i = 0; i < unit.MaxArtifactSlot; i++)
+            {
+                var artifact = unit.ArtifactSlot.ElementAtOrDefault(i);
                 if (artifact != default)
                 {
                     AssignArtifactToSlot(artifact, i);
@@ -414,109 +420,109 @@ namespace ScoreBoard.content
         }
 
         /*
-         * ShowNote(CoprsMember player)
+         * ShowNote(UnitBase unit)
          * - 플레이어의 특이사항을 보여주는 메서드
-         * - player: 특이사항을 보여줄 플레이어
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowNote(CorpsMember player)
+        private void ShowNote(UnitBase unit)
         {
-            rtbNote.Text = player.Note;
+            rtbNote.Text = unit.Note;
         }
 
         /*
-         * ShowWisdom(CorpsMember player)
+         * ShowWisdom(UnitBase unit)
          * - 플레이어의 지혜를 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowWisdom(CorpsMember player)
+        private void ShowWisdom(UnitBase unit)
         {
-            bool hasWisdom = player.Stat.Wisdom != null;
+            bool hasWisdom = unit.Stat.Wisdom != null;
             fpnWisdom.Visible = hasWisdom;
-            if (hasWisdom) lblWisdom.Text = player.Stat.Wisdom!.Value.ToString();
+            if (hasWisdom) lblWisdom.Text = unit.Stat.Wisdom!.Value.ToString();
         }
 
         /*
-         * ShowSpellPower(CorpsMember player)
+         * ShowSpellPower(UnitBase unit)
          * - 플레이어의 주문력을 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowSpellPower(CorpsMember player)
+        private void ShowSpellPower(UnitBase unit)
         {
-            bool hasSpellPower = player.Stat.SpellPower != null;
+            bool hasSpellPower = unit.Stat.SpellPower != null;
             fpnSpellPower.Visible = hasSpellPower;
-            if (hasSpellPower) lblSpellPower.Text = (player.Stat.SpellPower!.Value * player.ArtifactSpellPowerMultiplier).ToString();
+            if (hasSpellPower) lblSpellPower.Text = (unit.Stat.SpellPower!.Value * unit.ArtifactSpellPowerMultiplier).ToString();
         }
 
         /*
-         * ShowAttackValue(CorpsMember player)
+         * ShowAttackValue(UnitBase unit)
          * - 플레이어의 공격력, 공격 가능 횟수(속도)을 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowAttackValue(CorpsMember player)
+        private void ShowAttackValue(UnitBase unit)
         {
-            if (player.Stat.CombatStats.Count == 0)
+            if (unit.Stat.CombatStats.Count == 0)
             {
                 fpnAttackValue.Visible = false;
                 return;
             }
 
-            ChangeTextOfAttackValueLabels(player.Stat.CombatStats, player.SEAttackValueModifier);
+            ChangeTextOfAttackValueLabels(unit.Stat.CombatStats, unit.SEAttackValueModifier);
         }
 
         /*
-         * ShowAttackRange(CorpsMember player)
+         * ShowAttackRange(UnitBase unit)
          * - 플레이어의 공격 사거리를 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowAttackRange(CorpsMember player)
+        private void ShowAttackRange(UnitBase unit)
         {
             pbMelee.Visible = pbRanged.Visible = false;
             lblMeleeRange.Visible = lblRangedRange.Visible = false;
 
-            foreach (var (type, combatStat) in player.Stat.CombatStats)
+            foreach (var (type, combatStat) in unit.Stat.CombatStats)
             {
                 if (type == "melee")
                 {
                     pbMelee.Visible = lblMeleeRange.Visible = true;
-                    ushort range = (ushort)Math.Max(0, combatStat.Range + player.WeatherRangeModifier);
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + unit.WeatherRangeModifier);
                     lblMeleeRange.Text = range.ToString();
                 }
                 else
                 {
                     pbRanged.Visible = lblRangedRange.Visible = true;
-                    ushort range = (ushort)Math.Max(0, combatStat.Range + player.WeatherRangeModifier);
+                    ushort range = (ushort)Math.Max(0, combatStat.Range + unit.WeatherRangeModifier);
                     lblRangedRange.Text = range.ToString();
                 }
             }
         }
 
         /*
-         * ShowMovement(CorpsMember player)
+         * ShowMovement(UnitBase unit)
          * - 플레이어의 이동 속도를 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowMovement(CorpsMember player)
+        private void ShowMovement(UnitBase unit)
         {
-            ushort movement = (ushort)Math.Max(0, player.Stat.Movement + player.WeatherMovementModifier);
+            ushort movement = (ushort)Math.Max(0, unit.Stat.Movement + unit.WeatherMovementModifier);
             lblMovement.Text = movement.ToString();
         }
 
         /*
-         * ShowStatusEffect(CorpsMember player)
-         * - 플레이어의 상태 이상을 표시하는 메서드
-         * - player: CorpsMember 객체
+         * ShowStatusEffect(UnitBase unit)
+         * - 플레이어, 미니언의 상태 이상을 표시하는 메서드
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowStatusEffect(CorpsMember player)
+        private void ShowStatusEffect(UnitBase unit)
         {
             fpnStatusDetail.Visible = true;
             fpnStatusEffect.Controls.Clear();
-            if (player.Stat.StatusEffects.Count == 0)
+            if (unit.Stat.StatusEffects.Count == 0)
             {
                 fpnStatusEffect.Controls.Add(cachedStatusEffectDefault);
                 return;
             }
 
-            foreach (var statusEffect in player.Stat.StatusEffects)
+            foreach (var statusEffect in unit.Stat.StatusEffects)
             {
                 var (pb, label) = CreateStatusEffectControl(statusEffect);
                 fpnStatusEffect.Controls.Add(pb);
@@ -525,18 +531,18 @@ namespace ScoreBoard.content
         }
 
         /*
-         * ShowHealth(CorpsMember player)
+         * ShowHealth(UnitBase unit)
          * - 플레이어의 체력을 표시하는 메서드
-         * - player: CorpsMember 객체
+         * - unit: CorpsMember, Minion 객체
          */
-        private void ShowHealth(CorpsMember player)
+        private void ShowHealth(UnitBase unit)
         {
-            lblCurrentHealth.Text = player.Stat.Hp.ToString();
-            if (player.Stat.Shield > 0)
+            lblCurrentHealth.Text = unit.Stat.Hp.ToString();
+            if (unit.Stat.Shield > 0)
             {
-                lblCurrentHealth.Text += $"(+{player.Stat.Shield})";
+                lblCurrentHealth.Text += $"(+{unit.Stat.Shield})";
             }
-            lblMaxHealth.Text = $"{player.Stat.MaxHp}";
+            lblMaxHealth.Text = $"{unit.Stat.MaxHp}";
         }
 
         /*
@@ -1537,6 +1543,10 @@ namespace ScoreBoard.content
             {
                 currentShowingPlayer!.Note = rtbNote.Text;
             }
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+            {
+                currentShowingMinion!.Note = rtbNote.Text;
+            }
             else
             {
                 currentShowingMonster!.Note = rtbNote.Text;
@@ -1812,6 +1822,7 @@ namespace ScoreBoard.content
          */
         private void DisplayMinionStats(Minion minion)
         {
+            pnMinion.Visible = false;
             ShowBasicInfo(minion);
             ShowHealth(minion);
             ShowStatusEffect(minion);
@@ -1821,7 +1832,7 @@ namespace ScoreBoard.content
             ShowSpellPower(minion);
             ShowWisdom(minion);
             ShowArtifact(minion);
-            //ShowNote(minion);
+            ShowNote(minion);
         }
 
         /*
@@ -1835,147 +1846,6 @@ namespace ScoreBoard.content
             pbLevel.Visible = false;
             pbAdditionalEnemy.Visible = false;
             pbDice.Visible = false;
-        }
-
-        /*
-         * ShowHealth(Minion minion)
-         * - 미니언의 체력을 표시하는 메서드
-         * - minion: 표시할 미니언 객체
-         */
-        private void ShowHealth(Minion minion)
-        {
-            lblCurrentHealth.Text = minion.Stat.Hp.ToString();
-            if (minion.Stat.Shield > 0)
-            {
-                lblCurrentHealth.Text += $"(+{minion.Stat.Shield})";
-            }
-            lblMaxHealth.Text = $"{minion.Stat.MaxHp}";
-        }
-
-        /*
-         * ShowStatusEffect(Minion minion)
-         * - 미니언의 상태 이상을 표시하는 메서드
-         * - minion: 표시할 미니언 객체
-         */
-        private void ShowStatusEffect(Minion minion)
-        {
-            fpnStatusDetail.Visible = true;
-            fpnStatusEffect.Controls.Clear();
-            if (minion.Stat.StatusEffects.Count == 0)
-            {
-                fpnStatusEffect.Controls.Add(cachedStatusEffectDefault);
-                return;
-            }
-
-            foreach (var statusEffect in minion.Stat.StatusEffects)
-            {
-                var (pb, label) = CreateStatusEffectControl(statusEffect);
-                fpnStatusEffect.Controls.Add(pb);
-                fpnStatusEffect.Controls.Add(label);
-            }
-        }
-
-        /*
-         * ShowMovement(Minion minion)
-         * - 미니언의 이동력을 표시하는 메서드
-         * - minion: 표시할 미니언 객체
-         */
-        private void ShowMovement(Minion minion)
-        {
-            ushort movement = (ushort)Math.Max(0, minion.Stat.Movement + minion.WeatherMovementModifier);
-            lblMovement.Text = movement.ToString();
-        }
-
-        /*
-         * ShowAttackRange(Minion minion)
-         * - 미니언의 공격 범위를 표시하는 메서드
-         * - minion: 표시할 미니언 객체
-         */
-        private void ShowAttackRange(Minion minion)
-        {
-            pbMelee.Visible = pbRanged.Visible = false;
-            lblMeleeRange.Visible = lblRangedRange.Visible = false;
-
-            foreach (var (type, combatStat) in minion.Stat.CombatStats)
-            {
-                if (type == "melee")
-                {
-                    pbMelee.Visible = lblMeleeRange.Visible = true;
-                    ushort range = (ushort)Math.Max(0, combatStat.Range + minion.WeatherRangeModifier);
-                    lblMeleeRange.Text = range.ToString();
-                }
-                else
-                {
-                    pbRanged.Visible = lblRangedRange.Visible = true;
-                    ushort range = (ushort)Math.Max(0, combatStat.Range + minion.WeatherRangeModifier);
-                    lblRangedRange.Text = range.ToString();
-                }
-            }
-        }
-
-        /*
-         * ShowAttackValue(Minion minion)
-         * - 미니언의 공격력을 표시하는 메서드
-         * - minion: 표시할 미니언 객체
-         */
-        private void ShowAttackValue(Minion minion)
-        {
-            if (minion.Stat.CombatStats.Count == 0)
-            {
-                fpnAttackValue.Visible = false;
-                return;
-            }
-
-            ChangeTextOfAttackValueLabels(minion.Stat.CombatStats, minion.SEAttackValueModifier);
-        }
-
-        /*
-         * ShowSpellPower(Minion minion)
-         * - 미니언의 주문력을 표시하는 메서드
-         * - minion: 표시할 미니언 객체
-         */
-        private void ShowSpellPower(Minion minion)
-        {
-            bool hasSpellPower = minion.Stat.SpellPower != null;
-            fpnSpellPower.Visible = hasSpellPower;
-            if (hasSpellPower) lblSpellPower.Text = (minion.Stat.SpellPower!.Value * minion.ArtifactSpellPowerMultiplier).ToString();
-        }
-
-        /*
-         * ShowWisdom(Minion minion)
-         * - 미니언의 지혜를 표시하는 메서드
-         * - minion: Minion 객체
-         */
-        private void ShowWisdom(Minion minion)
-        {
-            bool hasWisdom = minion.Stat.Wisdom != null;
-            fpnWisdom.Visible = hasWisdom;
-            if (hasWisdom) lblWisdom.Text = minion.Stat.Wisdom!.Value.ToString();
-        }
-
-        /*
-         * ShowArtifact(Minion minion)
-         * - 미니언의 유물을 표시하는 메서드
-         * - minion: Minion 객체
-         */
-        private void ShowArtifact(Minion minion)
-        {
-            if (minion.ArtifactSlot.Count == 0)
-            {
-                fpnArtifact.Visible = false;
-                return;
-            }
-            fpnArtifact.Visible = true;
-            InitializeArtifactSlots(minion.ArtifactSlot, minion.MaxArtifactSlot);
-
-            for (int i = 0; i < minion.MaxArtifactSlot; i++)
-            {
-                var artifact = minion.ArtifactSlot.ElementAtOrDefault(i);
-                if (artifact != default)
-                {
-                    AssignArtifactToSlot(artifact, i);
-                }
-            }
         }
     }
 }
