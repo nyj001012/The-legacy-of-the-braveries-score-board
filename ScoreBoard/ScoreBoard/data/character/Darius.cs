@@ -41,8 +41,8 @@ namespace ScoreBoard.data.character
                         Minion minion = this.Minions[0];
                         minion.IsSummonable = true;
                         minion.Stat.Hp = minion.Stat.MaxHp; // 소환시 체력 = 최대 체력
-                    }
-                    ,
+                        minion.Stat.CombatStats["ranged"].Value = (ushort)(Stat.CombatStats["ranged"].Value + (Stat.SpellPower ?? 0));
+                    },
                     _ => null
                 };
 
