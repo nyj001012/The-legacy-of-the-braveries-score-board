@@ -1010,10 +1010,21 @@ namespace ScoreBoard.content
                 return;
             }
 
-            var statOwner = _showingDataType == SHOWING_DATA_TYPE.Player
-                ? (object)currentShowingPlayer
-                : (object)currentShowingMonster;
+            var statOwner = _showingDataType switch
+            {
+                SHOWING_DATA_TYPE.Player => currentShowingPlayer as object,
+                SHOWING_DATA_TYPE.Monster => currentShowingMonster as object,
+                SHOWING_DATA_TYPE.Minion => currentShowingMinion as object,
+                _ => null
+            };
 
+            if (statOwner == null)
+            {
+                MessageBox.Show("스탯을 설정할 수 없습니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 레이블 이름에 따라 해당 스탯을 설정하는 액션 딕셔너리 생성
             var setterMap = CreateStatSetters(statOwner);
 
             if (setterMap.TryGetValue(label.Name, out var action))
@@ -1046,6 +1057,8 @@ namespace ScoreBoard.content
                 stat = c.Stat;
             else if (target is Monster m)
                 stat = m.Stat;
+            else if (target is Minion min)
+                stat = min.Stat;
             else
                 throw new ArgumentException("Unsupported stat owner type", nameof(target));
 
@@ -1090,7 +1103,7 @@ namespace ScoreBoard.content
                     currentShowingPlayer!.Stat.Hp = (ushort)hp;
                     currentShowingPlayer.Stat.Shield = shield ?? 0;
                 }
-                else
+                else if (_showingDataType == SHOWING_DATA_TYPE.Monster)
                 {
                     if (hp == 0 && shield == null)
                     {
@@ -1100,7 +1113,11 @@ namespace ScoreBoard.content
                     else
                         hp = UpdateMonsterHp((ushort)hp, shield);
                 }
-
+                else
+                {
+                    currentShowingMinion!.Stat.Hp = (ushort)hp;
+                    currentShowingMinion.Stat.Shield = shield ?? 0;
+                }
                 lblCurrentHealth.Text = $"{hp}{(shield.HasValue ? $"(+{shield})" : "")}";
                 UpdateHealthBar();
             }
@@ -1140,7 +1157,7 @@ namespace ScoreBoard.content
 
         /*
          * UpdateHealthBar()
-         * - 현재 디테일 뷰포트에 표시된 플레이어 또는 몬스터의 체력 바를 업데이트하는 메서드
+         * - 현재 디테일 뷰포트에 표시된 플레이어 또는 몬스터, 소환수의 체력 바를 업데이트하는 메서드
          */
         private void UpdateHealthBar()
         {
@@ -1157,7 +1174,7 @@ namespace ScoreBoard.content
                                     currentShowingPlayer.Stat.MaxHp);
                 playerList.ResumeLayout();
             }
-            else
+            else if (_showingDataType == SHOWING_DATA_TYPE.Monster)
             {
                 var healthBar = this.Controls.Find($"hb{currentShowingMonster!.Id}", true).FirstOrDefault() as HealthBar;
                 enemyList.SuspendLayout();
@@ -1166,6 +1183,16 @@ namespace ScoreBoard.content
                                     currentShowingMonster.Stat.Shield,
                                     currentShowingMonster.Stat.MaxHp);
                 enemyList.ResumeLayout();
+            }
+            else
+            {
+                var healthBar = this.Controls.Find($"hb{currentShowingMinion!.Id}", true).FirstOrDefault() as HealthBar;
+                playerList.SuspendLayout();
+                // HealthBar 컨트롤을 찾아서 업데이트
+                healthBar?.SetValues(currentShowingMinion.Stat.Hp,
+                                    currentShowingMinion.Stat.Shield,
+                                    currentShowingMinion.Stat.MaxHp);
+                playerList.ResumeLayout();
             }
         }
 
@@ -1734,7 +1761,7 @@ namespace ScoreBoard.content
         private void DisplayMinionStats(Minion minion)
         {
             ShowBasicInfo(minion);
-            //ShowHealth(minion);
+            ShowHealth(minion);
             //ShowStatusEffect(player);
             //ShowMovement(minion);
             //ShowAttackRange(minion);
@@ -1756,6 +1783,16 @@ namespace ScoreBoard.content
             pbLevel.Visible = false;
             pbAdditionalEnemy.Visible = false;
             pbDice.Visible = false;
+        }
+
+        private void ShowHealth(Minion minion)
+        {
+            lblCurrentHealth.Text = minion.Stat.Hp.ToString();
+            if (minion.Stat.Shield > 0)
+            {
+                lblCurrentHealth.Text += $"(+{minion.Stat.Shield})";
+            }
+            lblMaxHealth.Text = $"{minion.Stat.MaxHp}";
         }
     }
 }
