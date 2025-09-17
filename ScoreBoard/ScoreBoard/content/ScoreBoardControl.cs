@@ -191,7 +191,25 @@ namespace ScoreBoard.content
             }
 
             playerList.ResumeLayout();
+            playerList.Height = playerList.Controls
+                .Cast<Control>()
+                .Select(c => c.Bounds.Bottom)
+                .DefaultIfEmpty(0)
+                .Max() + playerList.Padding.Bottom + playerList.Padding.Top;
             ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
+        }
+
+        private void playerList_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (!playerScrollBar.Enabled) return;
+
+            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * playerScrollBar.SmallStep;
+            int newScrollValue = playerScrollBar.Value + delta;
+
+            // 스크롤 범위 안에서만 동작하도록 조정
+            newScrollValue = Math.Max(playerScrollBar.Minimum, Math.Min(playerScrollBar.Maximum, newScrollValue));
+            playerScrollBar.Value = newScrollValue;
+            playerList.Top = -newScrollValue;
         }
 
         /*
