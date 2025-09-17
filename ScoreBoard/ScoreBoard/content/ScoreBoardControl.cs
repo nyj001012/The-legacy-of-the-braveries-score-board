@@ -305,6 +305,7 @@ namespace ScoreBoard.content
             {
                 // 소환하면 이미 소환중이므로 소환 불가로 변경
                 minion.IsSummonable = false;
+                minion.Stat.Hp = minion.Stat.MaxHp; // 소환시 체력 = 최대 체력
 
                 // playerList에 변경 사항 반영
                 InitPlayerList();
@@ -1663,9 +1664,28 @@ namespace ScoreBoard.content
             // 플레이어 패널 업데이트
             InitPlayerList();
 
+            // 소환수 소환 가능 여부 업데이트
+            UpdateMinionAvailable();
+
             // 다음 플레이어로 상세 정보 표시
             currentShowingPlayer = _characters.Values.ElementAt(actionCount % 4); // 4인 플레이어 기준으로 다음 플레이어 선택
             ShowDetail(currentShowingPlayer!);
+        }
+
+        /*
+         * UpdateMinionAvailable()
+         * - 모든 플레이어의 소환수 소환 가능 여부를 업데이트하는 메서드
+         * - 현재 턴이 소환 가능 턴 이상이면 소환 가능
+         */
+        private void UpdateMinionAvailable()
+        {
+            foreach (var player in _characters.Values)
+            {
+                foreach (var minion in player.Minions)
+                {
+                    minion.IsSummonable = minion.SummonAvailableTurn <= currentTurn; // 현재 턴이 소환 가능 턴 이상이면 소환 가능
+                }
+            }
         }
 
         /*

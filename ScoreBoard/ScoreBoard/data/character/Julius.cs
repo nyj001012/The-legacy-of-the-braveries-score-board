@@ -103,10 +103,14 @@ namespace ScoreBoard.data.character
          */
         private void GoToBattleFront()
         {
-            // 아군의 군단 번호 추출
-            if (_alliesCorpsIds.Length != 1) return; // 아군이 여러 군단에 속해있다면 패스
-
             string[] description = this.Passives.Find(p => p.Name == "황제의 전선")!.Description;
+            
+            if (_alliesCorpsIds.Length != 1)// 아군이 여러 군단에 속해있다면 패스
+            {
+                description = [];
+                return; 
+            }
+
             switch (_alliesCorpsIds[0]) // 1군단
             {
                 case "201": // 1군단
