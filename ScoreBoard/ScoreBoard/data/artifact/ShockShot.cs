@@ -13,7 +13,7 @@ namespace ScoreBoard.data.artifact
         {
         }
 
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase member)
         {
             // 공격력 100 증가
             if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
@@ -29,7 +29,7 @@ namespace ScoreBoard.data.artifact
             member.Stat.Movement++;
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase member)
         {
             // 공격력 100 감소
             if (member.Stat.CombatStats.TryGetValue("melee", out var melee))

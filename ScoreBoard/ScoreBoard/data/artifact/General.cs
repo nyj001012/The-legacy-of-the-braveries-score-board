@@ -15,7 +15,7 @@ namespace ScoreBoard.data.artifact
         public General()
         {
         }
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase member)
         {
             powerIncrease = Validator.IsDealer(member) ? 300 : 100;
 
@@ -29,7 +29,7 @@ namespace ScoreBoard.data.artifact
             }
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase member)
         {
             // 공격력 300 감소
             if (member.Stat.CombatStats.TryGetValue("melee", out var melee))

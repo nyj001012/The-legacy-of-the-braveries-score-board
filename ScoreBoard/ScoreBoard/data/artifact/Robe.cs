@@ -12,7 +12,7 @@ namespace ScoreBoard.data.artifact
         public Robe()
         {
         }
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase member)
         {
             // 주문력 300 증가
             if (member.Stat.SpellPower.HasValue)
@@ -20,7 +20,7 @@ namespace ScoreBoard.data.artifact
                 member.Stat.SpellPower = (ushort?)(member.Stat.SpellPower.Value + 300);
             }
         }
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase member)
         {
             // 주문력 300 감소
             if (member.Stat.SpellPower.HasValue)

@@ -13,36 +13,36 @@ namespace ScoreBoard.data.artifact
         {
         }
 
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase unit)
         {
             // 공격력 40 증가
-            if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
+            if (unit.Stat.CombatStats.TryGetValue("melee", out var melee))
             {
                 melee.Value += 40;
             }
-            if (member.Stat.CombatStats.TryGetValue("ranged", out var ranged))
+            if (unit.Stat.CombatStats.TryGetValue("ranged", out var ranged))
             {
                 ranged.Value += 40;
             }
 
             // 이동 속도 1 증가
-            member.Stat.Movement++;
+            unit.Stat.Movement++;
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase unit)
         {
             // 공격력 40 감소
-            if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
+            if (unit.Stat.CombatStats.TryGetValue("melee", out var melee))
             {
                 melee.Value = (ushort)Math.Max(0, (int)melee.Value - 40);
             }
-            else if (member.Stat.CombatStats.TryGetValue("ranged", out var ranged))
+            else if (unit.Stat.CombatStats.TryGetValue("ranged", out var ranged))
             {
                 ranged.Value = (ushort)Math.Max(0, (int)ranged.Value - 40);
             }
 
             // 이동 속도 1 감소
-            member.Stat.Movement = (ushort)Math.Max(0, (int)member.Stat.Movement - 1);
+            unit.Stat.Movement = (ushort)Math.Max(0, (int)unit.Stat.Movement - 1);
         }
     }
 }

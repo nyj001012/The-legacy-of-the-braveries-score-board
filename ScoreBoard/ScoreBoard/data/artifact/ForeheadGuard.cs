@@ -13,7 +13,7 @@ namespace ScoreBoard.data.artifact
         {
         }
 
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase member)
         {
             // 지혜 1 증가
             if (member.Stat.Wisdom.HasValue)
@@ -25,7 +25,7 @@ namespace ScoreBoard.data.artifact
             member.Stat.MaxHp = (ushort)(member.Stat.MaxHp + 50);
             member.Stat.Hp = (ushort)(member.Stat.Hp + 50);
         }
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase member)
         {
             // 지혜 1 감소
             if (member.Stat.Wisdom.HasValue)

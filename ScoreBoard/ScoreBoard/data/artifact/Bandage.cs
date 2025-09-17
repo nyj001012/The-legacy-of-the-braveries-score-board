@@ -12,20 +12,20 @@ namespace ScoreBoard.data.artifact
         public Bandage()
         {
         }
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase unit)
         {
             // 주문력 100 증가
-            if (member.Stat.SpellPower.HasValue)
+            if (unit.Stat.SpellPower.HasValue)
             {
-                member.Stat.SpellPower = (ushort?)(member.Stat.SpellPower.Value + 100);
+                unit.Stat.SpellPower = (ushort?)(unit.Stat.SpellPower.Value + 100);
             }
         }
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase unit)
         {
             // 주문력 100 감소
-            if (member.Stat.SpellPower.HasValue)
+            if (unit.Stat.SpellPower.HasValue)
             {
-                member.Stat.SpellPower = (ushort?)(Math.Max(0, member.Stat.SpellPower.Value - 100));
+                unit.Stat.SpellPower = (ushort?)(Math.Max(0, unit.Stat.SpellPower.Value - 100));
             }
         }
     }

@@ -17,7 +17,7 @@ namespace ScoreBoard.data.character
             Initialise(id);
         }
 
-        protected override void InitialisePasssiveSkills(CorpsMember data)
+        protected override void InitialisePasssiveSkills(CorpsMemberDTO data)
         {
             Validator.ValidateNull(data.Passives, nameof(data.Passives));
             Passives = data.Passives?.Select(p =>
@@ -103,7 +103,7 @@ namespace ScoreBoard.data.character
             adrenalineSkill.isOnCooldown = adrenalineSkill.CurrentCooldown > 0; // 쿨타임 상태 해제
         }
 
-        protected override void InitialiseActiveSkills(CorpsMember data)
+        protected override void InitialiseActiveSkills(CorpsMemberDTO data)
         {
             Validator.ValidateNull(data.Actives, nameof(data.Actives));
             Actives = data.Actives?.Select(a =>

@@ -16,7 +16,7 @@ namespace ScoreBoard.data.artifact
         {
         }
 
-        public override void Equip(CorpsMember member)
+        public override void Equip(UnitBase member)
         {
             hpIncrease = Validator.IsTanker(member) ? (ushort)1000 : (ushort)500;
 
@@ -33,7 +33,7 @@ namespace ScoreBoard.data.artifact
             member.Stat.Hp += hpIncrease;
         }
 
-        public override void Unequip(CorpsMember member)
+        public override void Unequip(UnitBase member)
         {
             // 공격력 20 감소
             if (member.Stat.CombatStats.TryGetValue("melee", out var melee))
