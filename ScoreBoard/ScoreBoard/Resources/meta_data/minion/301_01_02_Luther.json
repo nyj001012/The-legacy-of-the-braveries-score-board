@@ -25,7 +25,7 @@
   ],
   "actives": [
   ],
-  "maxArtifactSlot": 3,
+  "maxArtifactSlot": 0,
   "summonAvailableTurn": 10,
   "summonEndTurn": -1,
   "isSummonable": false
