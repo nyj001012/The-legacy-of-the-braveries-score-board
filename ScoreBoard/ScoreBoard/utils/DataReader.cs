@@ -470,7 +470,13 @@ namespace ScoreBoard.utils
         {
             return mid switch
             {
+                // 다리우스
                 "203_01_00_HambugiTank" => new HambugiTank(mid),
+
+                // 황제
+                "301_01_00_Bob" => new Bob(mid),
+                "301_01_01_Patrick" => new Patrick(mid),
+                "301_01_02_Luther" => new Luther(mid),
                 _ => throw new ArgumentException($"알 수 없는 소환수 ID: {mid}"),
             };
         }
