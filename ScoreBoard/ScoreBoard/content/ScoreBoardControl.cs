@@ -68,6 +68,11 @@ namespace ScoreBoard.content
                     s.SetAllies([.. characters.Values]);
                     break;
                 }
+                else if (c is Julius j)
+                {
+                    j.SetAllies([.. characters.Values]);
+                    break;
+                }
             }
             _monsters = monsters ?? throw new ArgumentNullException(nameof(monsters), "몬스터를 선택해야 합니다.");
             InitializeComponent();
