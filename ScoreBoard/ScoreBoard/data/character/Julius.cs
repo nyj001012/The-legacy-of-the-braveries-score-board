@@ -112,6 +112,7 @@ namespace ScoreBoard.data.character
                 case "201": // 1군단
                     // 1군단 효과만 적용. 나머지 군단 효과 설명 삭제
                     description = description[3..6];
+                    Minions.Find(m => m.Name == "밥")!.SummonAvailableTurn = 3; // 밥 3턴부터 소환 가능
                     break;
                 case "202": // 2군단
                     description = description[6..10];
@@ -122,6 +123,7 @@ namespace ScoreBoard.data.character
                     break;
                 case "204": // 4군단
                     description = description[14..17];
+                    Minions.Find(m => m.Name == "루터")!.SummonAvailableTurn = 2; // 루터 2턴부터 소환 가능
                     break;
             }
 
