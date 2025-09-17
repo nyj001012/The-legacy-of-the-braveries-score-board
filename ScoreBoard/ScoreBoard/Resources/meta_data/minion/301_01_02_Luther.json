@@ -1,0 +1,32 @@
+﻿{
+  "id": "301_01_02_Luther",
+  "name": "루터",
+  "stat": {
+    "hp": 2000,
+    "movement": 2,
+    "combatStat": {
+      "ranged": {
+        "type": "atk",
+        "range": 4,
+        "attackCount": 8,
+        "value": 250
+      }
+    }
+  },
+  "passives": [
+    {
+      "name": "화력으로 밀어버리기",
+      "requiredLevel": 0,
+      "cooldown": 1,
+      "description": [
+        "근접전투 아군이 전투 시 화력지원함"
+      ]
+    }
+  ],
+  "actives": [
+  ],
+  "maxArtifactSlot": 3,
+  "summonAvailableTurn": 10,
+  "summonEndTurn": -1,
+  "isSummonable": false
+}

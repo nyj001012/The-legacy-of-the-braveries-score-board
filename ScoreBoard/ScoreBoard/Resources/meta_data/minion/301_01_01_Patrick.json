@@ -1,0 +1,33 @@
+﻿{
+  "id": "301_01_01_Patrick",
+  "name": "패트릭",
+  "stat": {
+    "hp": 1000,
+    "movement": 3,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 5,
+        "value": 300
+      }
+    }
+  },
+  "passives": [
+  ],
+  "actives": [
+    {
+      "name": "단단하고 묵직하게",
+      "requiredLevel": 0,
+      "cooldown": 1,
+      "description": [
+        "자리에 멈춰서 움직일 수 없음",
+        "범위 내 적 공격력 감소, 결투능력 1 감소 부여 (사거리 2, 전투 가능)"
+      ]
+    }
+  ],
+  "maxArtifactSlot": 3,
+  "summonAvailableTurn": 3,
+  "summonEndTurn": -1,
+  "isSummonable": false
+}
