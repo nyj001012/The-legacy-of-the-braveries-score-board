@@ -22,8 +22,8 @@ namespace ScoreBoard.data.character
         public void SetAllies(List<CorpsMember> members)
         {
             Validator.ValidateNull(members, nameof(members));
-            _allies = members;
-            _alliesCorpsIds = members.Select(m => m.CorpsId).Distinct().ToArray();
+            _allies = members.Except([this]).ToList(); // 자신 제외
+            _alliesCorpsIds = _allies.Select(a => a.CorpsId).Distinct().ToArray();
         }
 
         public Julius(string id) : base()
