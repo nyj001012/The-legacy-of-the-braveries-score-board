@@ -160,7 +160,8 @@
 ![summon-tab](./image/in-game/summon-tab.png)
 소환이 가능한 형제의 경우, "소환" 탭이 추가됩니다.
 
-소환 가능 조건 충족 시, 각 소환수 아이콘을 클릭하여 소환할 수 있습니다.
+소환 가능 조건 충족 시, 각 소환수 아이콘을 클릭하여 소환할 수 있습니다.  
+또는 형제에 따라 패시브 스킬 등으로 자동 소환되는 경우도 있습니다.
 <br><br><br><br>
 
 ![after-summon](./image/in-game/after-summon.png)
