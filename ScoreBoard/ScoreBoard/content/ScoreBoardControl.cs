@@ -341,6 +341,7 @@ namespace ScoreBoard.content
 
             detailViewport.Height = detailViewport.Controls
                 .Cast<Control>()
+                .Where<Control>(c => c.Visible)
                 .Select(c => c.Bounds.Bottom)
                 .DefaultIfEmpty(0)
                 .Max() + detailViewport.Padding.Bottom;
@@ -730,6 +731,7 @@ namespace ScoreBoard.content
 
                 detailViewport.Height = detailViewport.Controls
                     .Cast<Control>()
+                    .Where<Control>(c => c.Visible)
                     .Select(c => c.Bounds.Bottom)
                     .DefaultIfEmpty(0)
                     .Max() + detailViewport.Padding.Bottom;
