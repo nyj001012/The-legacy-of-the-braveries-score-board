@@ -1484,15 +1484,23 @@ namespace ScoreBoard.content
          */
         private void EquipNewArtifact(ArtifactSlotInfo info, Artifact newArtifact)
         {
-            currentShowingPlayer!.ArtifactSlot[info.SlotIndex] = newArtifact;
-            newArtifact.Equip(currentShowingPlayer);
-
-            // 루다 2강 효과의 경우, 앞으로 장착하는 유물마다 공격속도 +1
-            if (currentShowingPlayer is Ruda && currentShowingPlayer.Level >= 2)
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
             {
-                ((Ruda)currentShowingPlayer).PerfectionBonus++;
-                currentShowingPlayer.Stat.CombatStats["melee"].AttackCount++;
-                currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount++;
+                currentShowingPlayer!.ArtifactSlot[info.SlotIndex] = newArtifact;
+                newArtifact.Equip(currentShowingPlayer);
+
+                // 루다 2강 효과의 경우, 앞으로 장착하는 유물마다 공격속도 +1
+                if (currentShowingPlayer is Ruda && currentShowingPlayer.Level >= 2)
+                {
+                    ((Ruda)currentShowingPlayer).PerfectionBonus++;
+                    currentShowingPlayer.Stat.CombatStats["melee"].AttackCount++;
+                    currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount++;
+                }
+            }
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+            {
+                currentShowingMinion!.ArtifactSlot[info.SlotIndex] = newArtifact;
+                newArtifact.Equip(currentShowingMinion);
             }
         }
 
