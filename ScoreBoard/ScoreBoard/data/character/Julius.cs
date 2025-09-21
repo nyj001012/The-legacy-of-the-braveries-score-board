@@ -109,7 +109,7 @@ namespace ScoreBoard.data.character
 
             if (_alliesCorpsIds.Length != 1)// 아군이 여러 군단에 속해있다면 패스
             {
-                description = ["적용되지 않습니다."];
+                s.Description = ["적용되지 않습니다."];
                 return;
             }
 
