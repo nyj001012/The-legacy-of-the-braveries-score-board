@@ -244,11 +244,11 @@ namespace ScoreBoard.controls
             {
                 if (artifacts.ElementAtOrDefault(i) != null)
                 {
-                    SetArtifactImage(artifacts[i]!, i);
+                    SetArtifactImage(panel, artifacts[i]!, i);
                 }
                 else
                 {
-                    SetDefaultArtifactSlot(i);
+                    SetDefaultArtifactSlot(panel, i);
                 }
             }
 
@@ -256,12 +256,13 @@ namespace ScoreBoard.controls
         }
 
         /*
-         * SetArtifactImage(Artifact artifact, int i)
+         * SetArtifactImage(CustomFlowLayoutPanel panel, Artifact artifact, int i)
          * - 유물 아이콘을 패널에 추가하는 메서드
+         * - panel: 유물 아이콘을 표시할 패널
          * - artifact: 유물 객체
          * - i: 유물 슬롯 인덱스 (0: 무기, 1: 방어구, 2~3: 액세서리)
          */
-        protected void SetArtifactImage(Artifact artifact, int i)
+        protected void SetArtifactImage(CustomFlowLayoutPanel panel, Artifact artifact, int i)
         {
             Image? artifactImage = DataReader.GetArtifactImage(artifact.Id);
             if (artifactImage == null)
@@ -272,21 +273,22 @@ namespace ScoreBoard.controls
             PictureBox pb = new()
             {
                 Name = $"pbArtifact{i}",
-                Size = new Size(FpnArtifact.Size.Height - 5, FpnArtifact.Size.Height - 5),
+                Size = new Size(panel.Size.Height - 5, panel.Size.Height - 5),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = artifactImage,
             };
-            FpnArtifact.Controls.Add(pb);
+            panel.Controls.Add(pb);
         }
 
         /*
-         * SetDefaultArtifactSlot(int index)
+         * SetDefaultArtifactSlot(CustomFlowLayoutPanel panel, int index)
          * - 유물 슬롯이 비어있을 때 기본 아이콘을 표시하는 메서드
+         * - panel: 유물 아이콘을 표시할 패널
          * - index: 유물 슬롯 인덱스 (0: 무기, 1: 방어구, 2~3: 액세서리)
          */
-        protected void SetDefaultArtifactSlot(int index)
+        protected void SetDefaultArtifactSlot(CustomFlowLayoutPanel panel, int index)
         {
-            int size = FpnArtifact.Size.Height - 5;
+            int size = panel.Size.Height - 5;
 
             Image image = index switch
             {
@@ -303,7 +305,7 @@ namespace ScoreBoard.controls
                 Image = image,
             };
 
-            FpnArtifact.Controls.Add(pb);
+            panel.Controls.Add(pb);
         }
 
         /*
@@ -429,8 +431,9 @@ namespace ScoreBoard.controls
          */
         private CustomFlowLayoutPanel CreateMinionArtifactPanel(List<Artifact?> artifacts, ushort maxSlots)
         {
-            CustomFlowLayoutPanel fpnArtifact = new()
+            CustomFlowLayoutPanel fpnMinionArtifact = new()
             {
+                Name = "fpnMinionArtifact",
                 Width = (int)(FpnArtifact.Width * 0.8),
                 Height = (int)(FpnArtifact.Height * 0.8),
                 AutoSize = false,
@@ -440,8 +443,8 @@ namespace ScoreBoard.controls
                 Tag = "minion",
             };
 
-            InitArtifact(fpnArtifact, artifacts, maxSlots);
-            return fpnArtifact;
+            InitArtifact(fpnMinionArtifact, artifacts, maxSlots);
+            return fpnMinionArtifact;
         }
 
         /*

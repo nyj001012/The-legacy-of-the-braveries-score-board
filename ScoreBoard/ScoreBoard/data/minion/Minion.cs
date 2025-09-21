@@ -42,6 +42,9 @@ namespace ScoreBoard.data.minion
             Id = Validator.ValidateNull(data.Id, nameof(data.Id));
             Name = Validator.ValidateNull(data.Name, nameof(data.Name));
             MaxArtifactSlot = data.MaxArtifactSlot;
+            SummonAvailableTurn = data.SummonAvailableTurn;
+            SummonEndTurn = data.SummonEndTurn;
+            IsSummonable = data.IsSummonable;
         }
 
         /*

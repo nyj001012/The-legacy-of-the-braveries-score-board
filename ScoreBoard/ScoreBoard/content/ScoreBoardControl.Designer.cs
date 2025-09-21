@@ -215,6 +215,7 @@
             playerList.Padding = new Padding(15, 35, 15, 35);
             playerList.Size = new Size(603, 930);
             playerList.TabIndex = 1;
+            playerList.MouseWheel += playerList_MouseWheel;
             // 
             // pn1P
             // 
@@ -720,6 +721,7 @@
             playerScrollBar.Rounding = true;
             playerScrollBar.RoundingInt = 7;
             playerScrollBar.Size = new Size(26, 930);
+            playerScrollBar.SmallStep = 15;
             playerScrollBar.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             playerScrollBar.TabIndex = 0;
             playerScrollBar.Tag = "Cyber";

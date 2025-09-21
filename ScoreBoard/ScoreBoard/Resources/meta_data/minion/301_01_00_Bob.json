@@ -1,0 +1,33 @@
+﻿{
+  "id": "301_01_00_Bob",
+  "name": "밥",
+  "stat": {
+    "hp": 2000,
+    "movement": 2,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 3,
+        "value": 200
+      }
+    }
+  },
+  "passives": [
+  ],
+  "actives": [
+    {
+      "name": "캐슬링",
+      "requiredLevel": 0,
+      "cooldown": 1,
+      "description": [
+        "황제와 위치를 바꿉니다. (사거리 7)",
+        "또는 황제 대신 결투합니다."
+      ]
+    }
+  ],
+  "maxArtifactSlot": 0,
+  "summonAvailableTurn": 5,
+  "summonEndTurn": -1,
+  "isSummonable": false
+}

@@ -68,6 +68,11 @@ namespace ScoreBoard.content
                     s.SetAllies([.. characters.Values]);
                     break;
                 }
+                else if (c is Julius j)
+                {
+                    j.SetAllies([.. characters.Values]);
+                    break;
+                }
             }
             _monsters = monsters ?? throw new ArgumentNullException(nameof(monsters), "몬스터를 선택해야 합니다.");
             InitializeComponent();
@@ -186,7 +191,25 @@ namespace ScoreBoard.content
             }
 
             playerList.ResumeLayout();
+            playerList.Height = playerList.Controls
+                .Cast<Control>()
+                .Select(c => c.Bounds.Bottom)
+                .DefaultIfEmpty(0)
+                .Max() + playerList.Padding.Bottom + playerList.Padding.Top;
             ScrollBarManager.SetScrollBar(playerContainer, playerList, playerScrollBar);
+        }
+
+        private void playerList_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (!playerScrollBar.Enabled) return;
+
+            int delta = -e.Delta / SystemInformation.MouseWheelScrollDelta * playerScrollBar.SmallStep;
+            int newScrollValue = playerScrollBar.Value + delta;
+
+            // 스크롤 범위 안에서만 동작하도록 조정
+            newScrollValue = Math.Max(playerScrollBar.Minimum, Math.Min(playerScrollBar.Maximum, newScrollValue));
+            playerScrollBar.Value = newScrollValue;
+            playerList.Top = -newScrollValue;
         }
 
         /*
@@ -300,6 +323,7 @@ namespace ScoreBoard.content
             {
                 // 소환하면 이미 소환중이므로 소환 불가로 변경
                 minion.IsSummonable = false;
+                minion.Stat.Hp = minion.Stat.MaxHp; // 소환시 체력 = 최대 체력
 
                 // playerList에 변경 사항 반영
                 InitPlayerList();
@@ -317,6 +341,7 @@ namespace ScoreBoard.content
 
             detailViewport.Height = detailViewport.Controls
                 .Cast<Control>()
+                .Where<Control>(c => c.Visible)
                 .Select(c => c.Bounds.Bottom)
                 .DefaultIfEmpty(0)
                 .Max() + detailViewport.Padding.Bottom;
@@ -706,6 +731,7 @@ namespace ScoreBoard.content
 
                 detailViewport.Height = detailViewport.Controls
                     .Cast<Control>()
+                    .Where<Control>(c => c.Visible)
                     .Select(c => c.Bounds.Bottom)
                     .DefaultIfEmpty(0)
                     .Max() + detailViewport.Padding.Bottom;
@@ -1460,15 +1486,23 @@ namespace ScoreBoard.content
          */
         private void EquipNewArtifact(ArtifactSlotInfo info, Artifact newArtifact)
         {
-            currentShowingPlayer!.ArtifactSlot[info.SlotIndex] = newArtifact;
-            newArtifact.Equip(currentShowingPlayer);
-
-            // 루다 2강 효과의 경우, 앞으로 장착하는 유물마다 공격속도 +1
-            if (currentShowingPlayer is Ruda && currentShowingPlayer.Level >= 2)
+            if (_showingDataType == SHOWING_DATA_TYPE.Player)
             {
-                ((Ruda)currentShowingPlayer).PerfectionBonus++;
-                currentShowingPlayer.Stat.CombatStats["melee"].AttackCount++;
-                currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount++;
+                currentShowingPlayer!.ArtifactSlot[info.SlotIndex] = newArtifact;
+                newArtifact.Equip(currentShowingPlayer);
+
+                // 루다 2강 효과의 경우, 앞으로 장착하는 유물마다 공격속도 +1
+                if (currentShowingPlayer is Ruda && currentShowingPlayer.Level >= 2)
+                {
+                    ((Ruda)currentShowingPlayer).PerfectionBonus++;
+                    currentShowingPlayer.Stat.CombatStats["melee"].AttackCount++;
+                    currentShowingPlayer.Stat.CombatStats["ranged"].AttackCount++;
+                }
+            }
+            else if (_showingDataType == SHOWING_DATA_TYPE.Minion)
+            {
+                currentShowingMinion!.ArtifactSlot[info.SlotIndex] = newArtifact;
+                newArtifact.Equip(currentShowingMinion);
             }
         }
 
@@ -1658,9 +1692,28 @@ namespace ScoreBoard.content
             // 플레이어 패널 업데이트
             InitPlayerList();
 
+            // 소환수 소환 가능 여부 업데이트
+            UpdateMinionAvailable();
+
             // 다음 플레이어로 상세 정보 표시
             currentShowingPlayer = _characters.Values.ElementAt(actionCount % 4); // 4인 플레이어 기준으로 다음 플레이어 선택
             ShowDetail(currentShowingPlayer!);
+        }
+
+        /*
+         * UpdateMinionAvailable()
+         * - 모든 플레이어의 소환수 소환 가능 여부를 업데이트하는 메서드
+         * - 현재 턴이 소환 가능 턴 이상이면 소환 가능
+         */
+        private void UpdateMinionAvailable()
+        {
+            foreach (var player in _characters.Values)
+            {
+                foreach (var minion in player.Minions)
+                {
+                    minion.IsSummonable = minion.SummonAvailableTurn <= currentTurn; // 현재 턴이 소환 가능 턴 이상이면 소환 가능
+                }
+            }
         }
 
         /*
