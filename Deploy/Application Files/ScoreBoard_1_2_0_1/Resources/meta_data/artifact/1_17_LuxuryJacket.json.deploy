@@ -1,0 +1,13 @@
+﻿{
+  "id": "1_17_LuxuryJacket",
+  "name": "럭셔리 자켓",
+  "type": "armour",
+  "rarity": "legendary",
+  "equipEffect": {
+    "atk": 100
+  },
+  "description": [
+    "공격력 +100",
+    "피해량 50% 흡수"
+  ]
+}

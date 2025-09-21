@@ -1,0 +1,13 @@
+﻿{
+  "id": "1_16_Sage",
+  "name": "현자",
+  "type": "armour",
+  "rarity": "legendary",
+  "equipEffect": {
+    "spellPower": 400
+  },
+  "description": [
+    "주문력 +400",
+    "주문력 2배"
+  ]
+}

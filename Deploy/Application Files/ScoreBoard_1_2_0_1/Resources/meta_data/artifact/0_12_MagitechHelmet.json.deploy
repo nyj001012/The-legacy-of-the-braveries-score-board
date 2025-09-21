@@ -1,0 +1,14 @@
+﻿{
+  "id": "0_12_MagitechHelmet",
+  "name": "마공 투구",
+  "type": "headgear",
+  "rarity": "rare",
+  "equipEffect": {
+    "spellPower": 400,
+    "movement": 1
+  },
+  "description": [
+    "주문력 +400",
+    "이동 속도 +1"
+  ]
+}

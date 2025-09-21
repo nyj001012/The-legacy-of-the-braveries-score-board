@@ -1,0 +1,12 @@
+﻿{
+  "id": "2_13_Ninxendo",
+  "name": "닌x도",
+  "type": "accessory",
+  "rarity": "rare",
+  "equipEffect": {
+    "count": 2
+  },
+  "description": [
+    "공격 속도 +2"
+  ]
+}

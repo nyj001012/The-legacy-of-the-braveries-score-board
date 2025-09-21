@@ -1,0 +1,16 @@
+﻿{
+  "type": 1,
+  "id": "1_02_GearaDoga",
+  "name": "기라도가",
+  "stat": {
+    "hp": 30000,
+    "combatStat": {
+      "melee": {
+        "type": "atk",
+        "range": 1,
+        "attackCount": 1,
+        "value": 600
+      }
+    }
+  }
+}

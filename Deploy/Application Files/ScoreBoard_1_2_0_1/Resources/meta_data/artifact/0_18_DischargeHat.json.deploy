@@ -1,0 +1,16 @@
+﻿{
+  "id": "0_18_DischargeHat",
+  "name": "장군 전역모",
+  "type": "headgear",
+  "rarity": "legendary",
+  "equipEffect": {
+    "atk": 60,
+    "movement": 1,
+    "critical": 1
+  },
+  "description": [
+    "공격력 +60",
+    "이동 속도 +1",
+    "치명타 +1"
+  ]
+}
