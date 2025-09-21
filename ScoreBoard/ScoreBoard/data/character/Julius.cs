@@ -1,4 +1,5 @@
-﻿using ScoreBoard.data.skill;
+﻿using ScoreBoard.data.artifact;
+using ScoreBoard.data.skill;
 using ScoreBoard.data.stat;
 using ScoreBoard.utils;
 using System;
@@ -104,11 +105,11 @@ namespace ScoreBoard.data.character
         private void GoToBattleFront()
         {
             string[] description = this.Passives.Find(p => p.Name == "황제의 전선")!.Description;
-            
+
             if (_alliesCorpsIds.Length != 1)// 아군이 여러 군단에 속해있다면 패스
             {
                 description = [];
-                return; 
+                return;
             }
 
             switch (_alliesCorpsIds[0]) // 1군단
@@ -139,7 +140,11 @@ namespace ScoreBoard.data.character
          */
         private void SupportEquip()
         {
-            Minions.ForEach(m => m.MaxArtifactSlot = 3);
+            Minions.ForEach(m =>
+            {
+                m.MaxArtifactSlot = 3;
+                m.ArtifactSlot = [.. Enumerable.Repeat<Artifact?>(null, m.MaxArtifactSlot)];
+            });
         }
 
         /*
@@ -186,6 +191,7 @@ namespace ScoreBoard.data.character
                     });
                 }
                 m.MaxArtifactSlot = 0; // 장비 착용 불가
+                m.ArtifactSlot = [];
             });
         }
 
