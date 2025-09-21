@@ -1,5 +1,5 @@
 ﻿# 용사 이야기 훈련 교본
-> [다운로드](https://nyj001012.github.io/The-legacy-of-the-braveries-score-board/Deploy/Scoreboard.application)
+> [다운로드](https://nyj001012.github.io/The-legacy-of-the-braveries-score-board/Deploy/ScoreBoard.application)
 
 - 작성자: 가이우스
 - 직급: 전술연산관
