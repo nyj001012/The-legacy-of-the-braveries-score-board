@@ -104,11 +104,12 @@ namespace ScoreBoard.data.character
          */
         private void GoToBattleFront()
         {
-            string[] description = this.Passives.Find(p => p.Name == "황제의 전선")!.Description;
+            PassiveSkill s = this.Passives.Find(p => p.Name == "황제의 전선")!;
+            string[] description = s.Description;
 
             if (_alliesCorpsIds.Length != 1)// 아군이 여러 군단에 속해있다면 패스
             {
-                description = [];
+                description = ["적용되지 않습니다."];
                 return;
             }
 
@@ -116,18 +117,18 @@ namespace ScoreBoard.data.character
             {
                 case "201": // 1군단
                     // 1군단 효과만 적용. 나머지 군단 효과 설명 삭제
-                    description = description[3..6];
+                    s.Description = description[3..6];
                     Minions.Find(m => m.Name == "밥")!.SummonAvailableTurn = 3; // 밥 3턴부터 소환 가능
                     break;
                 case "202": // 2군단
-                    description = description[6..10];
+                    s.Description = description[6..10];
                     break;
                 case "203": // 3군단
-                    description = description[10..14];
+                    s.Description = description[10..14];
                     _allies.ForEach(a => a.Stat.Wisdom++); // 아군 지혜 +1
                     break;
                 case "204": // 4군단
-                    description = description[14..17];
+                    s.Description = description[14..17];
                     Minions.Find(m => m.Name == "루터")!.SummonAvailableTurn = 2; // 루터 2턴부터 소환 가능
                     break;
             }
