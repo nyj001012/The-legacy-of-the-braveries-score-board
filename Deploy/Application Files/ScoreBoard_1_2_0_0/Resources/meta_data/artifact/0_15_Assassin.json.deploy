@@ -1,0 +1,13 @@
+﻿{
+  "id": "0_15_Assassin",
+  "name": "암살자",
+  "type": "headgear",
+  "rarity": "legendary",
+  "equipEffect": {
+    "atk": 90
+  },
+  "description": [
+    "공격력 +90",
+    "은신"
+  ]
+}

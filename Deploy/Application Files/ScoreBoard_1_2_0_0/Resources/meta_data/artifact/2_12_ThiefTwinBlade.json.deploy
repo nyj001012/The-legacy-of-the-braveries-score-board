@@ -1,0 +1,14 @@
+﻿{
+  "id": "2_12_ThiefTwinBlade",
+  "name": "도적쌍도",
+  "type": "accessory",
+  "rarity": "rare",
+  "equipEffect": {
+    "atk": 30,
+    "movement": 1
+  },
+  "description": [
+    "공격력 +30",
+    "이동 속도 +1"
+  ]
+}

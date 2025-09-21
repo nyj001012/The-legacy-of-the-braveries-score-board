@@ -1,0 +1,14 @@
+﻿{
+  "id": "2_21_ShockShot",
+  "name": "충격 샷",
+  "type": "accessory",
+  "rarity": "legendary",
+  "equipEffect": {
+    "atk": 100,
+    "movement": 1
+  },
+  "description": [
+    "공격력 +100",
+    "이동 속도 +1"
+  ]
+}

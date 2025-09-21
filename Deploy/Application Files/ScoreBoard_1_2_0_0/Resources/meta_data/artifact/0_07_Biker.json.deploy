@@ -1,0 +1,14 @@
+﻿{
+  "id": "0_07_Biker",
+  "name": "폭주족",
+  "type": "headgear",
+  "rarity": "rare",
+  "equipEffect": {
+    "atk": 40,
+    "movement": 1
+  },
+  "description": [
+    "공격력 +40",
+    "이동속도 +1"
+  ]
+}

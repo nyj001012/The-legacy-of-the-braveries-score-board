@@ -1,0 +1,15 @@
+﻿{
+  "id": "2_25_No1Sword",
+  "name": "1번의 검",
+  "type": "accessory",
+  "rarity": "legendary",
+  "equipEffect": {
+    "atk": 300,
+    "count": 1
+  },
+  "description": [
+    "공격력 +300",
+    "공격 속도 +1",
+    "피해량 50% 흡수"
+  ]
+}
